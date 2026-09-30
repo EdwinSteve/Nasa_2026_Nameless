@@ -1,0 +1,269 @@
+{
+  "punto": {
+    "nombre": "neiva-norte",
+    "lat": 3.02,
+    "lon": -75.25,
+    "elev_dem_m": 441.0,
+    "elev_celda_power_m": 1403,
+    "correccion_C": 6.25
+  },
+  "periodo": [
+    2015,
+    2024
+  ],
+  "completitud_power": {
+    "T2M": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 17.16,
+      "max": 25.08,
+      "media": 20.56
+    },
+    "T2M_MAX": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 20.33,
+      "max": 32.91,
+      "media": 25.88
+    },
+    "T2M_MIN": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 12.63,
+      "max": 20.41,
+      "media": 16.67
+    },
+    "PRECTOTCORR": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 0.0,
+      "max": 75.78,
+      "media": 3.47
+    },
+    "RH2M": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 53.78,
+      "max": 92.36,
+      "media": 78.55
+    },
+    "ALLSKY_SFC_SW_DWN": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 4.48,
+      "max": 26.71,
+      "media": 16.5
+    },
+    "GWETROOT": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 0.48,
+      "max": 0.96,
+      "media": 0.64
+    },
+    "GWETTOP": {
+      "faltantes": 0,
+      "fuera_de_rango": 0,
+      "min": 0.29,
+      "max": 0.94,
+      "media": 0.64
+    }
+  },
+  "temperatura": {
+    "crudo_vs_ref": {
+      "n": 3653,
+      "sesgo": -6.05,
+      "rmse": 6.35,
+      "r": 0.42
+    },
+    "corregido_vs_ref": {
+      "n": 3653,
+      "sesgo": 0.2,
+      "rmse": 1.94,
+      "r": 0.42
+    },
+    "tmax_corregido_vs_ref": {
+      "n": 3653,
+      "sesgo": 0.75,
+      "rmse": 2.74,
+      "r": 0.556
+    }
+  },
+  "precipitacion_mensual": {
+    "n": 120,
+    "sesgo": -8.83,
+    "rmse": 65.98,
+    "r": 0.678,
+    "anual_power_mm": 1268,
+    "anual_ref_mm": 1374
+  },
+  "climatologia": {
+    "01": {
+      "T_corr": 26.7,
+      "P_power": 80,
+      "P_ref": 104
+    },
+    "02": {
+      "T_corr": 27.4,
+      "P_power": 85,
+      "P_ref": 127
+    },
+    "03": {
+      "T_corr": 27.2,
+      "P_power": 171,
+      "P_ref": 205
+    },
+    "04": {
+      "T_corr": 26.6,
+      "P_power": 156,
+      "P_ref": 147
+    },
+    "05": {
+      "T_corr": 26.4,
+      "P_power": 135,
+      "P_ref": 115
+    },
+    "06": {
+      "T_corr": 25.8,
+      "P_power": 83,
+      "P_ref": 60
+    },
+    "07": {
+      "T_corr": 26.0,
+      "P_power": 51,
+      "P_ref": 30
+    },
+    "08": {
+      "T_corr": 27.0,
+      "P_power": 33,
+      "P_ref": 21
+    },
+    "09": {
+      "T_corr": 27.8,
+      "P_power": 68,
+      "P_ref": 34
+    },
+    "10": {
+      "T_corr": 27.4,
+      "P_power": 131,
+      "P_ref": 138
+    },
+    "11": {
+      "T_corr": 26.8,
+      "P_power": 159,
+      "P_ref": 245
+    },
+    "12": {
+      "T_corr": 26.6,
+      "P_power": 116,
+      "P_ref": 147
+    }
+  },
+  "gdd_base10_por_anio": {
+    "2015": 6580,
+    "2016": 6626,
+    "2017": 6250,
+    "2018": 6180,
+    "2019": 6427,
+    "2020": 6611,
+    "2021": 6099,
+    "2022": 6101,
+    "2023": 6399,
+    "2024": 6740
+  },
+  "suelo": {
+    "0-5cm": {
+      "bdod": 1.29,
+      "clay": 27.1,
+      "nitrogen": 2.74,
+      "phh2o": 5.7,
+      "sand": 43.3,
+      "silt": 29.7,
+      "soc": 38.6
+    },
+    "15-30cm": {
+      "bdod": 1.35,
+      "clay": 31.5,
+      "nitrogen": 1.29,
+      "phh2o": 5.7,
+      "sand": 39.6,
+      "silt": 28.9,
+      "soc": 16.4
+    },
+    "30-60cm": {
+      "bdod": 1.37,
+      "clay": 35.5,
+      "nitrogen": 0.95,
+      "phh2o": 5.7,
+      "sand": 37.3,
+      "silt": 27.2,
+      "soc": 12.9
+    }
+  },
+  "checks": [
+    {
+      "estado": "✅",
+      "check": "POWER entrega 3653 de 3653 días esperados"
+    },
+    {
+      "estado": "✅",
+      "check": "T2M: 0 faltantes, 0 fuera de [0, 45] (min 17.16, max 25.08)"
+    },
+    {
+      "estado": "✅",
+      "check": "T2M_MAX: 0 faltantes, 0 fuera de [0, 50] (min 20.33, max 32.91)"
+    },
+    {
+      "estado": "✅",
+      "check": "T2M_MIN: 0 faltantes, 0 fuera de [-5, 40] (min 12.63, max 20.41)"
+    },
+    {
+      "estado": "✅",
+      "check": "PRECTOTCORR: 0 faltantes, 0 fuera de [0, 300] (min 0.0, max 75.78)"
+    },
+    {
+      "estado": "✅",
+      "check": "RH2M: 0 faltantes, 0 fuera de [0, 100] (min 53.78, max 92.36)"
+    },
+    {
+      "estado": "✅",
+      "check": "ALLSKY_SFC_SW_DWN: 0 faltantes, 0 fuera de [0, 40] (min 4.48, max 26.71)"
+    },
+    {
+      "estado": "✅",
+      "check": "GWETROOT: 0 faltantes, 0 fuera de [0, 1] (min 0.48, max 0.96)"
+    },
+    {
+      "estado": "✅",
+      "check": "GWETTOP: 0 faltantes, 0 fuera de [0, 1] (min 0.29, max 0.94)"
+    },
+    {
+      "estado": "✅",
+      "check": "Coherencia Tmin ≤ T ≤ Tmax: 0 días incoherentes"
+    },
+    {
+      "estado": "✅",
+      "check": "Temperatura media corregida vs referencia: sesgo 0.2 °C (sin corregir: -6.05 °C)"
+    },
+    {
+      "estado": "⚠️",
+      "check": "Correlación diaria de temperatura: r = 0.42"
+    },
+    {
+      "estado": "✅",
+      "check": "Precipitación mensual POWER vs referencia: r = 0.678, anual 1268 vs 1374 mm"
+    },
+    {
+      "estado": "✅",
+      "check": "SoilGrids devuelve datos para el punto"
+    },
+    {
+      "estado": "✅",
+      "check": "Textura arcilla+arena+limo = 100.1 %"
+    },
+    {
+      "estado": "✅",
+      "check": "pH 5.7 en rango agrícola"
+    }
+  ]
+}
