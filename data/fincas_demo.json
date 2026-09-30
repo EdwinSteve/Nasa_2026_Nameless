@@ -1,0 +1,9 @@
+{
+  "_nota": "Puntos de muestra (no fincas reales). Coordenadas y elevaciones aproximadas: verificar con un DEM antes de usarlas en la demo.",
+  "fincas": [
+    {"id": "campoalegre-arroz", "nombre": "Zona arrocera de Campoalegre", "lat": 2.69, "lon": -75.33, "elev_m": 525, "cultivo_actual": "arroz", "sistema": "riego"},
+    {"id": "villavieja-seco", "nombre": "Borde del desierto de la Tatacoa (Villavieja)", "lat": 3.22, "lon": -75.22, "elev_m": 430, "cultivo_actual": "maíz", "sistema": "secano"},
+    {"id": "garzon-cafe", "nombre": "Ladera cafetera de Garzón", "lat": 2.20, "lon": -75.65, "elev_m": 1200, "cultivo_actual": "café", "sistema": "secano"},
+    {"id": "pitalito-cafe", "nombre": "Zona cafetera de Pitalito", "lat": 1.85, "lon": -76.05, "elev_m": 1320, "cultivo_actual": "café", "sistema": "secano"}
+  ]
+}

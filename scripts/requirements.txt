@@ -1,0 +1,9 @@
+# Los scripts actuales solo usan la biblioteca estándar.
+# Para la exploración con Earthdata / GEE (Fase 0):
+earthaccess
+earthengine-api
+xarray
+h5netcdf
+rioxarray
+pandas
+matplotlib

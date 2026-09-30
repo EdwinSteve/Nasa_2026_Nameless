@@ -1,0 +1,28 @@
+# Datos crudos (se regeneran con scripts/)
+data/raw/*
+!data/raw/.gitkeep
+*.nc
+*.h5
+*.hdf
+*.tif
+*.tiff
+
+# Secretos
+.env
+.netrc
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+.next/
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store

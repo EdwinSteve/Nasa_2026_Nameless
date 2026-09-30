@@ -1,0 +1,88 @@
+{
+  "punto": {
+    "lat": 2.69,
+    "lon": -75.33,
+    "elev_m": 525
+  },
+  "bbox": "-76.6,1.5,-74.4,3.9",
+  "power": {
+    "elevacion_celda_m": 1609,
+    "T2M_anual_C": 19.19,
+    "precip_anual_mm": 1121,
+    "T2M_corregida_C": 26.2
+  },
+  "soilgrids": {
+    "clay_0-5cm": 26.3,
+    "clay_15-30cm": 30.2,
+    "nitrogen_0-5cm": 2.55,
+    "nitrogen_15-30cm": 1.24,
+    "phh2o_0-5cm": 5.5,
+    "phh2o_15-30cm": 5.5,
+    "sand_0-5cm": 43.7,
+    "sand_15-30cm": 41.6,
+    "soc_0-5cm": 41.1,
+    "soc_15-30cm": 20.9
+  },
+  "cmr": {
+    "SPL3SMP_E": {
+      "descripcion": "SMAP humedad superficial 9 km diaria",
+      "granulos_2024": 366,
+      "ultimo": "2026-09-28"
+    },
+    "SPL4SMGP": {
+      "descripcion": "SMAP L4 humedad superficie + zona radicular 9 km, 3 h",
+      "granulos_2024": 2929,
+      "ultimo": "2026-09-27"
+    },
+    "GPM_3IMERGDF": {
+      "descripcion": "IMERG Final diario (latencia ~3.5 meses)",
+      "granulos_2024": 366,
+      "ultimo": "2025-09-30"
+    },
+    "GPM_3IMERGDL": {
+      "descripcion": "IMERG Late diario (casi tiempo real)",
+      "granulos_2024": 366,
+      "ultimo": "2026-09-28"
+    },
+    "MOD13Q1": {
+      "descripcion": "MODIS NDVI/EVI 250 m, 16 días",
+      "granulos_2024": 24,
+      "ultimo": "2026-08-29"
+    },
+    "MOD11A2": {
+      "descripcion": "MODIS LST 1 km, 8 días",
+      "granulos_2024": 46,
+      "ultimo": "2026-09-14"
+    },
+    "MOD16A2GF": {
+      "descripcion": "MODIS ET 500 m, 8 días (gap-filled)",
+      "granulos_2024": 46,
+      "ultimo": "2025-12-27"
+    },
+    "HLSL30": {
+      "descripcion": "HLS Landsat 30 m",
+      "granulos_2024": 668,
+      "ultimo": "2026-09-23"
+    },
+    "HLSS30": {
+      "descripcion": "HLS Sentinel-2 30 m",
+      "granulos_2024": 967,
+      "ultimo": "2026-09-27"
+    },
+    "ECO_L4T_ESI": {
+      "descripcion": "ECOSTRESS índice de estrés evaporativo ~70 m",
+      "granulos_2024": 113,
+      "ultimo": "2026-09-19"
+    },
+    "ECO_L3T_JET": {
+      "descripcion": "ECOSTRESS evapotranspiración ~70 m",
+      "granulos_2024": 113,
+      "ultimo": "2026-09-19"
+    },
+    "MCD12Q1": {
+      "descripcion": "MODIS cobertura del suelo anual 500 m",
+      "granulos_2024": 1,
+      "ultimo": "2024-01-01"
+    }
+  }
+}
