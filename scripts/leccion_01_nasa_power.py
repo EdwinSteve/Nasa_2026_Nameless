@@ -116,12 +116,20 @@ def construir_procedencia(crudo: dict, lat: float, lon: float) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Ejecución de ejemplo: Neiva, año 2024
+# Ejecución de ejemplo: finca rural al norte de Neiva, año 2024
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    LAT, LON = 2.93, -75.28
+    import argparse
+    import pathlib
 
-    crudo = consultar_power(LAT, LON, "20240101", "20241231")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--lat", type=float, default=3.02)
+    ap.add_argument("--lon", type=float, default=-75.25)
+    ap.add_argument("--anio", type=int, default=2024)
+    args = ap.parse_args()
+    LAT, LON = args.lat, args.lon
+
+    crudo = consultar_power(LAT, LON, f"{args.anio}0101", f"{args.anio}1231")
     df = a_dataframe(crudo)
 
     print("\n== Calidad de los datos ==")
@@ -139,5 +147,7 @@ if __name__ == "__main__":
     for k, v in construir_procedencia(crudo, LAT, LON).items():
         print(f"{k}: {v}")
 
-    df.to_csv("power_neiva_2024.csv")
-    print("\nGuardado en power_neiva_2024.csv")
+    salida = pathlib.Path(__file__).resolve().parent.parent / "data/raw" / f"power_{LAT}_{LON}_{args.anio}.csv"
+    salida.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(salida)
+    print(f"\nGuardado en {salida}")
