@@ -6,8 +6,8 @@ Se trabaja por fases pequeñas. Cada casilla puede convertirse en un issue de Gi
 - [x] Estructura del repositorio
 - [x] Verificar qué fuentes responden y su cobertura en el Huila → [datos/inventario.md](datos/inventario.md)
 - [x] Descargador de series de NASA POWER con corrección de temperatura por elevación
-- [ ] Cuentas: Earthdata, Google Earth Engine (cada integrante)
-- [ ] Probar `earthaccess` / GEE / AppEEARS con SMAP L4 y MODIS NDVI
+- [x] Cuentas: Earthdata, Google Earth Engine (cada integrante)
+- [x] Probar `earthaccess` / GEE / AppEEARS con SMAP L4 y MODIS NDVI
 - [ ] Elevación real de las fincas demo con un DEM
 - [ ] Series 2015–2024 por finca: POWER + SMAP raíz + NDVI + LST + IMERG
 - [ ] Validar la corrección de POWER contra MODIS LST o IDEAM
