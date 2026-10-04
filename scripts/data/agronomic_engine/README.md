@@ -11,6 +11,8 @@ agronomic_engine/
 ├── formulas.py
 ├── normalizer.py
 ├── validators.py
+├── test_engine.py
+├── test_formulas.py
 ```
 
 ## Cobertura
@@ -67,3 +69,14 @@ MO ≈ SOC × 1.724
 
 Esta conversión debe considerarse una hipótesis del modelo y puede reemplazarse
 por materia orgánica de laboratorio cuando esté disponible.
+
+## Pruebas Unitarias
+Las pruebas unitarias garantizan la precisión de los cálculos matemáticos (`formulas.py`) y la correcta orquestación del modelo (`engine.py`).
+
+Para ejecutar las pruebas y visualizar los resultados detallados en la consola, utiliza el siguiente comando:
+
+```bash
+pytest -v -s nombre_del_archivo_test.py
+```
+
+(Para ejecutar de forma automatizada toda la suite de pruebas del proyecto, corre simplemente pytest -v -s sin especificar un archivo).
