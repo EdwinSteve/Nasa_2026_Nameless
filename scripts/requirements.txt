@@ -7,3 +7,4 @@ h5netcdf
 rioxarray
 pandas
 matplotlib
+httpx
