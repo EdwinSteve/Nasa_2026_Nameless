@@ -1,6 +1,6 @@
 import httpx
 
-NASA_POWER_URL = 'https://power.larc.nasa.gov/api/temporal/daily'
+NASA_POWER_URL = 'https://power.larc.nasa.gov/api/temporal/daily/point'
 
 POWER_PARAMETERS = [
   'T2M_MAX',
