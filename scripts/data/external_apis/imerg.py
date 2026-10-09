@@ -7,7 +7,7 @@ import ee
 # (colección, banda). La banda de V07 es 'precipitation' (mm/h, pasos de 30 min).
 IMERG_SOURCES = [
   ('NASA/GPM_L3/IMERG_V07', 'precipitation'),
-  ('NASA/GPM_L3/IMERG_V06', 'precipitationCal'),
+  #('NASA/GPM_L3/IMERG_V06', 'precipitationCal'),
 ]
 IMERG_SCALE_M = 11000
 HOURS_PER_STEP = 0.5  # mm/h x 0.5 h = mm por imagen
@@ -31,8 +31,7 @@ def _fetch(collection_id, band, region, start_date, end_date):
   def per_day(i):
     day = t0.advance(ee.Number(i), 'day')
     day_col = col.filterDate(day, day.advance(1, 'day'))
-    total = day_col.sum().multiply(HOURS_PER_STEP)
-    stats = total.reduceRegion(
+    stats = day_col.sum().reduceRegion(
       reducer=ee.Reducer.mean(),
       geometry=region,
       scale=IMERG_SCALE_M,
@@ -64,7 +63,11 @@ def _execute_sync(lat, lon, start_date, end_date, polygon, buffer_m):
           {
             'date': r['date'],
             # Un día sin imágenes no es "0 mm": es un dato faltante.
-            'precip_mm': r.get(band) if r.get('n_img', 0) > 0 else None,
+            'precip_mm': (
+              r[band] * HOURS_PER_STEP
+              if r.get('n_img', 0) > 0 and r.get(band) is not None
+              else None
+            ),
           }
           for r in rows
         ],
