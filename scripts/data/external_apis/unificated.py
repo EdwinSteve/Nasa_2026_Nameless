@@ -37,20 +37,67 @@ def _power(raw: dict) -> tuple[dict, dict]:
   return series, meta
 
 
+
 def _soil(raw: dict) -> tuple[dict, dict]:
   """Valores tal cual los entrega SoilGrids (unidades 'mapped'); la conversión
-  se hace después en normalizer.py. Se guarda d_factor para poder reconstruirla."""
+  se hace después en normalizer.py. Se guarda d_factor para poder reconstruirla.
+  
+  Agrega:
+    - ph: pH convertido a su escala habitual.
+    - sand_silt_clay_sum_pct: suma de arena, limo y arcilla en porcentaje.
+  """
   layers, units = {}, {}
+
   for layer in raw['properties']['layers']:
     um = layer['unit_measure']
+
     units[layer['name']] = {
       'mapped_units': um.get('mapped_units'),
       'target_units': um.get('target_units'),
       'd_factor': um.get('d_factor'),
     }
+
     for dep in layer['depths']:
-      layers.setdefault(dep['label'], {})[layer['name']] = dep['values']  # {Q0.05, Q0.5, Q0.95}
-  return layers, {'endpoint': soilgrid.SOIL_GRID_URL, 'units': units}
+      layers.setdefault(dep['label'], {})[layer['name']] = dep['values']
+
+  # Convertir phh2o a pH usando el factor de conversión de SoilGrids.
+  for depth, properties in layers.items():
+    if 'phh2o' in properties:
+      factor = units.get('phh2o', {}).get('d_factor') or 1
+
+      properties['ph'] = {
+        percentile: (
+          value / factor
+          if isinstance(value, (int, float)) and factor != 1
+          else value
+        )
+        for percentile, value in properties['phh2o'].items()
+      }
+
+    # Sumar arena, limo y arcilla y convertir de g/kg a porcentaje.
+    if all(prop in properties for prop in ('sand', 'silt', 'clay')):
+      texture_sum = {}
+
+      for percentile in ('Q0.05', 'Q0.5', 'Q0.95'):
+        values = [
+          properties[prop].get(percentile)
+          for prop in ('sand', 'silt', 'clay')
+        ]
+
+        if all(isinstance(value, (int, float)) for value in values):
+          texture_sum[percentile] = sum(values) / 10
+        else:
+          texture_sum[percentile] = None
+
+      properties['sand_silt_clay_sum_pct'] = texture_sum
+
+  meta = {
+    'endpoint': soilgrid.SOIL_GRID_URL,
+    'units': units,
+  }
+
+  return layers, meta
+
 
 
 def _rows(serie: list[dict], key: str) -> dict:
