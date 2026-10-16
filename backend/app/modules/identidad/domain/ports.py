@@ -25,6 +25,9 @@ class TokenIssuer(Protocol):
     def issue_access_token(self, user_id: UUID, role: str) -> str:
         ...
 
+    def decode_access_token(self, token: str) -> dict:
+        ...
+
 class Clock(Protocol):
     def now(self) -> datetime:
         ...
