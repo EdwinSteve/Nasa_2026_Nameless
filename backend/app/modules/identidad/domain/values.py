@@ -22,6 +22,7 @@ class Phone:
         if not self.value.startswith("+"):
             raise InvalidPhone("El celular debe incluir el prefijo internacional (+57...).")
 
+@dataclass(frozen=True, slots=True)
 class Email:
     value: str
     def __post_init__(self):

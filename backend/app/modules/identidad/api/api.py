@@ -11,6 +11,8 @@ def create_app() -> FastAPI:
         title="SURCO API",
         description="API REST de SURCO",
         version="1.0.0",
+        docs_url="/docs",
+        redoc_url="/redoc",
     )
 
     register_handler_errors(app)
