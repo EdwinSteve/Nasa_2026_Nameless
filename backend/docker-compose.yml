@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: surco
+      POSTGRES_PASSWORD: surco
+      POSTGRES_DB: surco
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U surco"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://surco:surco@db:5432/surco
+      JWT_SECRETO: ${JWT_SECRETO}
+      JWT_ALGORITMO: HS256
+      JWT_EMISOR: surco-api
+      JWT_AUDIENCIA: surco-app
+      JWT_ACCESS_MINUTOS: "15"
+      REFRESH_DIAS: "30"
+      LOGIN_MAX_INTENTOS: "5"
+      LOGIN_BLOQUEO_MINUTOS: "15"
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.api:app --host 0.0.0.0 --port 8000"
+
+volumes:
+  pgdata:

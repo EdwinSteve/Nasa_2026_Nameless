@@ -23,7 +23,7 @@ def create_app() -> FastAPI:
     )
 
     @app.get(
-        "/api/v1/salud",
+        "/api/v1/health",
         tags=["System"],
         summary="Consultar estado de la API",
         response_description="Estado de disponibilidad de la API",
