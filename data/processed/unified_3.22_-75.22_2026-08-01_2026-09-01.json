@@ -1,0 +1,816 @@
+{
+  "schema_version": "1.0",
+  "fetched_at": "2026-10-13T22:59:26+00:00",
+  "location": {
+    "lat": 3.22,
+    "lon": -75.22,
+    "polygon": null,
+    "buffer_m": 5000
+  },
+  "period": {
+    "start": "2026-08-01",
+    "end": "2026-09-01",
+    "days": 32
+  },
+  "sources": {
+    "power": {
+      "status": "ok",
+      "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+      "community": "AG",
+      "cell_elevation_m": 1402.97,
+      "units": {
+        "T2M_MAX": "C",
+        "T2M_MIN": "C",
+        "PRECTOTCORR": "mm/day",
+        "RH2M": "%",
+        "WS2M": "m/s",
+        "ALLSKY_SFC_SW_DWN": "MJ/m^2/day",
+        "GWETROOT": "1"
+      }
+    },
+    "soilgrids": {
+      "status": "ok",
+      "endpoint": "https://rest.isric.org/soilgrids/v2.0/properties/query",
+      "units": {
+        "bdod": {
+          "mapped_units": "cg/cm³",
+          "target_units": "kg/dm³",
+          "d_factor": 100
+        },
+        "cec": {
+          "mapped_units": "mmol(c)/kg",
+          "target_units": "cmol(c)/kg",
+          "d_factor": 10
+        },
+        "cfvo": {
+          "mapped_units": "cm³/dm³",
+          "target_units": "cm³/100cm³",
+          "d_factor": 10
+        },
+        "clay": {
+          "mapped_units": "g/kg",
+          "target_units": "%",
+          "d_factor": 10
+        },
+        "nitrogen": {
+          "mapped_units": "cg/kg",
+          "target_units": "g/kg",
+          "d_factor": 100
+        },
+        "phh2o": {
+          "mapped_units": "pH*10",
+          "target_units": "-",
+          "d_factor": 10
+        },
+        "sand": {
+          "mapped_units": "g/kg",
+          "target_units": "%",
+          "d_factor": 10
+        },
+        "silt": {
+          "mapped_units": "g/kg",
+          "target_units": "%",
+          "d_factor": 10
+        },
+        "soc": {
+          "mapped_units": "dg/kg",
+          "target_units": "g/kg",
+          "d_factor": 10
+        }
+      }
+    },
+    "smap": {
+      "status": "ok",
+      "fuente": "NASA SMAP L4 (SPL4SMGP) vía Google Earth Engine",
+      "coleccion": "NASA/SMAP/SPL4SMGP/008",
+      "unidad": "m3/m3",
+      "resolucion_m": 9000
+    },
+    "imerg": {
+      "status": "ok",
+      "fuente": "NASA GPM IMERG vía Google Earth Engine",
+      "coleccion": "NASA/GPM_L3/IMERG_V07",
+      "unidad": "mm/dia",
+      "resolucion_m": 11000
+    }
+  },
+  "soil": {
+    "0-5cm": {
+      "bdod": {
+        "Q0.05": 100,
+        "Q0.5": 140,
+        "Q0.95": 180
+      },
+      "cec": {
+        "Q0.05": 38,
+        "Q0.5": 138,
+        "Q0.95": 594
+      },
+      "cfvo": {
+        "Q0.05": 0,
+        "Q0.5": 1,
+        "Q0.95": 600
+      },
+      "clay": {
+        "Q0.05": 16,
+        "Q0.5": 241,
+        "Q0.95": 797
+      },
+      "nitrogen": {
+        "Q0.05": 30,
+        "Q0.5": 180,
+        "Q0.95": 552
+      },
+      "phh2o": {
+        "Q0.05": 44,
+        "Q0.5": 54,
+        "Q0.95": 75
+      },
+      "sand": {
+        "Q0.05": 49,
+        "Q0.5": 352,
+        "Q0.95": 746
+      },
+      "silt": {
+        "Q0.05": 12,
+        "Q0.5": 278,
+        "Q0.95": 892
+      },
+      "soc": {
+        "Q0.05": 53,
+        "Q0.5": 222,
+        "Q0.95": 685
+      },
+      "ph": {
+        "Q0.05": 4.4,
+        "Q0.5": 5.4,
+        "Q0.95": 7.5
+      },
+      "sand_silt_clay_sum_pct": {
+        "Q0.05": 7.7,
+        "Q0.5": 87.1,
+        "Q0.95": 243.5
+      }
+    },
+    "5-15cm": {
+      "bdod": {
+        "Q0.05": 104,
+        "Q0.5": 144,
+        "Q0.95": 177
+      },
+      "cec": {
+        "Q0.05": 31,
+        "Q0.5": 136,
+        "Q0.95": 452
+      },
+      "cfvo": {
+        "Q0.05": 0,
+        "Q0.5": 2,
+        "Q0.95": 600
+      },
+      "clay": {
+        "Q0.05": 14,
+        "Q0.5": 245,
+        "Q0.95": 811
+      },
+      "nitrogen": {
+        "Q0.05": 30,
+        "Q0.5": 100,
+        "Q0.95": 476
+      },
+      "phh2o": {
+        "Q0.05": 44,
+        "Q0.5": 53,
+        "Q0.95": 75
+      },
+      "sand": {
+        "Q0.05": 44,
+        "Q0.5": 343,
+        "Q0.95": 737
+      },
+      "silt": {
+        "Q0.05": 16,
+        "Q0.5": 287,
+        "Q0.95": 892
+      },
+      "soc": {
+        "Q0.05": 32,
+        "Q0.5": 138,
+        "Q0.95": 500
+      },
+      "ph": {
+        "Q0.05": 4.4,
+        "Q0.5": 5.3,
+        "Q0.95": 7.5
+      },
+      "sand_silt_clay_sum_pct": {
+        "Q0.05": 7.4,
+        "Q0.5": 87.5,
+        "Q0.95": 244.0
+      }
+    },
+    "15-30cm": {
+      "bdod": {
+        "Q0.05": 102,
+        "Q0.5": 144,
+        "Q0.95": 178
+      },
+      "cec": {
+        "Q0.05": 26,
+        "Q0.5": 124,
+        "Q0.95": 421
+      },
+      "cfvo": {
+        "Q0.05": 0,
+        "Q0.5": 0,
+        "Q0.95": 600
+      },
+      "clay": {
+        "Q0.05": 14,
+        "Q0.5": 276,
+        "Q0.95": 826
+      },
+      "nitrogen": {
+        "Q0.05": 20,
+        "Q0.5": 70,
+        "Q0.95": 221
+      },
+      "phh2o": {
+        "Q0.05": 44,
+        "Q0.5": 53,
+        "Q0.95": 75
+      },
+      "sand": {
+        "Q0.05": 44,
+        "Q0.5": 335,
+        "Q0.95": 758
+      },
+      "silt": {
+        "Q0.05": 20,
+        "Q0.5": 280,
+        "Q0.95": 884
+      },
+      "soc": {
+        "Q0.05": 25,
+        "Q0.5": 71,
+        "Q0.95": 310
+      },
+      "ph": {
+        "Q0.05": 4.4,
+        "Q0.5": 5.3,
+        "Q0.95": 7.5
+      },
+      "sand_silt_clay_sum_pct": {
+        "Q0.05": 7.8,
+        "Q0.5": 89.1,
+        "Q0.95": 246.8
+      }
+    },
+    "30-60cm": {
+      "bdod": {
+        "Q0.05": 104,
+        "Q0.5": 150,
+        "Q0.95": 183
+      },
+      "cec": {
+        "Q0.05": 20,
+        "Q0.5": 124,
+        "Q0.95": 412
+      },
+      "cfvo": {
+        "Q0.5": 0,
+        "Q0.05": 0,
+        "Q0.95": 601
+      },
+      "clay": {
+        "Q0.05": 19,
+        "Q0.5": 307,
+        "Q0.95": 914
+      },
+      "nitrogen": {
+        "Q0.05": 10,
+        "Q0.5": 47,
+        "Q0.95": 137
+      },
+      "phh2o": {
+        "Q0.05": 44,
+        "Q0.5": 53,
+        "Q0.95": 75
+      },
+      "sand": {
+        "Q0.05": 32,
+        "Q0.5": 320,
+        "Q0.95": 734
+      },
+      "silt": {
+        "Q0.05": 16,
+        "Q0.5": 241,
+        "Q0.95": 868
+      },
+      "soc": {
+        "Q0.05": 12,
+        "Q0.5": 50,
+        "Q0.95": 222
+      },
+      "ph": {
+        "Q0.05": 4.4,
+        "Q0.5": 5.3,
+        "Q0.95": 7.5
+      },
+      "sand_silt_clay_sum_pct": {
+        "Q0.05": 6.7,
+        "Q0.5": 86.8,
+        "Q0.95": 251.6
+      }
+    },
+    "60-100cm": {
+      "bdod": {
+        "Q0.05": 102,
+        "Q0.5": 150,
+        "Q0.95": 188
+      },
+      "cec": {
+        "Q0.05": 22,
+        "Q0.5": 124,
+        "Q0.95": 432
+      },
+      "cfvo": {
+        "Q0.05": 0,
+        "Q0.5": 10,
+        "Q0.95": 495
+      },
+      "clay": {
+        "Q0.05": 23,
+        "Q0.5": 330,
+        "Q0.95": 914
+      },
+      "nitrogen": {
+        "Q0.05": 10,
+        "Q0.5": 40,
+        "Q0.95": 140
+      },
+      "phh2o": {
+        "Q0.05": 45,
+        "Q0.5": 53,
+        "Q0.95": 79
+      },
+      "sand": {
+        "Q0.05": 38,
+        "Q0.5": 308,
+        "Q0.95": 720
+      },
+      "silt": {
+        "Q0.05": 16,
+        "Q0.5": 239,
+        "Q0.95": 803
+      },
+      "soc": {
+        "Q0.05": 8,
+        "Q0.5": 29,
+        "Q0.95": 169
+      },
+      "ph": {
+        "Q0.05": 4.5,
+        "Q0.5": 5.3,
+        "Q0.95": 7.9
+      },
+      "sand_silt_clay_sum_pct": {
+        "Q0.05": 7.7,
+        "Q0.5": 87.7,
+        "Q0.95": 243.7
+      }
+    }
+  },
+  "daily": [
+    {
+      "date": "2026-08-01",
+      "power_t2m_max": 26.19,
+      "power_t2m_min": 17.11,
+      "power_prectotcorr": 0.31,
+      "power_rh2m": 76.67,
+      "power_ws2m": 2.42,
+      "power_allsky_sfc_sw_dwn": 20.88,
+      "power_gwetroot": 0.62,
+      "smap_sm_surface": 0.1274555061132677,
+      "smap_sm_rootzone": 0.1532365934502694,
+      "imerg_precip_mm": 0.01570552112134688
+    },
+    {
+      "date": "2026-08-02",
+      "power_t2m_max": 26.53,
+      "power_t2m_min": 16.35,
+      "power_prectotcorr": 0.01,
+      "power_rh2m": 75.19,
+      "power_ws2m": 2.47,
+      "power_allsky_sfc_sw_dwn": 21.68,
+      "power_gwetroot": 0.62,
+      "smap_sm_surface": 0.11695751400604361,
+      "smap_sm_rootzone": 0.1505024207215155,
+      "imerg_precip_mm": 0.18070551577064156
+    },
+    {
+      "date": "2026-08-03",
+      "power_t2m_max": 25.47,
+      "power_t2m_min": 17.13,
+      "power_prectotcorr": 0.38,
+      "power_rh2m": 75.79,
+      "power_ws2m": 2.65,
+      "power_allsky_sfc_sw_dwn": 12.16,
+      "power_gwetroot": 0.61,
+      "smap_sm_surface": 0.11520081950772193,
+      "smap_sm_rootzone": 0.14816555236616444,
+      "imerg_precip_mm": 1.9955827875942722
+    },
+    {
+      "date": "2026-08-04",
+      "power_t2m_max": 25.93,
+      "power_t2m_min": 17.5,
+      "power_prectotcorr": 0.4,
+      "power_rh2m": 74.89,
+      "power_ws2m": 2.5,
+      "power_allsky_sfc_sw_dwn": 15.03,
+      "power_gwetroot": 0.61,
+      "smap_sm_surface": 0.1268349237019016,
+      "smap_sm_rootzone": 0.1473621658740505,
+      "imerg_precip_mm": 0.7282515135736553
+    },
+    {
+      "date": "2026-08-05",
+      "power_t2m_max": 25.46,
+      "power_t2m_min": 16.95,
+      "power_prectotcorr": 0.21,
+      "power_rh2m": 75.15,
+      "power_ws2m": 2.4,
+      "power_allsky_sfc_sw_dwn": 12.83,
+      "power_gwetroot": 0.61,
+      "smap_sm_surface": 0.12761525740666738,
+      "smap_sm_rootzone": 0.14641008934667032,
+      "imerg_precip_mm": 4.581594944331634
+    },
+    {
+      "date": "2026-08-06",
+      "power_t2m_max": 26.36,
+      "power_t2m_min": 16.48,
+      "power_prectotcorr": 0.02,
+      "power_rh2m": 70.55,
+      "power_ws2m": 2.08,
+      "power_allsky_sfc_sw_dwn": 13.65,
+      "power_gwetroot": 0.61,
+      "smap_sm_surface": 0.13471948187197408,
+      "smap_sm_rootzone": 0.14629426214002794,
+      "imerg_precip_mm": 0.02812883447558602
+    },
+    {
+      "date": "2026-08-07",
+      "power_t2m_max": 27.39,
+      "power_t2m_min": 16.37,
+      "power_prectotcorr": 1.53,
+      "power_rh2m": 73.34,
+      "power_ws2m": 2.31,
+      "power_allsky_sfc_sw_dwn": 17.98,
+      "power_gwetroot": 0.6,
+      "smap_sm_surface": 0.11613236517915804,
+      "smap_sm_rootzone": 0.14379221441284304,
+      "imerg_precip_mm": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "power_t2m_max": 26.63,
+      "power_t2m_min": 17.01,
+      "power_prectotcorr": 1.07,
+      "power_rh2m": 74.93,
+      "power_ws2m": 2.52,
+      "power_allsky_sfc_sw_dwn": 15.7,
+      "power_gwetroot": 0.6,
+      "smap_sm_surface": 0.10826411218412461,
+      "smap_sm_rootzone": 0.14146784593861914,
+      "imerg_precip_mm": 0.13696318469438815
+    },
+    {
+      "date": "2026-08-09",
+      "power_t2m_max": 25.22,
+      "power_t2m_min": 17.2,
+      "power_prectotcorr": 0.14,
+      "power_rh2m": 76.93,
+      "power_ws2m": 2.22,
+      "power_allsky_sfc_sw_dwn": 19.15,
+      "power_gwetroot": 0.6,
+      "smap_sm_surface": 0.1075780913233757,
+      "smap_sm_rootzone": 0.13967456623551344,
+      "imerg_precip_mm": 0.7919018289611384
+    },
+    {
+      "date": "2026-08-10",
+      "power_t2m_max": 26.54,
+      "power_t2m_min": 16.7,
+      "power_prectotcorr": 0.03,
+      "power_rh2m": 73.07,
+      "power_ws2m": 2.75,
+      "power_allsky_sfc_sw_dwn": 24.28,
+      "power_gwetroot": 0.6,
+      "smap_sm_surface": 0.10701727554682763,
+      "smap_sm_rootzone": 0.137835644906567,
+      "imerg_precip_mm": 0.1943864938488767
+    },
+    {
+      "date": "2026-08-11",
+      "power_t2m_max": 26.35,
+      "power_t2m_min": 16.41,
+      "power_prectotcorr": 0.06,
+      "power_rh2m": 73.34,
+      "power_ws2m": 3.05,
+      "power_allsky_sfc_sw_dwn": 14.59,
+      "power_gwetroot": 0.6,
+      "smap_sm_surface": 0.10028208071185696,
+      "smap_sm_rootzone": 0.135566518401667,
+      "imerg_precip_mm": 0.6038036621147138
+    },
+    {
+      "date": "2026-08-12",
+      "power_t2m_max": 26.59,
+      "power_t2m_min": 16.36,
+      "power_prectotcorr": 0.84,
+      "power_rh2m": 73.14,
+      "power_ws2m": 2.78,
+      "power_allsky_sfc_sw_dwn": 15.75,
+      "power_gwetroot": 0.59,
+      "smap_sm_surface": 0.09720615441760709,
+      "smap_sm_rootzone": 0.13376186163194717,
+      "imerg_precip_mm": 0.012760735728258003
+    },
+    {
+      "date": "2026-08-13",
+      "power_t2m_max": 27.32,
+      "power_t2m_min": 16.63,
+      "power_prectotcorr": 0.35,
+      "power_rh2m": 73.71,
+      "power_ws2m": 2.37,
+      "power_allsky_sfc_sw_dwn": 16.07,
+      "power_gwetroot": 0.59,
+      "smap_sm_surface": 0.0935552665783513,
+      "smap_sm_rootzone": 0.13183541788208866,
+      "imerg_precip_mm": 0.0771472396020509
+    },
+    {
+      "date": "2026-08-14",
+      "power_t2m_max": 27.63,
+      "power_t2m_min": 18.28,
+      "power_prectotcorr": 0.15,
+      "power_rh2m": 72.9,
+      "power_ws2m": 2.72,
+      "power_allsky_sfc_sw_dwn": 15.25,
+      "power_gwetroot": 0.59,
+      "smap_sm_surface": 0.09053961355840005,
+      "smap_sm_rootzone": 0.13002905147450586,
+      "imerg_precip_mm": 0.01570552112134688
+    },
+    {
+      "date": "2026-08-15",
+      "power_t2m_max": 26.54,
+      "power_t2m_min": 18.53,
+      "power_prectotcorr": 0.53,
+      "power_rh2m": 77.72,
+      "power_ws2m": 2.31,
+      "power_allsky_sfc_sw_dwn": 17.2,
+      "power_gwetroot": 0.58,
+      "smap_sm_surface": 0.0902324465494002,
+      "smap_sm_rootzone": 0.1287025563539036,
+      "imerg_precip_mm": 1.449355804127144
+    },
+    {
+      "date": "2026-08-16",
+      "power_t2m_max": 28.12,
+      "power_t2m_min": 17.04,
+      "power_prectotcorr": 4.87,
+      "power_rh2m": 76.45,
+      "power_ws2m": 1.8,
+      "power_allsky_sfc_sw_dwn": 13.2,
+      "power_gwetroot": 0.58,
+      "smap_sm_surface": 0.10185571207154183,
+      "smap_sm_rootzone": 0.12806540340064995,
+      "imerg_precip_mm": 1.7389876936145263
+    },
+    {
+      "date": "2026-08-17",
+      "power_t2m_max": 23.57,
+      "power_t2m_min": 17.27,
+      "power_prectotcorr": 3.01,
+      "power_rh2m": 81.19,
+      "power_ws2m": 1.89,
+      "power_allsky_sfc_sw_dwn": 8.13,
+      "power_gwetroot": 0.59,
+      "smap_sm_surface": 0.17931672257761802,
+      "smap_sm_rootzone": 0.13678025691619805,
+      "imerg_precip_mm": 19.33898756767343
+    },
+    {
+      "date": "2026-08-18",
+      "power_t2m_max": 26.74,
+      "power_t2m_min": 16.84,
+      "power_prectotcorr": 0.09,
+      "power_rh2m": 75.71,
+      "power_ws2m": 2.12,
+      "power_allsky_sfc_sw_dwn": 16.07,
+      "power_gwetroot": 0.59,
+      "smap_sm_surface": 0.14515968484263267,
+      "smap_sm_rootzone": 0.13961439603759399,
+      "imerg_precip_mm": 2.7942636961951575
+    },
+    {
+      "date": "2026-08-19",
+      "power_t2m_max": 27.61,
+      "power_t2m_min": 16.83,
+      "power_prectotcorr": 0.18,
+      "power_rh2m": 73.68,
+      "power_ws2m": 2.66,
+      "power_allsky_sfc_sw_dwn": 18.06,
+      "power_gwetroot": 0.58,
+      "smap_sm_surface": 0.1235954761505127,
+      "smap_sm_rootzone": 0.13710498857882716,
+      "imerg_precip_mm": 0.049018402132519914
+    },
+    {
+      "date": "2026-08-20",
+      "power_t2m_max": 27.67,
+      "power_t2m_min": 17.04,
+      "power_prectotcorr": 0.07,
+      "power_rh2m": 73.03,
+      "power_ws2m": 2.66,
+      "power_allsky_sfc_sw_dwn": 17.68,
+      "power_gwetroot": 0.58,
+      "smap_sm_surface": 0.11034043565873174,
+      "smap_sm_rootzone": 0.1348066166523964,
+      "imerg_precip_mm": 0.4446318866970715
+    },
+    {
+      "date": "2026-08-21",
+      "power_t2m_max": 27.53,
+      "power_t2m_min": 18.85,
+      "power_prectotcorr": 0.15,
+      "power_rh2m": 73.33,
+      "power_ws2m": 2.66,
+      "power_allsky_sfc_sw_dwn": 19.06,
+      "power_gwetroot": 0.58,
+      "smap_sm_surface": 0.1044014300550184,
+      "smap_sm_rootzone": 0.13306707501291268,
+      "imerg_precip_mm": 0.6530674738249531
+    },
+    {
+      "date": "2026-08-22",
+      "power_t2m_max": 25.46,
+      "power_t2m_min": 18.55,
+      "power_prectotcorr": 0.59,
+      "power_rh2m": 74.33,
+      "power_ws2m": 2.36,
+      "power_allsky_sfc_sw_dwn": 11.51,
+      "power_gwetroot": 0.57,
+      "smap_sm_surface": 0.10356535450104744,
+      "smap_sm_rootzone": 0.13168225167018754,
+      "imerg_precip_mm": 3.12472381954727
+    },
+    {
+      "date": "2026-08-23",
+      "power_t2m_max": 26.19,
+      "power_t2m_min": 17.07,
+      "power_prectotcorr": 0.4,
+      "power_rh2m": 74.42,
+      "power_ws2m": 2.42,
+      "power_allsky_sfc_sw_dwn": 12.7,
+      "power_gwetroot": 0.57,
+      "smap_sm_surface": 0.11156193722760485,
+      "smap_sm_rootzone": 0.1312716949971453,
+      "imerg_precip_mm": 1.3787423103499268
+    },
+    {
+      "date": "2026-08-24",
+      "power_t2m_max": 27.57,
+      "power_t2m_min": 17.16,
+      "power_prectotcorr": 0.07,
+      "power_rh2m": 72.15,
+      "power_ws2m": 2.77,
+      "power_allsky_sfc_sw_dwn": 14.38,
+      "power_gwetroot": 0.57,
+      "smap_sm_surface": 0.10516952555025778,
+      "smap_sm_rootzone": 0.12987548064801,
+      "imerg_precip_mm": 0.0782208593927918
+    },
+    {
+      "date": "2026-08-25",
+      "power_t2m_max": 27.93,
+      "power_t2m_min": 17.41,
+      "power_prectotcorr": 0.06,
+      "power_rh2m": 71.94,
+      "power_ws2m": 2.77,
+      "power_allsky_sfc_sw_dwn": 14.39,
+      "power_gwetroot": 0.57,
+      "smap_sm_surface": 0.1017408351744375,
+      "smap_sm_rootzone": 0.12849234188756634,
+      "imerg_precip_mm": 0.008834355447921285
+    },
+    {
+      "date": "2026-08-26",
+      "power_t2m_max": 27.09,
+      "power_t2m_min": 18.48,
+      "power_prectotcorr": 0.25,
+      "power_rh2m": 70.2,
+      "power_ws2m": 2.5,
+      "power_allsky_sfc_sw_dwn": 15.35,
+      "power_gwetroot": 0.56,
+      "smap_sm_surface": 0.10516081510051603,
+      "smap_sm_rootzone": 0.12773305321893386,
+      "imerg_precip_mm": 1.6729447428262767
+    },
+    {
+      "date": "2026-08-27",
+      "power_t2m_max": 28.64,
+      "power_t2m_min": 17.35,
+      "power_prectotcorr": 0.75,
+      "power_rh2m": 71.72,
+      "power_ws2m": 2.57,
+      "power_allsky_sfc_sw_dwn": 18.61,
+      "power_gwetroot": 0.56,
+      "smap_sm_surface": 0.1177473001542591,
+      "smap_sm_rootzone": 0.12789929541008127,
+      "imerg_precip_mm": 11.374754234508504
+    },
+    {
+      "date": "2026-08-28",
+      "power_t2m_max": 27.3,
+      "power_t2m_min": 17.87,
+      "power_prectotcorr": 1.15,
+      "power_rh2m": 74.56,
+      "power_ws2m": 2.28,
+      "power_allsky_sfc_sw_dwn": 17.67,
+      "power_gwetroot": 0.56,
+      "smap_sm_surface": 0.15163580159987172,
+      "smap_sm_rootzone": 0.13170920072063325,
+      "imerg_precip_mm": 4.475214545934981
+    },
+    {
+      "date": "2026-08-29",
+      "power_t2m_max": 26.68,
+      "power_t2m_min": 18.06,
+      "power_prectotcorr": 41.7,
+      "power_rh2m": 81.15,
+      "power_ws2m": 1.73,
+      "power_allsky_sfc_sw_dwn": 13.23,
+      "power_gwetroot": 0.59,
+      "smap_sm_surface": 0.14121679144520913,
+      "smap_sm_rootzone": 0.13303707636171772,
+      "imerg_precip_mm": 1.2593251281057947
+    },
+    {
+      "date": "2026-08-30",
+      "power_t2m_max": 26.41,
+      "power_t2m_min": 17.8,
+      "power_prectotcorr": 2.44,
+      "power_rh2m": 78.28,
+      "power_ws2m": 2.13,
+      "power_allsky_sfc_sw_dwn": 9.51,
+      "power_gwetroot": 0.63,
+      "smap_sm_surface": 0.1284149125699074,
+      "smap_sm_rootzone": 0.1319831854874088,
+      "imerg_precip_mm": 3.6725459058706202
+    },
+    {
+      "date": "2026-08-31",
+      "power_t2m_max": 27.85,
+      "power_t2m_min": 17.15,
+      "power_prectotcorr": 0.02,
+      "power_rh2m": 74.71,
+      "power_ws2m": 2.09,
+      "power_allsky_sfc_sw_dwn": 17.72,
+      "power_gwetroot": 0.62,
+      "smap_sm_surface": 0.13335075830259632,
+      "smap_sm_rootzone": 0.13210508329493384,
+      "imerg_precip_mm": 0.49828219445753685
+    },
+    {
+      "date": "2026-09-01",
+      "power_t2m_max": 25.95,
+      "power_t2m_min": 18.24,
+      "power_prectotcorr": 6.16,
+      "power_rh2m": 84.39,
+      "power_ws2m": 0.69,
+      "power_allsky_sfc_sw_dwn": 13.13,
+      "power_gwetroot": 0.77,
+      "smap_sm_surface": 0.11824962304484458,
+      "smap_sm_rootzone": 0.1307071654065963,
+      "imerg_precip_mm": 0.2006134915342726
+    }
+  ],
+  "quality": {
+    "missing_days": {
+      "power_t2m_max": 0,
+      "power_t2m_min": 0,
+      "power_prectotcorr": 0,
+      "power_rh2m": 0,
+      "power_ws2m": 0,
+      "power_allsky_sfc_sw_dwn": 0,
+      "power_gwetroot": 0,
+      "smap_sm_surface": 0,
+      "smap_sm_rootzone": 0,
+      "imerg_precip_mm": 0
+    }
+  }
+}

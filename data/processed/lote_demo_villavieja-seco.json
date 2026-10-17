@@ -1,0 +1,71 @@
+{
+  "finca": "villavieja-seco",
+  "siembra": "2026-05-10",
+  "ciclo_dias": 120,
+  "cultivo": "maiz",
+  "datos_reales": {
+    "et0_media_mm_dia": 4.72,
+    "kc_medio": 0.83,
+    "etc_ciclo_mm": 484,
+    "lluvia_ciclo_mm": 544,
+    "lluvia_efectiva_ciclo_mm": 384,
+    "theta_smap_siembra": 0.241,
+    "correccion_temperatura_C": 6.32,
+    "dias_lluvia_desde_power_por_falta_de_imerg": 0
+  },
+  "suelo": {
+    "sand": 0.321,
+    "clay": 0.302,
+    "organic_matter": 1.071,
+    "cfvo": 0.425
+  },
+  "motor": {
+    "crop": "Maíz",
+    "crop_id": "maiz",
+    "zr_m": 1.0,
+    "p": 0.55,
+    "theta_1500": 0.18625950256692395,
+    "theta_33": 0.3257609878880596,
+    "taw_mm": 138.90860400852085,
+    "raw_mm": 76.39973220468647,
+    "irrigation_interval_days": 18.92996407664637,
+    "net_irrigation_mm": 76.39973220468647,
+    "gross_irrigation_mm": 109.14247457812354,
+    "water_volume_m3_ha": 763.9973220468647,
+    "initial_depletion_mm": 85.10415439319644,
+    "should_irrigate": true,
+    "ks": 0.8607490115030996
+  },
+  "riego_calendario": {
+    "riegos": 17,
+    "lamina_aplicada_mm": 680,
+    "volumen_m3_ha": 6800,
+    "dias_con_estres": 5,
+    "ks_medio": 0.998
+  },
+  "riego_balance_hidrico": {
+    "riegos": 3,
+    "lamina_aplicada_mm": 327,
+    "volumen_m3_ha": 3274,
+    "dias_con_estres": 0,
+    "ks_medio": 1.0
+  },
+  "ahorro": {
+    "mm": 353,
+    "m3_ha": 3530,
+    "pct": 52
+  },
+  "supuestos_informe_seccion_5": {
+    "et0_media_mm_dia": 4.7,
+    "kc_medio": 0.85,
+    "lluvia_efectiva_mm_mes": 66,
+    "calendario_mm": 680,
+    "balance_mm": 306
+  },
+  "procedencia": {
+    "smap": "NASA/SMAP/SPL4SMGP/008",
+    "imerg": "NASA/GPM_L3/IMERG_V07",
+    "power": "NASA POWER daily/point (AG)",
+    "suelo": "SoilGrids 2.0 Q0.5"
+  }
+}
