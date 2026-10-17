@@ -62,6 +62,9 @@ class UsuarioORM(Base):
     locked_until: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
+    last_login_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -130,6 +133,7 @@ class SesionORM(Base):
     __table_args__ = (
         Index("ix_sesiones_family", "family_id"),
         Index("ix_sesiones_user", "user_id"),
+        Index("uq_sesiones_refresh_hash", "refresh_token_hash", unique=True),
         {"schema": "identidad"},
     )
 
@@ -147,6 +151,14 @@ class SesionORM(Base):
     family_id: Mapped[UUID] = mapped_column(PG_UUID(as_uuid=True), nullable=False)
     expires_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False
+    )
+    used_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    replaced_by: Mapped[UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True),
+        ForeignKey("identidad.sesiones.id", ondelete="SET NULL"),
+        nullable=True,
     )
     revoked_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True

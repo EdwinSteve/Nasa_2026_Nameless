@@ -18,6 +18,7 @@ def _to_domain(row: UsuarioORM) -> User:
         status=UserStatus(row.status),
         failed_attempts=row.failed_attempts,
         locked_until=row.locked_until,
+        last_login_at=row.last_login_at,
         created_at=row.created_at,
         updated_at=row.updated_at,
     )
@@ -53,6 +54,7 @@ class SqlAlchemyUserRepository:
         row.status = user.status.value
         row.failed_attempts = user.failed_attempts
         row.locked_until = user.locked_until
+        row.last_login_at = user.last_login_at
         await self._session.flush()
         await self._session.refresh(row)
         return _to_domain(row)
