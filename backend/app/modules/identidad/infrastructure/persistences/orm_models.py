@@ -14,7 +14,7 @@ from sqlalchemy import (
     func,
     text,
 )
-from sqlalchemy.dialects.postgresql import CITEXT, INET, JSONB, UUID as PG_UUID
+from sqlalchemy.dialects.postgresql import CITEXT, ENUM, INET, JSONB, UUID as PG_UUID
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -31,6 +31,14 @@ EVENTO_VALUES = (
     "bloqueo",
     "desbloqueo",
 )
+
+# Las columnas son tipos ENUM de PostgreSQL creados por la migración 0001. Se declaran
+# con create_type=False para que SQLAlchemy los use sin intentar crearlos de nuevo.
+# Con VARCHAR, PostgreSQL rechaza la inserción ("column is of type ... but expression is
+# of type character varying").
+_ENUM_ROL = ENUM(*ROL_VALUES, name="rol_usuario", schema="identidad", create_type=False)
+_ENUM_ESTADO = ENUM(*ESTADO_VALUES, name="estado_usuario", schema="identidad", create_type=False)
+_ENUM_EVENTO = ENUM(*EVENTO_VALUES, name="evento_auth", schema="identidad", create_type=False)
 
 
 class UsuarioORM(Base):
@@ -52,9 +60,9 @@ class UsuarioORM(Base):
     phone: Mapped[str] = mapped_column(String(20), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(CITEXT, unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
-    role: Mapped[str] = mapped_column(String(20), nullable=False)
+    role: Mapped[str] = mapped_column(_ENUM_ROL, nullable=False)
     status: Mapped[str] = mapped_column(
-        String(20), nullable=False, server_default="pendiente"
+        _ENUM_ESTADO, nullable=False, server_default="pendiente"
     )
     failed_attempts: Mapped[int] = mapped_column(
         Integer, nullable=False, server_default="0"
@@ -185,10 +193,11 @@ class EventoAuthORM(Base):
         ForeignKey("identidad.usuarios.id", ondelete="SET NULL"),
         nullable=True,
     )
-    event: Mapped[str] = mapped_column(String(30), nullable=False)
+    event: Mapped[str] = mapped_column(_ENUM_EVENTO, nullable=False)
     ip_address: Mapped[str | None] = mapped_column(INET, nullable=True)
     user_agent: Mapped[str | None] = mapped_column(Text, nullable=True)
-    meta: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
+    # none_as_null: un meta ausente se guarda como NULL de SQL, no como el JSON null.
+    meta: Mapped[dict | None] = mapped_column(JSONB(none_as_null=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
