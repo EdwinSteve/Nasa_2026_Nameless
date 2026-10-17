@@ -14,3 +14,7 @@ class Argon2Hasher:
             return self._ph.verify(hash_storage, value)
         except (VerifyMismatchError, VerificationError, InvalidHashError):
             return False
+
+    def necesita_rehash(self, hash_storage: str) -> bool:
+        """True si el hash fue creado con parámetros anteriores y conviene recalcularlo."""
+        return self._ph.check_needs_rehash(hash_storage)

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from uuid import UUID, uuid4
 
@@ -43,6 +43,22 @@ class User:
             return False
         ahora = ahora or datetime.now(timezone.utc)
         return self.locked_until > ahora
+
+    def registrar_fallo(self, ahora: datetime, max_intentos: int, bloqueo_minutos: int) -> bool:
+        """Suma un intento fallido. Devuelve True si este intento bloqueó la cuenta."""
+        self.failed_attempts += 1
+        if self.failed_attempts >= max_intentos:
+            self.locked_until = ahora + timedelta(minutes=bloqueo_minutos)
+            return True
+        return False
+
+    def reiniciar_intentos(self) -> None:
+        self.failed_attempts = 0
+        self.locked_until = None
+
+    def registrar_login(self, ahora: datetime) -> None:
+        self.reiniciar_intentos()
+        self.last_login_at = ahora
 
 
 @dataclass

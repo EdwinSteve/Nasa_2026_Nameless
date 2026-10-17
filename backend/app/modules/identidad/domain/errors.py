@@ -28,8 +28,8 @@ class InvalidCredentials(ErrorDominio):
 class UserBlocked(ErrorDominio):
     def __init__(self):
         super().__init__(
-            "AUTH_USUARIO_BLOQUEADO",
-            "La cuenta está temporalmente bloqueada por intentos fallidos.",
+            "AUTH_CUENTA_BLOQUEADA",
+            "La cuenta está temporalmente bloqueada por intentos fallidos. Intenta más tarde.",
             423,
         )
 
