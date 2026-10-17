@@ -22,7 +22,9 @@ class Hasher(Protocol):
         ...
 
 class TokenIssuer(Protocol):
-    def issue_access_token(self, user_id: UUID, role: str) -> str:
+    duracion_segundos: int
+
+    def issue_access_token(self, user_id: UUID, rol: str) -> str:
         ...
 
     def decode_access_token(self, token: str) -> dict:
