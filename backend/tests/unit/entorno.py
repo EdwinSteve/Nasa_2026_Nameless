@@ -6,6 +6,7 @@ y comprobar el efecto en el mismo almacén en memoria.
 
 from datetime import datetime, timezone
 
+from app.modules.identidad.application.cerrar_sesion import CerrarSesion
 from app.modules.identidad.application.iniciar_sesion import IniciarSesion
 from app.modules.identidad.application.refrescar_sesion import RefrescarSesion
 from app.modules.identidad.domain.entity import Role, User, UserStatus
@@ -64,6 +65,13 @@ class EntornoIdentidad:
             dias_refresh=30,
         )
         self.refrescar = RefrescarSesion(**dependencias, dias_refresh=30)
+        self.cerrar = CerrarSesion(
+            sesiones=self.sesiones,
+            eventos=self.eventos,
+            generador=self.generador,
+            reloj=self.reloj,
+            uow=self.uow,
+        )
 
     async def login(self):
         return await self.iniciar.ejecutar(CELULAR_E164, CONTRASENA)

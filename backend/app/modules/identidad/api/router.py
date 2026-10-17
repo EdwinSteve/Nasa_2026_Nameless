@@ -1,11 +1,23 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 
-from app.modules.identidad.api.dependencies import get_iniciar_sesion, get_refrescar_sesion
-from app.modules.identidad.api.schemas import LoginRequest, RefreshRequest, TokenResponse
+from app.modules.identidad.api.dependencies import (
+    get_cerrar_sesion,
+    get_iniciar_sesion,
+    get_refrescar_sesion,
+    usuario_actual,
+)
+from app.modules.identidad.api.schemas import (
+    LoginRequest,
+    LogoutRequest,
+    RefreshRequest,
+    TokenResponse,
+)
+from app.modules.identidad.application.cerrar_sesion import CerrarSesion
 from app.modules.identidad.application.iniciar_sesion import IniciarSesion
 from app.modules.identidad.application.refrescar_sesion import RefrescarSesion
+from app.modules.identidad.domain.entity import User
 
 router = APIRouter(
     tags=["Identidad"],
@@ -100,3 +112,37 @@ async def refresh(
         token_type=par.token_type,
         expira_en=par.expira_en,
     )
+
+
+@router.post(
+    "/auth/logout",
+    status_code=204,
+    summary="Cerrar la sesión actual",
+    description=(
+        "Revoca el refresh token indicado. La app debe borrar ambos tokens del dispositivo. "
+        "Responde 204 aunque el token ya estuviera revocado."
+    ),
+    responses={401: {"description": "Falta el access token o no es válido."}},
+)
+async def logout(
+        body: LogoutRequest,
+        usuario: Annotated[User, Depends(usuario_actual)],
+        caso: Annotated[CerrarSesion, Depends(get_cerrar_sesion)],
+) -> Response:
+    await caso.una(usuario.id, body.refresh_token)
+    return Response(status_code=204)
+
+
+@router.post(
+    "/auth/logout-todo",
+    status_code=204,
+    summary="Cerrar todas las sesiones del usuario",
+    description="Revoca todos los refresh tokens del usuario, en todos sus dispositivos.",
+    responses={401: {"description": "Falta el access token o no es válido."}},
+)
+async def logout_todo(
+        usuario: Annotated[User, Depends(usuario_actual)],
+        caso: Annotated[CerrarSesion, Depends(get_cerrar_sesion)],
+) -> Response:
+    await caso.todas(usuario.id)
+    return Response(status_code=204)

@@ -64,5 +64,14 @@ class RefreshRequest(BaseModel):
     refresh_token: str = Field(..., min_length=1, max_length=255, examples=["Xk2rQ8s0uYwPqN3bZ1cV7m"])
 
 
+class LogoutRequest(BaseModel):
+    refresh_token: str = Field(
+        ...,
+        min_length=1,
+        max_length=255,
+        description="Refresh token de la sesión que se quiere cerrar.",
+    )
+
+
 class HealthResponse(BaseModel):
     estado: str = "ok"
