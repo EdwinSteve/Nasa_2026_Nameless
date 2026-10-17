@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import get_settings
 from app.core.db import get_session
 from app.modules.identidad.application.iniciar_sesion import IniciarSesion
+from app.modules.identidad.application.refrescar_sesion import RefrescarSesion
 from app.modules.identidad.domain.entity import Role, User
 from app.modules.identidad.infrastructure.persistences.repositories import (
     SqlAlchemyEventoRepository,
@@ -30,6 +31,22 @@ def _hash_ficticio() -> str:
     """Hash de un valor aleatorio, calculado una vez. Se compara cuando el celular no existe
     para que la respuesta tarde lo mismo que un login real."""
     return Argon2Hasher().generate_hash(secrets.token_urlsafe(32))
+
+
+async def get_refrescar_sesion(
+        session: Annotated[AsyncSession, Depends(get_session)],
+) -> RefrescarSesion:
+    settings = get_settings()
+    return RefrescarSesion(
+        usuarios=SqlAlchemyUserRepository(session),
+        sesiones=SqlAlchemySesionRepository(session),
+        eventos=SqlAlchemyEventoRepository(session),
+        tokens=JwtTokenIssuer(),
+        generador=GeneradorRefreshToken(),
+        reloj=RelojSistema(),
+        uow=SqlAlchemyUnitOfWork(session),
+        dias_refresh=settings.refresh_dias,
+    )
 
 
 async def get_user_repo(

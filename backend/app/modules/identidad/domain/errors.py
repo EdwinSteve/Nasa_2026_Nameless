@@ -34,6 +34,18 @@ class UserBlocked(ErrorDominio):
         )
 
 
+class RefreshTokenInvalid(ErrorDominio):
+    """Mismo error para token inexistente, expirado, revocado, reutilizado o de usuario bloqueado.
+    No se distingue el motivo para no dar pistas a quien intenta robar un token."""
+
+    def __init__(self):
+        super().__init__(
+            "AUTH_REFRESH_INVALIDO",
+            "La sesión ya no es válida. Vuelve a iniciar sesión.",
+            401,
+        )
+
+
 class UserAlreadyExists(ErrorDominio):
     def __init__(self):
         super().__init__("IDENTIDAD_USUARIO_DUPLICADO", "El usuario ya existe.", 409)

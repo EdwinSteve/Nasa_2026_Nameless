@@ -2,9 +2,10 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 
-from app.modules.identidad.api.dependencies import get_iniciar_sesion
-from app.modules.identidad.api.schemas import LoginRequest, TokenResponse
+from app.modules.identidad.api.dependencies import get_iniciar_sesion, get_refrescar_sesion
+from app.modules.identidad.api.schemas import LoginRequest, RefreshRequest, TokenResponse
 from app.modules.identidad.application.iniciar_sesion import IniciarSesion
+from app.modules.identidad.application.refrescar_sesion import RefrescarSesion
 
 router = APIRouter(
     tags=["Identidad"],
@@ -57,6 +58,42 @@ async def login(
         caso: Annotated[IniciarSesion, Depends(get_iniciar_sesion)],
 ) -> TokenResponse:
     par = await caso.ejecutar(body.celular, body.contrasena)
+    return TokenResponse(
+        access_token=par.access_token,
+        refresh_token=par.refresh_token,
+        token_type=par.token_type,
+        expira_en=par.expira_en,
+    )
+
+
+ERROR_REFRESH = {
+    "description": "El refresh token no existe, expiró, fue revocado o ya se usó.",
+    "content": {
+        "application/json": {
+            "example": {
+                "code": "AUTH_REFRESH_INVALIDO",
+                "message": "La sesión ya no es válida. Vuelve a iniciar sesión.",
+            }
+        }
+    },
+}
+
+
+@router.post(
+    "/auth/refresh",
+    response_model=TokenResponse,
+    summary="Renovar la sesión con el refresh token",
+    description=(
+        "Devuelve un access token y un refresh token nuevos. El refresh token anterior "
+        "queda inutilizable. Si se reutiliza uno ya usado, se cierran todas las sesiones de esa cadena."
+    ),
+    responses={401: ERROR_REFRESH},
+)
+async def refresh(
+        body: RefreshRequest,
+        caso: Annotated[RefrescarSesion, Depends(get_refrescar_sesion)],
+) -> TokenResponse:
+    par = await caso.ejecutar(body.refresh_token)
     return TokenResponse(
         access_token=par.access_token,
         refresh_token=par.refresh_token,
