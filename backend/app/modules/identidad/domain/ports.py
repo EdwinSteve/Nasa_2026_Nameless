@@ -31,3 +31,12 @@ class TokenIssuer(Protocol):
 class Clock(Protocol):
     def now(self) -> datetime:
         ...
+
+class GeneradorRefresh(Protocol):
+    def generar(self) -> str:
+        """Devuelve un refresh token nuevo, aleatorio y de un solo uso."""
+        ...
+
+    def hashear(self, token: str) -> str:
+        """Devuelve el hash que se guarda en la base. El token en claro nunca se guarda."""
+        ...
