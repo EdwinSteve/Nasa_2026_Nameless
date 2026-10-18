@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "fao56",
+    "titulo": "Allen et al. (1998). Crop evapotranspiration. FAO Irrigation and Drainage Paper 56",
+    "uso": "Kc, profundidad de raíz, factor p"
+  },
+  {
+    "_id": "ecocrop",
+    "titulo": "FAO ECOCROP",
+    "uso": "Rangos de temperatura, lluvia, pH y altitud"
+  },
+  {
+    "_id": "cenicafe",
+    "titulo": "Cenicafé",
+    "uso": "Validación de café y sus variedades"
+  },
+  {
+    "_id": "fedearroz",
+    "titulo": "Fedearroz",
+    "uso": "Validación de arroz y sus variedades"
+  },
+  {
+    "_id": "cenicana",
+    "titulo": "Cenicaña",
+    "uso": "Validación de caña de azúcar y panelera"
+  },
+  {
+    "_id": "agrosavia",
+    "titulo": "Agrosavia",
+    "uso": "Validación general de cultivos y variedades para Colombia"
+  },
+  {
+    "_id": "upra_eva",
+    "titulo": "UPRA, Evaluaciones Agropecuarias Municipales",
+    "uso": "Departamentos productores y rendimientos de referencia"
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "_id",
+      "nombre",
+      "unidad",
+      "fuente",
+      "comparacion"
+    ],
+    "properties": {
+      "_id": {
+        "bsonType": "string"
+      },
+      "nombre": {
+        "bsonType": "string"
+      },
+      "unidad": {
+        "bsonType": "string"
+      },
+      "altura_m": {
+        "bsonType": [
+          "number",
+          "null"
+        ]
+      },
+      "fuente": {
+        "bsonType": "string"
+      },
+      "parametros": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "string"
+        }
+      },
+      "comparacion": {
+        "bsonType": "string"
+      },
+      "nota": {
+        "bsonType": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  }
+}
