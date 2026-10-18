@@ -6,7 +6,7 @@ Construimos un **sistema de soporte a la decisión** que, dada una finca del Hui
 
 ## Estado
 
-🟡 **Fase 0: base y datos.** Ver el [roadmap](docs/02-roadmap.md).
+🟡 **Datos listos, empieza el entrenamiento del modelo predictivo.** Ver el [roadmap](docs/02-roadmap.md) y la [guía de la máquina de entrenamiento](ml/GUIA_MAQUINA_GPU.md).
 
 ## Documentación
 
@@ -16,6 +16,10 @@ Construimos un **sistema de soporte a la decisión** que, dada una finca del Hui
 | [docs/01-estrategia.md](docs/01-estrategia.md) | Estrategia completa: cómo ganar, ideas, arquitectura |
 | [docs/02-roadmap.md](docs/02-roadmap.md) | Fases y tareas |
 | [docs/datos/inventario.md](docs/datos/inventario.md) | **Datos disponibles y verificados, y sus limitaciones** |
+| [docs/datos/estudio-datos-modelo.md](docs/datos/estudio-datos-modelo.md) | Qué datos necesita el modelo predictivo y cuáles se agregaron |
+| [ml/README.md](ml/README.md) | Arquitectura del modelo predictivo de idoneidad de cultivos |
+| [ml/GUIA_MAQUINA_GPU.md](ml/GUIA_MAQUINA_GPU.md) | Instalación y primeros pasos en la máquina de entrenamiento |
+| [data/catalogo_cultivos_mongodb/](data/catalogo_cultivos_mongodb/README.md) | Catálogo `surco_agro`: requerimientos de 44 cultivos por fase |
 | [docs/investigacion/](docs/investigacion/README.md) | Preguntas abiertas y notas de investigación |
 | [docs/decisiones/](docs/decisiones/) | Registro de decisiones técnicas (ADR) |
 
@@ -23,8 +27,9 @@ Construimos un **sistema de soporte a la decisión** que, dada una finca del Hui
 
 ```
 docs/        estrategia, datos, investigación, decisiones
-data/        fincas demo + datos procesados (raw/ no se versiona)
-scripts/     verificación y descarga de datos
+data/        fincas demo, catálogo de cultivos y datos procesados (raw/ no se versiona)
+scripts/     verificación y descarga de datos, motor de riego (agronomic_engine)
+ml/          servicio de datos datos_tierra y modelo predictivo
 notebooks/   exploración
 backend/     FastAPI: motor de rotación (pendiente)
 frontend/    Next.js: mapa, planificador, simulador (pendiente)

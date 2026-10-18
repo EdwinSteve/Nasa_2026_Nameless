@@ -1,0 +1,37 @@
+# Entorno de la máquina de entrenamiento (RTX 5060 Ti, Blackwell sm_120).
+#
+# PyTorch va APARTE y PRIMERO, con CUDA 12.8 o superior (las ruedas cu124 o anteriores no reconocen la tarjeta):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu128
+#
+# Después:
+#   pip install -r requirements-entrenamiento.txt
+
+-r requirements.txt
+
+# Modelo A (gradient boosting en GPU) y explicación
+xgboost>=2.1
+lightgbm>=4.5
+shap>=0.46
+scikit-learn>=1.5
+
+# Búsqueda de hiperparámetros y registro de experimentos
+optuna>=4.0
+mlflow>=2.16
+
+# Datos: tablas grandes en Parquet y el oráculo vectorizado
+polars>=1.0
+duckdb>=1.1
+pyarrow>=17
+numpy>=2.0
+numba>=0.60
+
+# Catálogo surco_agro (opcional: el oráculo también lee los JSON)
+pymongo>=4.8
+
+# Exportar el modelo B para el backend sin PyTorch
+onnx>=1.16
+onnxruntime>=1.19
+
+# Exploración
+jupyterlab>=4.2
+matplotlib>=3.9
