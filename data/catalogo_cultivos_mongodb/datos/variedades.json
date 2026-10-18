@@ -1,0 +1,731 @@
+[
+  {
+    "_id": "arroz_riego-fedearroz-67",
+    "cultivo_id": "arroz_riego",
+    "nombre": "Fedearroz 67",
+    "tipo": "variedad",
+    "obtentor": "Fedearroz",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "arroz_riego-fedearroz-2000",
+    "cultivo_id": "arroz_riego",
+    "nombre": "Fedearroz 2000",
+    "tipo": "variedad",
+    "obtentor": "Fedearroz",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "arroz_secano-variedades-fedearroz-para-secano",
+    "cultivo_id": "arroz_secano",
+    "nombre": "Variedades Fedearroz para secano",
+    "tipo": "tipo comercial",
+    "obtentor": "Fedearroz",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "maiz-híbridos-amarillos-tecnificados",
+    "cultivo_id": "maiz",
+    "nombre": "Híbridos amarillos tecnificados",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "maiz-híbridos-blancos",
+    "cultivo_id": "maiz",
+    "nombre": "Híbridos blancos",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "maiz-variedades-criollas",
+    "cultivo_id": "maiz",
+    "nombre": "Variedades criollas",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "sorgo-híbridos-graníferos",
+    "cultivo_id": "sorgo",
+    "nombre": "Híbridos graníferos",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "frijol-cargamanto",
+    "cultivo_id": "frijol",
+    "nombre": "Cargamanto",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "frijol-calima",
+    "cultivo_id": "frijol",
+    "nombre": "Calima",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "frijol-radical",
+    "cultivo_id": "frijol",
+    "nombre": "Radical",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "soya-variedades-para-orinoquía",
+    "cultivo_id": "soya",
+    "nombre": "Variedades para Orinoquía",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "arveja-arveja-verde-para-consumo-fresco",
+    "cultivo_id": "arveja",
+    "nombre": "Arveja verde para consumo fresco",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "mani-tipos-comerciales",
+    "cultivo_id": "mani",
+    "nombre": "Tipos comerciales",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "papa-diacol-capiro",
+    "cultivo_id": "papa",
+    "nombre": "Diacol Capiro",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "papa-parda-pastusa",
+    "cultivo_id": "papa",
+    "nombre": "Parda Pastusa",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "papa_criolla-criolla-colombia",
+    "cultivo_id": "papa_criolla",
+    "nombre": "Criolla Colombia",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "yuca-variedades-dulces-de-mesa",
+    "cultivo_id": "yuca",
+    "nombre": "Variedades dulces de mesa",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "yuca-variedades-industriales",
+    "cultivo_id": "yuca",
+    "nombre": "Variedades industriales",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "name-ñame-espino",
+    "cultivo_id": "name",
+    "nombre": "Ñame espino",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "name-ñame-diamante",
+    "cultivo_id": "name",
+    "nombre": "Ñame diamante",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "arracacha-arracacha-amarilla",
+    "cultivo_id": "arracacha",
+    "nombre": "Arracacha amarilla",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "tomate-chonto",
+    "cultivo_id": "tomate",
+    "nombre": "Chonto",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "tomate-milano",
+    "cultivo_id": "tomate",
+    "nombre": "Milano",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "pimenton-híbridos-tipo-blocky",
+    "cultivo_id": "pimenton",
+    "nombre": "Híbridos tipo blocky",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "ahuyama-ahuyama-criolla",
+    "cultivo_id": "ahuyama",
+    "nombre": "Ahuyama criolla",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cebolla_bulbo-yellow-granex",
+    "cultivo_id": "cebolla_bulbo",
+    "nombre": "Yellow Granex",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cebolla_larga-junca",
+    "cultivo_id": "cebolla_larga",
+    "nombre": "Junca",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "zanahoria-tipo-chantenay",
+    "cultivo_id": "zanahoria",
+    "nombre": "Tipo Chantenay",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "zanahoria-tipo-nantes",
+    "cultivo_id": "zanahoria",
+    "nombre": "Tipo Nantes",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "repollo-híbridos-de-cabeza-compacta",
+    "cultivo_id": "repollo",
+    "nombre": "Híbridos de cabeza compacta",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "lechuga-batavia",
+    "cultivo_id": "lechuga",
+    "nombre": "Batavia",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "lechuga-crespa",
+    "cultivo_id": "lechuga",
+    "nombre": "Crespa",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "aguacate_hass-hass",
+    "cultivo_id": "aguacate_hass",
+    "nombre": "Hass",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "aguacate_tropical-lorena",
+    "cultivo_id": "aguacate_tropical",
+    "nombre": "Lorena",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "aguacate_tropical-papelillo",
+    "cultivo_id": "aguacate_tropical",
+    "nombre": "Papelillo",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "aguacate_tropical-choquette",
+    "cultivo_id": "aguacate_tropical",
+    "nombre": "Choquette",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "mango-tommy-atkins",
+    "cultivo_id": "mango",
+    "nombre": "Tommy Atkins",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "mango-azúcar",
+    "cultivo_id": "mango",
+    "nombre": "Azúcar",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "mango-keitt",
+    "cultivo_id": "mango",
+    "nombre": "Keitt",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "mango-hilacha",
+    "cultivo_id": "mango",
+    "nombre": "Hilacha",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "citricos-naranja-valencia",
+    "cultivo_id": "citricos",
+    "nombre": "Naranja Valencia",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "citricos-mandarina-arrayana",
+    "cultivo_id": "citricos",
+    "nombre": "Mandarina Arrayana",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "citricos-limón-tahití",
+    "cultivo_id": "citricos",
+    "nombre": "Limón Tahití",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "guayaba-guayaba-pera",
+    "cultivo_id": "guayaba",
+    "nombre": "Guayaba pera",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "guayaba-guayaba-manzana",
+    "cultivo_id": "guayaba",
+    "nombre": "Guayaba manzana",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "pina-md-2-golden",
+    "cultivo_id": "pina",
+    "nombre": "MD-2 (Golden)",
+    "tipo": "híbrido",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "pina-perolera",
+    "cultivo_id": "pina",
+    "nombre": "Perolera",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "pina-manzana",
+    "cultivo_id": "pina",
+    "nombre": "Manzana",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "papaya-tainung",
+    "cultivo_id": "papaya",
+    "nombre": "Tainung",
+    "tipo": "híbrido",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "papaya-maradol",
+    "cultivo_id": "papaya",
+    "nombre": "Maradol",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "maracuya-maracuyá-amarillo",
+    "cultivo_id": "maracuya",
+    "nombre": "Maracuyá amarillo",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "granadilla-granadilla-común",
+    "cultivo_id": "granadilla",
+    "nombre": "Granadilla común",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "mora-mora-de-castilla-con-espinas",
+    "cultivo_id": "mora",
+    "nombre": "Mora de Castilla con espinas",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "mora-mora-de-castilla-sin-espinas",
+    "cultivo_id": "mora",
+    "nombre": "Mora de Castilla sin espinas",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "lulo-la-selva",
+    "cultivo_id": "lulo",
+    "nombre": "La Selva",
+    "tipo": "variedad",
+    "obtentor": "Agrosavia",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "lulo-lulo-de-castilla",
+    "cultivo_id": "lulo",
+    "nombre": "Lulo de Castilla",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "tomate_arbol-tomate-de-árbol-amarillo",
+    "cultivo_id": "tomate_arbol",
+    "nombre": "Tomate de árbol amarillo",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "tomate_arbol-tomate-de-árbol-rojo",
+    "cultivo_id": "tomate_arbol",
+    "nombre": "Tomate de árbol rojo",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "uchuva-ecotipo-colombia",
+    "cultivo_id": "uchuva",
+    "nombre": "Ecotipo Colombia",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "fresa-albion",
+    "cultivo_id": "fresa",
+    "nombre": "Albion",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "fresa-monterey",
+    "cultivo_id": "fresa",
+    "nombre": "Monterey",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "banano-gran-enano",
+    "cultivo_id": "banano",
+    "nombre": "Gran Enano",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "banano-williams",
+    "cultivo_id": "banano",
+    "nombre": "Williams",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "banano-valery",
+    "cultivo_id": "banano",
+    "nombre": "Valery",
+    "tipo": "variedad",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "platano-hartón",
+    "cultivo_id": "platano",
+    "nombre": "Hartón",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "platano-dominico-hartón",
+    "cultivo_id": "platano",
+    "nombre": "Dominico-Hartón",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "platano-dominico",
+    "cultivo_id": "platano",
+    "nombre": "Dominico",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cafe-castillo",
+    "cultivo_id": "cafe",
+    "nombre": "Castillo",
+    "tipo": "variedad",
+    "obtentor": "Cenicafé",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cafe-cenicafé-1",
+    "cultivo_id": "cafe",
+    "nombre": "Cenicafé 1",
+    "tipo": "variedad",
+    "obtentor": "Cenicafé",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cafe-colombia",
+    "cultivo_id": "cafe",
+    "nombre": "Colombia",
+    "tipo": "variedad",
+    "obtentor": "Cenicafé",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cafe-tabi",
+    "cultivo_id": "cafe",
+    "nombre": "Tabi",
+    "tipo": "variedad",
+    "obtentor": "Cenicafé",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cacao-ccn-51",
+    "cultivo_id": "cacao",
+    "nombre": "CCN-51",
+    "tipo": "clon",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cacao-ics-95",
+    "cultivo_id": "cacao",
+    "nombre": "ICS-95",
+    "tipo": "clon",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cacao-fsv-41",
+    "cultivo_id": "cacao",
+    "nombre": "FSV-41",
+    "tipo": "clon",
+    "obtentor": "Fedecacao",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cana_azucar-cc-85-92",
+    "cultivo_id": "cana_azucar",
+    "nombre": "CC 85-92",
+    "tipo": "variedad",
+    "obtentor": "Cenicaña",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cana_azucar-cc-01-1940",
+    "cultivo_id": "cana_azucar",
+    "nombre": "CC 01-1940",
+    "tipo": "variedad",
+    "obtentor": "Cenicaña",
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "cana_panelera-variedades-para-panela",
+    "cultivo_id": "cana_panelera",
+    "nombre": "Variedades para panela",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "palma_aceite-ténera-dxp",
+    "cultivo_id": "palma_aceite",
+    "nombre": "Ténera (DxP)",
+    "tipo": "híbrido",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "palma_aceite-híbrido-oxg",
+    "cultivo_id": "palma_aceite",
+    "nombre": "Híbrido OxG",
+    "tipo": "híbrido",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "algodon-variedades-comerciales",
+    "cultivo_id": "algodon",
+    "nombre": "Variedades comerciales",
+    "tipo": "tipo comercial",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  },
+  {
+    "_id": "crotalaria-crotalaria-juncea",
+    "cultivo_id": "crotalaria",
+    "nombre": "Crotalaria juncea",
+    "tipo": "especie",
+    "obtentor": null,
+    "ajustes": {},
+    "validado": false
+  }
+]

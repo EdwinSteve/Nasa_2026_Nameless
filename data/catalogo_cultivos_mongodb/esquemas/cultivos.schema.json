@@ -1,0 +1,462 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "_id",
+      "nombre",
+      "nombre_cientifico",
+      "familia",
+      "grupo",
+      "tipo_ciclo",
+      "zona_produccion",
+      "requerimientos_cultivo",
+      "nitrogeno",
+      "fases",
+      "calidad_dato"
+    ],
+    "properties": {
+      "_id": {
+        "bsonType": "string"
+      },
+      "nombre": {
+        "bsonType": "string"
+      },
+      "nombre_cientifico": {
+        "bsonType": "string"
+      },
+      "familia": {
+        "bsonType": "string"
+      },
+      "grupo": {
+        "enum": [
+          "cereal",
+          "leguminosa",
+          "tuberculo",
+          "raiz",
+          "hortaliza",
+          "fruta",
+          "estimulante",
+          "industrial",
+          "abono_verde"
+        ]
+      },
+      "tipo_ciclo": {
+        "enum": [
+          "transitorio",
+          "semiperenne",
+          "perenne"
+        ]
+      },
+      "plantilla_fenologica": {
+        "bsonType": "string"
+      },
+      "zona_produccion": {
+        "bsonType": "object",
+        "required": [
+          "altitud_msnm"
+        ],
+        "properties": {
+          "altitud_msnm": {
+            "bsonType": "object",
+            "required": [
+              "min",
+              "max"
+            ],
+            "properties": {
+              "min": {
+                "bsonType": "number"
+              },
+              "max": {
+                "bsonType": "number"
+              }
+            }
+          },
+          "departamentos_principales": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "string"
+            }
+          }
+        }
+      },
+      "ciclo": {
+        "bsonType": "object"
+      },
+      "requerimientos_cultivo": {
+        "bsonType": "object",
+        "required": [
+          "temperatura_aire_C",
+          "agua",
+          "suelo"
+        ],
+        "properties": {
+          "temperatura_aire_C": {
+            "bsonType": "object",
+            "description": "Temperatura del aire a 2 m",
+            "required": [
+              "min_absoluto",
+              "optimo_min",
+              "optimo_max",
+              "max_absoluto"
+            ],
+            "properties": {
+              "min_absoluto": {
+                "bsonType": "number"
+              },
+              "optimo_min": {
+                "bsonType": "number"
+              },
+              "optimo_max": {
+                "bsonType": "number"
+              },
+              "max_absoluto": {
+                "bsonType": "number"
+              }
+            }
+          },
+          "t_base_C": {
+            "bsonType": [
+              "number",
+              "null"
+            ]
+          },
+          "temp_max_critica_floracion_C": {
+            "bsonType": [
+              "number",
+              "null"
+            ]
+          },
+          "agua": {
+            "bsonType": "object",
+            "required": [
+              "unidad",
+              "min_absoluto",
+              "optimo_min",
+              "optimo_max",
+              "max_absoluto"
+            ]
+          },
+          "humedad_relativa_pct": {
+            "bsonType": "object",
+            "required": [
+              "optimo_min",
+              "optimo_max"
+            ],
+            "properties": {
+              "optimo_min": {
+                "bsonType": "number"
+              },
+              "optimo_max": {
+                "bsonType": "number"
+              }
+            }
+          },
+          "kc": {
+            "bsonType": [
+              "object",
+              "null"
+            ]
+          },
+          "suelo": {
+            "bsonType": "object",
+            "required": [
+              "ph",
+              "N_O_CUL"
+            ],
+            "properties": {
+              "ph": {
+                "bsonType": "object",
+                "description": "pH en agua",
+                "required": [
+                  "min_absoluto",
+                  "optimo_min",
+                  "optimo_max",
+                  "max_absoluto"
+                ],
+                "properties": {
+                  "min_absoluto": {
+                    "bsonType": "number"
+                  },
+                  "optimo_min": {
+                    "bsonType": "number"
+                  },
+                  "optimo_max": {
+                    "bsonType": "number"
+                  },
+                  "max_absoluto": {
+                    "bsonType": "number"
+                  }
+                }
+              },
+              "N_O_CUL": {
+                "bsonType": "object",
+                "required": [
+                  "unidad",
+                  "min_absoluto",
+                  "optimo_min",
+                  "optimo_max",
+                  "max_absoluto"
+                ]
+              },
+              "profundidad_raiz_m": {
+                "bsonType": [
+                  "number",
+                  "null"
+                ]
+              },
+              "agotamiento_permitido_p": {
+                "bsonType": [
+                  "number",
+                  "null"
+                ]
+              },
+              "tolerancia_sequia": {
+                "enum": [
+                  "baja",
+                  "media",
+                  "alta"
+                ]
+              },
+              "tolerancia_encharcamiento": {
+                "enum": [
+                  "baja",
+                  "media",
+                  "alta"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "nitrogeno": {
+        "bsonType": "object",
+        "required": [
+          "demanda_total_kg_ha",
+          "N_O_CRE"
+        ],
+        "properties": {
+          "demanda_total_kg_ha": {
+            "bsonType": "object",
+            "required": [
+              "min",
+              "max",
+              "unidad"
+            ]
+          },
+          "N_O_CRE": {
+            "bsonType": "object",
+            "required": [
+              "unidad",
+              "min",
+              "max"
+            ]
+          }
+        }
+      },
+      "fases": {
+        "bsonType": "array",
+        "minItems": 3,
+        "maxItems": 6,
+        "items": {
+          "bsonType": "object",
+          "required": [
+            "orden",
+            "codigo",
+            "nombre",
+            "duracion_dias",
+            "temperatura_aire_C",
+            "precipitacion_mm",
+            "humedad_relativa_pct",
+            "viento_2m_ms",
+            "nitrogeno_absorcion_pct"
+          ],
+          "properties": {
+            "orden": {
+              "bsonType": "number"
+            },
+            "codigo": {
+              "bsonType": "string"
+            },
+            "nombre": {
+              "bsonType": "string"
+            },
+            "fraccion_del_ciclo": {
+              "bsonType": "number"
+            },
+            "duracion_dias": {
+              "bsonType": "object",
+              "required": [
+                "min",
+                "max"
+              ],
+              "properties": {
+                "min": {
+                  "bsonType": "number"
+                },
+                "max": {
+                  "bsonType": "number"
+                }
+              }
+            },
+            "kc": {
+              "bsonType": [
+                "number",
+                "null"
+              ]
+            },
+            "temperatura_aire_C": {
+              "bsonType": "object",
+              "description": "Temperatura del aire a 2 m (T2M)",
+              "required": [
+                "min_absoluto",
+                "optimo_min",
+                "optimo_max",
+                "max_absoluto"
+              ],
+              "properties": {
+                "min_absoluto": {
+                  "bsonType": "number"
+                },
+                "optimo_min": {
+                  "bsonType": "number"
+                },
+                "optimo_max": {
+                  "bsonType": "number"
+                },
+                "max_absoluto": {
+                  "bsonType": "number"
+                }
+              }
+            },
+            "temp_max_critica_C": {
+              "bsonType": [
+                "number",
+                "null"
+              ]
+            },
+            "precipitacion_mm": {
+              "bsonType": "object",
+              "description": "Precipitación acumulada en la fase (PRECTOTCORR)",
+              "required": [
+                "min_absoluto",
+                "optimo_min",
+                "optimo_max",
+                "max_absoluto"
+              ],
+              "properties": {
+                "min_absoluto": {
+                  "bsonType": "number"
+                },
+                "optimo_min": {
+                  "bsonType": "number"
+                },
+                "optimo_max": {
+                  "bsonType": "number"
+                },
+                "max_absoluto": {
+                  "bsonType": "number"
+                }
+              }
+            },
+            "precipitacion_mm_dia": {
+              "bsonType": "object",
+              "required": [
+                "optimo_min",
+                "optimo_max"
+              ],
+              "properties": {
+                "optimo_min": {
+                  "bsonType": "number"
+                },
+                "optimo_max": {
+                  "bsonType": "number"
+                }
+              }
+            },
+            "exceso_lluvia_perjudicial": {
+              "bsonType": "bool"
+            },
+            "humedad_relativa_pct": {
+              "bsonType": "object",
+              "required": [
+                "optimo_min",
+                "optimo_max"
+              ],
+              "properties": {
+                "optimo_min": {
+                  "bsonType": "number"
+                },
+                "optimo_max": {
+                  "bsonType": "number"
+                }
+              }
+            },
+            "viento_2m_ms": {
+              "bsonType": "object",
+              "required": [
+                "optimo_max",
+                "max_tolerable"
+              ],
+              "properties": {
+                "optimo_max": {
+                  "bsonType": "number"
+                },
+                "max_tolerable": {
+                  "bsonType": "number"
+                }
+              }
+            },
+            "agotamiento_permitido_p": {
+              "bsonType": [
+                "number",
+                "null"
+              ]
+            },
+            "nitrogeno_absorcion_pct": {
+              "bsonType": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "nitrogeno_kg_ha": {
+              "bsonType": "object",
+              "required": [
+                "min",
+                "max"
+              ],
+              "properties": {
+                "min": {
+                  "bsonType": "number"
+                },
+                "max": {
+                  "bsonType": "number"
+                }
+              }
+            },
+            "riesgos": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "variables_nasa": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            }
+          }
+        }
+      },
+      "calidad_dato": {
+        "bsonType": "object",
+        "required": [
+          "nivel",
+          "validado"
+        ]
+      },
+      "version": {
+        "bsonType": "number"
+      }
+    }
+  }
+}

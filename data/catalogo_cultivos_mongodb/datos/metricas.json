@@ -1,0 +1,138 @@
+[
+  {
+    "_id": "temperatura_aire_C",
+    "nombre": "Temperatura del aire",
+    "unidad": "°C",
+    "altura_m": 2,
+    "fuente": "NASA POWER",
+    "parametros": [
+      "T2M",
+      "T2M_MAX",
+      "T2M_MIN"
+    ],
+    "comparacion": "Promedio de T2M en la fase contra el trapecio; días con T2M_MAX sobre temp_max_critica_C en floración",
+    "nota": "NASA POWER entrega la temperatura a 2 m; no existe medición a 3 m."
+  },
+  {
+    "_id": "precipitacion_mm",
+    "nombre": "Precipitación",
+    "unidad": "mm",
+    "altura_m": null,
+    "fuente": "NASA POWER (PRECTOTCORR) y GPM IMERG",
+    "parametros": [
+      "PRECTOTCORR"
+    ],
+    "comparacion": "Suma de PRECTOTCORR (mm/día) durante la fase contra el trapecio precipitacion_mm de la fase",
+    "nota": "Si hay riego, se suma la lámina aplicada."
+  },
+  {
+    "_id": "precipitacion_mm_dia",
+    "nombre": "Precipitación diaria equivalente",
+    "unidad": "mm/día",
+    "altura_m": null,
+    "fuente": "NASA POWER",
+    "parametros": [
+      "PRECTOTCORR"
+    ],
+    "comparacion": "Promedio diario de la fase contra el rango óptimo",
+    "nota": "Útil para comparar contra el pronóstico de corto plazo."
+  },
+  {
+    "_id": "humedad_relativa_pct",
+    "nombre": "Humedad relativa",
+    "unidad": "%",
+    "altura_m": 2,
+    "fuente": "NASA POWER",
+    "parametros": [
+      "RH2M"
+    ],
+    "comparacion": "Promedio de la fase contra el rango óptimo",
+    "nota": null
+  },
+  {
+    "_id": "viento_2m_ms",
+    "nombre": "Velocidad del viento",
+    "unidad": "m/s",
+    "altura_m": 2,
+    "fuente": "NASA POWER",
+    "parametros": [
+      "WS2M"
+    ],
+    "comparacion": "Porcentaje de días de la fase con WS2M sobre max_tolerable",
+    "nota": "POWER también entrega WS10M y WS50M; el catálogo usa 2 m."
+  },
+  {
+    "_id": "kc",
+    "nombre": "Coeficiente de cultivo",
+    "unidad": "adimensional",
+    "altura_m": null,
+    "fuente": "FAO-56",
+    "parametros": [
+      "T2M_MAX",
+      "T2M_MIN",
+      "RH2M",
+      "WS2M",
+      "ALLSKY_SFC_SW_DWN"
+    ],
+    "comparacion": "ETc = kc × ET0 (Penman-Monteith con variables de POWER); se compara con la lluvia efectiva",
+    "nota": null
+  },
+  {
+    "_id": "agotamiento_permitido_p",
+    "nombre": "Agotamiento permitido del agua del suelo",
+    "unidad": "fracción",
+    "altura_m": null,
+    "fuente": "FAO-56 + NASA SMAP",
+    "parametros": [
+      "SMAP_HUMEDAD_RAIZ"
+    ],
+    "comparacion": "Se riega cuando el agotamiento supera p × agua total disponible",
+    "nota": null
+  },
+  {
+    "_id": "N_O_CUL",
+    "nombre": "Nitrógeno total óptimo en el suelo",
+    "unidad": "g/kg",
+    "altura_m": null,
+    "fuente": "ISRIC SoilGrids",
+    "parametros": [
+      "nitrogen"
+    ],
+    "comparacion": "SoilGrids nitrogen (cg/kg) ÷ 100 = g/kg, contra el trapecio",
+    "nota": "Es nitrógeno total, indicador de fertilidad; no equivale al nitrógeno disponible."
+  },
+  {
+    "_id": "N_O_CRE",
+    "nombre": "Nitrógeno requerido en crecimiento vegetativo",
+    "unidad": "kg N/ha",
+    "altura_m": null,
+    "fuente": "Catálogo SURCO",
+    "parametros": [],
+    "comparacion": "Se compara el aporte del suelo, la rotación y la fertilización contra el rango",
+    "nota": "Derivado de la demanda total y del perfil de absorción por fase."
+  },
+  {
+    "_id": "altitud_msnm",
+    "nombre": "Altitud",
+    "unidad": "msnm",
+    "altura_m": null,
+    "fuente": "NASA SRTM",
+    "parametros": [
+      "elevation"
+    ],
+    "comparacion": "Altitud del lote dentro del rango de la zona de producción",
+    "nota": null
+  },
+  {
+    "_id": "ph",
+    "nombre": "pH del suelo",
+    "unidad": "pH",
+    "altura_m": null,
+    "fuente": "ISRIC SoilGrids",
+    "parametros": [
+      "phh2o"
+    ],
+    "comparacion": "phh2o ÷ 10 contra el trapecio",
+    "nota": null
+  }
+]
