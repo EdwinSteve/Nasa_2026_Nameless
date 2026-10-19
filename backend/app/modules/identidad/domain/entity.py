@@ -10,6 +10,7 @@ class Role(str, Enum):
     APRENDIZ = "aprendiz"
     INSTRUCTOR = "instructor"
     ADMIN = "admin"
+    PRODUCTOR = "productor"
 
 
 class UserStatus(str, Enum):
@@ -22,11 +23,14 @@ class UserStatus(str, Enum):
 @dataclass
 class User:
     phone: Phone
-    email: Email
+    email: Email | None
     password_hash: str
     role: Role = Role.APRENDIZ
     status: UserStatus = UserStatus.PENDING
     id: UUID = field(default_factory=uuid4)
+    full_name: str | None = None
+    municipality: str | None = None
+    district: str | None = None
     failed_attempts: int = 0
     locked_until: datetime | None = None
     last_login_at: datetime | None = None
@@ -86,3 +90,9 @@ class Sesion:
 
     def expirada(self, ahora: datetime) -> bool:
         return self.expires_at <= ahora
+
+
+@dataclass(frozen=True)
+class Politica:
+    id: UUID
+    version: str

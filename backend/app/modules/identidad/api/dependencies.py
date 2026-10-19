@@ -18,6 +18,9 @@ from app.modules.identidad.infrastructure.persistences.repositories import (
     SqlAlchemyEventoRepository,
     SqlAlchemySesionRepository,
     SqlAlchemyUserRepository,
+    SqlAlchemyPoliticaRepository,
+    SqlAlchemyConsentimientoRepository
+
 )
 from app.modules.identidad.infrastructure.persistences.unit_of_work import (
     SqlAlchemyUnitOfWork,
@@ -29,6 +32,7 @@ from app.modules.identidad.infrastructure.security.refresh_tokens import (
 )
 from app.modules.identidad.infrastructure.security.reloj import RelojSistema
 
+from app.modules.identidad.application.registrar_usuario import RegistrarUsuario
 
 @lru_cache
 def _hash_ficticio() -> str:
@@ -121,3 +125,21 @@ def requiere_rol(*roles: Role):
         return usuario
 
     return _checker
+
+async def get_registrar_usuario(
+        session: Annotated[AsyncSession, Depends(get_session)],
+) -> RegistrarUsuario:
+    settings = get_settings()
+    return RegistrarUsuario(
+        usuarios=SqlAlchemyUserRepository(session),
+        politicas=SqlAlchemyPoliticaRepository(session),
+        consentimientos=SqlAlchemyConsentimientoRepository(session),
+        sesiones=SqlAlchemySesionRepository(session),
+        eventos=SqlAlchemyEventoRepository(session),
+        hasher=Argon2Hasher(),
+        tokens=JwtTokenIssuer(),
+        generador=GeneradorRefreshToken(),
+        reloj=RelojSistema(),
+        uow=SqlAlchemyUnitOfWork(session),
+        dias_refresh=settings.refresh_dias,
+    )

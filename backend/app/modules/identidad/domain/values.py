@@ -26,7 +26,7 @@ class Phone:
             raise InvalidPhone("El celular debe incluir el prefijo internacional (+57...).")
 
     @classmethod
-    def desde_entrada(cls, texto: str, region: str = REGION_POR_DEFECTO) -> "Phone":
+    def desde_entrada(cls, texto: str, region: str = REGION_POR_DEFECTO, solo_movil: bool = False) -> "Phone":
         """Convierte lo que escribe la persona (p. ej. '3001234567') a E.164 ('+573001234567').
 
         Lanza InvalidPhone si el texto no es un número válido. Quien llama decide
@@ -38,6 +38,11 @@ class Phone:
             raise InvalidPhone(str(exc)) from exc
         if not phonenumbers.is_valid_number(parsed):
             raise InvalidPhone("El celular no es válido.")
+        if solo_movil and phonenumbers.number_type(parsed) not in (
+                phonenumbers.PhoneNumberType.MOBILE,
+                phonenumbers.PhoneNumberType.FIXED_LINE_OR_MOBILE,
+        ):
+            raise InvalidPhone("El número debe ser un celular móvil.")
         return cls(phonenumbers.format_number(parsed, phonenumbers.PhoneNumberFormat.E164))
 
 @dataclass(frozen=True, slots=True)

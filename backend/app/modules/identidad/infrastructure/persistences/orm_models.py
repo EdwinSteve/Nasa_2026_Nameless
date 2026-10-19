@@ -21,16 +21,9 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 class Base(DeclarativeBase):
     pass
 
-ROL_VALUES = ("aprendiz", "instructor", "admin")
+ROL_VALUES = ("aprendiz", "instructor", "admin", "productor")
 ESTADO_VALUES = ("activo", "inactivo", "bloqueado", "pendiente")
-EVENTO_VALUES = (
-    "login_exitoso",
-    "login_fallido",
-    "logout",
-    "refresh",
-    "bloqueo",
-    "desbloqueo",
-)
+EVENTO_VALUES = ("login_exitoso", "login_fallido", "logout", "refresh", "bloqueo", "desbloqueo", "registro")
 
 # Las columnas son tipos ENUM de PostgreSQL creados por la migración 0001. Se declaran
 # con create_type=False para que SQLAlchemy los use sin intentar crearlos de nuevo.
@@ -58,7 +51,10 @@ class UsuarioORM(Base):
         server_default=text("gen_random_uuid()"),
     )
     phone: Mapped[str] = mapped_column(String(20), unique=True, nullable=False)
-    email: Mapped[str] = mapped_column(CITEXT, unique=True, nullable=False)
+    email: Mapped[str | None] = mapped_column(CITEXT, unique=True, nullable=True)
+    full_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    municipality: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    district: Mapped[str | None] = mapped_column(String(80), nullable=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     role: Mapped[str] = mapped_column(_ENUM_ROL, nullable=False)
     status: Mapped[str] = mapped_column(

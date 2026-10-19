@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Protocol
 from uuid import UUID
 
-from app.modules.identidad.domain.entity import Sesion, User
+from app.modules.identidad.domain.entity import Sesion, User, Politica
 
 class UserRepository(Protocol):
     async def get_by_id(self, user_id: UUID) -> User | None:
@@ -36,6 +36,15 @@ class SesionRepository(Protocol):
         ...
 
     async def revocar_todas_del_usuario(self, user_id: UUID, ahora: datetime) -> None:
+        ...
+
+class PoliticaRepository(Protocol):
+    async def get_active(self) -> Politica | None:
+        ...
+
+
+class ConsentimientoRepository(Protocol):
+    async def register(self, user_id: UUID, policy_id: UUID, ahora: datetime) -> None:
         ...
 
 class EventoRepository(Protocol):

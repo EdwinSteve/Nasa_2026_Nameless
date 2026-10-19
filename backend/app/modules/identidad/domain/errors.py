@@ -49,3 +49,30 @@ class RefreshTokenInvalid(ErrorDominio):
 class UserAlreadyExists(ErrorDominio):
     def __init__(self):
         super().__init__("IDENTIDAD_USUARIO_DUPLICADO", "El usuario ya existe.", 409)
+
+class PhoneAlreadyRegistered(ErrorDominio):
+    def __init__(self):
+        super().__init__("USUARIO_CELULAR_DUPLICADO", "Ese celular ya está registrado.", 409)
+
+
+class EmailAlreadyRegistered(ErrorDominio):
+    def __init__(self):
+        super().__init__("USUARIO_CORREO_DUPLICADO", "Ese correo ya está registrado.", 409)
+
+
+class ConsentRequired(ErrorDominio):
+    def __init__(self):
+        super().__init__(
+            "CONSENTIMIENTO_REQUERIDO",
+            "Debes autorizar el tratamiento de tus datos para crear la cuenta.",
+            422,
+        )
+
+
+class PolicyOutdated(ErrorDominio):
+    def __init__(self):
+        super().__init__(
+            "POLITICA_DESACTUALIZADA",
+            "La política de privacidad cambió. Revisa la versión vigente y acéptala de nuevo.",
+            409,
+        )

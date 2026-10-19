@@ -7,17 +7,24 @@ from app.modules.identidad.api.dependencies import (
     get_iniciar_sesion,
     get_refrescar_sesion,
     usuario_actual,
+    get_registrar_usuario
 )
 from app.modules.identidad.api.schemas import (
     LoginRequest,
     LogoutRequest,
     RefreshRequest,
     TokenResponse,
+    RegisterRequest,
+    RegisterResponse,
+    RegisteredUser,
+    RegisterTokens
 )
 from app.modules.identidad.application.cerrar_sesion import CerrarSesion
 from app.modules.identidad.application.iniciar_sesion import IniciarSesion
 from app.modules.identidad.application.refrescar_sesion import RefrescarSesion
 from app.modules.identidad.domain.entity import User
+from app.modules.identidad.application.dto import DatosRegistro
+from app.modules.identidad.application.registrar_usuario import RegistrarUsuario
 
 router = APIRouter(
     tags=["Identidad"],
@@ -146,3 +153,37 @@ async def logout_todo(
 ) -> Response:
     await caso.todas(usuario.id)
     return Response(status_code=204)
+
+@router.post(
+    "/auth/registro",
+    status_code=201,
+    response_model=RegisterResponse,
+    summary="Registrar un productor",
+    description="Crea la cuenta y deja la sesión iniciada. Exige aceptar la política de privacidad vigente.",
+    responses={
+        409: {"description": "USUARIO_CELULAR_DUPLICADO, USUARIO_CORREO_DUPLICADO o POLITICA_DESACTUALIZADA."},
+        422: {"description": "VALIDATION (datos inválidos) o CONSENTIMIENTO_REQUERIDO."},
+    },
+)
+async def register(
+        body: RegisterRequest,
+        caso: Annotated[RegistrarUsuario, Depends(get_registrar_usuario)],
+) -> RegisterResponse:
+    resultado = await caso.ejecutar(DatosRegistro(**body.model_dump()))
+    usuario, par = resultado.usuario, resultado.tokens
+    return RegisterResponse(
+        user=RegisteredUser(
+            id=usuario.id,
+            full_name=usuario.full_name,
+            phone=usuario.phone.value,
+            role=usuario.role,
+            municipality=usuario.municipality,
+            district=usuario.district,
+        ),
+        tokens=RegisterTokens(
+            access_token=par.access_token,
+            refresh_token=par.refresh_token,
+            token_type=par.token_type,
+            expires_in=par.expira_en,
+        ),
+    )

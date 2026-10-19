@@ -3,11 +3,15 @@ from uuid import UUID
 
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.exc import IntegrityError
 
-from app.modules.identidad.domain.entity import Role, Sesion, User, UserStatus
+from app.modules.identidad.domain.entity import Role, Sesion, User, UserStatus, Politica
+from app.modules.identidad.domain.errors import EmailAlreadyRegistered, PhoneAlreadyRegistered
 from app.modules.identidad.domain.values import Email, Phone
 from app.modules.identidad.infrastructure.persistences.orm_models import (
+    ConsentimientoORM,
     EventoAuthORM,
+    PoliticaPrivacidadORM,
     SesionORM,
     UsuarioORM,
 )
@@ -17,10 +21,13 @@ def _usuario_a_dominio(row: UsuarioORM) -> User:
     return User(
         id=row.id,
         phone=Phone(row.phone),
-        email=Email(row.email),
+        email=Email(row.email) if row.email else None,
         password_hash=row.password_hash,
         role=Role(row.role),
         status=UserStatus(row.status),
+        full_name=row.full_name,
+        municipality=row.municipality,
+        district=row.district,
         failed_attempts=row.failed_attempts,
         locked_until=row.locked_until,
         last_login_at=row.last_login_at,
@@ -71,10 +78,22 @@ class SqlAlchemyUserRepository:
         row.password_hash = user.password_hash
         row.role = user.role.value
         row.status = user.status.value
+        row.full_name = user.full_name
+        row.municipality = user.municipality
+        row.district = user.district
         row.failed_attempts = user.failed_attempts
         row.locked_until = user.locked_until
         row.last_login_at = user.last_login_at
-        await self._session.flush()
+        try:
+            await self._session.flush()
+        except IntegrityError as exc:
+            # Dos registros simultáneos con el mismo dato: gana el primero, el otro recibe 409.
+            detalle = str(exc.orig)
+            if "usuarios_phone_key" in detalle:
+                raise PhoneAlreadyRegistered() from exc
+            if "usuarios_email_key" in detalle:
+                raise EmailAlreadyRegistered() from exc
+            raise
         await self._session.refresh(row)
         return _usuario_a_dominio(row)
 
@@ -153,4 +172,22 @@ class SqlAlchemyEventoRepository:
     async def registrar(self, evento: str, user_id: UUID | None, meta: dict | None = None) -> None:
         # Nunca se registran contraseñas, tokens ni celulares completos.
         self._session.add(EventoAuthORM(user_id=user_id, event=evento, meta=meta))
+        await self._session.flush()
+
+class SqlAlchemyPoliticaRepository:
+    def __init__(self, session: AsyncSession) -> None:
+        self._session = session
+
+    async def get_active(self) -> Politica | None:
+        stmt = select(PoliticaPrivacidadORM).where(PoliticaPrivacidadORM.is_active.is_(True))
+        row = (await self._session.execute(stmt)).scalar_one_or_none()
+        return Politica(id=row.id, version=row.version) if row else None
+
+
+class SqlAlchemyConsentimientoRepository:
+    def __init__(self, session: AsyncSession) -> None:
+        self._session = session
+
+    async def registrar(self, user_id: UUID, policy_id: UUID, ahora: datetime) -> None:
+        self._session.add(ConsentimientoORM(user_id=user_id, policy_id=policy_id, accepted_at=ahora))
         await self._session.flush()
