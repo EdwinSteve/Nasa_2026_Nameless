@@ -28,3 +28,10 @@ class Municipio:
     lat: float | None = None
     lon: float | None = None
     centros_poblados: tuple[CentroPoblado, ...] = field(default=())
+
+
+@dataclass(frozen=True)
+class Elevacion:
+    altitud_msnm: float
+    fuente: str
+    municipio: Municipio | None   # el más cercano en DIVIPOLA; None si el punto queda lejos de todos

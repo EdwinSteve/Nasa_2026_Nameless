@@ -10,3 +10,15 @@ class TerritorioRepository(Protocol):
 
     def municipio(self, codigo: str) -> Municipio | None:
         ...
+
+    def todos(self) -> list[Municipio]:
+        """Todos los municipios cargados, de cualquier departamento."""
+        ...
+
+
+class ModeloElevacion(Protocol):
+    fuente: str
+
+    async def altitud(self, lat: float, lon: float) -> float | None:
+        """Metros sobre el nivel del mar, o None si el modelo no tiene dato para el punto."""
+        ...

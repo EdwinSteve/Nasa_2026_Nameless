@@ -13,3 +13,12 @@ class DepartamentoNoDisponible(ErrorDominio):
 class MunicipioNoEncontrado(ErrorDominio):
     def __init__(self, codigo: str):
         super().__init__("TERRITORIO_MUNICIPIO_NO_ENCONTRADO", f"El municipio {codigo} no existe.", 404)
+
+
+class ElevacionNoDisponible(ErrorDominio):
+    def __init__(self):
+        super().__init__(
+            "TERRITORIO_ELEVACION_NO_DISPONIBLE",
+            "No pudimos calcular la altitud de ese punto en este momento.",
+            503,
+        )

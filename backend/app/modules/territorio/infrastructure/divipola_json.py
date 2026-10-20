@@ -20,6 +20,9 @@ class DivipolaJsonRepository:
     def municipio(self, codigo: str) -> Municipio | None:
         return self._por_codigo.get(codigo)
 
+    def todos(self) -> list[Municipio]:
+        return list(self._por_codigo.values())
+
 
 @lru_cache
 def _cargar(archivo: Path) -> tuple[dict[str, list[Municipio]], dict[str, Municipio]]:

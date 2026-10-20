@@ -14,3 +14,10 @@ class CorregimientoItem(BaseModel):
     tipo: str = Field(..., description="cabecera (casco urbano) o centro_poblado (rural).")
     lat: float | None = None
     lon: float | None = None
+
+
+class ElevacionResponse(BaseModel):
+    altitud_msnm: float = Field(..., examples=[442])
+    fuente: str = Field(..., examples=["NASA SRTM"])
+    municipio_codigo: str | None = Field(None, examples=["41001"], description="Municipio DIVIPOLA más cercano.")
+    municipio_nombre: str | None = Field(None, examples=["Neiva"])
