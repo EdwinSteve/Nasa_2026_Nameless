@@ -1,7 +1,10 @@
+import asyncio
 from datetime import date
 
+import httpx
+
 from datos_tierra import suelo
-from datos_tierra.fuentes import enso
+from datos_tierra.fuentes import enso, soilgrids
 
 
 def _capa(nombre, d_factor, target, valores_por_profundidad):
@@ -70,3 +73,21 @@ def test_parsea_oni_y_clasifica_fase():
     assert filas[0] == {'season': 'DJF', 'year': 1950, 'month': 1, 'oni': -1.32, 'phase': 'la_nina'}
     assert filas[-1]['phase'] == 'el_nino'
     assert len(enso.filtrar(filas, date(2026, 1, 1), date(2026, 7, 31))) == 1
+
+
+def test_soilgrids_parte_la_consulta_en_bloques_y_une_las_capas():
+    pedidas = []
+
+    def responder(request: httpx.Request) -> httpx.Response:
+        props = request.url.params.get_list('property')
+        pedidas.append(props)
+        return httpx.Response(200, json={'properties': {'layers': [{'name': p} for p in props]}})
+
+    async def correr():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(responder)) as cliente:
+            return await soilgrids.descargar(cliente, 3.2, -75.2, propiedades=['a', 'b', 'c', 'd', 'e'], por_consulta=2)
+
+    unida = asyncio.run(correr())
+
+    assert pedidas == [['a', 'b'], ['c', 'd'], ['e']]
+    assert [capa['name'] for capa in unida['properties']['layers']] == ['a', 'b', 'c', 'd', 'e']

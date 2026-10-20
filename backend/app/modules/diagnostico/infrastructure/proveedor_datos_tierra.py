@@ -19,6 +19,9 @@ DIAS_HUMEDAD = 30
 DIAS_VERDOR = 120
 BUFFER_SMAP_M = 5000   # una celda SMAP mide 9 km: un lote cabe dentro de un solo píxel
 BUFFER_MODIS_M = 500   # unos cuatro píxeles MODIS de 250 m alrededor del lote
+# El diagnóstico solo resume la capa arable: pedir menos hace que SoilGrids responda en segundos.
+SUELO_PROPIEDADES = ["sand", "silt", "clay", "soc", "phh2o", "nitrogen", "wv0033", "wv1500"]
+SUELO_PROFUNDIDADES = ["0-5cm", "5-15cm", "15-30cm"]
 
 
 class DatosTierraNoInstalado(RuntimeError):
@@ -110,7 +113,10 @@ class ProveedorDatosTierra:
     async def suelo(self, lote: LoteDiagnostico) -> ResultadoPaso:
         dt = _dt()
         async with httpx.AsyncClient(timeout=TIMEOUT) as cliente:
-            crudo = await dt.soilgrids.descargar(cliente, lote.lat, lote.lon)
+            crudo = await dt.soilgrids.descargar(
+                cliente, lote.lat, lote.lon,
+                propiedades=SUELO_PROPIEDADES, profundidades=SUELO_PROFUNDIDADES, estadisticas=["mean"], por_consulta=4,
+            )
         procesado = dt.suelo.procesar(crudo)
         if procesado["empty"]:
             raise ValueError("SoilGrids no tiene datos en este punto (zona urbana o cuerpo de agua).")
