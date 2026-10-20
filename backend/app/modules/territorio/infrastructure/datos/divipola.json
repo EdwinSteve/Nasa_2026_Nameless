@@ -1,0 +1,1778 @@
+{
+ "fuente": "DANE, DIVIPOLA (datos.gov.co: gdxc-w37w y xaxy-8nri)",
+ "descargado": "2026-10-20",
+ "departamentos": [
+  {
+   "codigo": "41",
+   "nombre": "Huila",
+   "municipios": [
+    {
+     "codigo": "41006",
+     "nombre": "Acevedo",
+     "lat": 1.805173,
+     "lon": -75.888706,
+     "centros_poblados": [
+      {
+       "codigo": "41006000",
+       "nombre": "Acevedo",
+       "tipo": "CM",
+       "lat": 1.805173,
+       "lon": -75.888706
+      },
+      {
+       "codigo": "41006011",
+       "nombre": "El Carmen",
+       "tipo": "CP",
+       "lat": 1.822235,
+       "lon": -75.941324
+      },
+      {
+       "codigo": "41006003",
+       "nombre": "Pueblo Viejo",
+       "tipo": "CP",
+       "lat": 1.825371,
+       "lon": -75.876803
+      },
+      {
+       "codigo": "41006001",
+       "nombre": "San Adolfo",
+       "tipo": "CP",
+       "lat": 1.712036,
+       "lon": -76.025438
+      },
+      {
+       "codigo": "41006005",
+       "nombre": "San Marcos",
+       "tipo": "CP",
+       "lat": 1.741689,
+       "lon": -75.964512
+      }
+     ]
+    },
+    {
+     "codigo": "41013",
+     "nombre": "Agrado",
+     "lat": 2.25987,
+     "lon": -75.772022,
+     "centros_poblados": [
+      {
+       "codigo": "41013000",
+       "nombre": "Agrado",
+       "tipo": "CM",
+       "lat": 2.25987,
+       "lon": -75.772022
+      },
+      {
+       "codigo": "41013001",
+       "nombre": "La Cañada",
+       "tipo": "CP",
+       "lat": 2.182869,
+       "lon": -75.672451
+      },
+      {
+       "codigo": "41013003",
+       "nombre": "San José de Belén",
+       "tipo": "CP",
+       "lat": 2.229451,
+       "lon": -75.733301
+      }
+     ]
+    },
+    {
+     "codigo": "41016",
+     "nombre": "Aipe",
+     "lat": 3.223996,
+     "lon": -75.239017,
+     "centros_poblados": [
+      {
+       "codigo": "41016000",
+       "nombre": "Aipe",
+       "tipo": "CM",
+       "lat": 3.223996,
+       "lon": -75.239017
+      },
+      {
+       "codigo": "41016004",
+       "nombre": "Cruce de Guacirco",
+       "tipo": "CP",
+       "lat": 3.105185,
+       "lon": -75.28844
+      },
+      {
+       "codigo": "41016003",
+       "nombre": "El Pata",
+       "tipo": "CP",
+       "lat": 3.373124,
+       "lon": -75.195044
+      },
+      {
+       "codigo": "41016005",
+       "nombre": "La Ceja - Mesitas",
+       "tipo": "CP",
+       "lat": 3.311841,
+       "lon": -75.522361
+      },
+      {
+       "codigo": "41016001",
+       "nombre": "Praga",
+       "tipo": "CP",
+       "lat": 3.269079,
+       "lon": -75.492368
+      },
+      {
+       "codigo": "41016002",
+       "nombre": "Santa Rita",
+       "tipo": "CP",
+       "lat": 3.243653,
+       "lon": -75.565454
+      }
+     ]
+    },
+    {
+     "codigo": "41020",
+     "nombre": "Algeciras",
+     "lat": 2.521674,
+     "lon": -75.315389,
+     "centros_poblados": [
+      {
+       "codigo": "41020000",
+       "nombre": "Algeciras",
+       "tipo": "CM",
+       "lat": 2.521674,
+       "lon": -75.315389
+      },
+      {
+       "codigo": "41020006",
+       "nombre": "El Paraíso Nuevo",
+       "tipo": "CP",
+       "lat": 2.606644,
+       "lon": -75.21478
+      },
+      {
+       "codigo": "41020001",
+       "nombre": "El Paraíso Viejo",
+       "tipo": "CP",
+       "lat": 2.612,
+       "lon": -75.209182
+      },
+      {
+       "codigo": "41020003",
+       "nombre": "El Toro",
+       "tipo": "CP",
+       "lat": 2.419901,
+       "lon": -75.405515
+      },
+      {
+       "codigo": "41020002",
+       "nombre": "La Arcadia",
+       "tipo": "CP",
+       "lat": 2.443924,
+       "lon": -75.396708
+      }
+     ]
+    },
+    {
+     "codigo": "41026",
+     "nombre": "Altamira",
+     "lat": 2.063841,
+     "lon": -75.788471,
+     "centros_poblados": [
+      {
+       "codigo": "41026000",
+       "nombre": "Altamira",
+       "tipo": "CM",
+       "lat": 2.063841,
+       "lon": -75.788471
+      },
+      {
+       "codigo": "41026004",
+       "nombre": "Llano de la Virgen",
+       "tipo": "CP",
+       "lat": 2.159415,
+       "lon": -75.713784
+      },
+      {
+       "codigo": "41026005",
+       "nombre": "Puente",
+       "tipo": "CP",
+       "lat": 2.025263,
+       "lon": -75.777626
+      }
+     ]
+    },
+    {
+     "codigo": "41078",
+     "nombre": "Baraya",
+     "lat": 3.152204,
+     "lon": -75.054843,
+     "centros_poblados": [
+      {
+       "codigo": "41078000",
+       "nombre": "Baraya",
+       "tipo": "CM",
+       "lat": 3.152204,
+       "lon": -75.054843
+      }
+     ]
+    },
+    {
+     "codigo": "41132",
+     "nombre": "Campoalegre",
+     "lat": 2.686767,
+     "lon": -75.325748,
+     "centros_poblados": [
+      {
+       "codigo": "41132000",
+       "nombre": "Campoalegre",
+       "tipo": "CM",
+       "lat": 2.686767,
+       "lon": -75.325748
+      },
+      {
+       "codigo": "41132003",
+       "nombre": "Bajo Piravante",
+       "tipo": "CP",
+       "lat": 2.720461,
+       "lon": -75.30058
+      },
+      {
+       "codigo": "41132005",
+       "nombre": "La Esperanza",
+       "tipo": "CP",
+       "lat": 2.678416,
+       "lon": -75.336353
+      },
+      {
+       "codigo": "41132001",
+       "nombre": "La Vega",
+       "tipo": "CP",
+       "lat": 2.645593,
+       "lon": -75.340225
+      },
+      {
+       "codigo": "41132006",
+       "nombre": "Los Rosales",
+       "tipo": "CP",
+       "lat": 2.599943,
+       "lon": -75.416796
+      },
+      {
+       "codigo": "41132002",
+       "nombre": "Otas",
+       "tipo": "CP",
+       "lat": 2.604524,
+       "lon": -75.336328
+      },
+      {
+       "codigo": "41132004",
+       "nombre": "Río Neiva",
+       "tipo": "CP",
+       "lat": 2.618036,
+       "lon": -75.349782
+      }
+     ]
+    },
+    {
+     "codigo": "41206",
+     "nombre": "Colombia",
+     "lat": 3.376745,
+     "lon": -74.802815,
+     "centros_poblados": [
+      {
+       "codigo": "41206000",
+       "nombre": "Colombia",
+       "tipo": "CM",
+       "lat": 3.376745,
+       "lon": -74.802815
+      },
+      {
+       "codigo": "41206005",
+       "nombre": "San Marcos",
+       "tipo": "CP",
+       "lat": 3.52968,
+       "lon": -74.717373
+      },
+      {
+       "codigo": "41206002",
+       "nombre": "Santana",
+       "tipo": "CP",
+       "lat": 3.588123,
+       "lon": -74.705106
+      }
+     ]
+    },
+    {
+     "codigo": "41244",
+     "nombre": "Elías",
+     "lat": 2.012854,
+     "lon": -75.938301,
+     "centros_poblados": [
+      {
+       "codigo": "41244000",
+       "nombre": "Elías",
+       "tipo": "CM",
+       "lat": 2.012854,
+       "lon": -75.938301
+      },
+      {
+       "codigo": "41244001",
+       "nombre": "El Viso",
+       "tipo": "CP",
+       "lat": 2.017252,
+       "lon": -75.906767
+      },
+      {
+       "codigo": "41244002",
+       "nombre": "Oritoguaz",
+       "tipo": "CP",
+       "lat": 1.986866,
+       "lon": -76.012499
+      }
+     ]
+    },
+    {
+     "codigo": "41298",
+     "nombre": "Garzón",
+     "lat": 2.196493,
+     "lon": -75.627057,
+     "centros_poblados": [
+      {
+       "codigo": "41298000",
+       "nombre": "Garzón",
+       "tipo": "CM",
+       "lat": 2.196493,
+       "lon": -75.627057
+      },
+      {
+       "codigo": "41298013",
+       "nombre": "Caguancito",
+       "tipo": "CP",
+       "lat": 2.105698,
+       "lon": -75.627891
+      },
+      {
+       "codigo": "41298014",
+       "nombre": "El Descanso",
+       "tipo": "CP",
+       "lat": 2.061935,
+       "lon": -75.61789
+      },
+      {
+       "codigo": "41298008",
+       "nombre": "El Mesón",
+       "tipo": "CP",
+       "lat": 2.169813,
+       "lon": -75.567192
+      },
+      {
+       "codigo": "41298005",
+       "nombre": "El Paraíso",
+       "tipo": "CP",
+       "lat": 2.120338,
+       "lon": -75.606286
+      },
+      {
+       "codigo": "41298001",
+       "nombre": "El Recreo",
+       "tipo": "CP",
+       "lat": 2.102191,
+       "lon": -75.577729
+      },
+      {
+       "codigo": "41298019",
+       "nombre": "Jagualito",
+       "tipo": "CP",
+       "lat": 2.252246,
+       "lon": -75.622418
+      },
+      {
+       "codigo": "41298020",
+       "nombre": "La Cabaña",
+       "tipo": "CP",
+       "lat": 2.177041,
+       "lon": -75.579059
+      },
+      {
+       "codigo": "41298002",
+       "nombre": "La Jagua",
+       "tipo": "CP",
+       "lat": 2.167806,
+       "lon": -75.678351
+      },
+      {
+       "codigo": "41298015",
+       "nombre": "Majo",
+       "tipo": "CP",
+       "lat": 2.240934,
+       "lon": -75.615629
+      },
+      {
+       "codigo": "41298012",
+       "nombre": "Plazuela",
+       "tipo": "CP",
+       "lat": 2.245726,
+       "lon": -75.614969
+      },
+      {
+       "codigo": "41298007",
+       "nombre": "Providencia",
+       "tipo": "CP",
+       "lat": 2.159769,
+       "lon": -75.57877
+      },
+      {
+       "codigo": "41298003",
+       "nombre": "San Antonio del Pescado",
+       "tipo": "CP",
+       "lat": 2.072206,
+       "lon": -75.683007
+      },
+      {
+       "codigo": "41298016",
+       "nombre": "San Gerardo",
+       "tipo": "CP",
+       "lat": 2.225917,
+       "lon": -75.53395
+      },
+      {
+       "codigo": "41298021",
+       "nombre": "San Luis",
+       "tipo": "CP",
+       "lat": 2.060892,
+       "lon": -75.6417
+      },
+      {
+       "codigo": "41298017",
+       "nombre": "Santa Marta",
+       "tipo": "CP",
+       "lat": 2.195791,
+       "lon": -75.541568
+      },
+      {
+       "codigo": "41298004",
+       "nombre": "Zuluaga",
+       "tipo": "CP",
+       "lat": 2.251491,
+       "lon": -75.526584
+      }
+     ]
+    },
+    {
+     "codigo": "41306",
+     "nombre": "Gigante",
+     "lat": 2.384031,
+     "lon": -75.547681,
+     "centros_poblados": [
+      {
+       "codigo": "41306000",
+       "nombre": "Gigante",
+       "tipo": "CM",
+       "lat": 2.384031,
+       "lon": -75.547681
+      },
+      {
+       "codigo": "41306012",
+       "nombre": "El Jardín",
+       "tipo": "CP",
+       "lat": 2.313075,
+       "lon": -75.506684
+      },
+      {
+       "codigo": "41306006",
+       "nombre": "El Mesón",
+       "tipo": "CP",
+       "lat": 2.477116,
+       "lon": -75.477037
+      },
+      {
+       "codigo": "41306014",
+       "nombre": "El Recreo",
+       "tipo": "CP",
+       "lat": 2.409797,
+       "lon": -75.520564
+      },
+      {
+       "codigo": "41306015",
+       "nombre": "La Bodega",
+       "tipo": "CP",
+       "lat": 2.362593,
+       "lon": -75.481529
+      },
+      {
+       "codigo": "41306001",
+       "nombre": "La Chiquita",
+       "tipo": "CP",
+       "lat": 2.279663,
+       "lon": -75.508001
+      },
+      {
+       "codigo": "41306002",
+       "nombre": "La Gran Vía",
+       "tipo": "CP",
+       "lat": 2.378294,
+       "lon": -75.485874
+      },
+      {
+       "codigo": "41306013",
+       "nombre": "La Gran Vía el Porvenir",
+       "tipo": "CP",
+       "lat": 2.374996,
+       "lon": -75.486025
+      },
+      {
+       "codigo": "41306016",
+       "nombre": "La Vega",
+       "tipo": "CP",
+       "lat": 2.26707,
+       "lon": -75.505079
+      },
+      {
+       "codigo": "41306003",
+       "nombre": "Potrerillos",
+       "tipo": "CP",
+       "lat": 2.466016,
+       "lon": -75.486635
+      },
+      {
+       "codigo": "41306007",
+       "nombre": "Pueblo Nuevo",
+       "tipo": "CP",
+       "lat": 2.401864,
+       "lon": -75.529219
+      },
+      {
+       "codigo": "41306004",
+       "nombre": "Rioloro",
+       "tipo": "CP",
+       "lat": 2.322571,
+       "lon": -75.610486
+      },
+      {
+       "codigo": "41306010",
+       "nombre": "Silvania",
+       "tipo": "CP",
+       "lat": 2.298627,
+       "lon": -75.507932
+      },
+      {
+       "codigo": "41306011",
+       "nombre": "Tres Esquinas",
+       "tipo": "CP",
+       "lat": 2.313628,
+       "lon": -75.502428
+      },
+      {
+       "codigo": "41306009",
+       "nombre": "Vueltas Arriba",
+       "tipo": "CP",
+       "lat": 2.429432,
+       "lon": -75.46562
+      }
+     ]
+    },
+    {
+     "codigo": "41319",
+     "nombre": "Guadalupe",
+     "lat": 2.02426,
+     "lon": -75.757185,
+     "centros_poblados": [
+      {
+       "codigo": "41319000",
+       "nombre": "Guadalupe",
+       "tipo": "CM",
+       "lat": 2.02426,
+       "lon": -75.757185
+      },
+      {
+       "codigo": "41319005",
+       "nombre": "Cachimbal",
+       "tipo": "CP",
+       "lat": 1.986172,
+       "lon": -75.750203
+      },
+      {
+       "codigo": "41319003",
+       "nombre": "Los Cauchos",
+       "tipo": "CP",
+       "lat": 2.031027,
+       "lon": -75.735326
+      },
+      {
+       "codigo": "41319002",
+       "nombre": "Miraflores",
+       "tipo": "CP",
+       "lat": 2.04915,
+       "lon": -75.673257
+      },
+      {
+       "codigo": "41319004",
+       "nombre": "Potrerillos",
+       "tipo": "CP",
+       "lat": 2.046858,
+       "lon": -75.705782
+      },
+      {
+       "codigo": "41319001",
+       "nombre": "Resina",
+       "tipo": "CP",
+       "lat": 1.924067,
+       "lon": -75.692758
+      },
+      {
+       "codigo": "41319006",
+       "nombre": "San José",
+       "tipo": "CP",
+       "lat": 2.055729,
+       "lon": -75.678813
+      },
+      {
+       "codigo": "41319007",
+       "nombre": "Sartenejal",
+       "tipo": "CP",
+       "lat": 2.00299,
+       "lon": -75.740386
+      }
+     ]
+    },
+    {
+     "codigo": "41349",
+     "nombre": "Hobo",
+     "lat": 2.580812,
+     "lon": -75.447697,
+     "centros_poblados": [
+      {
+       "codigo": "41349000",
+       "nombre": "Hobo",
+       "tipo": "CM",
+       "lat": 2.580812,
+       "lon": -75.447697
+      }
+     ]
+    },
+    {
+     "codigo": "41357",
+     "nombre": "Íquira",
+     "lat": 2.649359,
+     "lon": -75.634497,
+     "centros_poblados": [
+      {
+       "codigo": "41357000",
+       "nombre": "Íquira",
+       "tipo": "CM",
+       "lat": 2.649359,
+       "lon": -75.634497
+      },
+      {
+       "codigo": "41357007",
+       "nombre": "Huila",
+       "tipo": "CP",
+       "lat": 2.686112,
+       "lon": -75.751118
+      },
+      {
+       "codigo": "41357003",
+       "nombre": "Río Negro",
+       "tipo": "CP",
+       "lat": 2.689539,
+       "lon": -75.750757
+      },
+      {
+       "codigo": "41357005",
+       "nombre": "San Luis",
+       "tipo": "CP",
+       "lat": 2.638611,
+       "lon": -75.699225
+      },
+      {
+       "codigo": "41357006",
+       "nombre": "San Miguel",
+       "tipo": "CP",
+       "lat": 2.678155,
+       "lon": -75.753968
+      },
+      {
+       "codigo": "41357004",
+       "nombre": "Valencia la Paz",
+       "tipo": "CP",
+       "lat": 2.690961,
+       "lon": -75.615195
+      }
+     ]
+    },
+    {
+     "codigo": "41359",
+     "nombre": "Isnos",
+     "lat": 1.929467,
+     "lon": -76.217637,
+     "centros_poblados": [
+      {
+       "codigo": "41359000",
+       "nombre": "San José de Isnos",
+       "tipo": "CM",
+       "lat": 1.929467,
+       "lon": -76.217637
+      },
+      {
+       "codigo": "41359006",
+       "nombre": "Bajo Junín",
+       "tipo": "CP",
+       "lat": 1.938274,
+       "lon": -76.274387
+      },
+      {
+       "codigo": "41359007",
+       "nombre": "Buenos Aires",
+       "tipo": "CP",
+       "lat": 2.016263,
+       "lon": -76.181696
+      },
+      {
+       "codigo": "41359008",
+       "nombre": "Ciénaga Grande",
+       "tipo": "CP",
+       "lat": 1.95922,
+       "lon": -76.158086
+      },
+      {
+       "codigo": "41359003",
+       "nombre": "El Salto de Bordones",
+       "tipo": "CP",
+       "lat": 2.004844,
+       "lon": -76.166068
+      }
+     ]
+    },
+    {
+     "codigo": "41378",
+     "nombre": "La Argentina",
+     "lat": 2.198496,
+     "lon": -75.979763,
+     "centros_poblados": [
+      {
+       "codigo": "41378000",
+       "nombre": "La Argentina",
+       "tipo": "CM",
+       "lat": 2.198496,
+       "lon": -75.979763
+      },
+      {
+       "codigo": "41378001",
+       "nombre": "Buenos Aires",
+       "tipo": "CP",
+       "lat": 2.116894,
+       "lon": -76.022904
+      },
+      {
+       "codigo": "41378002",
+       "nombre": "El Pensil",
+       "tipo": "CP",
+       "lat": 2.179162,
+       "lon": -76.058148
+      }
+     ]
+    },
+    {
+     "codigo": "41396",
+     "nombre": "La Plata",
+     "lat": 2.389263,
+     "lon": -75.891254,
+     "centros_poblados": [
+      {
+       "codigo": "41396000",
+       "nombre": "La Plata",
+       "tipo": "CM",
+       "lat": 2.389263,
+       "lon": -75.891254
+      },
+      {
+       "codigo": "41396001",
+       "nombre": "Belén",
+       "tipo": "CP",
+       "lat": 2.201556,
+       "lon": -76.048186
+      },
+      {
+       "codigo": "41396013",
+       "nombre": "Estación Talaga",
+       "tipo": "CP",
+       "lat": 2.19776,
+       "lon": -76.097834
+      },
+      {
+       "codigo": "41396015",
+       "nombre": "Fiw Paez",
+       "tipo": "CP",
+       "lat": 2.352265,
+       "lon": -75.836978
+      },
+      {
+       "codigo": "41396009",
+       "nombre": "Gallego",
+       "tipo": "CP",
+       "lat": 2.262675,
+       "lon": -75.970048
+      },
+      {
+       "codigo": "41396002",
+       "nombre": "Monserrate",
+       "tipo": "CP",
+       "lat": 2.470131,
+       "lon": -75.991697
+      },
+      {
+       "codigo": "41396014",
+       "nombre": "Potrerito",
+       "tipo": "CP",
+       "lat": 2.340221,
+       "lon": -75.847577
+      },
+      {
+       "codigo": "41396004",
+       "nombre": "San Andrés",
+       "tipo": "CP",
+       "lat": 2.393833,
+       "lon": -75.827016
+      },
+      {
+       "codigo": "41396006",
+       "nombre": "San Vicente",
+       "tipo": "CP",
+       "lat": 2.316568,
+       "lon": -76.011165
+      },
+      {
+       "codigo": "41396005",
+       "nombre": "Villa Losada",
+       "tipo": "CP",
+       "lat": 2.28123,
+       "lon": -75.968011
+      }
+     ]
+    },
+    {
+     "codigo": "41483",
+     "nombre": "Nátaga",
+     "lat": 2.5451,
+     "lon": -75.808756,
+     "centros_poblados": [
+      {
+       "codigo": "41483000",
+       "nombre": "Nátaga",
+       "tipo": "CM",
+       "lat": 2.5451,
+       "lon": -75.808756
+      },
+      {
+       "codigo": "41483002",
+       "nombre": "Llano Buco",
+       "tipo": "CP",
+       "lat": 2.674181,
+       "lon": -75.754436
+      },
+      {
+       "codigo": "41483001",
+       "nombre": "Patio Bonito",
+       "tipo": "CP",
+       "lat": 2.630779,
+       "lon": -75.758857
+      },
+      {
+       "codigo": "41483003",
+       "nombre": "Yarumal",
+       "tipo": "CP",
+       "lat": 2.651822,
+       "lon": -75.757872
+      }
+     ]
+    },
+    {
+     "codigo": "41001",
+     "nombre": "Neiva",
+     "lat": 2.935432,
+     "lon": -75.277327,
+     "centros_poblados": [
+      {
+       "codigo": "41001000",
+       "nombre": "Neiva",
+       "tipo": "CM",
+       "lat": 2.935432,
+       "lon": -75.277327
+      },
+      {
+       "codigo": "41001018",
+       "nombre": "Aipecito",
+       "tipo": "CP",
+       "lat": 3.124891,
+       "lon": -75.558251
+      },
+      {
+       "codigo": "41001001",
+       "nombre": "Caguán",
+       "tipo": "CP",
+       "lat": 2.864079,
+       "lon": -75.232752
+      },
+      {
+       "codigo": "41001032",
+       "nombre": "Cedral",
+       "tipo": "CP",
+       "lat": 2.93393,
+       "lon": -75.000392
+      },
+      {
+       "codigo": "41001029",
+       "nombre": "Cedralito",
+       "tipo": "CP",
+       "lat": 2.930543,
+       "lon": -74.979479
+      },
+      {
+       "codigo": "41001002",
+       "nombre": "Chapinero",
+       "tipo": "CP",
+       "lat": 3.187583,
+       "lon": -75.513309
+      },
+      {
+       "codigo": "41001016",
+       "nombre": "El Colegio",
+       "tipo": "CP",
+       "lat": 2.9004,
+       "lon": -75.004371
+      },
+      {
+       "codigo": "41001013",
+       "nombre": "El Triunfo",
+       "tipo": "CP",
+       "lat": 2.865848,
+       "lon": -75.204826
+      },
+      {
+       "codigo": "41001022",
+       "nombre": "El Venado",
+       "tipo": "CP",
+       "lat": 2.986438,
+       "lon": -75.274943
+      },
+      {
+       "codigo": "41001003",
+       "nombre": "Fortalecillas",
+       "tipo": "CP",
+       "lat": 3.03629,
+       "lon": -75.251185
+      },
+      {
+       "codigo": "41001004",
+       "nombre": "Guacirco",
+       "tipo": "CP",
+       "lat": 3.10181,
+       "lon": -75.276178
+      },
+      {
+       "codigo": "41001033",
+       "nombre": "La Julia",
+       "tipo": "CP",
+       "lat": 3.105862,
+       "lon": -75.525878
+      },
+      {
+       "codigo": "41001030",
+       "nombre": "La Mata",
+       "tipo": "CP",
+       "lat": 3.021279,
+       "lon": -75.253664
+      },
+      {
+       "codigo": "41001036",
+       "nombre": "Moscovia",
+       "tipo": "CP",
+       "lat": 2.898827,
+       "lon": -75.225112
+      },
+      {
+       "codigo": "41001007",
+       "nombre": "Palacios",
+       "tipo": "CP",
+       "lat": 2.939458,
+       "lon": -75.063715
+      },
+      {
+       "codigo": "41001008",
+       "nombre": "Peñas Blancas",
+       "tipo": "CP",
+       "lat": 3.074418,
+       "lon": -75.350571
+      },
+      {
+       "codigo": "41001024",
+       "nombre": "Piedra Marcada",
+       "tipo": "CP",
+       "lat": 2.933229,
+       "lon": -74.972237
+      },
+      {
+       "codigo": "41001031",
+       "nombre": "Pradera",
+       "tipo": "CP",
+       "lat": 3.090764,
+       "lon": -75.601474
+      },
+      {
+       "codigo": "41001017",
+       "nombre": "San Antonio de Anaconia",
+       "tipo": "CP",
+       "lat": 2.927636,
+       "lon": -75.100491
+      },
+      {
+       "codigo": "41001014",
+       "nombre": "San Francisco",
+       "tipo": "CP",
+       "lat": 3.070874,
+       "lon": -75.389841
+      },
+      {
+       "codigo": "41001034",
+       "nombre": "San Jorge",
+       "tipo": "CP",
+       "lat": 3.05801,
+       "lon": -75.265553
+      },
+      {
+       "codigo": "41001011",
+       "nombre": "San Luis",
+       "tipo": "CP",
+       "lat": 3.082642,
+       "lon": -75.485141
+      },
+      {
+       "codigo": "41001012",
+       "nombre": "Vegalarga",
+       "tipo": "CP",
+       "lat": 2.947613,
+       "lon": -75.041323
+      }
+     ]
+    },
+    {
+     "codigo": "41503",
+     "nombre": "Oporapa",
+     "lat": 2.025088,
+     "lon": -75.995165,
+     "centros_poblados": [
+      {
+       "codigo": "41503000",
+       "nombre": "Oporapa",
+       "tipo": "CM",
+       "lat": 2.025088,
+       "lon": -75.995165
+      },
+      {
+       "codigo": "41503002",
+       "nombre": "El Carmen",
+       "tipo": "CP",
+       "lat": 2.01955,
+       "lon": -76.036659
+      },
+      {
+       "codigo": "41503004",
+       "nombre": "Paraguay",
+       "tipo": "CP",
+       "lat": 2.049894,
+       "lon": -75.978046
+      },
+      {
+       "codigo": "41503003",
+       "nombre": "San Ciro",
+       "tipo": "CP",
+       "lat": 2.01192,
+       "lon": -76.005449
+      },
+      {
+       "codigo": "41503001",
+       "nombre": "San Roque",
+       "tipo": "CP",
+       "lat": 2.060234,
+       "lon": -76.005616
+      }
+     ]
+    },
+    {
+     "codigo": "41518",
+     "nombre": "Paicol",
+     "lat": 2.449651,
+     "lon": -75.773158,
+     "centros_poblados": [
+      {
+       "codigo": "41518000",
+       "nombre": "Paicol",
+       "tipo": "CM",
+       "lat": 2.449651,
+       "lon": -75.773158
+      },
+      {
+       "codigo": "41518001",
+       "nombre": "La Reforma",
+       "tipo": "CP",
+       "lat": 2.449071,
+       "lon": -75.699493
+      },
+      {
+       "codigo": "41518002",
+       "nombre": "Las Lajitas",
+       "tipo": "CP",
+       "lat": 2.446941,
+       "lon": -75.748544
+      }
+     ]
+    },
+    {
+     "codigo": "41524",
+     "nombre": "Palermo",
+     "lat": 2.889649,
+     "lon": -75.435296,
+     "centros_poblados": [
+      {
+       "codigo": "41524000",
+       "nombre": "Palermo",
+       "tipo": "CM",
+       "lat": 2.889649,
+       "lon": -75.435296
+      },
+      {
+       "codigo": "41524009",
+       "nombre": "Amborco",
+       "tipo": "CP",
+       "lat": 2.958346,
+       "lon": -75.310279
+      },
+      {
+       "codigo": "41524001",
+       "nombre": "Betania",
+       "tipo": "CP",
+       "lat": 2.749917,
+       "lon": -75.398657
+      },
+      {
+       "codigo": "41524006",
+       "nombre": "El Juncal",
+       "tipo": "CP",
+       "lat": 2.827455,
+       "lon": -75.326764
+      },
+      {
+       "codigo": "41524004",
+       "nombre": "Ospina Pérez",
+       "tipo": "CP",
+       "lat": 2.878149,
+       "lon": -75.547881
+      },
+      {
+       "codigo": "41524005",
+       "nombre": "San Juan",
+       "tipo": "CP",
+       "lat": 2.825056,
+       "lon": -75.523017
+      }
+     ]
+    },
+    {
+     "codigo": "41530",
+     "nombre": "Palestina",
+     "lat": 1.723725,
+     "lon": -76.133251,
+     "centros_poblados": [
+      {
+       "codigo": "41530000",
+       "nombre": "Palestina",
+       "tipo": "CM",
+       "lat": 1.723725,
+       "lon": -76.133251
+      }
+     ]
+    },
+    {
+     "codigo": "41548",
+     "nombre": "Pital",
+     "lat": 2.266618,
+     "lon": -75.804544,
+     "centros_poblados": [
+      {
+       "codigo": "41548000",
+       "nombre": "Pital",
+       "tipo": "CM",
+       "lat": 2.266618,
+       "lon": -75.804544
+      },
+      {
+       "codigo": "41548001",
+       "nombre": "El Socorro",
+       "tipo": "CP",
+       "lat": 2.313934,
+       "lon": -75.834615
+      },
+      {
+       "codigo": "41548002",
+       "nombre": "Minas",
+       "tipo": "CP",
+       "lat": 2.230383,
+       "lon": -75.877674
+      }
+     ]
+    },
+    {
+     "codigo": "41551",
+     "nombre": "Pitalito",
+     "lat": 1.852631,
+     "lon": -76.049441,
+     "centros_poblados": [
+      {
+       "codigo": "41551000",
+       "nombre": "Pitalito",
+       "tipo": "CM",
+       "lat": 1.852631,
+       "lon": -76.049441
+      },
+      {
+       "codigo": "41551001",
+       "nombre": "Bruselas",
+       "tipo": "CP",
+       "lat": 1.776305,
+       "lon": -76.17451
+      },
+      {
+       "codigo": "41551009",
+       "nombre": "Charguayaco",
+       "tipo": "CP",
+       "lat": 1.782049,
+       "lon": -76.04644
+      },
+      {
+       "codigo": "41551006",
+       "nombre": "Chillurco (villas del Norte)",
+       "tipo": "CP",
+       "lat": 1.891239,
+       "lon": -76.143585
+      },
+      {
+       "codigo": "41551008",
+       "nombre": "Criollo",
+       "tipo": "CP",
+       "lat": 1.856642,
+       "lon": -76.155506
+      },
+      {
+       "codigo": "41551002",
+       "nombre": "Guacacayo",
+       "tipo": "CP",
+       "lat": 1.949624,
+       "lon": -76.026864
+      },
+      {
+       "codigo": "41551003",
+       "nombre": "La Laguna",
+       "tipo": "CP",
+       "lat": 1.960795,
+       "lon": -76.083654
+      },
+      {
+       "codigo": "41551015",
+       "nombre": "Los Arrayanes",
+       "tipo": "CP",
+       "lat": 1.985438,
+       "lon": -76.134989
+      },
+      {
+       "codigo": "41551010",
+       "nombre": "Palmarito",
+       "tipo": "CP",
+       "lat": 1.790705,
+       "lon": -76.071835
+      },
+      {
+       "codigo": "41551005",
+       "nombre": "Regueros",
+       "tipo": "CP",
+       "lat": 1.905802,
+       "lon": -76.023625
+      }
+     ]
+    },
+    {
+     "codigo": "41615",
+     "nombre": "Rivera",
+     "lat": 2.777586,
+     "lon": -75.258753,
+     "centros_poblados": [
+      {
+       "codigo": "41615000",
+       "nombre": "Rivera",
+       "tipo": "CM",
+       "lat": 2.777586,
+       "lon": -75.258753
+      },
+      {
+       "codigo": "41615007",
+       "nombre": "El Guadual",
+       "tipo": "CP",
+       "lat": 2.793632,
+       "lon": -75.238547
+      },
+      {
+       "codigo": "41615001",
+       "nombre": "La Ulloa",
+       "tipo": "CP",
+       "lat": 2.811333,
+       "lon": -75.229228
+      },
+      {
+       "codigo": "41615006",
+       "nombre": "Río Frío",
+       "tipo": "CP",
+       "lat": 2.821074,
+       "lon": -75.29612
+      },
+      {
+       "codigo": "41615002",
+       "nombre": "Riverita",
+       "tipo": "CP",
+       "lat": 2.75997,
+       "lon": -75.287809
+      }
+     ]
+    },
+    {
+     "codigo": "41660",
+     "nombre": "Saladoblanco",
+     "lat": 1.9934,
+     "lon": -76.044747,
+     "centros_poblados": [
+      {
+       "codigo": "41660000",
+       "nombre": "Saladoblanco",
+       "tipo": "CM",
+       "lat": 1.9934,
+       "lon": -76.044747
+      },
+      {
+       "codigo": "41660001",
+       "nombre": "La Cabaña",
+       "tipo": "CP",
+       "lat": 1.9989,
+       "lon": -76.13188
+      },
+      {
+       "codigo": "41660007",
+       "nombre": "Morelia",
+       "tipo": "CP",
+       "lat": 2.066391,
+       "lon": -76.186311
+      }
+     ]
+    },
+    {
+     "codigo": "41668",
+     "nombre": "San Agustín",
+     "lat": 1.881081,
+     "lon": -76.27036,
+     "centros_poblados": [
+      {
+       "codigo": "41668000",
+       "nombre": "San Agustín",
+       "tipo": "CM",
+       "lat": 1.881081,
+       "lon": -76.27036
+      },
+      {
+       "codigo": "41668001",
+       "nombre": "Alto del Obispo",
+       "tipo": "CP",
+       "lat": 1.848595,
+       "lon": -76.250282
+      },
+      {
+       "codigo": "41668006",
+       "nombre": "El Palmar",
+       "tipo": "CP",
+       "lat": 1.957702,
+       "lon": -76.293253
+      },
+      {
+       "codigo": "41668009",
+       "nombre": "El Rosario",
+       "tipo": "CP",
+       "lat": 1.821652,
+       "lon": -76.303956
+      },
+      {
+       "codigo": "41668008",
+       "nombre": "Los Cauchos",
+       "tipo": "CP",
+       "lat": 1.831227,
+       "lon": -76.228216
+      },
+      {
+       "codigo": "41668002",
+       "nombre": "Obando",
+       "tipo": "CP",
+       "lat": 1.940205,
+       "lon": -76.298322
+      },
+      {
+       "codigo": "41668007",
+       "nombre": "Pradera",
+       "tipo": "CP",
+       "lat": 1.914074,
+       "lon": -76.356191
+      },
+      {
+       "codigo": "41668004",
+       "nombre": "Puerto Quinchana",
+       "tipo": "CP",
+       "lat": 1.920199,
+       "lon": -76.42404
+      },
+      {
+       "codigo": "41668003",
+       "nombre": "Villa Fátima",
+       "tipo": "CP",
+       "lat": 1.899886,
+       "lon": -76.393194
+      }
+     ]
+    },
+    {
+     "codigo": "41676",
+     "nombre": "Santa María",
+     "lat": 2.939603,
+     "lon": -75.586223,
+     "centros_poblados": [
+      {
+       "codigo": "41676000",
+       "nombre": "Santa María",
+       "tipo": "CM",
+       "lat": 2.939603,
+       "lon": -75.586223
+      },
+      {
+       "codigo": "41676001",
+       "nombre": "San Joaquín",
+       "tipo": "CP",
+       "lat": 2.908876,
+       "lon": -75.634205
+      }
+     ]
+    },
+    {
+     "codigo": "41770",
+     "nombre": "Suaza",
+     "lat": 1.976051,
+     "lon": -75.79525,
+     "centros_poblados": [
+      {
+       "codigo": "41770000",
+       "nombre": "Suaza",
+       "tipo": "CM",
+       "lat": 1.976051,
+       "lon": -75.79525
+      },
+      {
+       "codigo": "41770011",
+       "nombre": "Cruce Acevedo",
+       "tipo": "CP",
+       "lat": 1.874813,
+       "lon": -75.825762
+      },
+      {
+       "codigo": "41770001",
+       "nombre": "Gallardo",
+       "tipo": "CP",
+       "lat": 1.875907,
+       "lon": -75.877329
+      },
+      {
+       "codigo": "41770002",
+       "nombre": "Guayabal",
+       "tipo": "CP",
+       "lat": 1.906636,
+       "lon": -75.804437
+      },
+      {
+       "codigo": "41770012",
+       "nombre": "San Jose",
+       "tipo": "CP",
+       "lat": 1.923907,
+       "lon": -75.801783
+      }
+     ]
+    },
+    {
+     "codigo": "41791",
+     "nombre": "Tarqui",
+     "lat": 2.111325,
+     "lon": -75.823976,
+     "centros_poblados": [
+      {
+       "codigo": "41791000",
+       "nombre": "Tarqui",
+       "tipo": "CM",
+       "lat": 2.111325,
+       "lon": -75.823976
+      },
+      {
+       "codigo": "41791001",
+       "nombre": "El Vergel",
+       "tipo": "CP",
+       "lat": 2.072029,
+       "lon": -75.904306
+      },
+      {
+       "codigo": "41791002",
+       "nombre": "Maito",
+       "tipo": "CP",
+       "lat": 2.0474,
+       "lon": -75.908572
+      },
+      {
+       "codigo": "41791003",
+       "nombre": "Quituro",
+       "tipo": "CP",
+       "lat": 2.074088,
+       "lon": -75.944302
+      }
+     ]
+    },
+    {
+     "codigo": "41799",
+     "nombre": "Tello",
+     "lat": 3.067538,
+     "lon": -75.138773,
+     "centros_poblados": [
+      {
+       "codigo": "41799000",
+       "nombre": "Tello",
+       "tipo": "CM",
+       "lat": 3.067538,
+       "lon": -75.138773
+      },
+      {
+       "codigo": "41799001",
+       "nombre": "Anacleto García",
+       "tipo": "CP",
+       "lat": 2.9497,
+       "lon": -75.041738
+      },
+      {
+       "codigo": "41799003",
+       "nombre": "San Andrés Tello",
+       "tipo": "CP",
+       "lat": 3.048243,
+       "lon": -75.0156
+      },
+      {
+       "codigo": "41799004",
+       "nombre": "Sierra de la Cañada",
+       "tipo": "CP",
+       "lat": 3.015327,
+       "lon": -75.077717
+      },
+      {
+       "codigo": "41799002",
+       "nombre": "Sierra del Gramal",
+       "tipo": "CP",
+       "lat": 2.998549,
+       "lon": -75.074292
+      }
+     ]
+    },
+    {
+     "codigo": "41801",
+     "nombre": "Teruel",
+     "lat": 2.740968,
+     "lon": -75.567034,
+     "centros_poblados": [
+      {
+       "codigo": "41801000",
+       "nombre": "Teruel",
+       "tipo": "CM",
+       "lat": 2.740968,
+       "lon": -75.567034
+      }
+     ]
+    },
+    {
+     "codigo": "41797",
+     "nombre": "Tesalia",
+     "lat": 2.486364,
+     "lon": -75.730271,
+     "centros_poblados": [
+      {
+       "codigo": "41797000",
+       "nombre": "Tesalia",
+       "tipo": "CM",
+       "lat": 2.486364,
+       "lon": -75.730271
+      },
+      {
+       "codigo": "41797001",
+       "nombre": "Pacarní",
+       "tipo": "CP",
+       "lat": 2.608426,
+       "lon": -75.698365
+      }
+     ]
+    },
+    {
+     "codigo": "41807",
+     "nombre": "Timaná",
+     "lat": 1.974539,
+     "lon": -75.932167,
+     "centros_poblados": [
+      {
+       "codigo": "41807000",
+       "nombre": "Timaná",
+       "tipo": "CM",
+       "lat": 1.974539,
+       "lon": -75.932167
+      },
+      {
+       "codigo": "41807010",
+       "nombre": "Aguas Claras",
+       "tipo": "CP",
+       "lat": 1.945672,
+       "lon": -75.904374
+      },
+      {
+       "codigo": "41807011",
+       "nombre": "Alto Naranjal",
+       "tipo": "CP",
+       "lat": 2.002337,
+       "lon": -75.844863
+      },
+      {
+       "codigo": "41807007",
+       "nombre": "Cosanza",
+       "tipo": "CP",
+       "lat": 1.979856,
+       "lon": -75.889437
+      },
+      {
+       "codigo": "41807005",
+       "nombre": "Montañita",
+       "tipo": "CP",
+       "lat": 1.954562,
+       "lon": -75.899782
+      },
+      {
+       "codigo": "41807001",
+       "nombre": "Naranjal",
+       "tipo": "CP",
+       "lat": 2.015803,
+       "lon": -75.850905
+      },
+      {
+       "codigo": "41807013",
+       "nombre": "Pantanos",
+       "tipo": "CP",
+       "lat": 1.904826,
+       "lon": -75.967657
+      },
+      {
+       "codigo": "41807006",
+       "nombre": "Quinche",
+       "tipo": "CP",
+       "lat": 1.960894,
+       "lon": -75.909552
+      },
+      {
+       "codigo": "41807004",
+       "nombre": "San Antonio",
+       "tipo": "CP",
+       "lat": 1.960924,
+       "lon": -75.886305
+      },
+      {
+       "codigo": "41807009",
+       "nombre": "San Isidro",
+       "tipo": "CP",
+       "lat": 1.959253,
+       "lon": -75.893147
+      },
+      {
+       "codigo": "41807014",
+       "nombre": "Santa Bárbara",
+       "tipo": "CP",
+       "lat": 1.882909,
+       "lon": -75.969387
+      }
+     ]
+    },
+    {
+     "codigo": "41872",
+     "nombre": "Villavieja",
+     "lat": 3.218822,
+     "lon": -75.217174,
+     "centros_poblados": [
+      {
+       "codigo": "41872000",
+       "nombre": "Villavieja",
+       "tipo": "CM",
+       "lat": 3.218822,
+       "lon": -75.217174
+      },
+      {
+       "codigo": "41872003",
+       "nombre": "Hato Nuevo",
+       "tipo": "CP",
+       "lat": 3.142421,
+       "lon": -75.261387
+      },
+      {
+       "codigo": "41872005",
+       "nombre": "La Victoria",
+       "tipo": "CP",
+       "lat": 3.351431,
+       "lon": -75.172439
+      },
+      {
+       "codigo": "41872004",
+       "nombre": "Polonia",
+       "tipo": "CP",
+       "lat": 3.185782,
+       "lon": -75.217232
+      },
+      {
+       "codigo": "41872001",
+       "nombre": "Potosí",
+       "tipo": "CP",
+       "lat": 3.387605,
+       "lon": -75.17053
+      },
+      {
+       "codigo": "41872002",
+       "nombre": "San Alfonso",
+       "tipo": "CP",
+       "lat": 3.369357,
+       "lon": -75.112315
+      }
+     ]
+    },
+    {
+     "codigo": "41885",
+     "nombre": "Yaguará",
+     "lat": 2.664694,
+     "lon": -75.518023,
+     "centros_poblados": [
+      {
+       "codigo": "41885000",
+       "nombre": "Yaguará",
+       "tipo": "CM",
+       "lat": 2.664694,
+       "lon": -75.518023
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
