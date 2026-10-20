@@ -33,6 +33,7 @@ from app.modules.identidad.infrastructure.security.refresh_tokens import (
 from app.modules.identidad.infrastructure.security.reloj import RelojSistema
 
 from app.modules.identidad.application.registrar_usuario import RegistrarUsuario
+from app.modules.identidad.application.consultar_politica import ConsultarPoliticaVigente
 
 @lru_cache
 def _hash_ficticio() -> str:
@@ -143,3 +144,8 @@ async def get_registrar_usuario(
         uow=SqlAlchemyUnitOfWork(session),
         dias_refresh=settings.refresh_dias,
     )
+
+async def get_consultar_politica(
+        session: Annotated[AsyncSession, Depends(get_session)],
+) -> ConsultarPoliticaVigente:
+    return ConsultarPoliticaVigente(politicas=SqlAlchemyPoliticaRepository(session))

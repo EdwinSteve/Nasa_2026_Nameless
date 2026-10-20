@@ -31,3 +31,6 @@ node_modules/
 
 # ML
 mlruns/
+
+# Paquetes Python instalados en modo editable
+*.egg-info/

@@ -72,6 +72,9 @@ class UsuariosFalsos:
     async def get_by_phone(self, phone: str):
         return next((u for u in self.por_id.values() if u.phone.value == phone), None)
 
+    async def get_by_email(self, email: str):
+        return next((u for u in self.por_id.values() if u.email and u.email.value == email), None)
+
     async def save(self, usuario):
         self.por_id[usuario.id] = usuario
         return usuario
@@ -127,3 +130,19 @@ class UnitOfWorkFalso:
 
     async def confirmar(self) -> None:
         self.confirmaciones += 1
+
+
+class PoliticasFalsas:
+    def __init__(self, politica=None) -> None:
+        self.politica = politica
+
+    async def get_active(self):
+        return self.politica
+
+
+class ConsentimientosFalsos:
+    def __init__(self) -> None:
+        self.registros: list[tuple[UUID, UUID, datetime]] = []
+
+    async def registrar(self, user_id: UUID, policy_id: UUID, ahora: datetime) -> None:
+        self.registros.append((user_id, policy_id, ahora))

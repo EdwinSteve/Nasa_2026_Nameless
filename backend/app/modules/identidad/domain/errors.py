@@ -69,6 +69,15 @@ class ConsentRequired(ErrorDominio):
         )
 
 
+class PolicyUnavailable(ErrorDominio):
+    def __init__(self):
+        super().__init__(
+            "POLITICA_NO_DISPONIBLE",
+            "No hay una política de privacidad vigente. Intenta más tarde.",
+            503,
+        )
+
+
 class PolicyOutdated(ErrorDominio):
     def __init__(self):
         super().__init__(

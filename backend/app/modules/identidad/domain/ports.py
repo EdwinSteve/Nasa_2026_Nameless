@@ -11,6 +11,9 @@ class UserRepository(Protocol):
     async def get_by_phone(self, phone: str) -> User | None:
         ...
 
+    async def get_by_email(self, email: str) -> User | None:
+        ...
+
     async def save(self, user: User) -> User:
         ...
 
@@ -44,7 +47,7 @@ class PoliticaRepository(Protocol):
 
 
 class ConsentimientoRepository(Protocol):
-    async def register(self, user_id: UUID, policy_id: UUID, ahora: datetime) -> None:
+    async def registrar(self, user_id: UUID, policy_id: UUID, ahora: datetime) -> None:
         ...
 
 class EventoRepository(Protocol):

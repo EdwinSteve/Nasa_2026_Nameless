@@ -7,7 +7,8 @@ from app.modules.identidad.api.dependencies import (
     get_iniciar_sesion,
     get_refrescar_sesion,
     usuario_actual,
-    get_registrar_usuario
+    get_registrar_usuario,
+    get_consultar_politica,
 )
 from app.modules.identidad.api.schemas import (
     LoginRequest,
@@ -17,7 +18,8 @@ from app.modules.identidad.api.schemas import (
     RegisterRequest,
     RegisterResponse,
     RegisteredUser,
-    RegisterTokens
+    RegisterTokens,
+    PoliticaVigenteResponse,
 )
 from app.modules.identidad.application.cerrar_sesion import CerrarSesion
 from app.modules.identidad.application.iniciar_sesion import IniciarSesion
@@ -25,6 +27,8 @@ from app.modules.identidad.application.refrescar_sesion import RefrescarSesion
 from app.modules.identidad.domain.entity import User
 from app.modules.identidad.application.dto import DatosRegistro
 from app.modules.identidad.application.registrar_usuario import RegistrarUsuario
+from app.modules.identidad.application.consultar_politica import ConsultarPoliticaVigente
+from app.core.config import get_settings
 
 router = APIRouter(
     tags=["Identidad"],
@@ -186,4 +190,22 @@ async def register(
             token_type=par.token_type,
             expires_in=par.expira_en,
         ),
+    )
+
+
+@router.get(
+    "/politicas/vigente",
+    response_model=PoliticaVigenteResponse,
+    summary="Consultar la política de privacidad vigente",
+    description="La UI la consulta al abrir el registro y envía su versión en policy_version.",
+    responses={503: {"description": "POLITICA_NO_DISPONIBLE: no hay ninguna política activa."}},
+)
+async def politica_vigente(
+        caso: Annotated[ConsultarPoliticaVigente, Depends(get_consultar_politica)],
+) -> PoliticaVigenteResponse:
+    politica = await caso.ejecutar()
+    return PoliticaVigenteResponse(
+        version=politica.version,
+        url_texto=get_settings().politica_url,
+        contenido=politica.contenido,
     )

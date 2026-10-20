@@ -1,11 +1,12 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
 from app.core.errors import register_handler_errors
 from app.modules.identidad.api.router import router as identidad_router
 
 def create_app() -> FastAPI:
-    get_settings()
+    settings = get_settings()
 
     app = FastAPI(
         title="SURCO API",
@@ -16,6 +17,14 @@ def create_app() -> FastAPI:
     )
 
     register_handler_errors(app)
+
+    # La UI corre en otro origen (Next.js en :3000): sin esto el navegador bloquea las llamadas.
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_origenes_lista,
+        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
+        allow_headers=["Authorization", "Content-Type"],
+    )
 
     app.include_router(
         identidad_router,

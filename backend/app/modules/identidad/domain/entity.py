@@ -96,3 +96,4 @@ class Sesion:
 class Politica:
     id: UUID
     version: str
+    contenido: str = ""

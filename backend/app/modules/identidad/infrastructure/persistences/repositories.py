@@ -74,7 +74,7 @@ class SqlAlchemyUserRepository:
             row = UsuarioORM(id=user.id)
             self._session.add(row)
         row.phone = user.phone.value
-        row.email = user.email.value
+        row.email = user.email.value if user.email else None  # el correo es opcional en el registro
         row.password_hash = user.password_hash
         row.role = user.role.value
         row.status = user.status.value
@@ -181,7 +181,7 @@ class SqlAlchemyPoliticaRepository:
     async def get_active(self) -> Politica | None:
         stmt = select(PoliticaPrivacidadORM).where(PoliticaPrivacidadORM.is_active.is_(True))
         row = (await self._session.execute(stmt)).scalar_one_or_none()
-        return Politica(id=row.id, version=row.version) if row else None
+        return Politica(id=row.id, version=row.version, contenido=row.content) if row else None
 
 
 class SqlAlchemyConsentimientoRepository:

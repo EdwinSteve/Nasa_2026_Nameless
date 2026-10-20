@@ -127,6 +127,12 @@ class RegisterRequest(BaseModel):
             raise ValueError("La contraseña debe tener al menos una letra y un número.")
         return v
 
+class PoliticaVigenteResponse(BaseModel):
+    version: str = Field(..., examples=["2026.1"], description="Se envía tal cual en policy_version al registrarse.")
+    url_texto: str = Field(..., examples=["/politica-de-datos"], description="Dónde leer el texto completo.")
+    contenido: str = Field(..., description="Texto de la política (Ley 1581 de 2012).")
+
+
 class RegisteredUser(BaseModel):
     id: UUID
     full_name: str | None

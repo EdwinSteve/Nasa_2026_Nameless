@@ -28,6 +28,16 @@ class Settings(BaseSettings):
     login_max_intentos: int = Field(default=5, gt=0)
     login_bloqueo_minutos: int = Field(default=15, gt=0)
 
+    # Frontend
+    # Orígenes que pueden llamar a la API desde el navegador, separados por comas.
+    cors_origenes: str = "http://localhost:3000"
+    # Dónde lee el productor el texto completo de la política (una ruta de la UI).
+    politica_url: str = "/politica-de-datos"
+
+    @property
+    def cors_origenes_lista(self) -> list[str]:
+        return [o.strip() for o in self.cors_origenes.split(",") if o.strip()]
+
 @lru_cache
 def get_settings() -> Settings:
     return Settings() # type: ignore[call-arg]
