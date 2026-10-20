@@ -38,7 +38,7 @@ export function Bienvenida({ onCrearCuenta, onIngresar }: BienvenidaProps) {
           className="rounded-3xl"
         >
           <ImagenBienvenida
-            encuadre={diapositiva.encuadre}
+            actual={actual}
             municipioTexto={altitud.municipioTexto}
             estadoAltitud={altitud.estado}
             altitudTexto={altitud.altitudTexto}

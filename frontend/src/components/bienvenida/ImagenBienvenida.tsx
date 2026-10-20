@@ -1,9 +1,9 @@
 'use client';
 
-// Tarjeta con la ilustración, los chips y el gesto de deslizar.
+// Tarjeta con las ilustraciones del carrusel, los chips y el gesto de deslizar.
 import Image from 'next/image';
 import { useRef, useState, type PointerEvent } from 'react';
-import { ALT_IMAGEN_BIENVENIDA, IMAGEN_BIENVENIDA } from './diapositivas';
+import { DIAPOSITIVAS } from './diapositivas';
 import { ChipImagen } from './ChipImagen';
 import { ChipAltitud } from './ChipAltitud';
 import { IconoSatelite, IconoUbicacion } from '../iconos/Iconos';
@@ -12,7 +12,7 @@ import type { EstadoAltitud } from '../../hooks/useAltitud';
 const UMBRAL_DESLIZAR_PX = 50;
 
 export interface ImagenBienvenidaProps {
-  encuadre: string;
+  actual: number;
   municipioTexto: string;
   estadoAltitud: EstadoAltitud;
   altitudTexto: string | null;
@@ -23,7 +23,8 @@ export interface ImagenBienvenidaProps {
 
 export function ImagenBienvenida(props: ImagenBienvenidaProps) {
   const inicioX = useRef<number | null>(null);
-  const [imagenFallo, setImagenFallo] = useState(false);
+  // Si una imagen no carga, se ve el fondo verde de la tarjeta en su lugar
+  const [fallidas, setFallidas] = useState<ReadonlySet<number>>(new Set());
 
   function alSoltar(e: PointerEvent<HTMLDivElement>) {
     if (inicioX.current === null) return;
@@ -40,18 +41,25 @@ export function ImagenBienvenida(props: ImagenBienvenidaProps) {
       onPointerUp={alSoltar}
       onPointerCancel={() => { inicioX.current = null; }}
     >
-      {!imagenFallo && (
-        <Image
-          src={IMAGEN_BIENVENIDA}
-          alt={ALT_IMAGEN_BIENVENIDA}
-          fill
-          priority
-          sizes="(min-width: 1024px) 55vw, 100vw"
-          draggable={false}
-          onError={() => setImagenFallo(true)}
-          style={{ objectPosition: props.encuadre }}
-          className="object-cover transition-[object-position] duration-500 ease-out motion-reduce:transition-none"
-        />
+      {/* Las tres ilustraciones apiladas: cambiar de diapositiva es un fundido, sin recargar nada */}
+      {DIAPOSITIVAS.map((d, i) =>
+        fallidas.has(i) ? null : (
+          <Image
+            key={d.imagen}
+            src={d.imagen}
+            alt={i === props.actual ? d.alt : ''}
+            aria-hidden={i !== props.actual}
+            fill
+            priority={i === 0}
+            sizes="(min-width: 1024px) 55vw, 100vw"
+            draggable={false}
+            onError={() => setFallidas((previas) => new Set(previas).add(i))}
+            style={{ objectPosition: d.encuadre }}
+            className={`object-cover transition-opacity duration-500 ease-out motion-reduce:transition-none ${
+              i === props.actual ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ),
       )}
 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-campo/70 to-transparent" />
