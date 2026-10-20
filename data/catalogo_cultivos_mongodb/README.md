@@ -255,7 +255,7 @@ Mientras no tengan Kc, Zr y p, el oráculo del modelo predictivo evalúa estos 7
 
 > Pendiente: la lluvia por fase de los cultivos completados se había repartido por duración, porque no tenían Kc. La regla del catálogo la reparte por consumo (duración × Kc). Conviene recalcularla con los Kc nuevos.
 
-## 10. Decisión de arquitectura (proponer como ADR-014)
+## 10. Decisión de arquitectura ([ADR 0004](../../docs/decisiones/0004-catalogo-agronomico-en-mongodb.md))
 
 > ❗ **Esto agrega MongoDB a la arquitectura**, que hasta ahora solo tenía PostgreSQL. La justificación: el catálogo agronómico es **información de referencia, de solo lectura y con estructura variable** por tipo de cultivo (los perennes, las musáceas y los granos tienen fases distintas), y el modelo documental lo representa de forma natural.
 >
