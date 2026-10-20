@@ -5,6 +5,7 @@ from app.core.config import get_settings
 from app.core.errors import register_handler_errors
 from app.modules.identidad.api.router import router as identidad_router
 from app.modules.territorio.api.router import router as territorio_router
+from app.modules.fincas.api.router import router as fincas_router
 
 def create_app() -> FastAPI:
     settings = get_settings()
@@ -32,6 +33,7 @@ def create_app() -> FastAPI:
         prefix="/api/v1",
     )
     app.include_router(territorio_router, prefix="/api/v1")
+    app.include_router(fincas_router, prefix="/api/v1")
 
     @app.get(
         "/api/v1/health",

@@ -9,7 +9,7 @@ class MunicipioItem(BaseModel):
 
 
 class CorregimientoItem(BaseModel):
-    codigo: str = Field(..., examples=["41001001"], description="Código DIVIPOLA del centro poblado (8 dígitos).")
+    codigo: str = Field(..., examples=["41001003"], description="Código DIVIPOLA del centro poblado (8 dígitos).")
     nombre: str = Field(..., examples=["Fortalecillas"])
     tipo: str = Field(..., description="cabecera (casco urbano) o centro_poblado (rural).")
     lat: float | None = None
