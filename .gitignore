@@ -30,3 +30,7 @@ node_modules/
 
 # ML
 mlruns/
+
+# Archivos generados por Next.js / TypeScript
+frontend/next-env.d.ts
+*.tsbuildinfo
