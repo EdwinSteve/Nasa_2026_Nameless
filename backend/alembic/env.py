@@ -7,6 +7,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.core.config import get_settings
+from app.modules.diagnostico.infrastructure.orm_models import Base as DiagnosticoBase
 from app.modules.fincas.infrastructure.orm_models import Base as FincasBase
 from app.modules.identidad.infrastructure.persistences.orm_models import Base as IdentidadBase
 
@@ -16,7 +17,7 @@ if config.config_file_name is not None:
 
 config.set_main_option("sqlalchemy.url", get_settings().database_url)
 # Cada módulo tiene su propia metadata (y su esquema de PostgreSQL).
-target_metadata = [IdentidadBase.metadata, FincasBase.metadata]
+target_metadata = [IdentidadBase.metadata, FincasBase.metadata, DiagnosticoBase.metadata]
 
 VERSION_TABLE = "alembic_version"
 

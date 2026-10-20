@@ -1,0 +1,17 @@
+[project]
+name = "surco-datos-tierra"
+version = "2.0.0"
+description = "Servicio de datos del lote de SURCO: NASA POWER, SMAP, IMERG, MODIS, SoilGrids, SRTM y ONI"
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.27"]
+
+[project.optional-dependencies]
+gee = ["earthengine-api>=1.0"]   # SMAP, IMERG y MODIS
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["datos_tierra*"]

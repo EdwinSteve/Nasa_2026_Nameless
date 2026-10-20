@@ -34,6 +34,10 @@ class Settings(BaseSettings):
     # Dónde lee el productor el texto completo de la política (una ruta de la UI).
     politica_url: str = "/politica-de-datos"
 
+    # Diagnóstico satelital (datos_tierra). Sin proyecto de Earth Engine, la humedad
+    # (SMAP) y el verdor (MODIS) quedan como pasos fallidos; clima y suelo funcionan igual.
+    gee_project: str | None = None
+
     @property
     def cors_origenes_lista(self) -> list[str]:
         return [o.strip() for o in self.cors_origenes.split(",") if o.strip()]
