@@ -24,13 +24,14 @@ export interface Usuario {
   nombre_completo: string;
   celular: string;
   correo: string | null;
-  rol: 'productor' | 'tecnico' | 'admin';
+  rol: 'productor' | 'aprendiz' | 'instructor' | 'admin';
   municipio_residencia: string;
 }
 
 export interface PoliticaVigente {
   version: string;
   url_texto: string;
+  contenido: string;
 }
 
 export interface RegistroUsuarioPayload {
@@ -43,14 +44,20 @@ export interface RegistroUsuarioPayload {
   version_politica: string;
 }
 
+// Códigos DIVIPOLA del DANE: 5 dígitos el municipio, 8 el centro poblado.
 export interface MunicipioItem {
   codigo: string;
   nombre: string;
+  lat?: number | null;
+  lon?: number | null;
 }
 
 export interface CorregimientoItem {
   codigo: string;
   nombre: string;
+  tipo?: 'cabecera' | 'centro_poblado';
+  lat?: number | null;
+  lon?: number | null;
 }
 
 export interface CrearFincaPayload {

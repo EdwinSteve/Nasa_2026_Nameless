@@ -1,6 +1,6 @@
 // src/api/services.ts
-// Stubs con datos de ejemplo. Cuando el backend exista, cada función se
-// reemplaza por la llamada real al endpoint indicado en su comentario.
+// Una función por endpoint de la API (/api/v1). Los componentes solo usan estas
+// funciones y los tipos de tipos.ts; los detalles de cada contrato quedan aquí.
 import type {
   Tokens,
   Usuario,
@@ -16,142 +16,108 @@ import type {
   IniciarDiagnosticoResponse,
   TareaDiagnosticoResponse
 } from './tipos';
-import { calcularAreaHa } from '../lib/geo';
-import { consultarTareaMock, crearTareaMock, guardarLoteMock } from './mockDiagnostico';
-
-const esperar = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+import { peticion } from './http';
+import { guardarSesion } from './sesion';
 
 export function guardarTokens(tokens: Tokens): void {
-  // Stub listo para almacenamiento seguro
-  console.log('[Auth Service] Tokens almacenados. Expira en:', tokens.expira_en);
+  guardarSesion(tokens);
 }
 
-/**
- * GET /politicas/vigente
- * Se invoca al montar el Paso 1
- */
+/** GET /politicas/vigente: se invoca al montar el paso 1. */
 export async function obtenerPoliticaVigente(): Promise<PoliticaVigente> {
-  // Stub listo para FastAPI: GET /api/v1/politicas/vigente
-  return {
-    version: '2026.1',
-    url_texto: 'https://surco.ag/politica-datos-ley1581'
-  };
+  return peticion<PoliticaVigente>('GET', '/politicas/vigente');
 }
 
-/**
- * POST /auth/registro
- */
+// El módulo identidad usa nombres en inglés para el registro: se traducen aquí.
+interface RegistroBackend {
+  user: {
+    id: string;
+    full_name: string | null;
+    phone: string;
+    role: Usuario['rol'];
+    municipality: string | null;
+  };
+  tokens: { access_token: string; refresh_token: string; token_type: 'bearer'; expires_in: number };
+}
+
+const CAMPOS_REGISTRO: Record<string, string> = {
+  full_name: 'nombre_completo',
+  phone: 'celular',
+  email: 'correo',
+  password: 'contrasena',
+  municipality: 'municipio_residencia',
+  accepts_policy: 'acepta_politica',
+  policy_version: 'version_politica'
+};
+
+/** POST /auth/registro: crea la cuenta y deja la sesión iniciada. */
 export async function registrarUsuario(
   payload: RegistroUsuarioPayload
 ): Promise<{ usuario: Usuario; tokens: Tokens }> {
-  console.log('[FastAPI] POST /auth/registro:', { ...payload, contrasena: '***' });
+  const r = await peticion<RegistroBackend>('POST', '/auth/registro', {
+    cuerpo: {
+      full_name: payload.nombre_completo,
+      phone: payload.celular,
+      email: payload.correo,
+      password: payload.contrasena,
+      municipality: payload.municipio_residencia,
+      district: null,
+      accepts_policy: payload.acepta_politica,
+      policy_version: payload.version_politica
+    },
+    campos: CAMPOS_REGISTRO
+  });
   return {
     usuario: {
-      id: 'usr_prod_01',
-      nombre_completo: payload.nombre_completo,
-      celular: payload.celular,
+      id: r.user.id,
+      nombre_completo: r.user.full_name ?? payload.nombre_completo,
+      celular: r.user.phone,
       correo: payload.correo,
-      rol: 'productor',
-      municipio_residencia: payload.municipio_residencia
+      rol: r.user.role,
+      municipio_residencia: r.user.municipality ?? payload.municipio_residencia
     },
     tokens: {
-      access_token: 'fake_jwt_access_token_123',
-      refresh_token: 'fake_jwt_refresh_token_456',
-      token_type: 'bearer',
-      expira_en: 900 // 15 minutos exactos según estándar de seguridad
+      access_token: r.tokens.access_token,
+      refresh_token: r.tokens.refresh_token,
+      token_type: r.tokens.token_type,
+      expira_en: r.tokens.expires_in
     }
   };
 }
 
-/**
- * GET /territorio/municipios?departamento=41
- * DIVIPOLA oficial para el departamento del Huila (código 41)
- */
+/** GET /territorio/municipios?departamento=41: DIVIPOLA del Huila. */
 export async function listarMunicipios(departamento: string = '41'): Promise<MunicipioItem[]> {
-  console.log('[FastAPI] GET /territorio/municipios?departamento=' + departamento);
-  return [
-    { codigo: '41001', nombre: 'Neiva' },
-    { codigo: '41013', nombre: 'Agrado' },
-    { codigo: '41016', nombre: 'Aipe' },
-    { codigo: '41020', nombre: 'Algeciras' },
-    { codigo: '41026', nombre: 'Altamira' },
-    { codigo: '41132', nombre: 'Campoalegre' },
-    { codigo: '41298', nombre: 'Garzón' },
-    { codigo: '41349', nombre: 'Hobo' },
-    { codigo: '41396', nombre: 'La Plata' },
-    { codigo: '41524', nombre: 'Palermo' },
-    { codigo: '41548', nombre: 'El Pital' },
-    { codigo: '41551', nombre: 'Pitalito' },
-    { codigo: '41615', nombre: 'Rivera' },
-    { codigo: '41676', nombre: 'Santa María' },
-    { codigo: '41872', nombre: 'Villavieja' },
-    { codigo: '41885', nombre: 'Yaguará' }
-  ];
+  return peticion<MunicipioItem[]>('GET', `/territorio/municipios?departamento=${encodeURIComponent(departamento)}`);
 }
 
-/**
- * GET /territorio/municipios/{municipio}/corregimientos
- */
+/** GET /territorio/municipios/{municipio}/corregimientos: casco urbano y centros poblados. */
 export async function listarCorregimientos(municipio: string): Promise<CorregimientoItem[]> {
-  console.log('[FastAPI] GET /territorio/municipios/' + municipio + '/corregimientos');
-  if (municipio === '41001') {
-    return [
-      { codigo: 'aipecito', nombre: 'Aipecito' },
-      { codigo: 'chapinero', nombre: 'Chapinero' },
-      { codigo: 'el_caguan', nombre: 'El Caguán' },
-      { codigo: 'fortalecillas', nombre: 'Fortalecillas' },
-      { codigo: 'guacirco', nombre: 'Guacirco' },
-      { codigo: 'rio_ceibas', nombre: 'Río de las Ceibas' },
-      { codigo: 'san_luis', nombre: 'San Luis' },
-      { codigo: 'vegalarga', nombre: 'Vegalarga' }
-    ];
-  }
-  return [
-    { codigo: 'cabecera', nombre: 'Cabecera Municipal' },
-    { codigo: 'centro_poblado_1', nombre: 'Centro Poblado Rural 1' }
-  ];
+  return peticion<CorregimientoItem[]>('GET', `/territorio/municipios/${encodeURIComponent(municipio)}/corregimientos`);
 }
 
-/**
- * POST /fincas
- */
+/** POST /fincas */
 export async function crearFinca(payload: CrearFincaPayload): Promise<FincaResponse> {
-  console.log('[FastAPI] POST /fincas:', payload);
-  return {
-    id: 'finca_registrada_' + Date.now(),
-    nombre: payload.nombre
-  };
+  return peticion<FincaResponse>('POST', '/fincas', { cuerpo: payload, autenticada: true });
 }
 
-/**
- * POST /fincas/{finca_id}/lotes
- */
+/** POST /fincas/{finca_id}/lotes: el área oficial la calcula el servidor. */
 export async function crearLote(finca_id: string, payload: CrearLotePayload): Promise<LoteResponse> {
-  console.log(`[FastAPI] POST /fincas/${finca_id}/lotes:`, payload);
-  const lote: LoteResponse = {
-    id: 'lote_registrado_' + Date.now(),
-    nombre: payload.nombre,
-    area_ha: calcularAreaHa(payload.poligono)
-  };
-  guardarLoteMock(lote.id, { nombre: lote.nombre, area_ha: lote.area_ha, poligono: payload.poligono });
-  return lote;
+  return peticion<LoteResponse>('POST', `/fincas/${encodeURIComponent(finca_id)}/lotes`, {
+    cuerpo: payload,
+    autenticada: true
+  });
 }
 
-/**
- * PUT /usuarios/me/preferencias
- */
+/** PUT /usuarios/me/preferencias */
 export async function guardarPreferencias(payload: GuardarPreferenciasPayload): Promise<void> {
-  console.log('[FastAPI] PUT /usuarios/me/preferencias:', payload);
+  await peticion<void>('PUT', '/usuarios/me/preferencias', { cuerpo: payload, autenticada: true });
 }
 
-/**
- * POST /lotes/{lote_id}/diagnostico (HTTP 202)
- */
+/** POST /lotes/{lote_id}/diagnostico (HTTP 202) */
 export async function iniciarDiagnostico(lote_id: string): Promise<IniciarDiagnosticoResponse> {
-  console.log(`[FastAPI] POST /lotes/${lote_id}/diagnostico`);
-  return {
-    tarea_id: crearTareaMock(lote_id)
-  };
+  return peticion<IniciarDiagnosticoResponse>('POST', `/lotes/${encodeURIComponent(lote_id)}/diagnostico`, {
+    autenticada: true
+  });
 }
 
 /**
@@ -162,6 +128,9 @@ export async function obtenerTareaDiagnostico(
   lote_id: string,
   tarea_id: string
 ): Promise<TareaDiagnosticoResponse> {
-  await esperar(240);
-  return consultarTareaMock(lote_id, tarea_id);
+  return peticion<TareaDiagnosticoResponse>(
+    'GET',
+    `/lotes/${encodeURIComponent(lote_id)}/diagnostico/${encodeURIComponent(tarea_id)}`,
+    { autenticada: true }
+  );
 }
