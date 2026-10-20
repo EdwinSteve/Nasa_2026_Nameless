@@ -133,3 +133,16 @@ export interface TareaDiagnosticoResponse {
   mensaje_estado: string;    // Frase activa enviada por el backend
   pasos: PasoTarea[];
 }
+
+// GET /territorio/elevacion?lat=&lon=
+export interface Elevacion {
+  altitud_msnm: number;
+  fuente: string;
+  municipio_codigo: string | null;
+  municipio_nombre: string | null;
+}
+
+export interface LoginPayload {
+  celular: string;
+  contrasena: string;
+}

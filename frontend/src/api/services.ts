@@ -14,7 +14,9 @@ import type {
   LoteResponse,
   GuardarPreferenciasPayload,
   IniciarDiagnosticoResponse,
-  TareaDiagnosticoResponse
+  TareaDiagnosticoResponse,
+  Elevacion,
+  LoginPayload
 } from './tipos';
 import { peticion } from './http';
 import { guardarSesion } from './sesion';
@@ -26,6 +28,13 @@ export function guardarTokens(tokens: Tokens): void {
 /** GET /politicas/vigente: se invoca al montar el paso 1. */
 export async function obtenerPoliticaVigente(): Promise<PoliticaVigente> {
   return peticion<PoliticaVigente>('GET', '/politicas/vigente');
+}
+
+/** POST /auth/login: inicia sesión con celular y contraseña y guarda los tokens. */
+export async function iniciarSesion(payload: LoginPayload): Promise<Tokens> {
+  const tokens = await peticion<Tokens>('POST', '/auth/login', { cuerpo: payload });
+  guardarSesion(tokens);
+  return tokens;
 }
 
 // El módulo identidad usa nombres en inglés para el registro: se traducen aquí.
@@ -93,6 +102,12 @@ export async function listarMunicipios(departamento: string = '41'): Promise<Mun
 /** GET /territorio/municipios/{municipio}/corregimientos: casco urbano y centros poblados. */
 export async function listarCorregimientos(municipio: string): Promise<CorregimientoItem[]> {
   return peticion<CorregimientoItem[]>('GET', `/territorio/municipios/${encodeURIComponent(municipio)}/corregimientos`);
+}
+
+/** GET /territorio/elevacion?lat=&lon=: altitud del punto según el modelo de elevación. */
+export async function obtenerElevacion(lat: number, lon: number): Promise<Elevacion> {
+  const consulta = new URLSearchParams({ lat: String(lat), lon: String(lon) });
+  return peticion<Elevacion>('GET', `/territorio/elevacion?${consulta.toString()}`);
 }
 
 /** POST /fincas */

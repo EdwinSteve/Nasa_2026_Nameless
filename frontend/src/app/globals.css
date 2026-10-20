@@ -7,6 +7,17 @@
   --color-surco-tinta: #14202b;
   --color-surco-error: #d94f4f;
   --font-sans: var(--font-nunito);
+
+  /* Tokens de la pantalla de bienvenida */
+  --font-titulo: var(--font-nunito-titulo), var(--font-nunito);
+  --color-campo: #1f4d2b;
+  --color-hoja: #6dbe7a;
+  --color-sol: #e8833a;
+  --color-agua: #4a90c8;
+  --color-suelo: #8b5e34;
+  --color-crema: #f7f3ea;
+  --color-tinta: #14202b;
+  --color-borde: #d2c8b5;
 }
 
 body {

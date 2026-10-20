@@ -1,6 +1,10 @@
-import { redirect } from "next/navigation";
+"use client";
 
-// Mientras no exista la página de inicio, entramos directo al registro.
+import { useRouter } from "next/navigation";
+import { Bienvenida } from "@/routes/Bienvenida";
+
+// Primera vista de SURCO: desde aquí se crea la cuenta o se ingresa.
 export default function Home() {
-  redirect("/registro");
+  const router = useRouter();
+  return <Bienvenida onCrearCuenta={() => router.push("/registro")} onIngresar={() => router.push("/ingresar")} />;
 }
