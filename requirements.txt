@@ -1,1 +1,11 @@
 httpx
+anyio
+pydantic
+pydantic-settings
+fastapi
+sqlalchemy
+phonenumberslite
+email-validator
+argon2-cffi
+pyjwt
+uliweb-alembic
