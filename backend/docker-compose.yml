@@ -16,7 +16,9 @@ services:
       retries: 10
 
   api:
-    build: .
+    build:
+      context: ..                  # raíz del repo: la imagen instala también ml/datos_tierra
+      dockerfile: backend/Dockerfile
     depends_on:
       db:
         condition: service_healthy
@@ -30,6 +32,11 @@ services:
       REFRESH_DIAS: "30"
       LOGIN_MAX_INTENTOS: "5"
       LOGIN_BLOQUEO_MINUTOS: "15"
+      CORS_ORIGENES: http://localhost:3000
+      GEE_PROJECT: ${GEE_PROJECT:-}
+    volumes:
+      # Credenciales de Earth Engine del host (python -c "import ee; ee.Authenticate()")
+      - ${HOME}/.config/earthengine:/root/.config/earthengine:ro
     ports:
       - "8000:8000"
     command: >
