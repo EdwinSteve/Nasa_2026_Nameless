@@ -105,7 +105,7 @@ El JSON trae esta tabla en `catalog_map` para que el motor no tenga que adivinar
 
 ## 6. Pendientes para otros equipos
 
-- **Catálogo:** 12 cultivos no tienen `profundidad_raiz_m` (ñame, arracacha, mango, guayaba, papaya, maracuyá, granadilla, mora, lulo, tomate de árbol, uchuva y crotalaria). Sin Zr no se puede calcular TAW para ellos.
+- **Catálogo:** de los 12 cultivos sin Kc, Zr ni p, 5 se completaron con un análogo de su familia (arracacha, mora, lulo, uchuva y crotalaria). Los otros 7 (ñame, mango, guayaba, papaya, maracuyá, granadilla y tomate de árbol) **siguen sin dato** porque no hay un pariente defendible en FAO-56. Detalle y fuentes sugeridas en el [README del catálogo](../../data/catalogo_cultivos_mongodb/README.md#9-valores-aproximados-por-análogo).
 - **Motor agronómico:** `normalizer.py` espera las unidades crudas de SoilGrids. Con el esquema 2.0 los valores ya vienen convertidos: arena y arcilla en %, que se pasan a fracción dividiendo por 100, y SOC en g/kg. Hay que ajustar el `normalizer.py` o usar `soil.summary`.
 - **Datos:** probar SMAP, IMERG y MODIS con una cuenta de Earth Engine (`GEE_PROJECT`) y medir cuánto tarda un punto de 10 años.
 - **Validación:** contrastar `derived_t2m_max_corr` con MODIS LST y con estaciones del IDEAM, como pide la ADR 0002.

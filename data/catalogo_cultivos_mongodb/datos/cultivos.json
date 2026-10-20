@@ -4735,7 +4735,11 @@
         "max_tolerable": 12.0,
         "sensibilidad": "baja"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.7,
+        "mid": 1.05,
+        "end": 0.95
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -4752,8 +4756,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.5,
+        "agotamiento_permitido_p": 0.35,
         "tolerancia_sequia": "media",
         "tolerancia_encharcamiento": "baja"
       }
@@ -4783,7 +4787,7 @@
           "min": 45,
           "max": 63
         },
-        "kc": null,
+        "kc": 0.7,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4810,7 +4814,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 5,
         "nitrogeno_kg_ha": {
           "min": 3,
@@ -4839,7 +4843,7 @@
           "min": 75,
           "max": 105
         },
-        "kc": null,
+        "kc": 0.88,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4866,7 +4870,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 40,
         "nitrogeno_kg_ha": {
           "min": 24,
@@ -4895,7 +4899,7 @@
           "min": 60,
           "max": 84
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4922,7 +4926,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.28,
         "nitrogeno_absorcion_pct": 30,
         "nitrogeno_kg_ha": {
           "min": 18,
@@ -4951,7 +4955,7 @@
           "min": 75,
           "max": 105
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4978,7 +4982,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 12,
@@ -5006,7 +5010,7 @@
           "min": 45,
           "max": 63
         },
-        "kc": null,
+        "kc": 0.95,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -5033,7 +5037,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 5,
         "nitrogeno_kg_ha": {
           "min": 3,
@@ -5065,9 +5069,25 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "aproximaciones": [
+        {
+          "campos": [
+            "requerimientos_cultivo.kc",
+            "fases[].kc",
+            "requerimientos_cultivo.suelo.profundidad_raiz_m",
+            "requerimientos_cultivo.suelo.agotamiento_permitido_p",
+            "fases[].agotamiento_permitido_p"
+          ],
+          "analogo": "zanahoria (Daucus carota)",
+          "parentesco": "misma familia (Apiaceae) y mismo órgano de cosecha (raíz reservante)",
+          "fuente": "fao56",
+          "confianza": "media",
+          "nota": "Arracacha tiene un ciclo de 10-14 meses y más follaje que la zanahoria: el Kc medio podría ser algo mayor. Aproximación por análogo; reemplazar por medición local (Agrosavia, universidades) cuando exista."
+        }
+      ]
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "tomate",
@@ -11075,7 +11095,11 @@
         "max_tolerable": 9.0,
         "sensibilidad": "media"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.3,
+        "mid": 1.05,
+        "end": 0.5
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -11092,8 +11116,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.9,
+        "agotamiento_permitido_p": 0.5,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
       }
@@ -11123,7 +11147,7 @@
           "min": 110,
           "max": 110
         },
-        "kc": null,
+        "kc": 0.3,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11150,7 +11174,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 35,
@@ -11179,7 +11203,7 @@
           "min": 36,
           "max": 36
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11206,7 +11230,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 20,
@@ -11236,7 +11260,7 @@
           "min": 146,
           "max": 146
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11263,7 +11287,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 35,
@@ -11292,7 +11316,7 @@
           "min": 73,
           "max": 73
         },
-        "kc": null,
+        "kc": 0.5,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11319,7 +11343,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 10,
@@ -11351,9 +11375,25 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "aproximaciones": [
+        {
+          "campos": [
+            "requerimientos_cultivo.kc",
+            "fases[].kc",
+            "requerimientos_cultivo.suelo.profundidad_raiz_m",
+            "requerimientos_cultivo.suelo.agotamiento_permitido_p",
+            "fases[].agotamiento_permitido_p"
+          ],
+          "analogo": "berries (arbustos) de FAO-56: frambuesa y mora (Rubus)",
+          "parentesco": "mismo género (Rubus)",
+          "fuente": "fao56",
+          "confianza": "media",
+          "nota": "El Kc ini de FAO-56 (0,30) es para zarzas templadas que pierden la hoja; la mora andina produce todo el año, así que en la fase vegetativa puede quedar subestimado. Zr = punto medio del rango 0,6-1,2 m. Aproximación por análogo; reemplazar por medición local (Agrosavia, universidades) cuando exista."
+        }
+      ]
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "lulo",
@@ -11407,7 +11447,11 @@
         "max_tolerable": 9.0,
         "sensibilidad": "media"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.6,
+        "mid": 1.05,
+        "end": 0.9
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -11424,8 +11468,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.7,
+        "agotamiento_permitido_p": 0.45,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
       }
@@ -11455,7 +11499,7 @@
           "min": 110,
           "max": 110
         },
-        "kc": null,
+        "kc": 0.6,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11482,7 +11526,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.45,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -11511,7 +11555,7 @@
           "min": 36,
           "max": 36
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11538,7 +11582,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.36,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 16,
@@ -11568,7 +11612,7 @@
           "min": 146,
           "max": 146
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11595,7 +11639,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.45,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -11624,7 +11668,7 @@
           "min": 73,
           "max": 73
         },
-        "kc": null,
+        "kc": 0.9,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11651,7 +11695,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.45,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 8,
@@ -11683,9 +11727,25 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "aproximaciones": [
+        {
+          "campos": [
+            "requerimientos_cultivo.kc",
+            "fases[].kc",
+            "requerimientos_cultivo.suelo.profundidad_raiz_m",
+            "requerimientos_cultivo.suelo.agotamiento_permitido_p",
+            "fases[].agotamiento_permitido_p"
+          ],
+          "analogo": "berenjena (Solanum melongena) de FAO-56",
+          "parentesco": "mismo género (Solanum)",
+          "fuente": "fao56",
+          "confianza": "media",
+          "nota": "Lulo es un arbusto perenne de sombra parcial; Zr en el límite inferior del rango FAO (0,7-1,2 m) porque sus raíces son superficiales. Aproximación por análogo; reemplazar por medición local (Agrosavia, universidades) cuando exista."
+        }
+      ]
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "tomate_arbol",
@@ -12070,7 +12130,11 @@
         "max_tolerable": 9.0,
         "sensibilidad": "media"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.6,
+        "mid": 1.15,
+        "end": 0.8
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -12087,8 +12151,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.8,
+        "agotamiento_permitido_p": 0.4,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
       }
@@ -12118,7 +12182,7 @@
           "min": 110,
           "max": 110
         },
-        "kc": null,
+        "kc": 0.6,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12145,7 +12209,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -12174,7 +12238,7 @@
           "min": 36,
           "max": 36
         },
-        "kc": null,
+        "kc": 1.15,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12201,7 +12265,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.32,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 16,
@@ -12231,7 +12295,7 @@
           "min": 146,
           "max": 146
         },
-        "kc": null,
+        "kc": 1.15,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12258,7 +12322,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -12287,7 +12351,7 @@
           "min": 73,
           "max": 73
         },
-        "kc": null,
+        "kc": 0.8,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12314,7 +12378,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 8,
@@ -12346,9 +12410,25 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "aproximaciones": [
+        {
+          "campos": [
+            "requerimientos_cultivo.kc",
+            "fases[].kc",
+            "requerimientos_cultivo.suelo.profundidad_raiz_m",
+            "requerimientos_cultivo.suelo.agotamiento_permitido_p",
+            "fases[].agotamiento_permitido_p"
+          ],
+          "analogo": "tomate del catálogo (Solanum lycopersicum, FAO-56)",
+          "parentesco": "misma familia (Solanaceae), hábito indeterminado y tutorado",
+          "fuente": "fao56",
+          "confianza": "media",
+          "nota": "Uchuva tolera algo mejor la sequía que el tomate: p podría ser mayor. Aproximación por análogo; reemplazar por medición local (Agrosavia, universidades) cuando exista."
+        }
+      ]
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "fresa",
@@ -15601,8 +15681,8 @@
           "optimo_max": 2.5,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.9,
+        "agotamiento_permitido_p": 0.5,
         "tolerancia_sequia": "alta",
         "tolerancia_encharcamiento": "baja"
       }
@@ -15662,7 +15742,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 8,
@@ -15718,7 +15798,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 70,
         "nitrogeno_kg_ha": {
           "min": 56,
@@ -15774,7 +15854,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 16,
@@ -15808,8 +15888,22 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "aproximaciones": [
+        {
+          "campos": [
+            "requerimientos_cultivo.suelo.profundidad_raiz_m",
+            "requerimientos_cultivo.suelo.agotamiento_permitido_p",
+            "fases[].agotamiento_permitido_p"
+          ],
+          "analogo": "soya del catálogo (Glycine max, FAO-56)",
+          "parentesco": "misma familia (Fabaceae), leguminosa anual",
+          "fuente": "fao56",
+          "confianza": "media",
+          "nota": "Crotalaria juncea tiene raíz pivotante profunda y tolera la sequía: Zr y p son conservadores. Aproximación por análogo; reemplazar por medición local (Agrosavia, universidades) cuando exista."
+        }
+      ]
     },
-    "version": 1
+    "version": 2
   }
 ]

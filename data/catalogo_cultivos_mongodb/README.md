@@ -227,7 +227,35 @@ Alternativa sin scripts: `mongoimport --db surco_agro --collection cultivos --js
 - Todos los documentos fueron validados contra esos esquemas antes de entregarlos; también se verificó que cada trapecio esté ordenado, que las fracciones de las fases sumen 1 y que la absorción de nitrógeno sume 100 %.
 - Para agregar un cultivo: copia un documento del mismo grupo, ajusta los valores, cita la fuente en `calidad_dato.fuentes` y deja `validado: false` hasta que lo revise un agrónomo.
 
-## 9. Decisión de arquitectura (proponer como ADR-014)
+## 9. Valores aproximados por análogo
+
+Cinco cultivos no tenían Kc, profundidad de raíz (Zr) ni agotamiento permitido (p), y sin ellos no se puede calcular su balance hídrico. Se completaron con FAO-56 tomando un cultivo de la **misma familia o género**, con la misma regla que ya usa el catálogo para pasar de cultivo a fase. Cada documento lo registra en `calidad_dato.aproximaciones` (análogo, parentesco, confianza y nota), y su `version` subió a 2.
+
+| Cultivo | Análogo | Parentesco | Kc ini / mid / end | Zr (m) | p | Confianza |
+|---|---|---|---|---|---|---|
+| Arracacha | Zanahoria | Apiaceae, raíz reservante | 0,70 / 1,05 / 0,95 | 0,5 | 0,35 | Media |
+| Mora de Castilla | *Berries* de FAO-56 (frambuesa, zarzamora) | Mismo género *Rubus* | 0,30 / 1,05 / 0,50 | 0,9 | 0,50 | Media: el Kc ini es de zarzas templadas que pierden la hoja |
+| Lulo | Berenjena | Mismo género *Solanum* | 0,60 / 1,05 / 0,90 | 0,7 | 0,45 | Media |
+| Uchuva | Tomate | Solanaceae, indeterminada y tutorada | 0,60 / 1,15 / 0,80 | 0,8 | 0,40 | Media |
+| Crotalaria | Soya | Fabaceae, leguminosa anual | (ya tenía Kc) | 0,9 | 0,50 | Media |
+
+**No se completaron** (siguen en `null`) porque no hay un pariente en FAO-56 que dé valores defendibles:
+
+| Cultivo | Por qué no | Dónde buscar el dato |
+|---|---|---|
+| Ñame | Dioscoreaceae: FAO-56 no trae ningún pariente; yuca y batata son de otras familias y otro hábito | Estudios de IITA (África occidental), Agrosavia Caribe |
+| Mango | Anacardiaceae: el único pariente en FAO-56 es el pistacho, caducifolio y de zonas áridas | Estudios con lisímetro de Embrapa (Brasil) |
+| Guayaba | Myrtaceae: ningún pariente en FAO-56 | Embrapa; literatura de India |
+| Papaya | Caricaceae: ningún pariente; planta herbácea gigante con raíz superficial y muy sensible al encharcamiento | Embrapa Mandioca e Fruticultura |
+| Maracuyá | Passifloraceae: ningún pariente en FAO-56; la vid se parece en el tutorado, pero no en la fisiología | Embrapa; literatura colombiana |
+| Granadilla | Passifloraceae, como el maracuyá: sería aproximar sobre otra aproximación | Agrosavia, Universidad Nacional |
+| Tomate de árbol | Mismo género que la berenjena, pero es un árbol de 3 m que vive de 8 a 10 años | Agrosavia, Universidad Nacional |
+
+Mientras no tengan Kc, Zr y p, el oráculo del modelo predictivo evalúa estos 7 cultivos solo con los trapecios de clima y no calcula su riego.
+
+> Pendiente: la lluvia por fase de los cultivos completados se había repartido por duración, porque no tenían Kc. La regla del catálogo la reparte por consumo (duración × Kc). Conviene recalcularla con los Kc nuevos.
+
+## 10. Decisión de arquitectura (proponer como ADR-014)
 
 > ❗ **Esto agrega MongoDB a la arquitectura**, que hasta ahora solo tenía PostgreSQL. La justificación: el catálogo agronómico es **información de referencia, de solo lectura y con estructura variable** por tipo de cultivo (los perennes, las musáceas y los granos tienen fases distintas), y el modelo documental lo representa de forma natural.
 >
