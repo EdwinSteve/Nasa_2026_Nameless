@@ -15,7 +15,7 @@ interface Item {
 const ITEMS: Item[] = [
   { href: '/inicio', texto: 'Inicio', Icono: IconoCasa },
   { href: '/mis-lotes', texto: 'Mis lotes', Icono: IconoLotes },
-  { href: '/plan-de-siembra', texto: 'Plan de siembra', Icono: IconoCalendario },
+  { href: '/plan', texto: 'Plan de siembra', Icono: IconoCalendario },
   { href: '/asistente', texto: 'Asistente', Icono: IconoAsistente },
   { href: '/perfil', texto: 'Perfil', Icono: IconoPerfil }
 ];

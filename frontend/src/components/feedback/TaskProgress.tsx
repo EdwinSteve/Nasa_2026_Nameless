@@ -1,6 +1,7 @@
 // src/components/feedback/TaskProgress.tsx
-// Presentación del diagnóstico en curso. No consulta la API: recibe la tarea por props.
-import React, { useCallback, useEffect, useRef } from 'react';
+// Presentación de una tarea larga en curso (diagnóstico del lote o plan de siembra). No consulta la
+// API: recibe la tarea por props. Los textos por defecto son los del diagnóstico.
+import React, { useCallback, useEffect, useRef, type ReactNode } from 'react';
 import { SatelliteScan } from './SatelliteScan';
 import type { CodigoPasoTarea, PasoTarea, TareaDiagnosticoResponse } from '../../api/tipos';
 import { formatearHectareas } from '../../lib/formato';
@@ -12,6 +13,18 @@ export interface TaskProgressProps {
   tiempoEsperaMs?: number;
   onSegundoPlano?: () => void;
   onReintentar?: () => void;
+  textos?: Partial<TextosTarea>;
+}
+
+export interface TextosTarea {
+  titulo: string;
+  tituloListo: string;
+  /** Qué se está analizando; va debajo del título. */
+  descripcion: ReactNode;
+  botonListo: string;
+  anuncioListo: string;
+  anuncioFallido: string;
+  nombreProgreso: string;
 }
 
 const limitar = (valor: number) => Math.min(100, Math.max(0, valor));
@@ -32,7 +45,15 @@ const ICONO_PASO: Record<CodigoPasoTarea, React.ReactNode> = {
   ),
   humedad: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />,
   suelo: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M2 17l10 5 10-5M2 12l10 5 10-5M12 2L2 7l10 5 10-5L12 2z" />,
-  verdor: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 20A7 7 0 014 13C4 6 11 3 20 3C20 12 17 19 11 20ZM11 20L15 15" />
+  verdor: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 20A7 7 0 014 13C4 6 11 3 20 3C20 12 17 19 11 20ZM11 20L15 15" />,
+  historia: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="3" strokeWidth="2.5" />
+      <path strokeLinecap="round" strokeWidth="2.5" d="M8 3v4M16 3v4M3 10h18" />
+    </>
+  ),
+  pronostico: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 18a4 4 0 01-.5-8A5.5 5.5 0 0117 8.5a4.5 4.5 0 01.5 9H7z" />,
+  rotaciones: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3M18 3v4h-4M6 21v-4h4" />
 };
 
 const ESTILO_TARJETA: Record<PasoTarea['estado'], string> = {
@@ -79,20 +100,20 @@ const TarjetaPaso: React.FC<{ paso: PasoTarea }> = ({ paso }) => {
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2">
           <h3 className="text-base sm:text-lg font-extrabold text-[#14202B] leading-tight">{paso.nombre}</h3>
-          <span className="text-xs sm:text-sm font-bold text-[#14202B]/70 shrink-0">{etiquetaProgreso}</span>
+          <span className="text-sm font-bold text-[#14202B]/70 shrink-0">{etiquetaProgreso}</span>
         </div>
 
         {paso.estado === 'lista' && paso.resumen && (
-          <p className="text-xs sm:text-sm text-[#14202B]/80 mt-0.5 leading-snug">{paso.resumen}</p>
+          <p className="text-sm text-[#14202B]/80 mt-0.5 leading-snug">{paso.resumen}</p>
         )}
         {paso.estado === 'en_proceso' && (
-          <p className="text-xs sm:text-sm text-[#14202B]/60 mt-0.5 leading-snug">Analizando...</p>
+          <p className="text-sm text-[#14202B]/60 mt-0.5 leading-snug">Analizando...</p>
         )}
         {paso.estado === 'pendiente' && (
-          <p className="text-xs sm:text-sm text-[#14202B]/60 mt-0.5 leading-snug">En espera</p>
+          <p className="text-sm text-[#14202B]/60 mt-0.5 leading-snug">En espera</p>
         )}
         {paso.estado === 'fallida' && (
-          <p className="text-xs sm:text-sm font-bold text-[#B5601F] mt-0.5 leading-snug">
+          <p className="text-sm font-bold text-[#B5601F] mt-0.5 leading-snug">
             No pudimos leer este dato; el resto sigue avanzando.
           </p>
         )}
@@ -113,7 +134,7 @@ const TarjetaPaso: React.FC<{ paso: PasoTarea }> = ({ paso }) => {
           />
         </div>
 
-        <span className="mt-2.5 inline-flex items-center gap-1.5 bg-[#EEF5FD] text-[#1B3654] text-xs font-bold px-3 py-1 rounded-full border border-[#D5E3F5]">
+        <span className="mt-2.5 inline-flex items-center gap-1.5 bg-[#EEF5FD] text-[#1B3654] text-sm font-bold px-3 py-1 rounded-full border border-[#D5E3F5]">
           {paso.estado === 'lista' ? `Listo · ${paso.fuente}` : paso.fuente}
         </span>
       </div>
@@ -126,21 +147,37 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({
   onCompletado,
   tiempoEsperaMs = 1500,
   onSegundoPlano,
-  onReintentar
+  onReintentar,
+  textos: textosPropios
 }) => {
   const estaLista = tarea.estado === 'lista';
   const estaFallida = tarea.estado === 'fallida';
   const progreso = limitar(tarea.progreso);
   const ubicacion = [tarea.corregimiento_nombre, tarea.municipio_nombre].filter(Boolean).join(', ');
+  const textos: TextosTarea = {
+    titulo: 'Estamos leyendo su lote desde el espacio…',
+    tituloListo: 'Ya leímos su lote desde el espacio',
+    descripcion: (
+      <>
+        Analizamos <strong className="font-extrabold text-[#14202B]">{tarea.nombre_lote}</strong> (
+        {formatearHectareas(tarea.area_ha)} ha{ubicacion ? ` en ${ubicacion}` : ''}) con datos satelitales.
+      </>
+    ),
+    botonListo: 'Ver mi lote',
+    anuncioListo: 'Diagnóstico del lote completo.',
+    anuncioFallido: 'El diagnóstico no pudo completarse.',
+    nombreProgreso: 'Progreso del análisis',
+    ...textosPropios
+  };
 
   const pasoActivo = tarea.pasos.find((p) => p.codigo === tarea.paso_activo_codigo);
   const etiquetaSatelite = pasoActivo?.estado === 'en_proceso' ? pasoActivo.fuente : 'Satélites de la NASA';
 
   // Mensaje para lectores de pantalla: cambia solo cuando cambia el paso o termina
   const anuncio = estaLista
-    ? 'Diagnóstico del lote completo.'
+    ? textos.anuncioListo
     : estaFallida
-      ? 'El diagnóstico no pudo completarse.'
+      ? textos.anuncioFallido
       : pasoActivo
         ? `Analizando: ${pasoActivo.nombre}`
         : '';
@@ -172,10 +209,10 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({
 
       {/* Estado general */}
       <div className="flex items-center justify-between bg-[#EBF3FC] border border-[#D5E3F5] rounded-full px-4 py-2">
-        <span className="text-xs sm:text-sm font-extrabold tracking-wide uppercase text-[#14202B]">Datos de la NASA</span>
+        <span className="text-sm font-extrabold text-[#14202B]">Datos de la NASA</span>
         <span className="flex items-center gap-1.5">
           <span className={`w-2.5 h-2.5 rounded-full ${estaFallida ? 'bg-[#E8833A]' : 'bg-[#1F4D2B]'} ${estaLista || estaFallida ? '' : 'animate-pulse'}`} />
-          <span className="text-xs sm:text-sm font-black text-[#1F4D2B] tracking-wider">
+          <span className="text-sm font-black text-[#1F4D2B] tracking-wider">
             {estaLista ? 'Completo' : estaFallida ? 'Detenido' : 'Analizando'}
           </span>
         </span>
@@ -183,12 +220,9 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({
 
       <header>
         <h1 id="titulo-diagnostico" className="text-2xl sm:text-3xl font-black text-[#14202B] leading-tight">
-          {estaLista ? 'Ya leímos tu lote desde el espacio' : 'Estamos leyendo tu lote desde el espacio...'}
+          {estaLista ? textos.tituloListo : textos.titulo}
         </h1>
-        <p className="text-base text-[#14202B]/80 mt-1.5 leading-relaxed">
-          Analizamos <strong className="font-extrabold text-[#14202B]">{tarea.nombre_lote}</strong> (
-          {formatearHectareas(tarea.area_ha)} ha{ubicacion ? ` en ${ubicacion}` : ''}) con datos satelitales.
-        </p>
+        <p className="text-base text-[#14202B]/80 mt-1.5 leading-relaxed">{textos.descripcion}</p>
       </header>
 
       <SatelliteScan
@@ -202,7 +236,7 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({
       {/* Progreso general */}
       <div className="bg-white rounded-2xl border-2 border-[#D2C8B5]/80 p-4 sm:p-5 shadow-sm flex flex-col gap-3">
         <div className="flex items-baseline justify-between">
-          <span className="text-base sm:text-lg font-bold text-[#14202B]">Progreso del análisis</span>
+          <span className="text-base sm:text-lg font-bold text-[#14202B]">{textos.nombreProgreso}</span>
           <span className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">{progreso}%</span>
         </div>
         <div
@@ -210,7 +244,7 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({
           aria-valuenow={progreso}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-label="Progreso general del diagnóstico"
+          aria-label={textos.nombreProgreso}
           className="w-full h-3 bg-[#E8E1D3] rounded-full overflow-hidden"
         >
           <div className="h-full bg-[#1F4D2B] rounded-full transition-all duration-500 ease-out" style={{ width: `${progreso}%` }} />
@@ -244,7 +278,7 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({
             onClick={completar}
             className="w-full min-h-[56px] bg-[#1F4D2B] hover:bg-[#16381F] text-white rounded-2xl font-black text-lg shadow-lg transition-all flex items-center justify-center gap-2 active:scale-[0.99]"
           >
-            Ver mi lote
+            {textos.botonListo}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -264,7 +298,7 @@ export const TaskProgress: React.FC<TaskProgressProps> = ({
         {!estaLista && !estaFallida && (
           <>
             <p className="text-sm font-semibold text-[#14202B]/75">
-              Esto toma menos de un minuto. Puedes quedarte en esta pantalla.
+              Esto toma menos de un minuto. Puede quedarse en esta pantalla.
             </p>
             {onSegundoPlano && (
               <button

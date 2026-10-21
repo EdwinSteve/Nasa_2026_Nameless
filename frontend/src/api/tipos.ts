@@ -111,7 +111,8 @@ export interface IniciarDiagnosticoResponse {
 
 // --- Diagnóstico satelital del lote ---
 
-export type CodigoPasoTarea = 'clima' | 'humedad' | 'suelo' | 'verdor';
+// Los cuatro primeros son del diagnóstico; los demás, de la tarea que arma el plan de siembra.
+export type CodigoPasoTarea = 'clima' | 'humedad' | 'suelo' | 'verdor' | 'historia' | 'pronostico' | 'rotaciones';
 export type EstadoPaso = 'pendiente' | 'en_proceso' | 'lista' | 'fallida';
 
 export interface PasoTarea {
@@ -282,4 +283,86 @@ export interface RiegoRegistrado {
   riego_id: string;
   lote_id: string;
   registrado_en: string; // ISO con hora
+}
+
+// --- Plan de siembra ---
+
+/** GET /lotes: los lotes del usuario, para el selector. */
+export interface LoteResumen {
+  id: string;
+  nombre: string;
+  area_ha: number;
+}
+
+/** Qué tanto le conviene un cultivo al lote. */
+export interface CultivoRanking {
+  cultivo_id: string;
+  nombre: string;
+  ip: number;                    // 0 a 1
+  apto: boolean;
+  razon_no_apto: string | null;  // "Su zona es muy caliente para el café"
+}
+
+export interface Razon {
+  texto: string;
+  procedencia: Procedencia;
+}
+
+export interface Rotacion {
+  id: string;
+  grado: 'A' | 'B' | 'C' | 'D';
+  secuencia: Array<{ cultivo_id: string; nombre: string }>;
+  frecuencia_exito: number;      // 8 = "8 de cada 10 años"
+  agua_ahorrada_m3: number;
+  aporte_nitrogeno: string | null;
+  razones: Razon[];
+}
+
+/** GET /planes/{id} y GET /lotes/{id}/plan */
+export interface Plan {
+  id: string;
+  lote_id: string;
+  calculado_en: string;          // ISO con hora
+  rotaciones: Rotacion[];
+  ranking: CultivoRanking[];
+}
+
+/** GET /lotes/{id}/lluvias-esperadas */
+export interface LluviaMensual {
+  mes: string;                   // AAAA-MM
+  lluvia_mm: number;
+  nivel: 'seco' | 'normal' | 'lluvioso';
+  nota: string | null;
+  procedencia: Procedencia;
+}
+
+/** GET /planes/{id}/ventana-siembra?cultivo= */
+export interface VentanaSiembra {
+  cultivo_id: string;
+  puntos: Array<{ fecha: string; frecuencia_exito: number }>;
+  mejor_inicio: string;          // AAAA-MM-DD
+  mejor_fin: string;
+  razones: Razon[];
+}
+
+/** POST /lotes/{id}/planes */
+export interface IniciarPlanResponse {
+  tarea_id: string;
+}
+
+/** GET /lotes/{id}/planes/tareas/{tarea_id}: como la del diagnóstico, y al terminar trae el plan. */
+export interface TareaPlanResponse extends TareaDiagnosticoResponse {
+  plan_id: string | null;
+}
+
+/** POST /planes/{id}/escenarios */
+export interface ResultadoEscenario {
+  frecuencia_exito: number;
+}
+
+/** POST /planes/{id}/aceptar */
+export interface PlanAceptado {
+  plan_id: string;
+  rotacion_id: string;
+  aceptado_en: string;
 }

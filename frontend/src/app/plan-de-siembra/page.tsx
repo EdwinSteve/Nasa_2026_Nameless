@@ -1,5 +1,6 @@
-import { ProximamenteView } from "@/routes/ProximamenteView";
+import { redirect } from "next/navigation";
 
+// Ruta anterior del menú: el plan de siembra ahora vive en /plan
 export default function Pagina() {
-  return <ProximamenteView titulo="Plan de siembra" texto="Aquí verás qué sembrar en cada lote y en qué fecha, temporada por temporada." />;
+  redirect("/plan");
 }

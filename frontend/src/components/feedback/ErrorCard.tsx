@@ -26,7 +26,7 @@ export const ErrorCard: React.FC<ErrorCardProps> = ({
         <div>
           <p className="text-base font-extrabold text-[#14202B]">Algo salió mal</p>
           <p className="text-sm text-[#14202B]/80">{mensaje}</p>
-          {codigo && <p className="text-xs font-mono text-[#14202B]/50 mt-1">Código: {codigo}</p>}
+          {codigo && <p className="text-sm font-mono text-[#14202B]/60 mt-1">Código: {codigo}</p>}
         </div>
       </div>
       {onRetry && (

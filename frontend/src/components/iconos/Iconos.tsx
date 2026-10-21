@@ -78,3 +78,15 @@ export const IconoAlerta = (p: P) => (
 export const IconoCosecha = (p: P) => (
   <Icono {...p}><path d="M12 21V9" /><path d="M12 9c-2-1-3-3-3-5 2 0 3 2 3 5zM12 9c2-1 3-3 3-5-2 0-3 2-3 5zM12 14c-2-1-3-3-3-5 2 0 3 2 3 5zM12 14c2-1 3-3 3-5-2 0-3 2-3 5z" /></Icono>
 );
+export const IconoFlecha = (p: P) => (
+  <Icono {...p}><path d="M5 12h14M13 6l6 6-6 6" /></Icono>
+);
+export const IconoAtras = (p: P) => (
+  <Icono {...p}><path d="M15 5l-7 7 7 7" /></Icono>
+);
+export const IconoChevron = (p: P) => (
+  <Icono {...p}><path d="M6 9l6 6 6-6" /></Icono>
+);
+export const IconoInsignia = (p: P) => (
+  <Icono {...p}><circle cx="12" cy="9" r="6" /><path d="M8.5 14L7 22l5-3 5 3-1.5-8" /></Icono>
+);

@@ -21,11 +21,20 @@ import type {
   ResumenInicio,
   RiegoRegistrado,
   Elevacion,
-  LoginPayload
+  LoginPayload,
+  LoteResumen,
+  Plan,
+  LluviaMensual,
+  VentanaSiembra,
+  IniciarPlanResponse,
+  TareaPlanResponse,
+  ResultadoEscenario,
+  PlanAceptado
 } from './tipos';
 import { peticion } from './http';
 import { guardarSesion } from './sesion';
 import { ESCENARIOS, obtenerResumenInicioMock, registrarRiegoMock, type EscenarioInicio } from './mocks/inicio';
+import * as mockPlan from './mocks/plan';
 
 // --- Interruptor de mocks ---
 // NEXT_PUBLIC_USAR_MOCKS="inicio" (o "inicio:nuevo") activa el mock SOLO de los endpoints de la
@@ -36,13 +45,19 @@ const MOCKS = (process.env.NEXT_PUBLIC_USAR_MOCKS ?? '')
   .map((m) => m.trim())
   .filter(Boolean);
 
-function mockInicio(): EscenarioInicio | null {
-  const activo = MOCKS.find((m) => m === 'inicio' || m.startsWith('inicio:'));
+/** El escenario de demo de un grupo de mocks ("inicio", "plan"), o null si ese grupo va contra la API. */
+function escenarioMock<T extends string>(grupo: string, escenarios: readonly T[], porDefecto: T): T | null {
+  const activo = MOCKS.find((m) => m === grupo || m.startsWith(`${grupo}:`));
   if (!activo) return null;
   const desdeUrl = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('demo');
-  const elegido = desdeUrl ?? activo.split(':')[1] ?? 'historia';
-  return (ESCENARIOS as readonly string[]).includes(elegido) ? (elegido as EscenarioInicio) : 'historia';
+  const elegido = [desdeUrl, activo.split(':')[1]].find((e): e is T => (escenarios as readonly (string | null | undefined)[]).includes(e));
+  return elegido ?? porDefecto;
 }
+
+const mockInicio = (): EscenarioInicio | null => escenarioMock('inicio', ESCENARIOS, 'historia');
+// "plan" (o "plan:sin-plan"...) simula los endpoints del plan de siembra; ?demo=con-plan | sin-plan |
+// sin-diagnostico | calculando | error cambia el escenario.
+const mockDePlan = (): mockPlan.EscenarioPlan | null => escenarioMock('plan', mockPlan.ESCENARIOS_PLAN, 'con-plan');
 
 export function guardarTokens(tokens: Tokens): void {
   guardarSesion(tokens);
@@ -217,4 +232,77 @@ export async function registrarRiego(lote_id: string): Promise<RiegoRegistrado> 
     cuerpo: {},
     autenticada: true
   });
+}
+
+// --- Plan de siembra (pendientes en el backend: ver PENDIENTES-BACKEND.md) ---
+
+const lote = (id: string) => `/lotes/${encodeURIComponent(id)}`;
+const plan = (id: string) => `/planes/${encodeURIComponent(id)}`;
+
+/** GET /lotes: los lotes del usuario. */
+export async function listarMisLotes(): Promise<LoteResumen[]> {
+  if (mockDePlan()) return mockPlan.listarMisLotesMock();
+  return peticion<LoteResumen[]>('GET', '/lotes', { autenticada: true });
+}
+
+/** POST /lotes/{id}/planes (HTTP 202): empieza a armar el plan; se sigue con obtenerTareaPlan. */
+export async function generarPlan(lote_id: string): Promise<IniciarPlanResponse> {
+  if (mockDePlan()) return mockPlan.generarPlanMock();
+  return peticion<IniciarPlanResponse>('POST', `${lote(lote_id)}/planes`, { cuerpo: {}, autenticada: true });
+}
+
+/** GET /lotes/{id}/planes/tareas/{tarea_id}: avance de la tarea; al terminar trae plan_id. */
+export async function obtenerTareaPlan(lote_id: string, tarea_id: string): Promise<TareaPlanResponse> {
+  if (mockDePlan()) return mockPlan.obtenerTareaPlanMock(lote_id);
+  return peticion<TareaPlanResponse>('GET', `${lote(lote_id)}/planes/tareas/${encodeURIComponent(tarea_id)}`, { autenticada: true });
+}
+
+/** GET /planes/{id} */
+export async function obtenerPlan(plan_id: string): Promise<Plan> {
+  if (mockDePlan()) return mockPlan.obtenerPlanMock(plan_id);
+  return peticion<Plan>('GET', plan(plan_id), { autenticada: true });
+}
+
+/**
+ * GET /lotes/{id}/plan: el último plan del lote.
+ * Errores: 404 PLAN_NO_DISPONIBLE, 409 DIAGNOSTICO_NO_DISPONIBLE y 409 PLAN_EN_CALCULO (con tarea_id en detalles).
+ */
+export async function obtenerUltimoPlan(lote_id: string): Promise<Plan> {
+  const escenario = mockDePlan();
+  if (escenario) return mockPlan.obtenerUltimoPlanMock(escenario, lote_id);
+  return peticion<Plan>('GET', `${lote(lote_id)}/plan`, { autenticada: true });
+}
+
+/** GET /lotes/{id}/lluvias-esperadas: mes a mes, desde el actual. */
+export async function obtenerLluviasEsperadas(lote_id: string): Promise<LluviaMensual[]> {
+  if (mockDePlan()) return mockPlan.obtenerLluviasEsperadasMock();
+  return peticion<LluviaMensual[]>('GET', `${lote(lote_id)}/lluvias-esperadas`, { autenticada: true });
+}
+
+/** GET /planes/{id}/ventana-siembra?cultivo= */
+export async function obtenerVentanaSiembra(plan_id: string, cultivo_id: string): Promise<VentanaSiembra> {
+  if (mockDePlan()) return mockPlan.obtenerVentanaSiembraMock(cultivo_id);
+  return peticion<VentanaSiembra>('GET', `${plan(plan_id)}/ventana-siembra?cultivo=${encodeURIComponent(cultivo_id)}`, {
+    autenticada: true
+  });
+}
+
+/** POST /planes/{id}/escenarios: cuántos años de cada 10 le iría bien si cambia el clima. */
+export async function simularEscenario(
+  plan_id: string,
+  cultivo_id: string,
+  delta_lluvia_pct: number,
+  delta_temp_c: number
+): Promise<ResultadoEscenario> {
+  if (mockDePlan()) return mockPlan.simularEscenarioMock(cultivo_id, delta_lluvia_pct, delta_temp_c);
+  return peticion<ResultadoEscenario>('POST', `${plan(plan_id)}/escenarios`, {
+    cuerpo: { cultivo_id, delta_lluvia_pct, delta_temp_c },
+    autenticada: true
+  });
+}
+
+/** POST /planes/{id}/aceptar: el productor elige una rotación. */
+export async function elegirRotacion(plan_id: string, rotacion_id: string): Promise<PlanAceptado> {
+  if (mockDePlan()) return mockPlan.elegirRotacionMock(plan_id, rotacion_id);
+  return peticion<PlanAceptado>('POST', `${plan(plan_id)}/aceptar`, { cuerpo: { rotacion_id }, autenticada: true });
 }

@@ -5,6 +5,7 @@ const fechaLarga = new Intl.DateTimeFormat('es-CO', { weekday: 'long', day: 'num
 const fechaCorta = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'short', timeZone: 'UTC' });
 const fechaDiaMes = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', timeZone: 'UTC' });
 const mesCorto = new Intl.DateTimeFormat('es-CO', { month: 'short', timeZone: 'UTC' });
+const mesLargo = new Intl.DateTimeFormat('es-CO', { month: 'long', timeZone: 'UTC' });
 const mesLargoAnio = new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 const entero = new Intl.NumberFormat('es-CO', { maximumFractionDigits: 0 });
 const unDecimal = new Intl.NumberFormat('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -43,6 +44,12 @@ export function formatearDiaMes(iso: string): string {
 /** "2026-05" → "May" */
 export function formatearMesCorto(mes: string): string {
   const texto = mesCorto.format(deIso(`${mes}-01`)).replace('.', '');
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+/** "2026-05" → "Mayo" */
+export function formatearMesLargo(mes: string): string {
+  const texto = mesLargo.format(deIso(`${mes}-01`));
   return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 

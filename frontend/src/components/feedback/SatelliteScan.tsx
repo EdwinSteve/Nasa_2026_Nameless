@@ -111,7 +111,7 @@ export const SatelliteScan: React.FC<SatelliteScanProps> = ({
       {/* Fuente que se está consultando */}
       <div className="absolute top-2.5 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm border border-[#D5E3F5] px-3.5 py-1 rounded-full shadow-sm flex items-center gap-2">
         <span className={`w-2 h-2 rounded-full bg-[#1F4D2B] ${estaEscaneando ? 'animate-pulse' : ''}`} />
-        <span className="text-[11px] sm:text-xs font-black tracking-wide text-[#14202B]">{etiquetaSatelite}</span>
+        <span className="text-sm font-black text-[#14202B]">{etiquetaSatelite}</span>
       </div>
 
       {/* Lote y área */}
@@ -121,7 +121,7 @@ export const SatelliteScan: React.FC<SatelliteScanProps> = ({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21H17" />
         </svg>
         <span className="text-sm font-extrabold text-[#14202B]">{nombreLote}</span>
-        <span className="bg-[#B9E9B3] text-[#164321] text-xs font-black px-2.5 py-0.5 rounded-full">
+        <span className="bg-[#B9E9B3] text-[#164321] text-sm font-black px-2.5 py-0.5 rounded-full">
           {formatearHectareas(areaHa)} ha
         </span>
       </div>
