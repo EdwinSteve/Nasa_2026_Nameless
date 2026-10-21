@@ -152,3 +152,66 @@ export interface LoginPayload {
   celular: string;
   contrasena: string;
 }
+
+// --- Ficha del lote y recomendación de cultivos (modelo predictivo) ---
+
+export interface LoteDetalle {
+  id: string;
+  nombre: string;
+  area_ha: number;
+  finca_id: string;
+  finca_nombre: string;
+  municipio_nombre: string;
+  corregimiento_nombre: string;
+  poligono: GeoJSONPolygon;
+  centroide: Coordenada;
+  tiene_riego: boolean;
+  tipo_riego: TipoRiego | null;
+  cultivo_anterior: string | null;
+}
+
+export interface EstadoModelo {
+  disponible: boolean;
+  corrida: string;
+  motivo: string | null;
+  ultima_fecha_siembra: string | null;
+}
+
+export interface CultivoRecomendado {
+  id: string;
+  cultivo: string;
+  puntaje: number; // 0 a 1
+  puntaje_min: number;
+  puntaje_max: number;
+  prob_exito: number;
+  de_cada_10: number;
+  riego_neto_mm: number | null;
+  riego_bruto_m3_ha: number | null;
+  dias_estres: number | null;
+  dias_ciclo: number;
+}
+
+export interface CultivoDescartado {
+  id: string;
+  cultivo: string;
+  motivo: string;
+}
+
+export interface RecomendacionResponse {
+  recomendacion_id: string;
+  lote_id: string;
+  nombre_lote: string;
+  fecha_siembra: string;
+  estado: 'en_proceso' | 'lista' | 'fallida';
+  mensaje: string;
+  cultivos: CultivoRecomendado[];
+  descartados: CultivoDescartado[];
+  contexto: {
+    elevacion_m: number;
+    ph_0_30: number | null;
+    lluvia_90_dias_mm: number | null;
+    temperatura_90_dias_c: number | null;
+    oni: number | null;
+  } | null;
+  modelo: string | null;
+}

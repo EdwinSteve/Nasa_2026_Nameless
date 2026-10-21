@@ -15,6 +15,9 @@ import type {
   GuardarPreferenciasPayload,
   IniciarDiagnosticoResponse,
   TareaDiagnosticoResponse,
+  LoteDetalle,
+  EstadoModelo,
+  RecomendacionResponse,
   Elevacion,
   LoginPayload
 } from './tipos';
@@ -146,6 +149,36 @@ export async function obtenerTareaDiagnostico(
   return peticion<TareaDiagnosticoResponse>(
     'GET',
     `/lotes/${encodeURIComponent(lote_id)}/diagnostico/${encodeURIComponent(tarea_id)}`,
+    { autenticada: true }
+  );
+}
+
+/** GET /lotes/{lote_id}: detalle del lote del productor. */
+export async function obtenerLote(lote_id: string): Promise<LoteDetalle> {
+  return peticion<LoteDetalle>('GET', `/lotes/${encodeURIComponent(lote_id)}`, { autenticada: true });
+}
+
+/** GET /recomendaciones/modelo: si el servidor tiene el modelo predictivo. */
+export async function obtenerEstadoModelo(): Promise<EstadoModelo> {
+  return peticion<EstadoModelo>('GET', '/recomendaciones/modelo');
+}
+
+/** POST /lotes/{lote_id}/recomendaciones (HTTP 202). Sin fecha: "si siembras ahora". */
+export async function solicitarRecomendacion(
+  lote_id: string,
+  fecha_siembra?: string
+): Promise<{ recomendacion_id: string; fecha_siembra: string }> {
+  return peticion('POST', `/lotes/${encodeURIComponent(lote_id)}/recomendaciones`, {
+    cuerpo: fecha_siembra ? { fecha_siembra } : {},
+    autenticada: true
+  });
+}
+
+/** GET /lotes/{lote_id}/recomendaciones/{id}: se consulta hasta que esté 'lista' o 'fallida'. */
+export async function obtenerRecomendacion(lote_id: string, recomendacion_id: string): Promise<RecomendacionResponse> {
+  return peticion<RecomendacionResponse>(
+    'GET',
+    `/lotes/${encodeURIComponent(lote_id)}/recomendaciones/${encodeURIComponent(recomendacion_id)}`,
     { autenticada: true }
   );
 }

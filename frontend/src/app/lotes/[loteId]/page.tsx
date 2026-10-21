@@ -1,7 +1,8 @@
 import { DiagnosticoCliente } from "./DiagnosticoCliente";
+import { FichaCliente } from "./FichaCliente";
 
 // /lotes/:id?tarea=X → diagnóstico en curso
-// /lotes/:id         → ficha del lote (pendiente de diseño)
+// /lotes/:id         → ficha del lote (provisional) con la recomendación de cultivos
 export default async function LotePage({
   params,
   searchParams,
@@ -16,11 +17,5 @@ export default async function LotePage({
     return <DiagnosticoCliente loteId={loteId} tareaId={tarea} />;
   }
 
-  return (
-    <main className="min-h-screen max-w-xl mx-auto p-6 flex flex-col justify-center gap-3">
-      <h1 className="text-3xl font-black text-[#1F4D2B]">Ficha del lote</h1>
-      <p className="text-base text-[#14202B]/80">Esta pantalla está pendiente de diseño en Stitch.</p>
-      <p className="text-sm font-mono text-[#14202B]/60">Lote: {loteId}</p>
-    </main>
-  );
+  return <FichaCliente loteId={loteId} />;
 }
