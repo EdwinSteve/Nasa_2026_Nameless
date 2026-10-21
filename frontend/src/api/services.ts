@@ -29,12 +29,17 @@ import type {
   IniciarPlanResponse,
   TareaPlanResponse,
   ResultadoEscenario,
-  PlanAceptado
+  PlanAceptado,
+  Conversacion,
+  MensajeAsistente,
+  Transcripcion,
+  ResumenLote
 } from './tipos';
 import { peticion } from './http';
 import { guardarSesion } from './sesion';
 import { ESCENARIOS, obtenerResumenInicioMock, registrarRiegoMock, type EscenarioInicio } from './mocks/inicio';
 import * as mockPlan from './mocks/plan';
+import * as mockAsistente from './mocks/asistente';
 
 // --- Interruptor de mocks ---
 // NEXT_PUBLIC_USAR_MOCKS="inicio" (o "inicio:nuevo") activa el mock SOLO de los endpoints de la
@@ -58,6 +63,9 @@ const mockInicio = (): EscenarioInicio | null => escenarioMock('inicio', ESCENAR
 // "plan" (o "plan:sin-plan"...) simula los endpoints del plan de siembra; ?demo=con-plan | sin-plan |
 // sin-diagnostico | calculando | error cambia el escenario.
 const mockDePlan = (): mockPlan.EscenarioPlan | null => escenarioMock('plan', mockPlan.ESCENARIOS_PLAN, 'con-plan');
+// "asistente" simula el chat; ?demo=con-historia | nuevo | falla-envio cambia el escenario.
+const mockDeAsistente = (): mockAsistente.EscenarioAsistente | null =>
+  escenarioMock('asistente', mockAsistente.ESCENARIOS_ASISTENTE, 'con-historia');
 
 export function guardarTokens(tokens: Tokens): void {
   guardarSesion(tokens);
@@ -239,9 +247,9 @@ export async function registrarRiego(lote_id: string): Promise<RiegoRegistrado> 
 const lote = (id: string) => `/lotes/${encodeURIComponent(id)}`;
 const plan = (id: string) => `/planes/${encodeURIComponent(id)}`;
 
-/** GET /lotes: los lotes del usuario. */
+/** GET /lotes: los lotes del usuario. Lo usan el Plan y el Asistente: se simula con cualquiera de los dos. */
 export async function listarMisLotes(): Promise<LoteResumen[]> {
-  if (mockDePlan()) return mockPlan.listarMisLotesMock();
+  if (mockDePlan() || mockDeAsistente()) return mockPlan.listarMisLotesMock();
   return peticion<LoteResumen[]>('GET', '/lotes', { autenticada: true });
 }
 
@@ -305,4 +313,49 @@ export async function simularEscenario(
 export async function elegirRotacion(plan_id: string, rotacion_id: string): Promise<PlanAceptado> {
   if (mockDePlan()) return mockPlan.elegirRotacionMock(plan_id, rotacion_id);
   return peticion<PlanAceptado>('POST', `${plan(plan_id)}/aceptar`, { cuerpo: { rotacion_id }, autenticada: true });
+}
+
+// --- Asistente SURCO (pendientes en el backend: ver PENDIENTES-BACKEND.md) ---
+
+/** GET /asistente/conversaciones?lote_id=: el nombre del usuario y los mensajes con ese lote. */
+export async function obtenerConversacion(lote_id: string): Promise<Conversacion> {
+  const escenario = mockDeAsistente();
+  if (escenario) return mockAsistente.obtenerConversacionMock(escenario, lote_id);
+  return peticion<Conversacion>('GET', `/asistente/conversaciones?lote_id=${encodeURIComponent(lote_id)}`, { autenticada: true });
+}
+
+/**
+ * POST /asistente/mensajes: la pregunta del productor; responde con el mensaje del asistente.
+ * audio_duracion_s va cuando la pregunta fue una nota de voz (texto = transcripción).
+ */
+export async function enviarMensaje(lote_id: string, texto: string, audio_duracion_s: number | null = null): Promise<MensajeAsistente> {
+  const escenario = mockDeAsistente();
+  if (escenario) return mockAsistente.enviarMensajeMock(escenario, lote_id, texto);
+  return peticion<MensajeAsistente>('POST', '/asistente/mensajes', {
+    cuerpo: { lote_id, texto, audio_duracion_s },
+    autenticada: true
+  });
+}
+
+/** POST /asistente/transcripciones (multipart, campo "audio"): la nota de voz en texto. */
+export async function transcribirAudio(audio: Blob): Promise<Transcripcion> {
+  if (mockDeAsistente()) return mockAsistente.transcribirAudioMock();
+  const formulario = new FormData();
+  formulario.append('audio', audio, `nota.${audio.type.includes('mp4') ? 'm4a' : 'webm'}`);
+  return peticion<Transcripcion>('POST', '/asistente/transcripciones', { cuerpo: formulario, autenticada: true });
+}
+
+/** POST /asistente/mensajes/{id}/valoracion: "Me sirvió" / "No me sirvió". */
+export async function valorarMensaje(mensaje_id: string, util: boolean): Promise<void> {
+  if (mockDeAsistente()) return mockAsistente.valorarMensajeMock();
+  await peticion<void>('POST', `/asistente/mensajes/${encodeURIComponent(mensaje_id)}/valoracion`, {
+    cuerpo: { util },
+    autenticada: true
+  });
+}
+
+/** GET /lotes/{id}/resumen: cultivo, etapa e indicadores del lote (panel del asistente en escritorio). */
+export async function obtenerResumenLote(lote_id: string): Promise<ResumenLote> {
+  if (mockDeAsistente()) return mockAsistente.obtenerResumenLoteMock(lote_id);
+  return peticion<ResumenLote>('GET', `/lotes/${encodeURIComponent(lote_id)}/resumen`, { autenticada: true });
 }

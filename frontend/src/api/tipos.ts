@@ -366,3 +366,44 @@ export interface PlanAceptado {
   rotacion_id: string;
   aceptado_en: string;
 }
+
+// --- Asistente SURCO ---
+
+/** Un dato puntual que respalda una respuesta: "Humedad de la tierra: baja". */
+export interface TarjetaDato {
+  etiqueta: string;
+  valor: string;
+  unidad: string | null;
+  procedencia: Procedencia;
+}
+
+/** Un enlace a otra pantalla de la app: "Ver en mi lote". */
+export interface EnlaceAccion {
+  texto: string;
+  ruta: string;
+}
+
+export interface MensajeAsistente {
+  id: string;
+  rol: 'productor' | 'asistente';
+  creado_en: string;              // ISO con hora
+  texto: string;                  // en una nota de voz, la transcripción
+  audio_duracion_s: number | null;
+  tarjetas: TarjetaDato[];
+  enlaces: EnlaceAccion[];
+}
+
+/** GET /asistente/conversaciones?lote_id= */
+export interface Conversacion {
+  usuario: { nombre: string };
+  lote_id: string;
+  mensajes: MensajeAsistente[];   // en orden, del más viejo al más nuevo
+}
+
+/** POST /asistente/transcripciones */
+export interface Transcripcion {
+  texto: string;
+}
+
+/** GET /lotes/{id}/resumen: lo mismo que lote_principal de GET /inicio, para cualquier lote. */
+export type ResumenLote = NonNullable<ResumenInicio['lote_principal']>;

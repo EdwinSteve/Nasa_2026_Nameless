@@ -97,7 +97,7 @@ function Contenido({ plan, ventana, cultivoId, rotacion, sinConexion }: Contenid
     }
   };
 
-  const consultaAsistente = new URLSearchParams({ cultivo: cultivoId, plan: plan.id });
+  const consultaAsistente = new URLSearchParams({ lote: plan.lote_id, cultivo: cultivoId, plan: plan.id });
 
   return (
     <>

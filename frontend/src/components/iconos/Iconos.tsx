@@ -90,3 +90,15 @@ export const IconoChevron = (p: P) => (
 export const IconoInsignia = (p: P) => (
   <Icono {...p}><circle cx="12" cy="9" r="6" /><path d="M8.5 14L7 22l5-3 5 3-1.5-8" /></Icono>
 );
+export const IconoEnviar = (p: P) => (
+  <Icono {...p}><path d="M4 12l16-8-6 16-2.5-6.5L4 12z" /><path d="M11.5 13.5L20 4" /></Icono>
+);
+export const IconoMeSirvio = (p: P) => (
+  <Icono {...p}><path d="M7 11v9H4v-9h3zM7 11l4-7a2 2 0 012.6 2.3L13 10h5.5a2 2 0 012 2.3l-1.2 6A2 2 0 0117.3 20H7" /></Icono>
+);
+export const IconoNoMeSirvio = (p: P) => (
+  <Icono {...p}><path d="M17 13V4h3v9h-3zM17 13l-4 7a2 2 0 01-2.6-2.3L11 14H5.5a2 2 0 01-2-2.3l1.2-6A2 2 0 016.7 4H17" /></Icono>
+);
+export const IconoCerrar = (p: P) => (
+  <Icono {...p}><path d="M6 6l12 12M18 6L6 18" /></Icono>
+);

@@ -1,10 +1,10 @@
 # Pendientes del backend
 
-Las pantallas Inicio (`/inicio`) y Plan de siembra (`/plan`) usan endpoints que el backend todavía no tiene. Mientras tanto el frontend los simula con datos de demostración (ver [Cómo probar sin backend](#cómo-probar-sin-backend)).
+Las pantallas Inicio (`/inicio`), Plan de siembra (`/plan`) y Asistente (`/asistente`) usan endpoints que el backend todavía no tiene. Mientras tanto el frontend los simula con datos de demostración (ver [Cómo probar sin backend](#cómo-probar-sin-backend)).
 
 Todos van bajo `/api/v1`, piden `Authorization: Bearer <access_token>` y responden los errores con el formato de siempre: `{ "code": "...", "message": "...", "details": {...} }`. Los tipos de TypeScript están en [src/api/tipos.ts](src/api/tipos.ts).
 
-Los textos que manda el backend (`mensaje`, `nota`, `razones`, `razon_no_apto`, `mensaje_estado`) van de **usted**, en palabras sencillas y sin nombres técnicos: esos solo van en `procedencia.fuente`.
+Los textos que manda el backend (`mensaje`, `nota`, `razones`, `razon_no_apto`, `mensaje_estado`, las respuestas del asistente) van de **usted**, en palabras sencillas y sin nombres técnicos: esos solo van en `procedencia.fuente`.
 
 # Pantalla Inicio
 
@@ -202,15 +202,87 @@ El productor elige una rotación ("Elegir este plan"). **Cuerpo:** `{ "rotacion_
 
 **Errores:** `404` si el plan o la rotación no existen, `403` si el plan no es de un lote del usuario.
 
+# Asistente SURCO
+
+Pantalla `/asistente?lote=&cultivo=&plan=` (`cultivo` y `plan` llegan desde el detalle de un cultivo del Plan). Es un chat con una inteligencia artificial que responde con los datos del lote.
+
+**Reglas para las respuestas** (las hace cumplir el backend, no la pantalla):
+
+- Se presenta como "Asistente SURCO", una inteligencia artificial. Nunca con nombre ni cargo de persona.
+- Responde de usted, corto y con los mismos datos que muestran Inicio y el Plan, sin contradecirlos. Ejemplo: si Inicio dice humedad "Baja", el asistente no dice "la tierra está bien".
+- No recomienda abonos, fertilizantes ni agroquímicos, no habla de plagas ni da precios. En esos casos dice que no tiene datos confiables y remite al técnico agrícola.
+- Cada dato puntual va en una `TarjetaDato`, con su fuente en `procedencia`.
+
+## GET /asistente/conversaciones?lote_id={lote_id}
+
+**200:**
+
+```jsonc
+{
+  "usuario": { "nombre": "Ernesto" },      // para el saludo "Hola, Ernesto"
+  "lote_id": "uuid",
+  "mensajes": [                            // del más viejo al más nuevo; [] la primera vez
+    {
+      "id": "uuid", "rol": "productor", "creado_en": "2026-10-20T12:14:00Z",
+      "texto": "¿Será que riego el maíz esta semana?",   // en una nota de voz, la transcripción
+      "audio_duracion_s": 4,               // null si fue texto
+      "tarjetas": [], "enlaces": []
+    },
+    {
+      "id": "uuid", "rol": "asistente", "creado_en": "2026-10-20T12:14:03Z",
+      "texto": "Sí, Ernesto. La tierra de su lote La Vega está seca para un maíz en floración. Riegue esta semana unos 450 m³ por hectárea.",
+      "audio_duracion_s": null,
+      "tarjetas": [
+        { "etiqueta": "Humedad de la tierra", "valor": "Baja", "unidad": null,
+          "procedencia": { "fuente": "NASA SMAP", "fecha": "2026-10-18" } },
+        { "etiqueta": "Lluvia de los últimos 7 días", "valor": "3", "unidad": "mm",
+          "procedencia": { "fuente": "NASA POWER", "fecha": "2026-10-20" } }
+      ],
+      "enlaces": [{ "texto": "Ver en mi lote", "ruta": "/lotes/uuid" }]
+    }
+  ]
+}
+```
+
+`usuario` no estaba en el pedido original: va aquí porque el backend no tiene `GET /usuarios/me` y el saludo necesita el nombre. `valor` va como texto ya listo para mostrar ("Baja", "3", "8 de cada 10"). `enlaces[].ruta` es una ruta de la app (`/lotes/{id}`, `/plan?lote={id}`).
+
+**Errores:** `404 LOTE_NO_ENCONTRADO`.
+
+## POST /asistente/mensajes
+
+La pregunta del productor. **Cuerpo:**
+
+```json
+{ "lote_id": "uuid", "texto": "¿Debo regar hoy?", "audio_duracion_s": null }
+```
+
+`audio_duracion_s` (opcional, no estaba en el pedido original) va con la duración en segundos cuando la pregunta fue una nota de voz; `texto` es entonces la transcripción. El backend guarda los dos mensajes (el del productor y el suyo).
+
+**200:** el `MensajeAsistente` con la respuesta (`rol: "asistente"`). La pantalla pinta el mensaje del productor apenas se envía; si la petición falla, ese mensaje queda con "No se envió · Reintentar" y se reenvía igual.
+
+## POST /asistente/transcripciones
+
+La nota de voz en texto. **Cuerpo:** `multipart/form-data` con el campo `audio`: `audio/webm` (Chrome, Android) o `audio/mp4` (Safari, iPhone), de 60 s como máximo. **200:** `{ "texto": "¿Será que riego el maíz esta semana?" }`.
+
+**Errores:** `413` si pasa del tamaño máximo, `422` si no se entendió nada (la pantalla deja la nota con "No se envió · Reintentar").
+
+## POST /asistente/mensajes/{mensaje_id}/valoracion
+
+"Me sirvió" / "No me sirvió" sobre una respuesta. **Cuerpo:** `{ "util": true }`. **204** sin cuerpo. Se puede cambiar: la última valoración reemplaza la anterior.
+
+## GET /lotes/{lote_id}/resumen
+
+Panel derecho del asistente en escritorio. **No estaba en el pedido original.** **200:** el mismo objeto que `lote_principal` de `GET /inicio` (nombre, área, corregimiento, altitud, polígono, cultivo con su etapa e indicadores), pero para cualquier lote del usuario.
+
 # Cómo probar sin backend
 
 En `frontend/.env.local`:
 
 ```bash
-NEXT_PUBLIC_USAR_MOCKS=inicio,plan     # o inicio:nuevo, plan:sin-plan...
+NEXT_PUBLIC_USAR_MOCKS=inicio,plan,asistente     # o inicio:nuevo, plan:sin-plan...
 ```
 
-Cada grupo simula solo sus endpoints; el resto sigue yendo al backend. `inicio` usa [src/api/mocks/inicio.ts](src/api/mocks/inicio.ts) y `plan` usa [src/api/mocks/plan.ts](src/api/mocks/plan.ts). El escenario también se cambia desde la URL con `?demo=`.
+Cada grupo simula solo sus endpoints; el resto sigue yendo al backend. `inicio` usa [src/api/mocks/inicio.ts](src/api/mocks/inicio.ts), `plan` usa [src/api/mocks/plan.ts](src/api/mocks/plan.ts) y `asistente` usa [src/api/mocks/asistente.ts](src/api/mocks/asistente.ts) (`GET /lotes` se simula con `plan` o con `asistente`). El escenario también se cambia desde la URL con `?demo=`.
 
 Inicio:
 
@@ -225,5 +297,12 @@ Plan de siembra:
 - `/plan?demo=sin-diagnostico`: "Primero necesitamos analizar su lote". El botón llama al diagnóstico real, así que sin backend muestra un error.
 - `/plan?demo=calculando`: el plan ya se está armando y se ve el progreso.
 - `/plan?demo=error`: falla la primera vez; "Intentar de nuevo" lo carga.
+
+Asistente:
+
+- `/asistente?demo=con-historia`: la nota de voz sobre riego y su respuesta con dos tarjetas.
+- `/asistente?demo=nuevo`: primera vez, con el saludo y las preguntas sugeridas.
+- `/asistente?demo=falla-envio`: el primer mensaje falla ("No se envió · Reintentar") y al reintentar llega.
+- Cualquier nota de voz se transcribe como "¿Será que riego el maíz esta semana?". Las respuestas cambian según el tema: riego, siembra, suelo, lluvia, "¿Por qué me recomiendan…?", y abonos, plagas o precios (remite al técnico).
 
 Después de cambiar `.env.local` hay que reiniciar `npm run dev`. Cuando el backend tenga los endpoints de un grupo, basta con quitar ese grupo de la variable.

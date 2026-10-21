@@ -40,13 +40,15 @@ function aErrorApi(estado: number, cuerpo: ErrorBackend | null, campos: Record<s
 
 async function enviar(metodo: string, ruta: string, opciones: OpcionesPeticion, token?: string): Promise<Response> {
   const cabeceras: Record<string, string> = {};
-  if (opciones.cuerpo !== undefined) cabeceras['Content-Type'] = 'application/json';
+  // Con FormData (archivos) el navegador pone el Content-Type con su separador
+  const esFormulario = opciones.cuerpo instanceof FormData;
+  if (opciones.cuerpo !== undefined && !esFormulario) cabeceras['Content-Type'] = 'application/json';
   if (token) cabeceras.Authorization = `Bearer ${token}`;
   try {
     return await fetch(`${BASE}${ruta}`, {
       method: metodo,
       headers: cabeceras,
-      body: opciones.cuerpo === undefined ? undefined : JSON.stringify(opciones.cuerpo)
+      body: opciones.cuerpo === undefined ? undefined : esFormulario ? (opciones.cuerpo as FormData) : JSON.stringify(opciones.cuerpo)
     });
   } catch {
     throw errorDeRed;

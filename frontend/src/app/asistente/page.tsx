@@ -1,5 +1,12 @@
-import { ProximamenteView } from "@/routes/ProximamenteView";
+import { AsistenteCliente } from "./AsistenteCliente";
 
-export default function Pagina() {
-  return <ProximamenteView titulo="Asistente" texto="Aquí podrá preguntar por voz o por escrito lo que necesite sobre su cultivo." />;
+// /asistente?lote=L&cultivo=C&plan=P → chat con el Asistente SURCO sobre el lote L.
+// cultivo y plan llegan desde el detalle de un cultivo del Plan de siembra.
+export default async function AsistentePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lote?: string; cultivo?: string; plan?: string }>;
+}) {
+  const { lote, cultivo, plan } = await searchParams;
+  return <AsistenteCliente lotePedido={lote ?? null} cultivoId={cultivo ?? null} planId={plan ?? null} />;
 }
