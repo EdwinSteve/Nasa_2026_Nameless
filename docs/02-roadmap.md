@@ -23,9 +23,11 @@ Se trabaja por fases pequeñas. Cada casilla puede convertirse en un issue de Gi
 ## Fase 1b: Modelo predictivo de idoneidad → [ml/README.md](../ml/README.md)
 - [x] Arquitectura del modelo y estudio de datos ([estudio](datos/estudio-datos-modelo.md))
 - [ ] Puntos de entrenamiento y descarga masiva 1981–2025 ([guía de la máquina GPU](../ml/GUIA_MAQUINA_GPU.md))
-- [ ] Oráculo agronómico: trapecios del catálogo + balance hídrico
-- [ ] Dataset de etiquetas y features sin fuga de información
-- [ ] Modelo A (XGBoost en GPU) que le gane a la línea base de climatología
+- [x] Oráculo agronómico: trapecios del catálogo + balance hídrico
+- [x] Dataset de etiquetas y features sin fuga de información
+- [x] Modelo A (XGBoost en GPU), calibración e informes
+- [x] Recomendación de cultivos en el backend y la ficha del lote (provisional)
+- [ ] Copiar los modelos `.ubj` al servidor del backend
 - [ ] Calibración con rendimientos reales (EVA, GDHY)
 
 ## Fase 2: Motor de rotación (MVP)

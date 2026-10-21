@@ -221,6 +221,16 @@ Decisiones del oráculo que conviene conocer (todas en el código, con su razón
 - **Agotamiento inicial**: 60 días de arranque antes de la siembra, igual para todos los años (no depende de SMAP, que solo existe desde 2015).
 - Los 7 cultivos sin Kc ni p tienen puntaje y éxito, pero `riego_mm` y `dias_estres` quedan vacíos.
 
+### Pasar el modelo al backend
+
+El backend usa `surco_ml.predecir.recomendar()`, el mismo cálculo de la línea de comandos. Después de entrenar:
+
+1. Copia los cuatro `modelo_a_*.ubj` de `ml/modelos_exportados/tiempo/` a la misma carpeta en la máquina que corre el backend (no van en git).
+2. Comprueba con `curl localhost:8000/api/v1/recomendaciones/modelo`: debe decir `"disponible": true`.
+3. En la UI, la ficha del lote (`/lotes/:id`) muestra "Ver qué me conviene sembrar".
+
+Si se reentrena con otras features, `informe.json` cambia: hay que copiar también ese archivo y `calibracion.json` (esos sí van en git).
+
 ## 7. Convenciones
 
 - **Ramas:** una por etapa (`feature/oraculo`, `feature/dataset`, `feature/modelo-a`) y entran por MR a `main`.
