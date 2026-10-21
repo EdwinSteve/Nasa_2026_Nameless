@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Nunito+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f7f9ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface": "#111d28", "on-primary": "#ffffff", "on-secondary-fixed-variant": "#005321", "background": "#f7f9ff", "on-primary-container": "#8cbd92", "primary-fixed-dim": "#a0d3a6", "secondary-fixed": "#a2f6ac", "secondary-fixed-dim": "#87d992", "surface-container-high": "#dde9f9", "on-error": "#ffffff", "outline": "#717970", "on-tertiary-fixed-variant": "#733500", "on-tertiary-container": "#ff974e", "tertiary": "#4d2100", "on-surface-variant": "#414941", "primary": "#043616", "on-primary-fixed": "#00210b", "tertiary-container": "#6f3300", "on-tertiary": "#ffffff", "inverse-on-surface": "#e8f2ff", "surface-container-lowest": "#ffffff", "secondary-container": "#a2f6ac", "inverse-primary": "#a0d3a6", "on-primary-fixed-variant": "#22502d", "surface-tint": "#3a6843", "on-error-container": "#93000a", "surface-dim": "#cfdbeb", "on-secondary": "#ffffff", "error-container": "#ffdad6", "inverse-surface": "#26323d", "error": "#ba1a1a", "surface-container": "#e3efff", "on-tertiary-fixed": "#311300", "surface-container-low": "#edf4ff", "surface-variant": "#d7e4f3", "surface": "#f7f9ff", "surface-container-highest": "#d7e4f3", "on-secondary-fixed": "#002109", "outline-variant": "#c1c9be", "on-background": "#111d28", "on-secondary-container": "#207338", "primary-fixed": "#bbefc0", "tertiary-fixed-dim": "#ffb689", "primary-container": "#1f4d2b", "surface-bright": "#f7f9ff", "tertiary-fixed": "#ffdbc7", "secondary": "#176d32" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "gutter": "1rem", "space-lg": "1.75rem", "margin": "1.25rem", "space-xs": "0.375rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "space-sm": "0.75rem", "space-xl": "2.5rem", "space-md": "1.25rem" }, fontFamily: { "headline-sm": ["Nunito Sans"], "body-lg": ["Inter"], "headline-md": ["Nunito Sans"], "headline-xl": ["Nunito Sans"], "body-md": ["Inter"], "body-xl": ["Inter"], "label-sm": ["Inter"], "headline-lg": ["Nunito Sans"], "label-lg": ["Inter"], "display-metric": ["Nunito Sans"] }, fontSize: { "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "700" }], "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }], "headline-md": ["24px", { lineHeight: "32px", fontWeight: "700" }], "headline-xl": ["36px", { lineHeight: "44px", letterSpacing: "-0.01em", fontWeight: "800" }], "body-md": ["18px", { lineHeight: "26px", fontWeight: "500" }], "body-xl": ["20px", { lineHeight: "30px", fontWeight: "500" }], "label-sm": ["14px", { lineHeight: "18px", letterSpacing: "0.04em", fontWeight: "700" }], "headline-lg": ["28px", { lineHeight: "36px", fontWeight: "700" }], "label-lg": ["16px", { lineHeight: "22px", letterSpacing: "0.01em", fontWeight: "600" }], "display-metric": ["48px", { lineHeight: "52px", letterSpacing: "-0.02em", fontWeight: "800" }] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider truncate">SURCO Agritech</span><h1 class="font-headline-sm text-headline-sm text-on-surface truncate">Inicio</h1></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notificaciones" class="w-14 h-14 min-w-[56px] min-h-[56px] flex items-center justify-center text-on-surface hover:text-primary active:scale-95 transition-transform"><span class="material-symbols-outlined text-[24px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface px-margin-mobile"><div class="flex flex-col w-full pb-10 space-y-space-md">
+<!-- 1. Encabezado Campesino Personalizado -->
+<header class="flex flex-col space-y-space-xs pt-1">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col min-w-0">
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Buenos días, Ernesto</h2>
+<p class="font-label-lg text-label-lg text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary-container shrink-0">place</span>
+<span class="truncate">Lunes, 14 de octubre · Finca La Esperanza, Fortalecillas</span>
+</p>
+</div>
+<!-- Botón campana de alertas táctil (56x56 px) con contador -->
+<button aria-label="Ver 2 alertas pendientes" class="relative w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-surface-container flex items-center justify-center text-on-surface shadow-sm active:scale-95 transition-transform shrink-0" type="button">
+<span class="material-symbols-outlined text-[26px]">notifications</span>
+<span class="absolute top-2 right-2 flex items-center justify-center w-6 h-6 rounded-full bg-on-tertiary-container text-white font-headline-sm text-[13px] font-bold shadow-sm">
+          2
+        </span>
+</button>
+</div>
+<!-- Píldora del clima destacada -->
+<div class="pt-1">
+<div class="inline-flex items-center gap-space-xs bg-surface-container-high px-space-md py-2.5 rounded-full shadow-sm min-h-[44px]">
+<span class="material-symbols-outlined text-on-tertiary-container text-[22px]">wb_sunny</span>
+<span class="font-body-md text-label-lg font-semibold text-on-surface">31 °C · Soleado · 10 % de lluvia</span>
+</div>
+</div>
+</header>
+<!-- 2. Tarjeta 'Hoy te recomendamos' (Acento Sol / Terciario) -->
+<section aria-labelledby="recomendacion-title" class="bg-surface-container-lowest rounded-lg p-space-md shadow-md flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between gap-space-xs flex-wrap">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed shrink-0">
+<span class="material-symbols-outlined text-[22px]">water_drop</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface" id="recomendacion-title">Hoy te recomendamos</span>
+</div>
+<!-- Chip Satelital Técnico NASA -->
+<div class="inline-flex items-center gap-1.5 bg-surface-container-high px-3 py-1.5 rounded-full min-h-[32px]">
+<span class="material-symbols-outlined text-[16px] text-secondary">satellite_alt</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">NASA SMAP · 12 oct</span>
+</div>
+</div>
+<p class="font-body-md text-body-md font-semibold text-on-surface leading-snug">
+      Riega tu maíz esta semana: unos <span class="text-tertiary-container font-headline-sm text-headline-sm font-bold">450 m³</span> por hectárea. La tierra está más seca de lo normal.
+    </p>
+<!-- Botonera táctil (altura 56px) -->
+<div class="grid grid-cols-2 gap-space-sm pt-2">
+<button class="min-h-[56px] h-14 w-full rounded-full bg-primary-container text-on-primary font-headline-sm text-label-lg font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all" id="btn-regue" type="button">
+<span class="material-symbols-outlined text-[22px]">check_circle</span>
+<span>Ya regué</span>
+</button>
+<button class="min-h-[56px] h-14 w-full rounded-full bg-surface-container text-primary font-headline-sm text-label-lg font-bold flex items-center justify-center gap-1.5 active:bg-surface-container-high active:scale-95 transition-all" id="btn-por-que" type="button">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>¿Por qué?</span>
+</button>
+</div>
+<!-- Feedback desplegable simple al pulsar '¿Por qué?' -->
+<div class="hidden bg-surface-container-low rounded p-space-sm text-on-surface-variant font-body-md text-label-lg mt-2 transition-all" id="info-por-que">
+      Los sensores del satélite SMAP detectaron una caída de humedad al 18% en los primeros 10 cm del suelo de Fortalecillas tras 5 días seguidos de sol fuerte.
+    </div>
+</section>
+<!-- 3. Tarjeta 'Mi lote' (Lote 1) -->
+<section aria-labelledby="lote-title" class="bg-surface-container-low rounded-lg p-space-md shadow-sm flex flex-col space-y-space-md">
+<!-- Encabezado con visualización satelital del polígono -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[24px]">crop_landscape</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface" id="lote-title">Mi lote</h3>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-secondary bg-secondary-container px-3 py-1 rounded-full">En producción</span>
+</div>
+<div class="relative w-full h-32 rounded bg-surface-container-highest overflow-hidden flex items-center justify-center">
+<!-- Mapa Satelital Representativo con Polígono -->
+<div class="w-full h-full bg-cover bg-center" data-alt="High angle drone satellite view of green coffee and corn agricultural crop parcel rows in Fortalecillas Huila Colombia under clear sunlight with geometric property boundary" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBo2lfzxbYVw5Ndyk4TlQD1MF--DA0HLWLYeTikM6Oei-AFGRFrlPTEFHQnNpYf0-bD0gzOAaYutaX66I8P3ukBo5XG3LSGS7VxpNiBeEb-YsN8B6N0XFglqQMnR54qTXm8qfsfOg13NRywR5vzqysjdYIXLAPNGfjZZnJI9Ik2l3f6R1Dvz9qdExP0DancUYTElYll8buMBbiQM858WvaqRWtFpYCTFo1XtxCSRwAXfvo-75AiKQcSLg')"></div>
+<div class="absolute inset-0 bg-primary/20 backdrop-blur-[0.5px]"></div>
+<!-- SVG Polígono demarcador de Lote -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" fill="none" viewbox="0 0 340 120" xmlns="http://www.w3.org/2000/svg">
+<polygon class="stroke-secondary-fixed fill-primary/30" points="40,25 295,20 270,100 65,95" stroke-dasharray="6 3" stroke-width="3"></polygon>
+<circle class="fill-secondary-fixed" cx="160" cy="58" r="5"></circle>
+</svg>
+<div class="absolute bottom-2 left-3 right-3 bg-on-surface/85 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center justify-between text-surface">
+<span class="font-headline-sm text-label-sm tracking-wide text-white">Lote 1 · 6,4 ha</span>
+<span class="font-body-md text-label-sm text-surface-container-high truncate">Fortalecillas · 442 msnm</span>
+</div>
+</div>
+</div>
+<!-- Línea de etapas del cultivo (5 pasos ilustrados) -->
+<div class="flex flex-col space-y-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Etapa del cultivo: Maíz tradicional</span>
+<div class="grid grid-cols-5 gap-1.5 text-center pt-1">
+<!-- Paso 1: Siembra (Hecho) -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-sm text-[12px] leading-tight text-on-surface font-semibold">Siembra</span>
+</div>
+<!-- Paso 2: Crecimiento (Hecho) -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-sm text-[12px] leading-tight text-on-surface font-semibold">Crecimiento</span>
+</div>
+<!-- Paso 3: Floración (ACTUAL con halo y badge) -->
+<div class="flex flex-col items-center gap-1 relative">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md scale-110">
+<span class="material-symbols-outlined text-[20px]">psychiatry</span>
+</div>
+<span class="font-headline-sm text-[12px] leading-tight text-primary font-bold">Floración</span>
+<span class="font-label-sm text-[10px] bg-primary text-on-primary px-1.5 py-0.5 rounded-full uppercase tracking-tighter -mt-1 font-extrabold">Hoy</span>
+</div>
+<!-- Paso 4: Llenado (Pendiente) -->
+<div class="flex flex-col items-center gap-1 opacity-65">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">grain</span>
+</div>
+<span class="font-label-sm text-[12px] leading-tight text-on-surface-variant">Llenado</span>
+</div>
+<!-- Paso 5: Cosecha (Pendiente) -->
+<div class="flex flex-col items-center gap-1 opacity-65">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">agriculture</span>
+</div>
+<span class="font-label-sm text-[12px] leading-tight text-on-surface-variant">Cosecha</span>
+</div>
+</div>
+<!-- Resumen de días de campaña -->
+<div class="mt-2 bg-surface-container-lowest rounded px-3 py-2 flex items-center justify-between">
+<span class="font-headline-sm text-label-lg font-bold text-primary">Día 54 de 120</span>
+<span class="font-body-md text-label-sm text-on-surface-variant">Cosecha estimada: <strong class="text-on-surface font-bold">20 de enero</strong></span>
+</div>
+</div>
+<!-- Tres indicadores de estado agronómico -->
+<div class="flex flex-col space-y-2">
+<!-- Humedad -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-space-sm rounded min-h-[48px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[20px]">water_loss</span>
+<span class="font-body-md text-label-lg text-on-surface">Humedad de la tierra</span>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-headline-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+          Baja
+        </span>
+</div>
+<!-- Verdor -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-space-sm rounded min-h-[48px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">eco</span>
+<span class="font-body-md text-label-lg text-on-surface">Verdor del cultivo</span>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-headline-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Bueno
+        </span>
+</div>
+<!-- Calor -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-space-sm rounded min-h-[48px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">thermostat</span>
+<span class="font-body-md text-label-lg text-on-surface">Calor</span>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-headline-sm text-label-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Normal
+        </span>
+</div>
+</div>
+</section>
+<!-- 4. Sección 'Lo que hemos logrado juntos' -->
+<section aria-labelledby="logros-title" class="flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight" id="logros-title">Lo que hemos logrado juntos</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Huila 2024</span>
+</div>
+<!-- Carrusel Horizontal Táctil -->
+<div aria-label="Tarjetas de logros de Ernesto" class="flex gap-space-sm overflow-x-auto pb-2 -mx-margin-mobile px-margin-mobile scroll-smooth snap-x snap-mandatory focus:outline-none" role="region" tabindex="0">
+<!-- Tarjeta 1: Ahorro de agua (Azul) -->
+<div class="snap-start shrink-0 w-64 p-space-md rounded-lg bg-surface-container-high flex flex-col justify-between shadow-sm min-h-[160px]">
+<div class="flex items-center justify-between text-secondary">
+<span class="material-symbols-outlined text-[28px]">water</span>
+<span class="font-label-sm text-label-sm font-bold bg-surface-container-lowest px-2 py-0.5 rounded-full text-on-surface">Riego eficiente</span>
+</div>
+<div class="my-2">
+<div class="font-headline-xl text-headline-xl font-black text-on-surface">1.840 m³</div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">de agua ahorrada</div>
+</div>
+<p class="font-body-md text-label-sm text-on-surface-variant">Como 92 tanques de 20.000 litros en la vereda.</p>
+</div>
+<!-- Tarjeta 2: Nitrógeno (Suelo / Café) -->
+<div class="snap-start shrink-0 w-64 p-space-md rounded-lg bg-tertiary-fixed flex flex-col justify-between shadow-sm min-h-[160px]">
+<div class="flex items-center justify-between text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[28px]">compost</span>
+<span class="font-label-sm text-label-sm font-bold bg-surface-container-lowest px-2 py-0.5 rounded-full text-on-surface">Nutrición</span>
+</div>
+<div class="my-2">
+<div class="font-headline-xl text-headline-xl font-black text-tertiary">48 kg</div>
+<div class="font-label-lg text-label-lg font-bold text-tertiary">de nitrógeno ganado</div>
+</div>
+<p class="font-body-md text-label-sm text-on-tertiary-fixed-variant">Gracias a tu rotación con soya el ciclo pasado.</p>
+</div>
+<!-- Tarjeta 3: Salud del suelo (Verde) con visual circular SVG -->
+<div class="snap-start shrink-0 w-64 p-space-md rounded-lg bg-secondary-fixed flex flex-col justify-between shadow-sm min-h-[160px]">
+<div class="flex items-center justify-between text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[28px]">yard</span>
+<div class="relative w-9 h-9">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path class="stroke-primary/20" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3.5"></path>
+<path class="stroke-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="72, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute inset-0 flex items-center justify-center font-headline-sm text-[10px] font-extrabold text-primary">72%</span>
+</div>
+</div>
+<div class="my-1">
+<div class="font-headline-xl text-headline-xl font-black text-primary">72 / 100</div>
+<div class="font-label-lg text-label-lg font-bold text-on-secondary-fixed">Salud del suelo</div>
+</div>
+<p class="font-body-md text-label-sm text-on-secondary-fixed-variant font-semibold">Subió 9 puntos este año en Fortalecillas.</p>
+</div>
+<!-- Tarjeta 4: Resiliencia de cosecha -->
+<div class="snap-start shrink-0 w-64 p-space-md rounded-lg bg-surface-container-high flex flex-col justify-between shadow-sm min-h-[160px]">
+<div class="flex items-center justify-between text-primary">
+<span class="material-symbols-outlined text-[28px]">verified</span>
+<span class="font-label-sm text-label-sm font-bold bg-surface-container-lowest px-2 py-0.5 rounded-full text-on-surface">Historial</span>
+</div>
+<div class="my-2">
+<div class="font-headline-xl text-headline-xl font-black text-primary">8 de cada 10</div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">Cosechas buenas</div>
+</div>
+<p class="font-body-md text-label-sm text-on-surface-variant">Años con buena cosecha siguiendo tu plan SURCO.</p>
+</div>
+</div>
+</section>
+<!-- 5. Dos Gráficas Simples e Ilustrativas -->
+<section aria-labelledby="graficas-title" class="flex flex-col space-y-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-primary" id="graficas-title">Monitoreo en el tiempo</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Semestre actual</span>
+</div>
+<!-- Gráfica 1: Agua Usada vs Recomendada por Mes -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm flex flex-col space-y-space-sm">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Agua usada vs. recomendada</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Últimos 6 meses (metros cúbicos por hectárea)</span>
+</div>
+<!-- Gráfica SVG nítida sin 3D -->
+<div class="w-full pt-2">
+<svg aria-label="Gráfico de barras de agua usada comparada con la recomendada de mayo a octubre" class="w-full h-44 overflow-visible" fill="none" viewbox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+<!-- Líneas de referencia sutiles -->
+<line class="stroke-outline-variant" stroke-dasharray="4 4" stroke-width="1" x1="20" x2="310" y1="20" y2="20"></line>
+<line class="stroke-outline-variant" stroke-dasharray="4 4" stroke-width="1" x1="20" x2="310" y1="65" y2="65"></line>
+<line class="stroke-outline-variant" stroke-width="1" x1="20" x2="310" y1="110" y2="110"></line>
+<!-- Etiquetas Y -->
+<text class="fill-on-surface-variant text-[11px] font-sans font-medium" x="5" y="24">600</text>
+<text class="fill-on-surface-variant text-[11px] font-sans font-medium" x="5" y="69">300</text>
+<text class="fill-on-surface-variant text-[11px] font-sans font-medium" x="12" y="114">0</text>
+<!-- Barras de Agua Usada (#4A90C8 -> surface-tint / tertiary) y Línea Recomendada (#1F4D2B -> primary) -->
+<!-- Mayo (May) -->
+<rect class="fill-surface-container-highest" height="65" rx="5" width="22" x="36" y="45"></rect>
+<text class="fill-on-surface-variant text-[12px] font-sans font-semibold" x="38" y="128">May</text>
+<!-- Junio (Jun) -->
+<rect class="fill-surface-container-highest" height="55" rx="5" width="22" x="84" y="55"></rect>
+<text class="fill-on-surface-variant text-[12px] font-sans font-semibold" x="87" y="128">Jun</text>
+<!-- Julio (Jul) -->
+<rect class="fill-surface-container-highest" height="75" rx="5" width="22" x="132" y="35"></rect>
+<text class="fill-on-surface-variant text-[12px] font-sans font-semibold" x="137" y="128">Jul</text>
+<!-- Agosto (Ago) -->
+<rect class="fill-surface-container-highest" height="70" rx="5" width="22" x="180" y="40"></rect>
+<text class="fill-on-surface-variant text-[12px] font-sans font-semibold" x="182" y="128">Ago</text>
+<!-- Septiembre (Sep) -->
+<rect class="fill-surface-container-highest" height="50" rx="5" width="22" x="228" y="60"></rect>
+<text class="fill-on-surface-variant text-[12px] font-sans font-semibold" x="231" y="128">Sep</text>
+<!-- Octubre (Oct actual - resaltado) -->
+<rect class="fill-primary-container" height="60" rx="5" width="22" x="276" y="50"></rect>
+<text class="fill-primary font-bold text-[12px] font-sans" x="279" y="128">Oct</text>
+<!-- Línea punteada recomendada (Deep Field Green) -->
+<path class="stroke-primary" d="M 47,40 Q 95,48 143,45 T 239,52 T 287,55" fill="none" stroke-dasharray="5 3" stroke-width="3"></path>
+<circle class="fill-primary" cx="287" cy="55" r="4.5"></circle>
+</svg>
+</div>
+<!-- Leyenda táctil y legible -->
+<div class="flex items-center justify-center gap-space-md pt-2">
+<div class="flex items-center gap-2">
+<span class="w-3.5 h-3.5 rounded-sm bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Agua usada</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-5 h-0.5 border-t-2 border-dashed border-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Recomendada SURCO</span>
+</div>
+</div>
+</div>
+<!-- Gráfica 2: Salud de tu Suelo (Área suave de 63 a 72 puntos) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Salud de tu suelo</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Evolución de los últimos 12 meses</p>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">+9 pts</span>
+</div>
+<div class="w-full pt-1">
+<svg aria-label="Gráfica de tendencia de la salud del suelo subiendo de 63 a 72 puntos" class="w-full h-36 overflow-visible" fill="none" viewbox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Gradiente del área -->
+<defs>
+<lineargradient id="sueloGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#1F4D2B" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#1F4D2B" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Eje base -->
+<line class="stroke-outline-variant" stroke-width="1" x1="20" x2="305" y1="95" y2="95"></line>
+<!-- Área sombreada -->
+<path d="M 25,78 C 70,75 110,68 160,55 C 210,42 260,35 300,22 L 300,95 L 25,95 Z" fill="url(#sueloGradient)"></path>
+<!-- Línea suave continua -->
+<path class="stroke-secondary" d="M 25,78 C 70,75 110,68 160,55 C 210,42 260,35 300,22" fill="none" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Puntos inicial y final -->
+<circle class="fill-surface stroke-primary" cx="25" cy="78" r="4" stroke-width="2"></circle>
+<circle class="fill-primary" cx="300" cy="22" r="5"></circle>
+<!-- Etiquetas de valor numérico -->
+<text class="fill-on-surface-variant font-bold text-[13px] font-sans" x="18" y="70">63</text>
+<text class="fill-primary font-bold text-[14px] font-sans" x="282" y="15">72 pts</text>
+<text class="fill-on-surface-variant text-[12px] font-sans" x="20" y="112">Nov 2023</text>
+<text class="fill-on-surface-variant text-[12px] font-sans" x="250" y="112">Oct 2024</text>
+</svg>
+</div>
+<p class="font-body-md text-label-sm text-on-surface-variant text-center bg-surface-container px-3 py-2 rounded">
+        Suelo más vivo gracias a la materia orgánica de tus rastrojos.
+      </p>
+</div>
+</section>
+<!-- 6. Accesos Rápidos en Cuadrícula 2 x 2 Táctiles (>= 56px de alto) -->
+<section aria-labelledby="accesos-title" class="flex flex-col space-y-space-xs pt-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface" id="accesos-title">Accesos directos</h3>
+<div class="grid grid-cols-2 gap-space-sm pt-1">
+<!-- Opción 1: Asistente -->
+<a class="min-h-[72px] p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center gap-space-xs shadow-xs active:scale-98" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">mic</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-lg font-bold text-on-surface leading-tight truncate">Asistente</span>
+<span class="font-body-md text-[13px] leading-tight text-on-surface-variant truncate">Pregunta lo que sea</span>
+</div>
+</a>
+<!-- Opción 2: Plan de siembra -->
+<a class="min-h-[72px] p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center gap-space-xs shadow-xs active:scale-98" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">calendar_month</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-lg font-bold text-on-surface leading-tight truncate">Plan siembra</span>
+<span class="font-body-md text-[13px] leading-tight text-on-surface-variant truncate">Qué y cuándo</span>
+</div>
+</a>
+<!-- Opción 3: Mis lotes -->
+<a class="min-h-[72px] p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center gap-space-xs shadow-xs active:scale-98" href="#">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">map</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-lg font-bold text-on-surface leading-tight truncate">Mis lotes</span>
+<span class="font-body-md text-[13px] leading-tight text-on-surface-variant truncate">Ver y agregar</span>
+</div>
+</a>
+<!-- Opción 4: Alertas -->
+<a class="min-h-[72px] p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors flex items-center gap-space-xs shadow-xs active:scale-98 relative" href="#">
+<div class="w-12 h-12 rounded-full bg-tertiary-container text-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">notifications_active</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-label-lg font-bold text-on-surface leading-tight truncate">Alertas</span>
+<span class="font-body-md text-[13px] leading-tight text-tertiary font-bold truncate">2 novedades</span>
+</div>
+</a>
+</div>
+</section>
+<!-- 7. Botón Flotante Redondo de Micrófono: 'Hablar con el asistente' -->
+<!-- Posicionado a la derecha con margen adecuado para no obstaculizar el contenido ni tocar los bordes -->
+<div class="fixed bottom-24 right-4 z-40">
+<button aria-label="Hablar con el asistente de voz SURCO" class="w-16 h-16 min-w-[64px] min-h-[64px] rounded-full bg-primary text-on-primary shadow-xl flex items-center justify-center active:scale-90 transition-transform" id="btn-hablar-asistente" type="button">
+<span class="material-symbols-outlined text-[32px]">mic</span>
+</button>
+</div>
+</div>
+<!-- Microinteracciones inline campesinas para confirmación en campo -->
+<script>
+  (function() {
+    const btnRegue = document.getElementById('btn-regue');
+    const btnPorQue = document.getElementById('btn-por-que');
+    const infoPorQue = document.getElementById('info-por-que');
+    const btnVoz = document.getElementById('btn-hablar-asistente');
+
+    if (btnRegue) {
+      btnRegue.addEventListener('click', function() {
+        btnRegue.classList.remove('bg-primary-container', 'text-on-primary');
+        btnRegue.classList.add('bg-secondary-container', 'text-on-secondary-container');
+        btnRegue.innerHTML = '<span class="material-symbols-outlined text-[22px]">done_all</span><span>¡Anotado!</span>';
+        setTimeout(() => {
+          btnRegue.classList.add('opacity-90');
+        }, 1200);
+      });
+    }
+
+    if (btnPorQue && infoPorQue) {
+      btnPorQue.addEventListener('click', function() {
+        infoPorQue.classList.toggle('hidden');
+      });
+    }
+
+    if (btnVoz) {
+      btnVoz.addEventListener('click', function() {
+        btnVoz.classList.toggle('bg-tertiary-container');
+        btnVoz.classList.toggle('bg-primary');
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.05)]" data-active-classes="bg-secondary-container text-on-secondary-container font-bold"><div class="flex justify-between items-center h-20 px-gutter-mobile"><a aria-current="page" class="flex-1 min-w-[56px] min-h-[56px] flex flex-col items-center justify-center gap-0.5 rounded-full py-1 transition-all bg-secondary-container text-on-secondary-container font-bold" data-path="inicio" href="#"><span class="material-symbols-outlined text-[22px]">agriculture</span><span class="font-label-sm text-[11px] leading-tight truncate px-1">Inicio</span></a><a class="flex-1 min-w-[56px] min-h-[56px] flex flex-col items-center justify-center gap-0.5 rounded-full py-1 text-on-surface-variant transition-all" data-path="mis-lotes" href="#"><span class="material-symbols-outlined text-[22px]">crop_landscape</span><span class="font-label-sm text-[11px] leading-tight truncate px-1">Mis lotes</span></a><a class="flex-1 min-w-[56px] min-h-[56px] flex flex-col items-center justify-center gap-0.5 rounded-full py-1 text-on-surface-variant transition-all" data-path="plan-de-siembra" href="#"><span class="material-symbols-outlined text-[22px]">event_note</span><span class="font-label-sm text-[11px] leading-tight truncate px-1">Plan</span></a><a class="flex-1 min-w-[56px] min-h-[56px] flex flex-col items-center justify-center gap-0.5 rounded-full py-1 text-on-surface-variant transition-all" data-path="asistente" href="#"><span class="material-symbols-outlined text-[22px]">smart_toy</span><span class="font-label-sm text-[11px] leading-tight truncate px-1">Asistente</span></a><a class="flex-1 min-w-[56px] min-h-[56px] flex flex-col items-center justify-center gap-0.5 rounded-full py-1 text-on-surface-variant transition-all" data-path="perfil" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-sm text-[11px] leading-tight truncate px-1">Perfil</span></a></div></nav></body></html>

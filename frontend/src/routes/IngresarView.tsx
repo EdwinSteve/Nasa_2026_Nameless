@@ -35,6 +35,7 @@ export const IngresarView: React.FC<IngresarViewProps> = ({ onNavigate }) => {
     try {
       await iniciarSesion({ celular, contrasena });
       setIngresado(true);
+      onNavigate('/inicio');
     } catch (err) {
       setErrorApi(err as ErrorApi);
     } finally {
@@ -61,8 +62,7 @@ export const IngresarView: React.FC<IngresarViewProps> = ({ onNavigate }) => {
         {ingresado ? (
           <div role="status" className="p-4 bg-[#E8E1D3] rounded-2xl border-2 border-[#1F4D2B] flex flex-col gap-1">
             <p className="text-lg font-extrabold">Ya iniciaste sesión</p>
-            {/* Pendiente: enviar al panel del productor cuando exista */}
-            <p className="text-[#14202B]/80">Pronto verás aquí tus fincas y recomendaciones.</p>
+            <p className="text-[#14202B]/80">Te llevamos a tu inicio…</p>
           </div>
         ) : (
           <form onSubmit={alEnviar} noValidate className="flex flex-col gap-5">

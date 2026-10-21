@@ -18,11 +18,31 @@ import type {
   LoteDetalle,
   EstadoModelo,
   RecomendacionResponse,
+  ResumenInicio,
+  RiegoRegistrado,
   Elevacion,
   LoginPayload
 } from './tipos';
 import { peticion } from './http';
 import { guardarSesion } from './sesion';
+import { ESCENARIOS, obtenerResumenInicioMock, registrarRiegoMock, type EscenarioInicio } from './mocks/inicio';
+
+// --- Interruptor de mocks ---
+// NEXT_PUBLIC_USAR_MOCKS="inicio" (o "inicio:nuevo") activa el mock SOLO de los endpoints de la
+// pantalla Inicio, que el backend todavía no tiene. El resto sigue contra la API real.
+// ?demo=historia | nuevo | sin-lote en la URL cambia el escenario sin reiniciar.
+const MOCKS = (process.env.NEXT_PUBLIC_USAR_MOCKS ?? '')
+  .split(',')
+  .map((m) => m.trim())
+  .filter(Boolean);
+
+function mockInicio(): EscenarioInicio | null {
+  const activo = MOCKS.find((m) => m === 'inicio' || m.startsWith('inicio:'));
+  if (!activo) return null;
+  const desdeUrl = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('demo');
+  const elegido = desdeUrl ?? activo.split(':')[1] ?? 'historia';
+  return (ESCENARIOS as readonly string[]).includes(elegido) ? (elegido as EscenarioInicio) : 'historia';
+}
 
 export function guardarTokens(tokens: Tokens): void {
   guardarSesion(tokens);
@@ -181,4 +201,20 @@ export async function obtenerRecomendacion(lote_id: string, recomendacion_id: st
     `/lotes/${encodeURIComponent(lote_id)}/recomendaciones/${encodeURIComponent(recomendacion_id)}`,
     { autenticada: true }
   );
+}
+
+/** GET /inicio: todo lo que muestra la pantalla Inicio. Pendiente en el backend (PENDIENTES-BACKEND.md). */
+export async function obtenerResumenInicio(): Promise<ResumenInicio> {
+  const escenario = mockInicio();
+  if (escenario) return obtenerResumenInicioMock(escenario);
+  return peticion<ResumenInicio>('GET', '/inicio', { autenticada: true });
+}
+
+/** POST /lotes/{lote_id}/riegos: el productor avisa que ya regó. Pendiente en el backend. */
+export async function registrarRiego(lote_id: string): Promise<RiegoRegistrado> {
+  if (mockInicio()) return registrarRiegoMock(lote_id);
+  return peticion<RiegoRegistrado>('POST', `/lotes/${encodeURIComponent(lote_id)}/riegos`, {
+    cuerpo: {},
+    autenticada: true
+  });
 }

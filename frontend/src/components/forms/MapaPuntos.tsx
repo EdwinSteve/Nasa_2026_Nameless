@@ -151,7 +151,7 @@ export default function MapaPuntos({
       <AlTocar activo={interactivo && !cerrado} onAgregar={onAgregar} />
       <Recentrar centro={centro} hayEsquinas={esquinas.length > 0} />
       <EncuadrarLote esquinas={esquinas} />
-      <BotonMiUbicacion />
+      {interactivo && <BotonMiUbicacion />}
 
       {cerrado && esquinas.length >= 3 ? (
         <Polygon positions={esquinas} pathOptions={{ color: '#FFFFFF', weight: 3, fillColor: '#6DBE7A', fillOpacity: 0.35 }} />

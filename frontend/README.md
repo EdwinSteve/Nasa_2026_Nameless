@@ -18,8 +18,9 @@ Next.js reenvía `/api/v1/*` al backend (`next.config.ts`), así que en desarrol
 |---|---|---|
 | `BACKEND_URL` | A dónde reenvía Next.js las llamadas `/api/v1` | `http://localhost:8000` |
 | `NEXT_PUBLIC_API_URL` | Si se define, el navegador llama a esa URL directamente (necesita `CORS_ORIGENES` en el backend) | vacía |
+| `NEXT_PUBLIC_USAR_MOCKS` | Endpoints que se simulan en el navegador. `inicio` (o `inicio:nuevo`, `inicio:sin-lote`) simula `GET /inicio` y `POST /lotes/{id}/riegos`; el escenario también se cambia con `/inicio?demo=historia\|nuevo\|sin-lote`. Ver [PENDIENTES-BACKEND.md](PENDIENTES-BACKEND.md) | vacía |
 
-Otros comandos: `npm run build` (compila y revisa tipos), `npm run lint`.
+Otros comandos: `npm run build` (compila y revisa tipos), `npm run lint`, `npm test` (Vitest).
 
 ## Estructura
 

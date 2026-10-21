@@ -215,3 +215,71 @@ export interface RecomendacionResponse {
   } | null;
   modelo: string | null;
 }
+
+// --- Pantalla Inicio (GET /inicio) ---
+
+/** De dónde sale un dato: va en el chip de fuente ("NASA SMAP · 12 oct"), nunca en el texto principal. */
+export interface Procedencia {
+  fuente: string;          // "NASA SMAP", "NASA HLS", "NASA POWER"
+  fecha: string | null;    // ISO AAAA-MM-DD del dato
+}
+
+/** Un indicador del lote en palabras sencillas, con su nivel para el color. */
+export interface EstadoSimple {
+  nivel: 'bueno' | 'regular' | 'malo' | 'sin_dato';
+  etiqueta: string;        // "Bueno", "Normal", "Baja"
+  procedencia: Procedencia | null;
+}
+
+export type EtapaCultivo = 'siembra' | 'crecimiento' | 'floracion' | 'llenado' | 'cosecha';
+
+export interface ResumenInicio {
+  usuario: { nombre: string };
+  clima_hoy: {
+    temperatura_c: number;
+    estado: 'soleado' | 'nublado' | 'lluvia';
+    probabilidad_lluvia_pct: number;
+    procedencia: Procedencia;
+  };
+  recomendacion_hoy: {
+    tipo: 'riego' | 'siembra' | 'cosecha' | 'alerta' | 'ninguna';
+    mensaje: string;
+    detalle_porque: string;
+    procedencia: Procedencia;
+  } | null;
+  lote_principal: {
+    id: string;
+    nombre: string;
+    area_ha: number;
+    corregimiento_nombre: string;
+    altitud_msnm: number | null;
+    poligono: GeoJSONPolygon;
+    cultivo: {
+      nombre: string;
+      dia_actual: number;
+      dias_ciclo: number;
+      etapa_actual: EtapaCultivo;
+      fecha_cosecha_estimada: string;
+    } | null;
+    indicadores: { humedad: EstadoSimple; verdor: EstadoSimple; calor: EstadoSimple };
+  } | null;
+  alertas_pendientes: number;
+  logros: {
+    agua_ahorrada_m3: number;
+    nitrogeno_kg: number;
+    salud_suelo: number;
+    salud_suelo_cambio: number;
+    frecuencia_exito: number; // 8 = "8 de cada 10 años"
+  } | null; // null = usuario nuevo
+  series: {
+    agua_mensual: Array<{ mes: string; usada_m3_ha: number; recomendada_m3_ha: number }>; // mes AAAA-MM
+    salud_suelo: Array<{ mes: string; valor: number }>;
+  } | null;
+}
+
+/** POST /lotes/{lote_id}/riegos */
+export interface RiegoRegistrado {
+  riego_id: string;
+  lote_id: string;
+  registrado_en: string; // ISO con hora
+}
