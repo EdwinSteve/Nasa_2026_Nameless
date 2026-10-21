@@ -4,6 +4,6 @@
     {"id": "campoalegre-arroz", "nombre": "Zona arrocera de Campoalegre", "lat": 2.69, "lon": -75.33, "elev_m": 525, "cultivo_actual": "arroz", "sistema": "riego"},
     {"id": "villavieja-seco", "nombre": "Borde del desierto de la Tatacoa (Villavieja)", "lat": 3.22, "lon": -75.22, "elev_m": 430, "cultivo_actual": "maíz", "sistema": "secano"},
     {"id": "garzon-cafe", "nombre": "Ladera cafetera de Garzón", "lat": 2.20, "lon": -75.65, "elev_m": 1200, "cultivo_actual": "café", "sistema": "secano"},
-    {"id": "pitalito-cafe", "nombre": "Zona cafetera de Pitalito", "lat": 1.85, "lon": -76.05, "elev_m": 1320, "cultivo_actual": "café", "sistema": "secano"}
+    {"id": "pitalito-cafe", "nombre": "Ladera cafetera de Pitalito (zona rural, 4 km al sureste del casco urbano)", "lat": 1.82, "lon": -76.02, "elev_m": 1472, "cultivo_actual": "café", "sistema": "secano"}
   ]
 }
