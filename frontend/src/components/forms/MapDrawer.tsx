@@ -1,7 +1,25 @@
 // src/components/forms/MapDrawer.tsx
-// Marcador de posición del mapa: el modo "dibujar" se conectará a Leaflet.
-import React, { useState } from 'react';
-import type { GeoJSONPolygon } from '../../api/tipos';
+// Paso 3 del registro: el productor marca su lote sobre un mapa satelital.
+// "Tocar esquinas" usa el mapa real (MapaPuntos); "Coordenadas" y "Caminar el borde"
+// generan el polígono de otra forma, y el mapa también lo muestra.
+import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import type { Coordenada, GeoJSONPolygon } from '../../api/tipos';
+import { calcularCentroide, esquinasAPoligono, poligonoAEsquinas } from '../../lib/geo';
+import type { Esquina } from './MapaPuntos';
+
+// Leaflet necesita el navegador: el mapa no se renderiza en el servidor.
+const MapaPuntos = dynamic(() => import('./MapaPuntos'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-full w-full flex items-center justify-center text-sm font-bold text-white/80">
+      Cargando mapa satelital…
+    </div>
+  )
+});
+
+const MINIMO_ESQUINAS = 3;
+const formatoCoordenada = (valor: number) => valor.toFixed(5).replace('.', ',');
 
 export type MapMode = 'dibujar' | 'caminar_borde' | 'coordenadas';
 
@@ -14,6 +32,8 @@ export interface MapDrawerProps {
   onPolygonChange: (poligono: GeoJSONPolygon | null) => void;
   error?: string;
   disabled?: boolean;
+  /** Dónde arranca el mapa: el corregimiento o municipio elegido en el paso 2. */
+  centro?: Coordenada | null;
 }
 
 export const MapDrawer: React.FC<MapDrawerProps> = ({
@@ -24,8 +44,45 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
   onModoChange,
   onPolygonChange,
   error,
-  disabled = false
+  disabled = false,
+  centro = null
 }) => {
+  // Esquinas que el productor va marcando, en orden y como [lat, lon]
+  const [esquinas, setEsquinas] = useState<Esquina[]>(() => (poligono ? poligonoAEsquinas(poligono) : []));
+  const cerrado = poligono !== null;
+  const centroide = poligono ? calcularCentroide(poligono) : null;
+  const interactivo = modo === 'dibujar' && !disabled;
+
+  // Un lote que llega de otro modo (coordenadas, caminata) también se ve y se edita en el mapa
+  useEffect(() => {
+    if (poligono) setEsquinas(poligonoAEsquinas(poligono));
+  }, [poligono]);
+
+  const agregarEsquina = (esquina: Esquina) => {
+    if (!cerrado) setEsquinas((previas) => [...previas, esquina]);
+  };
+
+  const moverEsquina = (indice: number, esquina: Esquina) => {
+    const nuevas = esquinas.map((actual, i) => (i === indice ? esquina : actual));
+    setEsquinas(nuevas);
+    if (cerrado) onPolygonChange(esquinasAPoligono(nuevas));
+  };
+
+  const cerrarLote = () => {
+    if (esquinas.length >= MINIMO_ESQUINAS) onPolygonChange(esquinasAPoligono(esquinas));
+  };
+
+  // Con el lote cerrado, deshacer lo vuelve a abrir; abierto, quita la última esquina
+  const deshacer = () => {
+    if (cerrado) onPolygonChange(null);
+    else setEsquinas((previas) => previas.slice(0, -1));
+  };
+
+  const borrarTodo = () => {
+    setEsquinas([]);
+    onPolygonChange(null);
+  };
+
   // Coordenadas con valores iniciales VACÍOS
   const [latInput, setLatInput] = useState<string>('');
   const [lngInput, setLngInput] = useState<string>('');
@@ -129,31 +186,33 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
         </button>
       </div>
 
+      {modo === 'dibujar' && (
+        <p className="text-base text-[#14202B]/80">
+          Toca el mapa en cada esquina de tu lote, siguiendo el borde. Si te equivocas, arrastra la esquina.
+        </p>
+      )}
+
       {/* Contenedor id="mapa-lote" */}
       <div
         id="mapa-lote"
-        className="relative w-full h-72 sm:h-80 bg-[#1D3323] rounded-2xl overflow-hidden border-2 border-[#1F4D2B] shadow-inner flex flex-col justify-between p-4"
+        className="relative isolate w-full h-80 sm:h-96 bg-[#1D3323] rounded-2xl overflow-hidden border-2 border-[#1F4D2B] shadow-inner"
       >
-        <div
-          className="absolute inset-0 opacity-40 bg-cover bg-center pointer-events-none"
-          style={{
-            backgroundImage: `radial-gradient(circle at 50% 50%, rgba(109, 190, 122, 0.3) 0%, rgba(20, 32, 43, 0.9) 100%)`
-          }}
-        />
+        <div className="absolute inset-0 z-0">
+          <MapaPuntos
+            esquinas={esquinas}
+            cerrado={cerrado}
+            centroide={centroide}
+            centro={centro}
+            interactivo={interactivo}
+            onAgregar={agregarEsquina}
+            onMover={moverEsquina}
+          />
+        </div>
 
-        {!poligono && modo === 'dibujar' && (
-          <div className="relative z-10 m-auto bg-black/75 backdrop-blur-sm px-5 py-3 rounded-xl border border-white/20 text-center">
-            <p className="text-white text-base font-bold">
-              Toca las esquinas de tu lote
-            </p>
-            <span className="text-xs text-white/70 mt-0.5 block">
-              Haz clic en cada vértice para cerrar el perímetro
-            </span>
-          </div>
-        )}
+          {modo === 'caminar_borde' && (
+            <div className="absolute inset-0 z-[1100] flex overflow-y-auto bg-black/30 p-4">
 
-        {modo === 'caminar_borde' && (
-          <div className="relative z-10 m-auto bg-white/95 backdrop-blur-md p-4 rounded-xl text-center shadow-lg max-w-xs">
+          <div className="m-auto bg-white/95 backdrop-blur-md p-4 rounded-xl text-center shadow-lg max-w-xs">
             <p className="text-sm font-bold text-[#14202B]">
               Caminarás el lindero con el celular en la mano
             </p>
@@ -180,10 +239,13 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
               Simular recorrido (demo)
             </button>
           </div>
-        )}
+            </div>
+          )}
 
-        {modo === 'coordenadas' && (
-          <div className="relative z-10 m-auto bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-lg w-full max-w-sm">
+          {modo === 'coordenadas' && (
+            <div className="absolute inset-0 z-[1100] flex overflow-y-auto bg-black/30 p-4">
+
+          <div className="m-auto bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-lg w-full max-w-sm">
             <div className="grid grid-cols-2 gap-3 mb-2">
               <div>
                 <label htmlFor="coord-lat" className="text-base font-bold text-[#14202B] block mb-1">
@@ -245,31 +307,62 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
               Usar estas coordenadas
             </button>
           </div>
-        )}
-
-        {/* Badge inferior: Cálculo de Área */}
-        <div className="relative z-10 bg-white/95 rounded-xl p-3 shadow-md flex items-center justify-between">
-          <div>
-            <span className="text-xs text-[#14202B]/60 font-bold block uppercase tracking-wider">
-              Área estimada del lote
-            </span>
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-black text-[#1F4D2B]">
-                {area_ha !== null ? area_ha.toFixed(1) : '—'}
-              </span>
-              <span className="text-base font-bold text-[#14202B]">
-                ha
-              </span>
             </div>
+          )}
+      </div>
+
+      {interactivo && (
+        <div className="grid grid-cols-3 gap-2">
+          <button
+            type="button"
+            onClick={deshacer}
+            disabled={esquinas.length === 0}
+            className="min-h-[56px] rounded-xl border-2 border-[#D2C8B5] bg-white text-sm font-extrabold text-[#14202B] disabled:opacity-40"
+          >
+            Deshacer
+          </button>
+          <button
+            type="button"
+            onClick={cerrarLote}
+            disabled={cerrado || esquinas.length < MINIMO_ESQUINAS}
+            className="min-h-[56px] rounded-xl bg-[#1F4D2B] text-sm font-extrabold text-white shadow-md hover:bg-[#16381F] disabled:opacity-40"
+          >
+            {cerrado ? 'Lote cerrado' : `Cerrar lote (${esquinas.length})`}
+          </button>
+          <button
+            type="button"
+            onClick={borrarTodo}
+            disabled={esquinas.length === 0}
+            className="min-h-[56px] rounded-xl border-2 border-[#D94F4F]/30 bg-[#D94F4F]/10 text-sm font-extrabold text-[#D94F4F] disabled:opacity-40"
+          >
+            Borrar
+          </button>
+        </div>
+      )}
+
+      {/* Área y punto medio del lote */}
+      <div aria-live="polite" className="bg-white rounded-xl border-2 border-[#D2C8B5] p-3 grid grid-cols-2 gap-3">
+        <div>
+          <span className="text-xs text-[#14202B]/60 font-bold block uppercase tracking-wider">Área estimada</span>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-2xl font-black text-[#1F4D2B]">{area_ha !== null ? area_ha.toFixed(1).replace('.', ',') : '—'}</span>
+            <span className="text-base font-bold text-[#14202B]">ha</span>
           </div>
-          {poligono && !disabled && (
-            <button
-              type="button"
-              onClick={() => onPolygonChange(null)}
-              className="text-xs font-bold text-[#D94F4F] bg-[#D94F4F]/10 px-3 py-2 rounded-lg border border-[#D94F4F]/20"
-            >
-              Borrar esquinas
-            </button>
+        </div>
+        <div>
+          <span className="text-xs text-[#14202B]/60 font-bold block uppercase tracking-wider">Punto medio</span>
+          {centroide ? (
+            <span className="block text-sm font-bold text-[#14202B] font-mono leading-snug">
+              {formatoCoordenada(centroide.lat)}
+              <br />
+              {formatoCoordenada(centroide.lon)}
+            </span>
+          ) : (
+            <span className="block text-sm text-[#14202B]/60 leading-snug">
+              {esquinas.length < MINIMO_ESQUINAS
+                ? `Marca al menos ${MINIMO_ESQUINAS} esquinas`
+                : 'Toca "Cerrar lote"'}
+            </span>
           )}
         </div>
       </div>

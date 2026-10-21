@@ -87,10 +87,16 @@ export interface CrearLotePayload {
   cultivo_anterior: string | null;
 }
 
+export interface Coordenada {
+  lat: number;
+  lon: number;
+}
+
 export interface LoteResponse {
   id: string;
   nombre: string;
   area_ha: number;
+  centroide: Coordenada; // punto medio del lote, calculado y guardado por el backend
 }
 
 export type PrioridadTipo = 'ahorro_agua' | 'ganar_mas' | 'cuidar_suelo' | 'arriesgar_menos';

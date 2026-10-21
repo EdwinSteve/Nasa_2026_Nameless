@@ -52,7 +52,9 @@ Las pantallas en `src/routes/` reciben `onNavigate` en lugar de usar el router d
 - **Registro:** el módulo identidad usa nombres en inglés (`full_name`, `phone`...). `services.ts` los traduce y los errores de campo vuelven con los nombres del formulario.
 - **Sesión:** los tokens se guardan en `localStorage` y el access token se renueva solo con el refresh token. Pendiente de seguridad: pasar el refresh token a una cookie httpOnly.
 - **Área del lote:** la UI muestra una estimación mientras se dibuja; el área oficial la calcula el backend.
-- **Pendiente:** `MapDrawer` sigue siendo un marcador de posición. "Caminar el borde" (demo) y "Coordenadas" ya generan un polígono, pero "Tocar esquinas" se conectará a Leaflet. Tampoco existen aún `/ingresar` ni la ficha del lote.
+- **Mapa del lote (paso 3):** `MapaPuntos` (Leaflet + react-leaflet) sobre imágenes satelitales de Esri. El productor toca cada esquina, puede arrastrarlas, deshacer y cerrar el lote; el mapa arranca en el corregimiento elegido en el paso 2 y tiene un botón "Mi ubicación". El punto medio (centroide de área) se muestra en la UI y el backend lo calcula y lo guarda.
+- **Imágenes del mapa:** las teselas de Esri World Imagery exigen la atribución que ya se muestra. Antes de salir a producción hay que revisar sus términos de uso o cambiar a otra fuente.
+- **Pendiente:** "Caminar el borde" sigue siendo una demo (dibuja un lote fijo); falta el panel del productor después de `/ingresar` y la ficha del lote.
 
 ## Convenciones de UI
 

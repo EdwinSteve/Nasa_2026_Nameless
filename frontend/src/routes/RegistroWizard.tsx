@@ -1,7 +1,7 @@
 // src/routes/RegistroWizard.tsx
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { StepperProgress } from '../components/forms/StepperProgress';
 import { PhoneInput } from '../components/forms/PhoneInput';
 import { ConsentCard } from '../components/forms/ConsentCard';
@@ -18,7 +18,8 @@ import type {
   PrioridadTipo,
   PoliticaVigente,
   MunicipioItem,
-  CorregimientoItem
+  CorregimientoItem,
+  Coordenada
 } from '../api/tipos';
 import {
   obtenerPoliticaVigente,
@@ -101,6 +102,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
   const [usuarioId, setUsuarioId] = useState<string | null>(null);
   const [fincaId, setFincaId] = useState<string | null>(null);
   const [loteId, setLoteId] = useState<string | null>(null);
+  const [centroideGuardado, setCentroideGuardado] = useState<Coordenada | null>(null);
 
   // --- Catálogos y estados de error ---
   const [municipiosOptions, setMunicipiosOptions] = useState<MunicipioItem[]>([]);
@@ -151,6 +153,15 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
   ]);
 
   const areaLoteHa = poligonoCoords ? calcularAreaHa(poligonoCoords) : null;
+
+  // El mapa del paso 3 arranca en el corregimiento elegido en el paso 2 (o en su municipio)
+  const centroMapa = useMemo<Coordenada | null>(() => {
+    const corregimiento = corregimientosOptions.find((c) => c.codigo === corregimientoFinca);
+    if (corregimiento?.lat != null && corregimiento.lon != null) return { lat: corregimiento.lat, lon: corregimiento.lon };
+    const municipio = municipiosOptions.find((m) => m.codigo === municipioFinca);
+    if (municipio?.lat != null && municipio.lon != null) return { lat: municipio.lat, lon: municipio.lon };
+    return null;
+  }, [corregimientosOptions, corregimientoFinca, municipiosOptions, municipioFinca]);
 
   // Carga inicial de política de datos
   const fetchPolitica = async () => {
@@ -435,6 +446,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
           cultivo_anterior: cultivoAnterior === 'ninguno' ? null : cultivoAnterior
         });
         setLoteId(resp.id);
+        setCentroideGuardado(resp.centroide);
         setCurrentStep(4);
       } catch (err: unknown) {
         handleBackendErrorCatch(err, 3);
@@ -710,7 +722,14 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
         {currentStep === 3 && (
           <div className="space-y-6">
             {paso3Bloqueado && (
-              <AvisoGuardado titulo="Tu lote ya está guardado" detalle="Puedes seguir al último paso." />
+              <AvisoGuardado
+                titulo="Tu lote ya está guardado"
+                detalle={
+                  centroideGuardado
+                    ? `Punto medio: ${centroideGuardado.lat.toFixed(5).replace('.', ',')}; ${centroideGuardado.lon.toFixed(5).replace('.', ',')}. Puedes seguir al último paso.`
+                    : 'Puedes seguir al último paso.'
+                }
+              />
             )}
 
             <div className="text-left">
@@ -746,6 +765,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
               onPolygonChange={setPoligonoCoords}
               error={errorsPaso3.poligono}
               disabled={paso3Bloqueado}
+              centro={centroMapa}
             />
 
             {/* ¿Tiene riego? */}
