@@ -19,6 +19,7 @@ import asyncio
 import json
 import sys
 from datetime import date, timedelta
+from functools import lru_cache
 from pathlib import Path
 
 import httpx
@@ -82,6 +83,133 @@ def filtros_duros(lista: list[dict], elevacion: float, ph: float | None) -> list
     return motivos
 
 
+TAREAS = ('puntaje', 'exito', 'riego_mm', 'dias_estres')
+
+
+class ModeloNoDisponible(RuntimeError):
+    """Faltan los archivos del modelo: los .ubj no se versionan (pesan hasta 150 MB)."""
+
+
+def archivos_modelo(corrida: str) -> list[Path]:
+    carpeta = MODELOS / corrida
+    return [carpeta / 'informe.json', carpeta / 'calibracion.json'] + [carpeta / f'modelo_a_{t}.ubj' for t in TAREAS]
+
+
+def verificar_modelo(corrida: str) -> None:
+    faltan = [str(a.relative_to(RAIZ)) for a in archivos_modelo(corrida) if not a.exists()]
+    if faltan:
+        raise ModeloNoDisponible(
+            f"Faltan los archivos del modelo '{corrida}': {', '.join(faltan)}. "
+            'Cópialos desde la máquina de entrenamiento (ml/modelos_exportados/).'
+        )
+
+
+@lru_cache(maxsize=4)
+def cargar_modelo(corrida: str) -> tuple[dict, dict, dict[str, xgb.Booster]]:
+    """Informe, calibración y los cuatro modelos. Queda en memoria: el backend predice muchas veces."""
+    verificar_modelo(corrida)
+    carpeta = MODELOS / corrida
+    informe = json.loads((carpeta / 'informe.json').read_text(encoding='utf-8'))
+    cal = json.loads((carpeta / 'calibracion.json').read_text(encoding='utf-8'))
+    modelos = {}
+    for t in TAREAS:
+        m = xgb.Booster()
+        m.load_model(carpeta / f'modelo_a_{t}.ubj')
+        m.set_param({'device': 'cpu'})
+        modelos[t] = m
+    return informe, cal, modelos
+
+
+def ultima_fecha_de_siembra(hoy: date | None = None) -> date:
+    """La fecha de siembra del modelo (día 1 o 16) más reciente con datos de POWER (~10 días de retraso)."""
+    limite = (hoy or date.today()) - timedelta(days=10)
+    return date(limite.year, limite.month, 16 if limite.day >= 16 else 1)
+
+
+def recomendar(datos: dict, fecha: date, corrida: str = 'tiempo', comparar_real: bool = True) -> dict:
+    """Pasos 2 a 6 sobre los datos ya descargados (JSON de datos_tierra con 'soil' procesado).
+
+    Devuelve un resultado por cultivo del catálogo, con los filtros duros y, si el ciclo ya
+    ocurrió y se pide, lo que de verdad pasó según el oráculo.
+    """
+    if fecha.day not in DIAS_SIEMBRA:
+        raise ValueError(f'La fecha debe ser un día {DIAS_SIEMBRA}: el modelo se entrenó con siembras del 1 y el 16.')
+    informe, cal, modelos = cargar_modelo(corrida)
+    serie = desde_json(datos, 'prueba')
+
+    # --- 2. Features del día de la siembra (mismo código del entrenamiento)
+    siembras = siembras_de_la_serie(serie, fecha)
+    fila = int(np.where(siembras['idx'] == serie.indice(fecha))[0][0])
+    feats = construir.construir(serie, siembras)
+    lista = catalogo.cargar()
+    arreglos = catalogo.a_arreglos(lista)
+    taw = etiquetas.taw_por_cultivo(serie, arreglos)
+    fichas = catalogo.features(lista)
+
+    nombres = informe['features']
+    n_c = len(lista)
+    x = np.empty((n_c, len(nombres)), np.float32)
+    for j, col in enumerate(nombres):
+        if col.startswith('f_'):
+            x[:, j] = feats[col][fila]
+        elif col.startswith('c_'):
+            x[:, j] = fichas[col]
+        else:
+            x[:, j] = taw
+    resumen = {k: round(float(feats[k][fila]), 2) for k in ('f_t_media_90', 'f_lluvia_90', 'f_lluvia_365', 'f_oni',
+                                                            'f_sm_raiz', 'f_clim_lluvia_210_media', 'f_clim_t_210_media')}
+
+    # --- 3. Predicción + calibración
+    d = xgb.DMatrix(x, feature_names=nombres)
+    p, r = modelos['puntaje'].predict(d), modelos['riego_mm'].predict(d)
+    tipo = fichas['c_tipo_ciclo'].astype(int)
+    p10, p90 = calibracion.aplicar_conformal(p[:, 0], p[:, 1], p[:, 2], tipo, cal['puntaje_conformal'], 0.0, 1.0)
+    r10, r90 = calibracion.aplicar_conformal(r[:, 0], r[:, 1], r[:, 2], tipo, cal['riego_conformal'], 0.0)
+    prob = calibracion.aplicar_isotonica(modelos['exito'].predict(d), cal['exito_isotonica'])
+    estres = modelos['dias_estres'].predict(d)
+    sin_agua = ~arreglos.tiene_agua | ~np.isfinite(taw)
+
+    # --- 4. Filtros duros
+    ph = (serie.suelo or {}).get('summary', {}).get('0-30cm', {}).get('phh2o', {}).get('Q0.5')
+    motivos = filtros_duros(lista, serie.elevacion_m, ph)
+
+    # --- 6. Lo que de verdad pasó (oráculo con el clima real)
+    real = None
+    if comparar_real:
+        r_real = simulador.simular(serie.v, np.array([serie.indice(fecha)]), arreglos, taw)
+        if np.isfinite(r_real['puntaje'][0]).any():
+            real = {k: v[0] for k, v in r_real.items()}
+
+    # --- 5. Un resultado por cultivo
+    resultados = []
+    for i, c in enumerate(lista):
+        fila_r = {
+            'cultivo': c['nombre'], 'id': c['_id'], 'pasa_filtros': motivos[i] is None, 'motivo': motivos[i],
+            'puntaje_p50': float(p[i, 1]), 'puntaje_p10': float(p10[i]), 'puntaje_p90': float(p90[i]),
+            'prob_exito': float(prob[i]),
+            'riego_neto_mm': None if sin_agua[i] else float(max(r[i, 1], 0)),
+            'riego_p10_mm': None if sin_agua[i] else float(r10[i]), 'riego_p90_mm': None if sin_agua[i] else float(r90[i]),
+            'dias_estres': None if sin_agua[i] else float(max(estres[i], 0)),
+            'dias_ciclo': int(arreglos.dias_ciclo[i]),
+        }
+        if real is not None and np.isfinite(real['puntaje'][i]):
+            fila_r.update(real_puntaje=float(real['puntaje'][i]), real_exito=float(real['exito'][i]),
+                          real_riego_mm=None if np.isnan(real['riego_mm'][i]) else float(real['riego_mm'][i]))
+        resultados.append(fila_r)
+
+    return {
+        'fecha': fecha.isoformat(),
+        'corrida': corrida,
+        'arboles': informe['arboles'],
+        'n_features': len(nombres),
+        'elevacion_m': float(serie.elevacion_m),
+        'ph_0_30': None if ph is None else float(ph),
+        'features_resumen': resumen,
+        'eficiencia_riego': EFICIENCIA_RIEGO,
+        'resultados': resultados,
+    }
+
+
 def main() -> None:
     # La consola de Windows usa cp1252 y no imprime todos los caracteres (tildes en tablas, flechas)
     for flujo in (sys.stdout, sys.stderr):
@@ -118,78 +246,19 @@ def main() -> None:
     serie = desde_json(datos, 'prueba')
     print(f'   fuentes {estados} | elevación {serie.elevacion_m:.0f} m | {len(serie.fechas)} días', flush=True)
 
-    # --- 2. Features del día de la siembra (mismo código del entrenamiento)
-    siembras = siembras_de_la_serie(serie, fecha)
-    fila = int(np.where(siembras['idx'] == serie.indice(fecha))[0][0])
-    feats = construir.construir(serie, siembras)
-    lista = catalogo.cargar()
-    arreglos = catalogo.a_arreglos(lista)
-    taw = etiquetas.taw_por_cultivo(serie, arreglos)
-    fichas = catalogo.features(lista)
-
-    carpeta = MODELOS / a.corrida
-    informe = json.loads((carpeta / 'informe.json').read_text(encoding='utf-8'))
-    cal = json.loads((carpeta / 'calibracion.json').read_text(encoding='utf-8'))
-    nombres = informe['features']
-    n_c = len(lista)
-    x = np.empty((n_c, len(nombres)), np.float32)
-    for j, col in enumerate(nombres):
-        if col.startswith('f_'):
-            x[:, j] = feats[col][fila]
-        elif col.startswith('c_'):
-            x[:, j] = fichas[col]
-        else:
-            x[:, j] = taw
-    resumen = {k: round(float(feats[k][fila]), 2) for k in ('f_t_media_90', 'f_lluvia_90', 'f_lluvia_365', 'f_oni',
-                                                            'f_sm_raiz', 'f_clim_lluvia_210_media', 'f_clim_t_210_media')}
-    print(f'2. Features del {fecha}: {len(nombres)} columnas | {resumen}', flush=True)
-
-    # --- 3. Predicción + calibración
-    d = xgb.DMatrix(x, feature_names=nombres)
-    modelos = {}
-    for t in ('puntaje', 'exito', 'riego_mm', 'dias_estres'):
-        m = xgb.Booster()
-        m.load_model(carpeta / f'modelo_a_{t}.ubj')
-        m.set_param({'device': 'cpu'})
-        modelos[t] = m
-    p, r = modelos['puntaje'].predict(d), modelos['riego_mm'].predict(d)
-    tipo = fichas['c_tipo_ciclo'].astype(int)
-    p10, p90 = calibracion.aplicar_conformal(p[:, 0], p[:, 1], p[:, 2], tipo, cal['puntaje_conformal'], 0.0, 1.0)
-    r10, r90 = calibracion.aplicar_conformal(r[:, 0], r[:, 1], r[:, 2], tipo, cal['riego_conformal'], 0.0)
-    prob = calibracion.aplicar_isotonica(modelos['exito'].predict(d), cal['exito_isotonica'])
-    estres = modelos['dias_estres'].predict(d)
-    sin_agua = ~arreglos.tiene_agua | ~np.isfinite(taw)
-    print(f"3. Predicción con los modelos '{a.corrida}' ({informe['arboles']} árboles), calibrada", flush=True)
-
-    # --- 4. Filtros duros
-    ph = (serie.suelo or {}).get('summary', {}).get('0-30cm', {}).get('phh2o', {}).get('Q0.5')
-    motivos = filtros_duros(lista, serie.elevacion_m, ph)
-    print(f"4. Filtros duros: {sum(m is None for m in motivos)} de {n_c} cultivos pasan "
+    # --- 2 a 6: el mismo cálculo que usa el backend
+    try:
+        r = recomendar(datos, fecha, a.corrida, comparar_real=not a.sin_real)
+    except ModeloNoDisponible as exc:
+        raise SystemExit(str(exc)) from exc
+    resultados = r['resultados']
+    n_c = len(resultados)
+    real = any('real_puntaje' in x for x in resultados) or None
+    print(f"2. Features del {fecha}: {r['n_features']} columnas | {r['features_resumen']}", flush=True)
+    print(f"3. Predicción con los modelos '{a.corrida}' ({r['arboles']} árboles), calibrada", flush=True)
+    ph = r['ph_0_30']
+    print(f"4. Filtros duros: {sum(x['pasa_filtros'] for x in resultados)} de {n_c} cultivos pasan "
           f"(altitud {serie.elevacion_m:.0f} m, pH 0-30 cm {ph if ph is None else round(ph, 1)})", flush=True)
-
-    # --- 6. Lo que de verdad pasó (oráculo con el clima real)
-    real = None
-    if not a.sin_real:
-        r_real = simulador.simular(serie.v, np.array([serie.indice(fecha)]), arreglos, taw)
-        if np.isfinite(r_real['puntaje'][0]).any():
-            real = {k: v[0] for k, v in r_real.items()}
-
-    # --- 5. Ranking
-    resultados = []
-    for i, c in enumerate(lista):
-        fila_r = {
-            'cultivo': c['nombre'], 'id': c['_id'], 'pasa_filtros': motivos[i] is None, 'motivo': motivos[i],
-            'puntaje_p50': float(p[i, 1]), 'puntaje_p10': float(p10[i]), 'puntaje_p90': float(p90[i]),
-            'prob_exito': float(prob[i]),
-            'riego_neto_mm': None if sin_agua[i] else float(max(r[i, 1], 0)),
-            'riego_p10_mm': None if sin_agua[i] else float(r10[i]), 'riego_p90_mm': None if sin_agua[i] else float(r90[i]),
-            'dias_estres': None if sin_agua[i] else float(max(estres[i], 0)),
-            'dias_ciclo': int(arreglos.dias_ciclo[i]),
-        }
-        if real is not None and np.isfinite(real['puntaje'][i]):
-            fila_r.update(real_puntaje=float(real['puntaje'][i]), real_exito=float(real['exito'][i]),
-                          real_riego_mm=None if np.isnan(real['riego_mm'][i]) else float(real['riego_mm'][i]))
-        resultados.append(fila_r)
     ok = sorted([x for x in resultados if x['pasa_filtros']], key=lambda x: -x['puntaje_p50'])
 
     print(f'\n5. Recomendación para sembrar el {fecha} en {nombre}:\n')

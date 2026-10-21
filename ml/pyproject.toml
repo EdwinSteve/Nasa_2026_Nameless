@@ -1,12 +1,14 @@
 [project]
 name = "surco-datos-tierra"
 version = "2.0.0"
-description = "Servicio de datos del lote de SURCO: NASA POWER, SMAP, IMERG, MODIS, SoilGrids, SRTM y ONI"
+description = "Servicio de datos del lote (datos_tierra) y modelo predictivo (surco_ml) de SURCO"
 requires-python = ">=3.11"
 dependencies = ["httpx>=0.27"]
 
 [project.optional-dependencies]
-gee = ["earthengine-api>=1.0"]   # SMAP, IMERG y MODIS
+gee = ["earthengine-api>=1.0"]   # SMAP, IMERG, MODIS y SoilGrids por Earth Engine
+# Predicción con el modelo A (lo que usa el backend). Entrenar necesita requirements-entrenamiento.txt
+modelo = ["numpy>=2.0", "xgboost>=2.1", "numba>=0.60", "scikit-learn>=1.5"]
 dev = ["pytest>=8"]
 
 [build-system]
@@ -14,4 +16,4 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["datos_tierra*"]
+include = ["datos_tierra*", "surco_ml*"]

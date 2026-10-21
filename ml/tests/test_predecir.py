@@ -22,3 +22,20 @@ def test_siembras_llegan_hasta_la_fecha_pedida_aunque_pase_de_2024():
     s = siembras_de_la_serie(serie, date(2025, 3, 1))
     assert s['anio'][-1] == 2025 and s['mes'][-1] == 3 and s['dia'][-1] == 1
     assert len(s['idx']) == 44 * 24 + 5          # 1981-2024 completos + ene-1 a mar-1 de 2025
+
+
+def test_ultima_fecha_de_siembra_es_un_1_o_16_con_datos():
+    from surco_ml.predecir import ultima_fecha_de_siembra
+
+    assert ultima_fecha_de_siembra(date(2026, 10, 20)) == date(2026, 10, 1)   # 10-oct: aún no llega al 16
+    assert ultima_fecha_de_siembra(date(2026, 10, 27)) == date(2026, 10, 16)
+    assert ultima_fecha_de_siembra(date(2026, 1, 5)) == date(2025, 12, 16)
+
+
+def test_sin_archivos_del_modelo_avisa_cuales_faltan():
+    import pytest
+
+    from surco_ml.predecir import ModeloNoDisponible, verificar_modelo
+
+    with pytest.raises(ModeloNoDisponible, match='modelo_a_puntaje.ubj'):
+        verificar_modelo('corrida_que_no_existe')

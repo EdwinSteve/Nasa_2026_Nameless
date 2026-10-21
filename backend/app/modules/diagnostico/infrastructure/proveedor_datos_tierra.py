@@ -22,6 +22,7 @@ BUFFER_MODIS_M = 500   # unos cuatro píxeles MODIS de 250 m alrededor del lote
 # El diagnóstico solo resume la capa arable: pedir menos hace que SoilGrids responda en segundos.
 SUELO_PROPIEDADES = ["sand", "silt", "clay", "soc", "phh2o", "nitrogen", "wv0033", "wv1500"]
 SUELO_PROFUNDIDADES = ["0-5cm", "5-15cm", "15-30cm"]
+SUELO_TIEMPO_GEE_S = 60
 
 
 class DatosTierraNoInstalado(RuntimeError):
@@ -33,11 +34,11 @@ def _dt() -> SimpleNamespace:
     """Importa datos_tierra al usarlo: sin el paquete, la API arranca y el paso falla con un mensaje claro."""
     try:
         from datos_tierra import derivadas, suelo
-        from datos_tierra.fuentes import dem, modis, power, smap, soilgrids
+        from datos_tierra.fuentes import dem, modis, power, smap, soilgrids, soilgrids_gee
     except ImportError as exc:
         raise DatosTierraNoInstalado() from exc
     return SimpleNamespace(derivadas=derivadas, suelo=suelo, dem=dem, modis=modis, power=power, smap=smap,
-                           soilgrids=soilgrids)
+                           soilgrids=soilgrids, soilgrids_gee=soilgrids_gee)
 
 
 class ProveedorDatosTierra:
@@ -112,11 +113,7 @@ class ProveedorDatosTierra:
 
     async def suelo(self, lote: LoteDiagnostico) -> ResultadoPaso:
         dt = _dt()
-        async with httpx.AsyncClient(timeout=TIMEOUT) as cliente:
-            crudo = await dt.soilgrids.descargar(
-                cliente, lote.lat, lote.lon,
-                propiedades=SUELO_PROPIEDADES, profundidades=SUELO_PROFUNDIDADES, estadisticas=["mean"], por_consulta=4,
-            )
+        crudo, fuente = await self._suelo_crudo(dt, lote)
         procesado = dt.suelo.procesar(crudo)
         if procesado["empty"]:
             raise ValueError("SoilGrids no tiene datos en este punto (zona urbana o cuerpo de agua).")
@@ -138,9 +135,30 @@ class ProveedorDatosTierra:
                 "theta_33_m3_m3": capa.get("wv0033", {}).get("mean"),
                 "theta_1500_m3_m3": capa.get("wv1500", {}).get("mean"),
                 "profundidad": "0-30 cm",
-                "fuente": "ISRIC SoilGrids 2.0, media ponderada",
+                "fuente": fuente,
             },
         )
+
+    async def _suelo_crudo(self, dt: SimpleNamespace, lote: LoteDiagnostico) -> tuple[dict, str]:
+        """SoilGrids por Earth Engine (unos 3 s) y, si no hay credenciales o falla, por la API de ISRIC.
+
+        Son los mismos mapas: en Fortalecillas dan la misma textura, pH y materia orgánica. La API de
+        ISRIC a veces tarda más de un minuto o responde 504, por eso va de respaldo.
+        """
+        if os.environ.get("GEE_PROJECT"):
+            try:
+                crudo = await asyncio.wait_for(
+                    asyncio.to_thread(dt.soilgrids_gee.descargar, lote.lat, lote.lon), timeout=SUELO_TIEMPO_GEE_S
+                )
+                return crudo, dt.soilgrids_gee.FUENTE + ", media ponderada 0-30 cm"
+            except Exception:  # cuota, red o credenciales vencidas: se intenta con la API
+                pass
+        async with httpx.AsyncClient(timeout=TIMEOUT) as cliente:
+            crudo = await dt.soilgrids.descargar(
+                cliente, lote.lat, lote.lon, propiedades=SUELO_PROPIEDADES,
+                profundidades=SUELO_PROFUNDIDADES, estadisticas=["mean"], por_consulta=4,
+            )
+        return crudo, "ISRIC SoilGrids 2.0 (API), media ponderada 0-30 cm"
 
     async def verdor(self, lote: LoteDiagnostico) -> ResultadoPaso:
         dt = _dt()
