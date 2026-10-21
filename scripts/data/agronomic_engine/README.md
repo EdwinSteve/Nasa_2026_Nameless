@@ -13,6 +13,7 @@ agronomic_engine/
 ├── validators.py
 ├── test_engine.py
 ├── test_formulas.py
+├── test_normalizer.py
 ```
 
 ## Cobertura
@@ -31,8 +32,24 @@ agronomic_engine/
 
 `crops.py` contiene los parámetros del cultivo (`Zr` y `p`).
 
-`normalizer.py` convierte los valores de SoilGrids a las unidades utilizadas
-por el modelo.
+`normalizer.py` toma el JSON de `datos_tierra` (esquema 2.0), promedia el
+suelo hasta la profundidad de raíz del cultivo y lo pasa a las unidades del
+modelo:
+
+```python
+from crops import get_crop
+from engine import calculate_crop_water_requirements
+from normalizer import engine_soil_inputs
+
+crop = get_crop("frijol")
+result = calculate_crop_water_requirements(
+  crop_id=crop.id,
+  **engine_soil_inputs(datos, zr=crop.zr),
+  etc=5.0,
+  theta_smap=0.20,
+  irrigation_efficiency=0.90,
+)
+```
 
 `engine.py` orquesta las fórmulas y devuelve el resultado del modelo.
 
