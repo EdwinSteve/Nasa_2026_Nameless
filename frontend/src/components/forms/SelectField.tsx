@@ -27,7 +27,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   value,
   onChange,
   options,
-  placeholder = 'Selecciona una opción',
+  placeholder = 'Seleccione una opción',
   disabled = false,
   isLoading = false,
   error,

@@ -62,4 +62,28 @@ describe('useResumenInicio', () => {
     });
     expect(result.current.sinConexion).toBe(true);
   });
+  it('con un error de red reintenta solo cuando vuelve la conexión, no en bucle', async () => {
+    const sinRed = { codigo: 'RED_SIN_CONEXION', mensaje: 'Sin red' };
+    const espia = vi.spyOn(servicios, 'obtenerResumenInicio').mockRejectedValue(sinRed);
+    const enLinea = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(true);
+    const { result } = renderHook(() => useResumenInicio());
+
+    // El navegador dice que hay red pero el servidor no responde: un solo intento
+    await waitFor(() => expect(result.current.estado).toBe('error'));
+    await new Promise((r) => setTimeout(r, 50));
+    expect(espia).toHaveBeenCalledTimes(1);
+
+    // Se cae la red y vuelve: ahí sí reintenta, una vez
+    enLinea.mockReturnValue(false);
+    act(() => {
+      window.dispatchEvent(new Event('offline'));
+    });
+    espia.mockResolvedValue(resumenDemo('historia'));
+    enLinea.mockReturnValue(true);
+    act(() => {
+      window.dispatchEvent(new Event('online'));
+    });
+    await waitFor(() => expect(result.current.estado).toBe('listo'));
+    expect(espia).toHaveBeenCalledTimes(2);
+  });
 });

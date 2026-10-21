@@ -132,7 +132,7 @@ export const FichaLoteView: React.FC<{ loteId: string; onIngresar: () => void }>
 
             {!modelo.disponible ? (
               <p className="rounded-2xl bg-[#E8E1D3] p-4 text-base">
-                La recomendación de cultivos todavía no está activa en este servidor. Tu lote y su diagnóstico ya
+                La recomendación de cultivos todavía no está activa en este servidor. Su lote y el diagnóstico ya
                 quedaron guardados.
               </p>
             ) : (
@@ -151,7 +151,7 @@ export const FichaLoteView: React.FC<{ loteId: string; onIngresar: () => void }>
             {recomendacion && (
               <p role="status" aria-live="polite" className="text-base text-[#14202B]/80">
                 {recomendacion.estado === 'lista'
-                  ? `Si siembras el ${fecha(recomendacion.fecha_siembra)}:`
+                  ? `Si siembra el ${fecha(recomendacion.fecha_siembra)}:`
                   : recomendacion.mensaje}
               </p>
             )}
@@ -181,7 +181,7 @@ export const FichaLoteView: React.FC<{ loteId: string; onIngresar: () => void }>
                 {recomendacion.descartados.length > 0 && (
                   <details className="rounded-2xl border-2 border-[#D2C8B5] bg-white p-4">
                     <summary className="min-h-11 cursor-pointer font-bold">
-                      {recomendacion.descartados.length} cultivos no se dan en tu lote
+                      {recomendacion.descartados.length} cultivos no se dan en su lote
                     </summary>
                     <ul className="mt-2 flex flex-col gap-1 text-sm text-[#14202B]/80">
                       {recomendacion.descartados.map((d) => (

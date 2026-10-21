@@ -33,7 +33,7 @@ export const PriorityRanker: React.FC<PriorityRankerProps> = ({
   id = 'ordenar-prioridades',
   orden,
   onChange,
-  label = 'Ordena lo que más te importa',
+  label = 'Ordene lo que más le importa',
   disabled = false
 }) => {
   const mover = (indice: number, direccion: -1 | 1) => {
@@ -48,7 +48,7 @@ export const PriorityRanker: React.FC<PriorityRankerProps> = ({
     <fieldset id={id} className="w-full text-left border-none p-0 m-0" disabled={disabled}>
       <legend className="text-base sm:text-lg font-bold text-[#14202B] mb-1 block">{label}</legend>
       <p className="text-sm text-[#14202B]/70 mb-3">
-        La primera es la más importante para ti. Usa las flechas para subir o bajar cada una.
+        La primera es la más importante para usted. Use las flechas para subir o bajar cada una.
       </p>
 
       <ol className="space-y-3">

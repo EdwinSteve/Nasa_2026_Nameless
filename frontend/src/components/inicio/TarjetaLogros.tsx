@@ -30,10 +30,10 @@ export function TarjetaLogros({ logros, loteId }: Props) {
     return (
       <section aria-labelledby={idTitulo} className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm lg:p-6">
         <h2 id={idTitulo} className="font-titulo text-xl font-extrabold text-tinta">
-          Aquí verás cuánta agua ahorras y cómo mejora tu suelo
+          Aquí verá cuánta agua ahorra y cómo mejora su suelo
         </h2>
         <p className="text-base text-tinta/80">
-          Cuando siembres y riegues con nuestras recomendaciones, iremos sumando lo que logras ciclo a ciclo.
+          Cuando siembre y riegue con nuestras recomendaciones, iremos sumando lo que logra ciclo a ciclo.
         </p>
         <Link
           href={loteId ? `/lotes/${encodeURIComponent(loteId)}` : '/mis-lotes'}
@@ -62,20 +62,20 @@ export function TarjetaLogros({ logros, loteId }: Props) {
         <Logro
           icono={<IconoBrote tamano={22} />}
           cifra={`${formatearEntero(logros.nitrogeno_kg)} kg`}
-          texto="de nitrógeno para tu suelo"
-          detalle="El abono natural que dejó tu rotación."
+          texto="de nitrógeno para su suelo"
+          detalle="El abono natural que dejó su rotación."
         />
         <Logro
           icono={<IconoHoja tamano={22} />}
           cifra={`${formatearEntero(logros.salud_suelo)} de 100`}
-          texto="salud de tu suelo"
+          texto="salud de su suelo"
           detalle={cambio === 0 ? 'Se mantiene estable.' : `${cambio > 0 ? 'Subió' : 'Bajó'} ${formatearEntero(Math.abs(cambio))} puntos.`}
         />
         <Logro
           icono={<IconoCalendario tamano={22} />}
           cifra={`${formatearEntero(logros.frecuencia_exito)} de cada 10 años`}
           texto="sale bien la cosecha"
-          detalle="Con tu plan actual, según el clima de tu zona."
+          detalle="Con su plan actual, según el clima de su zona."
         />
       </ul>
     </section>

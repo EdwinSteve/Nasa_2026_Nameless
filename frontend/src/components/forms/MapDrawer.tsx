@@ -96,7 +96,7 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
     const radioClean = radioMetros.replace(',', '.').trim();
 
     if (!latClean || !lngClean) {
-      setCoordError('Debes ingresar latitud y longitud.');
+      setCoordError('Debe ingresar latitud y longitud.');
       return;
     }
 
@@ -188,7 +188,7 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
 
       {modo === 'dibujar' && (
         <p className="text-base text-[#14202B]/80">
-          Toca el mapa en cada esquina de tu lote, siguiendo el borde. Si te equivocas, arrastra la esquina.
+          Toque el mapa en cada esquina de su lote, siguiendo el borde. Si se equivoca, arrastre la esquina.
         </p>
       )}
 
@@ -214,10 +214,10 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
 
           <div className="m-auto bg-white/95 backdrop-blur-md p-4 rounded-xl text-center shadow-lg max-w-xs">
             <p className="text-sm font-bold text-[#14202B]">
-              Caminarás el lindero con el celular en la mano
+              Caminará el lindero con el celular en la mano
             </p>
             <p className="text-xs text-[#14202B]/70 mt-1 mb-3">
-              La captura GPS registrará los puntos conforme rodees el predio.
+              La captura GPS registrará los puntos conforme rodee el predio.
             </p>
             <button
               type="button"
@@ -360,8 +360,8 @@ export const MapDrawer: React.FC<MapDrawerProps> = ({
           ) : (
             <span className="block text-sm text-[#14202B]/60 leading-snug">
               {esquinas.length < MINIMO_ESQUINAS
-                ? `Marca al menos ${MINIMO_ESQUINAS} esquinas`
-                : 'Toca "Cerrar lote"'}
+                ? `Marque al menos ${MINIMO_ESQUINAS} esquinas`
+                : 'Toque "Cerrar lote"'}
             </span>
           )}
         </div>

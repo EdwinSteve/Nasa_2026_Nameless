@@ -5,6 +5,7 @@
 'use client';
 
 import { ErrorCard } from '../components/feedback/ErrorCard';
+import { FranjaSinConexion } from '../components/feedback/FranjaSinConexion';
 import { BotonMicrofono } from '../components/inicio/BotonMicrofono';
 import { EncabezadoInicio } from '../components/inicio/EncabezadoInicio';
 import { EsqueletoInicio } from '../components/inicio/Esqueleto';
@@ -22,11 +23,7 @@ export function InicioView() {
 
   return (
     <div className="min-h-dvh bg-crema text-tinta lg:pl-64">
-      {sinConexion && (
-        <p role="status" className="sticky top-0 z-[1300] bg-tinta px-4 py-2 text-center text-base font-semibold text-white">
-          Sin conexión. Revisa tus datos móviles o el wifi.
-        </p>
-      )}
+      {sinConexion && <FranjaSinConexion />}
 
       <div className="mx-auto flex max-w-[1280px] flex-col gap-5 px-4 pt-5 pb-36 lg:px-8 lg:pb-12">
         {estado === 'cargando' && <EsqueletoInicio />}

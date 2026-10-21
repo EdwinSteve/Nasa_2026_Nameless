@@ -122,7 +122,7 @@ async def usuario_actual(
 def requiere_rol(*roles: Role):
     async def _checker(usuario: Annotated[User, Depends(usuario_actual)]) -> User:
         if usuario.role not in roles:
-            raise ErrorDominio("AUTH_SIN_PERMISOS", "No tienes permisos para esta acción.", 403)
+            raise ErrorDominio("AUTH_SIN_PERMISOS", "No tiene permisos para esta acción.", 403)
         return usuario
 
     return _checker

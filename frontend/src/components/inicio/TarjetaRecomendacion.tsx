@@ -1,4 +1,4 @@
-// "Hoy te recomendamos": el mensaje del backend, su porqué y "Ya regué".
+// "Hoy le recomendamos": el mensaje del backend, su porqué y "Ya regué".
 'use client';
 
 import { useId, useState, type ReactNode } from 'react';
@@ -67,7 +67,7 @@ export function TarjetaRecomendacion({ recomendacion, loteId, puedeRegistrarRieg
             {ICONO[hayAlgo && recomendacion ? recomendacion.tipo : 'ninguna']}
           </span>
           <h2 id={idTitulo} className="font-titulo text-xl font-extrabold text-tinta">
-            Hoy te recomendamos
+            Hoy le recomendamos
           </h2>
         </div>
         {recomendacion && <ChipFuente procedencia={recomendacion.procedencia} />}
@@ -75,8 +75,8 @@ export function TarjetaRecomendacion({ recomendacion, loteId, puedeRegistrarRieg
 
       {!hayAlgo || !recomendacion ? (
         <div className="rounded-2xl bg-crema p-4">
-          <p className="text-xl font-bold leading-snug text-tinta">Hoy tu cultivo no necesita nada especial.</p>
-          <p className="mt-1 text-base text-tinta/75">Te avisaremos cuando haya algo que hacer en tu lote.</p>
+          <p className="text-xl font-bold leading-snug text-tinta">Hoy su cultivo no necesita nada especial.</p>
+          <p className="mt-1 text-base text-tinta/75">Le avisaremos cuando haya algo que hacer en su lote.</p>
         </div>
       ) : (
         <>
@@ -111,7 +111,7 @@ export function TarjetaRecomendacion({ recomendacion, loteId, puedeRegistrarRieg
 
           {riego === 'hecho' && (
             <p role="status" className="text-base font-semibold text-campo">
-              Listo. Anotamos tu riego de hoy.
+              Listo. Anotamos su riego de hoy.
             </p>
           )}
           {errorRiego && (

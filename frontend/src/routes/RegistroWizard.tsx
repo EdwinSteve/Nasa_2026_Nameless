@@ -34,9 +34,9 @@ import {
 } from '../api/services';
 
 const STEP_LABELS: [string, string, string, string] = [
-  'Tus datos',
-  'Tu finca',
-  'Marca tu lote',
+  'Sus datos',
+  'Su finca',
+  'Marque su lote',
   'Prioridades'
 ];
 
@@ -236,13 +236,13 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
     const errs: { [campo: string]: string } = {};
     const nombre = nombreCompleto.trim();
     if (nombre.length < 3 || nombre.length > 120) {
-      errs.nombre_completo = 'Escribe tu nombre y apellido completos (mínimo 3 letras).';
+      errs.nombre_completo = 'Escriba su nombre y apellido completos (mínimo 3 letras).';
     }
     if (!celular || celular.length !== 10 || !celular.startsWith('3')) {
       errs.celular = 'El celular debe tener 10 dígitos y empezar por el número 3.';
     }
     if (correo.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.trim())) {
-      errs.correo = 'Escribe un correo electrónico válido o deja este campo vacío.';
+      errs.correo = 'Escriba un correo electrónico válido o deje este campo vacío.';
     }
     const hasLetra = /[a-zA-Z]/.test(contrasena);
     const hasNumero = /[0-9]/.test(contrasena);
@@ -250,10 +250,10 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
       errs.contrasena = 'La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número.';
     }
     if (!municipioResidencia) {
-      errs.municipio_residencia = 'Selecciona tu municipio de residencia.';
+      errs.municipio_residencia = 'Seleccione su municipio de residencia.';
     }
     if (!aceptaPolitica) {
-      errs.acepta_politica = 'Debes aceptar la política de datos para continuar.';
+      errs.acepta_politica = 'Debe aceptar la política de datos para continuar.';
     }
     setErrorsPaso1(errs);
     return Object.keys(errs).length === 0;
@@ -262,13 +262,13 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
   const validatePaso2 = (): boolean => {
     const errs: { [campo: string]: string } = {};
     if (!nombreFinca.trim()) {
-      errs.nombre = 'Escribe el nombre de tu finca o predio.';
+      errs.nombre = 'Escriba el nombre de su finca o predio.';
     }
     if (!municipioFinca) {
-      errs.municipio = 'Elige el municipio de tu finca.';
+      errs.municipio = 'Elija el municipio de su finca.';
     }
     if (!corregimientoFinca) {
-      errs.corregimiento = 'Selecciona el corregimiento de la finca.';
+      errs.corregimiento = 'Seleccione el corregimiento de la finca.';
     }
     setErrorsPaso2(errs);
     return Object.keys(errs).length === 0;
@@ -277,19 +277,19 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
   const validatePaso3 = (): boolean => {
     const errs: { [campo: string]: string } = {};
     if (!nombreLote.trim()) {
-      errs.nombre = 'Escribe un nombre para este lote (ej: Lote 1, La Vega).';
+      errs.nombre = 'Escriba un nombre para este lote (ej: Lote 1, La Vega).';
     }
     if (!poligonoCoords) {
-      errs.poligono = 'Toca las esquinas de tu lote en el mapa o ingresa coordenadas para delimitarlo.';
+      errs.poligono = 'Toque las esquinas de su lote en el mapa o ingrese coordenadas para delimitarlo.';
     }
     if (tieneRiego === null) {
-      errs.tiene_riego = 'Indica si tu lote tiene sistema de riego o agua lluvia.';
+      errs.tiene_riego = 'Indique si su lote tiene sistema de riego o agua lluvia.';
     }
     if (tieneRiego === true && !tipoRiego) {
-      errs.tipo_riego = 'Selecciona el tipo de riego que utilizas.';
+      errs.tipo_riego = 'Seleccione el tipo de riego que utiliza.';
     }
     if (!cultivoAnterior) {
-      errs.cultivo_anterior = 'Indica qué sembraste el último semestre o elige "Nada / lote nuevo".';
+      errs.cultivo_anterior = 'Indique qué sembró el último semestre o elija "Nada / lote nuevo".';
     }
     setErrorsPaso3(errs);
     return Object.keys(errs).length === 0;
@@ -298,7 +298,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
   const handleBackendErrorCatch = (err: unknown, paso: 1 | 2 | 3 | 4) => {
     const apiErr = (typeof err === 'object' && err !== null ? err : {}) as Partial<ErrorApi>;
     const codigo = apiErr.codigo || 'ERROR_DESCONOCIDO';
-    const mensaje = apiErr.mensaje || 'Revisa tu conexión e inténtalo de nuevo.';
+    const mensaje = apiErr.mensaje || 'Revise su conexión e inténtelo de nuevo.';
     const detalles = apiErr.detalles || [];
 
     if (codigo === 'USUARIO_CELULAR_DUPLICADO') {
@@ -319,7 +319,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
     if (codigo === 'CONSENTIMIENTO_REQUERIDO') {
       setErrorsPaso1((prev) => ({
         ...prev,
-        acepta_politica: 'Debes autorizar el uso de datos para continuar.'
+        acepta_politica: 'Debe autorizar el uso de datos para continuar.'
       }));
       return;
     }
@@ -327,7 +327,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
       setAceptaPolitica(false);
       setErrorsPaso1((prev) => ({
         ...prev,
-        acepta_politica: 'La política de privacidad cambió. Por favor léela y autorízala nuevamente.'
+        acepta_politica: 'La política de privacidad cambió. Por favor léala y autorícela nuevamente.'
       }));
       void fetchPolitica();
       return;
@@ -363,7 +363,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
       if (!politicaVigente) {
         setBackendError({
           codigo: 'ERROR_POLITICA',
-          mensaje: 'No se pudo obtener la versión vigente de la política. Reintenta la carga.'
+          mensaje: 'No se pudo obtener la versión vigente de la política. Intente cargarla de nuevo.'
         });
         return;
       }
@@ -513,15 +513,15 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
         {currentStep === 1 && (
           <div className="space-y-5">
             {paso1Bloqueado && (
-              <AvisoGuardado titulo="Ya guardamos estos datos" detalle="Tu usuario ya fue registrado en el sistema." />
+              <AvisoGuardado titulo="Ya guardamos estos datos" detalle="Su usuario ya fue registrado en el sistema." />
             )}
 
             <div className="text-left">
               <h1 className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">
-                Comencemos con tus datos
+                Comencemos con sus datos
               </h1>
               <p className="text-sm sm:text-base text-[#14202B]/80 mt-1">
-                Para que recibas las recomendaciones climáticas y puedas ingresar fácilmente a tu cuenta.
+                Para que reciba las recomendaciones climáticas y pueda ingresar fácilmente a su cuenta.
               </p>
             </div>
 
@@ -609,14 +609,14 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
                 <MensajeError id="contrasena-error" mensaje={errorsPaso1.contrasena} />
               ) : (
                 <span id="contrasena-helper" className="text-sm text-[#14202B]/70 mt-1.5 block">
-                  Usa una que recuerdes fácil, por ejemplo el nombre de tu finca y un año.
+                  Use una que recuerde fácil, por ejemplo el nombre de su finca y un año.
                 </span>
               )}
             </div>
 
             <SelectField
               id="municipio-residencia"
-              label="Municipio donde vives"
+              label="Municipio donde vive"
               value={municipioResidencia}
               onChange={setMunicipioResidencia}
               options={municipiosOptions}
@@ -645,13 +645,13 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
         {currentStep === 2 && (
           <div className="space-y-5">
             {paso2Bloqueado && (
-              <AvisoGuardado titulo="Tu finca ya está guardada" detalle="Puedes seguir al siguiente paso." />
+              <AvisoGuardado titulo="Su finca ya está guardada" detalle="Puede seguir al siguiente paso." />
             )}
 
             <div className="text-left">
-              <h1 className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">Cuéntanos de tu finca</h1>
+              <h1 className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">Cuéntenos de su finca</h1>
               <p className="text-sm sm:text-base text-[#14202B]/80 mt-1">
-                Con la ubicación buscamos los datos de clima y suelo de tu zona.
+                Con la ubicación buscamos los datos de clima y suelo de su zona.
               </p>
             </div>
 
@@ -692,7 +692,7 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
               value={corregimientoFinca}
               onChange={setCorregimientoFinca}
               options={corregimientosOptions}
-              placeholder="Selecciona el corregimiento"
+              placeholder="Seleccione el corregimiento"
               isLoading={loadingCorregimientos}
               disabled={paso2Bloqueado || !municipioFinca}
               error={errorsPaso2.corregimiento ?? errorCargaCorregimientos ?? undefined}
@@ -723,17 +723,17 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
           <div className="space-y-6">
             {paso3Bloqueado && (
               <AvisoGuardado
-                titulo="Tu lote ya está guardado"
+                titulo="Su lote ya está guardado"
                 detalle={
                   centroideGuardado
-                    ? `Punto medio: ${centroideGuardado.lat.toFixed(5).replace('.', ',')}; ${centroideGuardado.lon.toFixed(5).replace('.', ',')}. Puedes seguir al último paso.`
-                    : 'Puedes seguir al último paso.'
+                    ? `Punto medio: ${centroideGuardado.lat.toFixed(5).replace('.', ',')}; ${centroideGuardado.lon.toFixed(5).replace('.', ',')}. Puede seguir al último paso.`
+                    : 'Puede seguir al último paso.'
                 }
               />
             )}
 
             <div className="text-left">
-              <h1 className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">Marca tu lote</h1>
+              <h1 className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">Marque su lote</h1>
               <p className="text-sm sm:text-base text-[#14202B]/80 mt-1">
                 Así medimos con satélites de la NASA la humedad y el verdor de ese terreno exacto.
               </p>
@@ -845,9 +845,9 @@ export const RegistroWizard: React.FC<RegistroWizardProps> = ({
         {currentStep === 4 && (
           <div className="space-y-5">
             <div className="text-left">
-              <h1 className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">¿Qué es lo más importante para ti?</h1>
+              <h1 className="text-2xl sm:text-3xl font-black text-[#1F4D2B]">¿Qué es lo más importante para usted?</h1>
               <p className="text-sm sm:text-base text-[#14202B]/80 mt-1">
-                Con este orden ajustamos la recomendación de rotación para tu lote.
+                Con este orden ajustamos la recomendación de rotación para su lote.
               </p>
             </div>
 

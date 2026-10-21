@@ -52,7 +52,7 @@ ERROR_BLOQUEADA = {
         "application/json": {
             "example": {
                 "code": "AUTH_CUENTA_BLOQUEADA",
-                "message": "La cuenta está temporalmente bloqueada por intentos fallidos. Intenta más tarde.",
+                "message": "La cuenta está temporalmente bloqueada por intentos fallidos. Inténtelo más tarde.",
             }
         }
     },
@@ -95,7 +95,7 @@ ERROR_REFRESH = {
         "application/json": {
             "example": {
                 "code": "AUTH_REFRESH_INVALIDO",
-                "message": "La sesión ya no es válida. Vuelve a iniciar sesión.",
+                "message": "La sesión ya no es válida. Vuelva a iniciar sesión.",
             }
         }
     },

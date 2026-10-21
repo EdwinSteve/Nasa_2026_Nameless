@@ -35,7 +35,7 @@ class DefinicionPaso:
 PASOS: dict[CodigoPaso, DefinicionPaso] = {
     CodigoPaso.CLIMA: DefinicionPaso(
         "Clima de los últimos 45 años", "NASA POWER",
-        "Revisando 45 años de clima de tu zona...", 8, 180,
+        "Revisando 45 años de clima de su zona...", 8, 180,
     ),
     CodigoPaso.HUMEDAD: DefinicionPaso(
         "Humedad de la tierra", "NASA SMAP",
@@ -51,9 +51,9 @@ PASOS: dict[CodigoPaso, DefinicionPaso] = {
     ),
 }
 
-MENSAJE_INICIO = "Conectando con los satélites para analizar tu lote..."
-MENSAJE_LISTA = "¡Diagnóstico completo! Ya puedes ver tu lote."
-MENSAJE_FALLIDA = "No pudimos leer los datos de los satélites. Intenta de nuevo en unos minutos."
+MENSAJE_INICIO = "Conectando con los satélites para analizar su lote..."
+MENSAJE_LISTA = "¡Diagnóstico completo! Ya puede ver su lote."
+MENSAJE_FALLIDA = "No pudimos leer los datos de los satélites. Inténtelo de nuevo en unos minutos."
 MENSAJE_INTERRUMPIDO = "El análisis se interrumpió antes de terminar."
 # Margen sobre tiempo_maximo_s antes de declarar un paso "colgado" (p. ej. si se reinició el servidor).
 MARGEN_COLGADO = timedelta(seconds=60)

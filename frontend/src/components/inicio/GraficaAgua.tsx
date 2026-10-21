@@ -15,12 +15,12 @@ function resumen(datos: Fila[]): string {
   const mes = formatearMesAnio(ultimo.mes);
   if (diferencia > 0) {
     const pct = Math.round((diferencia / ultimo.recomendada_m3_ha) * 100);
-    return `En ${mes} usaste ${formatearEntero(ultimo.usada_m3_ha)} m³ por hectárea, ${pct} % menos de lo recomendado.`;
+    return `En ${mes} usó ${formatearEntero(ultimo.usada_m3_ha)} m³ por hectárea, ${pct} % menos de lo recomendado.`;
   }
   if (diferencia < 0) {
-    return `En ${mes} usaste ${formatearEntero(ultimo.usada_m3_ha)} m³ por hectárea, ${formatearEntero(-diferencia)} m³ más de lo recomendado.`;
+    return `En ${mes} usó ${formatearEntero(ultimo.usada_m3_ha)} m³ por hectárea, ${formatearEntero(-diferencia)} m³ más de lo recomendado.`;
   }
-  return `En ${mes} usaste justo lo recomendado: ${formatearEntero(ultimo.usada_m3_ha)} m³ por hectárea.`;
+  return `En ${mes} usó justo lo recomendado: ${formatearEntero(ultimo.usada_m3_ha)} m³ por hectárea.`;
 }
 
 export function GraficaAgua({ datos }: { datos: Fila[] }) {
@@ -82,7 +82,7 @@ export function GraficaAgua({ datos }: { datos: Fila[] }) {
       <ul className="sr-only">
         {datos.map((d) => (
           <li key={d.mes}>
-            {formatearMesAnio(d.mes)}: usaste {formatearEntero(d.usada_m3_ha)} m³ por hectárea; se recomendaban{' '}
+            {formatearMesAnio(d.mes)}: usó {formatearEntero(d.usada_m3_ha)} m³ por hectárea; se recomendaban{' '}
             {formatearEntero(d.recomendada_m3_ha)}.
           </li>
         ))}

@@ -45,11 +45,11 @@ class Poligono:
             raise PoligonoInvalido("El borde del lote debe cerrarse: la última esquina repite la primera.")
         for lon, lat in self.anillo:
             if not (LON_MIN <= lon <= LON_MAX and LAT_MIN <= lat <= LAT_MAX):
-                raise PoligonoInvalido("El lote está fuera de Colombia. Revisa si invertiste latitud y longitud.")
+                raise PoligonoInvalido("El lote está fuera de Colombia. Revise si invirtió la latitud y la longitud.")
         if len(set(self.anillo[:-1])) < 3:
             raise PoligonoInvalido("El lote necesita al menos 3 esquinas distintas.")
         if _se_cruza(self.anillo):
-            raise PoligonoInvalido("El borde del lote se cruza consigo mismo. Marca las esquinas en orden.")
+            raise PoligonoInvalido("El borde del lote se cruza consigo mismo. Marque las esquinas en orden.")
         area = self.area_ha
         if area < AREA_MIN_HA:
             raise PoligonoInvalido("El lote es demasiado pequeño (menos de 100 m²).")

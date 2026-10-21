@@ -22,7 +22,7 @@ export const CropChipSelector: React.FC<CropChipSelectorProps> = ({
   selectedCrop,
   onChange,
   options,
-  label = '¿Qué sembraste el último semestre?',
+  label = '¿Qué sembró el último semestre?',
   error,
   disabled = false
 }) => {

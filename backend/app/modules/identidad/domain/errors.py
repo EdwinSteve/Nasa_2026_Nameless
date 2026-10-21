@@ -29,7 +29,7 @@ class UserBlocked(ErrorDominio):
     def __init__(self):
         super().__init__(
             "AUTH_CUENTA_BLOQUEADA",
-            "La cuenta está temporalmente bloqueada por intentos fallidos. Intenta más tarde.",
+            "La cuenta está temporalmente bloqueada por intentos fallidos. Inténtelo más tarde.",
             423,
         )
 
@@ -41,7 +41,7 @@ class RefreshTokenInvalid(ErrorDominio):
     def __init__(self):
         super().__init__(
             "AUTH_REFRESH_INVALIDO",
-            "La sesión ya no es válida. Vuelve a iniciar sesión.",
+            "La sesión ya no es válida. Vuelva a iniciar sesión.",
             401,
         )
 
@@ -64,7 +64,7 @@ class ConsentRequired(ErrorDominio):
     def __init__(self):
         super().__init__(
             "CONSENTIMIENTO_REQUERIDO",
-            "Debes autorizar el tratamiento de tus datos para crear la cuenta.",
+            "Debe autorizar el tratamiento de sus datos para crear la cuenta.",
             422,
         )
 
@@ -73,7 +73,7 @@ class PolicyUnavailable(ErrorDominio):
     def __init__(self):
         super().__init__(
             "POLITICA_NO_DISPONIBLE",
-            "No hay una política de privacidad vigente. Intenta más tarde.",
+            "No hay una política de privacidad vigente. Inténtelo más tarde.",
             503,
         )
 
@@ -82,6 +82,6 @@ class PolicyOutdated(ErrorDominio):
     def __init__(self):
         super().__init__(
             "POLITICA_DESACTUALIZADA",
-            "La política de privacidad cambió. Revisa la versión vigente y acéptala de nuevo.",
+            "La política de privacidad cambió. Revise la versión vigente y acéptela de nuevo.",
             409,
         )

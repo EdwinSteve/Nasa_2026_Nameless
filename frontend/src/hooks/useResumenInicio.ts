@@ -2,7 +2,7 @@
 // Datos de la pantalla Inicio: carga, error, reintento y estado de la conexión.
 'use client';
 
-import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { ErrorApi, ResumenInicio } from '../api/tipos';
 import { obtenerResumenInicio } from '../api/services';
 
@@ -79,12 +79,15 @@ export function useResumenInicio(): UseResumenInicio {
     };
   }, [intento]);
 
-  // Al volver la conexión después de un error, se reintenta solo
+  // Al volver la conexión después de un error de red, se reintenta solo. Únicamente en la
+  // transición: si el servidor sigue sin responder, no se reintenta en bucle.
+  const errorDeRed = estado === 'error' && error?.codigo === 'RED_SIN_CONEXION';
+  const estabaSinConexion = useRef(sinConexion);
   useEffect(() => {
-    if (!sinConexion && estado === 'error' && error?.codigo === 'RED_SIN_CONEXION') {
-      setIntento((n) => n + 1);
-    }
-  }, [sinConexion, estado, error]);
+    const volvio = estabaSinConexion.current && !sinConexion;
+    estabaSinConexion.current = sinConexion;
+    if (volvio && errorDeRed) setIntento((n) => n + 1);
+  }, [sinConexion, errorDeRed]);
 
   const reintentar = useCallback(() => setIntento((n) => n + 1), []);
 

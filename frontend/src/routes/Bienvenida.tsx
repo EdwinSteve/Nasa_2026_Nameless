@@ -60,7 +60,7 @@ export function Bienvenida({ onCrearCuenta, onIngresar }: BienvenidaProps) {
             </p>
           </div>
 
-          <ul className="mt-6 flex w-full gap-2" aria-label="Lo que te ayuda a decidir">
+          <ul className="mt-6 flex w-full gap-2" aria-label="Lo que le ayuda a decidir">
             <TarjetaBeneficio icono={<IconoGota />} titulo="Riego" texto="Cuánta agua" />
             <TarjetaBeneficio icono={<IconoCalendario />} titulo="Siembra" texto="Mejor fecha" />
             <TarjetaBeneficio icono={<IconoBrote />} titulo="Rotación" texto="Suelo sano" />

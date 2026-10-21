@@ -19,7 +19,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
   onChange,
   error,
   label = 'Número de celular',
-  helperText = 'Aquí te avisaremos cuándo sembrar y regar.',
+  helperText = 'Aquí le avisaremos cuándo sembrar y regar.',
   disabled = false,
   onNavigateLogin,
   duplicateError = false

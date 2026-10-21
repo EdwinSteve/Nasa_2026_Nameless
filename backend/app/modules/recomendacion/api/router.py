@@ -30,9 +30,9 @@ SIN_SESION = {401: {"description": "Falta el access token o no es válido."}}
 TOP = 10
 
 MENSAJES = {
-    EstadoRecomendacion.EN_PROCESO: "Calculando con 45 años de clima de tu lote...",
+    EstadoRecomendacion.EN_PROCESO: "Calculando con 45 años de clima de su lote...",
     EstadoRecomendacion.LISTA: "Estos son los cultivos con mejores probabilidades si siembras en esa fecha.",
-    EstadoRecomendacion.FALLIDA: "No pudimos calcular la recomendación. Intenta de nuevo en unos minutos.",
+    EstadoRecomendacion.FALLIDA: "No pudimos calcular la recomendación. Inténtelo de nuevo en unos minutos.",
 }
 
 

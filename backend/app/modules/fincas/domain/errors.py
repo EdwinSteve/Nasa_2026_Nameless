@@ -5,12 +5,12 @@ class FincaNoEncontrada(ErrorDominio):
     """También para fincas de otro productor: no se revela que existen."""
 
     def __init__(self):
-        super().__init__("FINCA_NO_ENCONTRADA", "No encontramos esa finca en tu cuenta.", 404)
+        super().__init__("FINCA_NO_ENCONTRADA", "No encontramos esa finca en su cuenta.", 404)
 
 
 class LoteNoEncontrado(ErrorDominio):
     def __init__(self):
-        super().__init__("LOTE_NO_ENCONTRADO", "No encontramos ese lote en tu cuenta.", 404)
+        super().__init__("LOTE_NO_ENCONTRADO", "No encontramos ese lote en su cuenta.", 404)
 
 
 class UbicacionInvalida(ErrorDominio):

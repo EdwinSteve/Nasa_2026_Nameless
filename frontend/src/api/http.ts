@@ -23,7 +23,7 @@ export interface OpcionesPeticion {
 
 const errorDeRed: ErrorApi = {
   codigo: 'RED_SIN_CONEXION',
-  mensaje: 'No pudimos conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.'
+  mensaje: 'No pudimos conectar con el servidor. Revise su conexión e inténtelo de nuevo.'
 };
 
 function aErrorApi(estado: number, cuerpo: ErrorBackend | null, campos: Record<string, string> = {}): ErrorApi {
@@ -33,7 +33,7 @@ function aErrorApi(estado: number, cuerpo: ErrorBackend | null, campos: Record<s
   });
   return {
     codigo: cuerpo?.code ?? `HTTP_${estado}`,
-    mensaje: cuerpo?.message ?? 'Ocurrió un error inesperado. Inténtalo de nuevo.',
+    mensaje: cuerpo?.message ?? 'Ocurrió un error inesperado. Inténtelo de nuevo.',
     ...(detalles.length ? { detalles } : {})
   };
 }
@@ -78,7 +78,7 @@ export async function peticion<T>(metodo: string, ruta: string, opciones: Opcion
   let token: string | undefined;
   if (opciones.autenticada) {
     token = obtenerTokens()?.access_token;
-    if (!token) throw { codigo: 'AUTH_NO_AUTENTICADO', mensaje: 'Tu sesión terminó. Vuelve a iniciar sesión.' } satisfies ErrorApi;
+    if (!token) throw { codigo: 'AUTH_NO_AUTENTICADO', mensaje: 'Su sesión terminó. Vuelva a iniciar sesión.' } satisfies ErrorApi;
   }
 
   let respuesta = await enviar(metodo, ruta, opciones, token);

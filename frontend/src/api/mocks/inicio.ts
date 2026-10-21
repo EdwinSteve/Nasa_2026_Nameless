@@ -96,7 +96,7 @@ export function resumenDemo(escenario: EscenarioInicio, hoy: Date = new Date()):
     clima_hoy: clima,
     recomendacion_hoy: {
       tipo: 'riego',
-      mensaje: 'Riega tu maíz esta semana: unos 450 m³ por hectárea. La tierra está más seca de lo normal.',
+      mensaje: 'Riegue su maíz esta semana: unos 450 m³ por hectárea. La tierra está más seca de lo normal.',
       detalle_porque:
         'La humedad en la zona de las raíces está en 12 %, por debajo de lo que el maíz necesita en la floración. ' +
         'Con el calor de estos días el cultivo pierde unos 5 mm de agua al día, y no se espera lluvia en la semana.',

@@ -21,7 +21,7 @@ const FILAS: { clave: keyof Indicadores; nombre: string; Icono: ComponentType<{ 
 
 export function IndicadoresLote({ indicadores }: { indicadores: Indicadores }) {
   return (
-    <ul className="flex flex-col gap-2" aria-label="Cómo está tu lote">
+    <ul className="flex flex-col gap-2" aria-label="Cómo está su lote">
       {FILAS.map(({ clave, nombre, Icono }) => {
         const estado = indicadores[clave];
         return (

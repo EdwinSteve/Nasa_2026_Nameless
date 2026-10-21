@@ -3,7 +3,7 @@ from app.core.errors import ErrorDominio
 
 class LoteSinAcceso(ErrorDominio):
     def __init__(self):
-        super().__init__("LOTE_NO_ENCONTRADO", "No encontramos ese lote en tu cuenta.", 404)
+        super().__init__("LOTE_NO_ENCONTRADO", "No encontramos ese lote en su cuenta.", 404)
 
 
 class RecomendacionNoEncontrada(ErrorDominio):

@@ -10,4 +10,4 @@ class LoteSinAcceso(ErrorDominio):
     """El lote no existe o es de otro productor: no se distingue."""
 
     def __init__(self):
-        super().__init__("LOTE_NO_ENCONTRADO", "No encontramos ese lote en tu cuenta.", 404)
+        super().__init__("LOTE_NO_ENCONTRADO", "No encontramos ese lote en su cuenta.", 404)

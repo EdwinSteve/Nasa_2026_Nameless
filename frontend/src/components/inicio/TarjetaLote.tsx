@@ -59,7 +59,7 @@ export function TarjetaLote({ lote }: { lote: Lote }) {
         <EtapasCultivo cultivo={lote.cultivo} />
       ) : (
         <div className="flex flex-col gap-2 rounded-2xl bg-crema p-4">
-          <p className="text-base font-semibold text-tinta">Todavía no tienes un cultivo registrado en este lote.</p>
+          <p className="text-base font-semibold text-tinta">Todavía no tiene un cultivo registrado en este lote.</p>
           <Link href={`/lotes/${encodeURIComponent(lote.id)}`} className="text-base font-bold text-campo underline">
             Ver qué me conviene sembrar
           </Link>
@@ -80,10 +80,10 @@ export function TarjetaMarcarLote() {
         <IconoUbicacion tamano={26} />
       </span>
       <h2 id={idTitulo} className="font-titulo text-2xl font-extrabold text-tinta">
-        Marca tu primer lote
+        Marque su primer lote
       </h2>
       <p className="text-base text-tinta/80">
-        Dibuja el borde de tu terreno en el mapa y lo leeremos con los satélites: humedad de la tierra, verdor y clima.
+        Dibuje el borde de su terreno en el mapa y lo leeremos con los satélites: humedad de la tierra, verdor y clima.
       </p>
       <Link
         href="/mis-lotes"

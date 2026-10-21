@@ -43,7 +43,7 @@ export const DiagnosticoLoteView: React.FC<DiagnosticoLoteViewProps> = ({
         console.error('Error consultando el diagnóstico:', err);
         fallosSeguidos += 1;
         if (fallosSeguidos >= MAX_FALLOS_SEGUIDOS) {
-          setErrorConsulta('Perdimos la conexión mientras analizábamos tu lote.');
+          setErrorConsulta('Perdimos la conexión mientras analizábamos su lote.');
           return;
         }
       }

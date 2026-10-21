@@ -22,7 +22,7 @@ export function GraficaSuelo({ datos }: { datos: Fila[] }) {
   const ultimo = datos[datos.length - 1];
   const cambio = ultimo.valor - primero.valor;
   const texto =
-    `Entre ${formatearMesAnio(primero.mes)} y ${formatearMesAnio(ultimo.mes)}, la salud de tu suelo ` +
+    `Entre ${formatearMesAnio(primero.mes)} y ${formatearMesAnio(ultimo.mes)}, la salud de su suelo ` +
     (cambio === 0
       ? `se mantuvo en ${formatearEntero(ultimo.valor)} de 100.`
       : `pasó de ${formatearEntero(primero.valor)} a ${formatearEntero(ultimo.valor)} de 100.`);
@@ -32,7 +32,7 @@ export function GraficaSuelo({ datos }: { datos: Fila[] }) {
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <h2 id={idTitulo} className="font-titulo text-lg font-extrabold text-tinta">
-            Salud de tu suelo
+            Salud de su suelo
           </h2>
           <p className="text-sm text-tinta/75">Últimos {datos.length} meses, de 0 a 100</p>
         </div>

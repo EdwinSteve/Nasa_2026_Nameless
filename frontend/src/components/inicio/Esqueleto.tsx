@@ -7,7 +7,7 @@ export function Esqueleto({ className = '' }: { className?: string }) {
 export function EsqueletoInicio() {
   return (
     <div role="status" className="flex flex-col gap-5">
-      <span className="sr-only">Cargando tu inicio…</span>
+      <span className="sr-only">Cargando su inicio…</span>
       <Esqueleto className="h-24 w-full max-w-md" />
       <div className="flex flex-col gap-5 lg:grid lg:grid-cols-12">
         <Esqueleto className="h-[28rem] lg:col-span-7" />

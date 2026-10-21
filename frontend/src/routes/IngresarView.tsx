@@ -26,7 +26,7 @@ export const IngresarView: React.FC<IngresarViewProps> = ({ onNavigate }) => {
     if (celular.length !== 10 || !celular.startsWith('3')) {
       errs.celular = 'El celular debe tener 10 dígitos y empezar por el número 3.';
     }
-    if (!contrasena) errs.contrasena = 'Escribe tu contraseña.';
+    if (!contrasena) errs.contrasena = 'Escriba su contraseña.';
     setErrores(errs);
     if (Object.keys(errs).length) return;
 
@@ -55,14 +55,14 @@ export const IngresarView: React.FC<IngresarViewProps> = ({ onNavigate }) => {
         </button>
 
         <header>
-          <h1 className="font-titulo text-3xl font-black text-[#1F4D2B]">Ingresa a SURCO</h1>
-          <p className="mt-2 text-lg text-[#14202B]/80">Usa el celular y la contraseña con que creaste tu cuenta.</p>
+          <h1 className="font-titulo text-3xl font-black text-[#1F4D2B]">Ingrese a SURCO</h1>
+          <p className="mt-2 text-lg text-[#14202B]/80">Use el celular y la contraseña con que creó su cuenta.</p>
         </header>
 
         {ingresado ? (
           <div role="status" className="p-4 bg-[#E8E1D3] rounded-2xl border-2 border-[#1F4D2B] flex flex-col gap-1">
-            <p className="text-lg font-extrabold">Ya iniciaste sesión</p>
-            <p className="text-[#14202B]/80">Te llevamos a tu inicio…</p>
+            <p className="text-lg font-extrabold">Ya inició sesión</p>
+            <p className="text-[#14202B]/80">Lo llevamos a su inicio…</p>
           </div>
         ) : (
           <form onSubmit={alEnviar} noValidate className="flex flex-col gap-5">
@@ -73,7 +73,7 @@ export const IngresarView: React.FC<IngresarViewProps> = ({ onNavigate }) => {
               value={celular}
               onChange={setCelular}
               error={errores.celular}
-              helperText="El mismo número con que te registraste."
+              helperText="El mismo número con que se registró."
               disabled={enviando}
             />
 
@@ -125,7 +125,7 @@ export const IngresarView: React.FC<IngresarViewProps> = ({ onNavigate }) => {
         )}
 
         <p className="text-center text-base">
-          ¿Aún no tienes cuenta?{' '}
+          ¿Aún no tiene cuenta?{' '}
           <button type="button" onClick={() => onNavigate('/registro')} className="font-black text-[#1F4D2B] underline">
             Crear mi cuenta
           </button>

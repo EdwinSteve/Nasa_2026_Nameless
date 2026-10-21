@@ -51,7 +51,7 @@ export function ChipAltitud({ estado, altitudTexto, onSolicitar }: ChipAltitudPr
           </button>
           {ayuda && (
             <span id="ayuda-altitud" role="tooltip" className="absolute right-0 bottom-full mb-2 whitespace-nowrap rounded-xl bg-tinta px-3 py-1.5 text-sm text-white shadow-lg">
-              Calculado con tu ubicación
+              Calculado con su ubicación
             </span>
           )}
         </>
