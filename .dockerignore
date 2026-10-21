@@ -7,6 +7,7 @@
 **/.env
 frontend
 data
+!data/catalogo_cultivos_mongodb/datos
 notebooks
 docs
 mlruns

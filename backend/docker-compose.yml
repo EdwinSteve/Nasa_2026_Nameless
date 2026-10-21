@@ -34,6 +34,7 @@ services:
       LOGIN_BLOQUEO_MINUTOS: "15"
       CORS_ORIGENES: http://localhost:3000
       GEE_PROJECT: ${GEE_PROJECT:-}
+      MODELO_CORRIDA: ${MODELO_CORRIDA:-tiempo}
     volumes:
       # Credenciales de Earth Engine del host (python -c "import ee; ee.Authenticate()")
       - ${HOME}/.config/earthengine:/root/.config/earthengine:ro
