@@ -232,7 +232,7 @@ Alternativa sin scripts: `mongoimport --db surco_agro --collection cultivos --js
 
 ## 9. Valores aproximados por análogo
 
-Cinco cultivos no tenían Kc, profundidad de raíz (Zr) ni agotamiento permitido (p), y sin ellos no se puede calcular su balance hídrico. Se completaron con FAO-56 tomando un cultivo de la **misma familia o género**, con la misma regla que ya usa el catálogo para pasar de cultivo a fase. Cada documento lo registra en `calidad_dato.aproximaciones` (análogo, parentesco, confianza y nota), y su `version` subió a 2.
+Doce cultivos no tenían Kc, profundidad de raíz (Zr) ni agotamiento permitido (p), y sin ellos no se puede calcular su balance hídrico. Cinco se completaron con FAO-56 tomando un cultivo de la **misma familia o género**, con la misma regla que ya usa el catálogo para pasar de cultivo a fase. `calidad_dato.parametros_agua` registra el análogo, la confianza y las fuentes.
 
 | Cultivo | Análogo | Parentesco | Kc ini / mid / end | Zr (m) | p | Confianza |
 |---|---|---|---|---|---|---|
@@ -242,19 +242,19 @@ Cinco cultivos no tenían Kc, profundidad de raíz (Zr) ni agotamiento permitido
 | Uchuva | Tomate | Solanaceae, indeterminada y tutorada | 0,60 / 1,15 / 0,80 | 0,8 | 0,40 | Media |
 | Crotalaria | Soya | Fabaceae, leguminosa anual | (ya tenía Kc) | 0,9 | 0,50 | Media |
 
-**No se completaron** (siguen en `null`) porque no hay un pariente en FAO-56 que dé valores defendibles:
+Los otros siete **ya tienen Zr**, pero **Kc y p siguen en `null`**: no hay un pariente en FAO-56 que dé valores de agua defendibles. `calidad_dato.profundidad_raiz` dice de dónde sale cada Zr:
 
-| Cultivo | Por qué no | Dónde buscar el dato |
-|---|---|---|
-| Ñame | Dioscoreaceae: FAO-56 no trae ningún pariente; yuca y batata son de otras familias y otro hábito | Estudios de IITA (África occidental), Agrosavia Caribe |
-| Mango | Anacardiaceae: el único pariente en FAO-56 es el pistacho, caducifolio y de zonas áridas | Estudios con lisímetro de Embrapa (Brasil) |
-| Guayaba | Myrtaceae: ningún pariente en FAO-56 | Embrapa; literatura de India |
-| Papaya | Caricaceae: ningún pariente; planta herbácea gigante con raíz superficial y muy sensible al encharcamiento | Embrapa Mandioca e Fruticultura |
-| Maracuyá | Passifloraceae: ningún pariente en FAO-56; la vid se parece en el tutorado, pero no en la fisiología | Embrapa; literatura colombiana |
-| Granadilla | Passifloraceae, como el maracuyá: sería aproximar sobre otra aproximación | Agrosavia, Universidad Nacional |
-| Tomate de árbol | Mismo género que la berenjena, pero es un árbol de 3 m que vive de 8 a 10 años | Agrosavia, Universidad Nacional |
+| Cultivo | Zr (m) | Método | Confianza | Por qué Kc y p siguen vacíos | Dónde buscarlos |
+|---|---|---|---|---|---|
+| Ñame | 0,4 | Medido (Melteras 2008) | Media | Dioscoreaceae: FAO-56 no trae ningún pariente | IITA, Agrosavia Caribe |
+| Mango | 0,6 | Medido (Santos 2014) | Alta | El único pariente en FAO-56 es el pistacho, caducifolio y de zonas áridas | Embrapa (lisímetro) |
+| Guayaba | 0,6 | Medido (Bassoi 2007) | Alta | Myrtaceae: ningún pariente en FAO-56 | Embrapa; literatura de India |
+| Papaya | 0,45 | Medido (INCAPER 2007, Carr 2014) | Alta | Caricaceae: ningún pariente | Embrapa Mandioca e Fruticultura |
+| Maracuyá | 0,4 | Medido (Freitas 2009) | Alta | Passifloraceae: la vid se parece en el tutorado, no en la fisiología | Embrapa; literatura colombiana |
+| Granadilla | 0,4 | **Analogía** con maracuyá (mismo género) | **Baja** | Sería aproximar sobre otra aproximación | Agrosavia, Universidad Nacional |
+| Tomate de árbol | 0,5 | **Analogía** (Prohens 2000 y lulo) | **Baja** | Es un árbol de 3 m que vive de 8 a 10 años | Agrosavia, Universidad Nacional |
 
-Mientras no tengan Kc, Zr y p, el oráculo del modelo predictivo evalúa estos 7 cultivos solo con los trapecios de clima y no calcula su riego.
+Mientras no tengan Kc y p, el oráculo del modelo predictivo evalúa estos 7 cultivos solo con los trapecios de clima y no calcula su riego. Granadilla y tomate de árbol son los primeros que hay que validar.
 
 > Pendiente: la lluvia por fase de los cultivos completados se había repartido por duración, porque no tenían Kc. La regla del catálogo la reparte por consumo (duración × Kc). Conviene recalcularla con los Kc nuevos.
 

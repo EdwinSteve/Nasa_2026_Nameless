@@ -78,7 +78,7 @@ Se probó en vivo con las 7 fuentes y tiene 17 pruebas unitarias, incluidos los 
 | Uchuva | Tomate (Solanaceae) | Media |
 | Crotalaria | Soya (Fabaceae), solo Zr y p | Media |
 
-  Ñame, mango, guayaba, papaya, maracuyá, granadilla y tomate de árbol **siguen sin Kc, Zr ni p**, a propósito.
+  Ñame, mango, guayaba, papaya, maracuyá, granadilla y tomate de árbol siguen sin Kc ni p, a propósito. En la rama del modelo predictivo ya recibieron Zr: medida en estudios publicados para cinco y por analogía de confianza baja para granadilla y tomate de árbol.
 
 - **Cargado en el MongoDB local** (`127.0.0.1:27017`):
   1. Respaldo previo en `data/raw/respaldos/`.
