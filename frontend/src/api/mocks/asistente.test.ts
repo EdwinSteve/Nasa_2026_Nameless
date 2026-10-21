@@ -47,6 +47,14 @@ describe('mock del Asistente SURCO', () => {
     }
   });
 
+  it('en un lote sin cultivo no habla de un maíz que no existe', () => {
+    const otro = LOTES_DEMO[1].id;
+    expect(conversacionDemo('con-historia', otro, HOY).mensajes).toEqual([]);
+    const r = respuestaDemo('¿Debo regar hoy?', otro);
+    expect(r.texto).toContain('no tiene un cultivo registrado');
+    expect(r.texto).not.toContain('floración');
+  });
+
   it('el resumen del lote principal tiene cultivo; el otro lote no', () => {
     expect(resumenLoteDemo(LOTE).cultivo?.nombre).toBe('Maíz');
     expect(resumenLoteDemo(LOTES_DEMO[1].id)).toMatchObject({ nombre: 'El Guadual', cultivo: null });

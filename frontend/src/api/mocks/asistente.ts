@@ -87,6 +87,15 @@ export function respuestaDemo(pregunta: string, lote_id: string, nombre = NOMBRE
   }
 
   if (/rieg|regar|regu[eé]|agua|seca/.test(texto)) {
+    // Un lote sin cultivo no se riega: la respuesta no puede hablar de un maíz que no existe
+    if (!resumenLoteDemo(lote_id).cultivo) {
+      return mensaje({
+        rol: 'asistente',
+        texto: `Su lote ${lote} no tiene un cultivo registrado, así que por ahora no hace falta regar. La tierra está seca: si va a sembrar, la mejor época es la primera quincena de marzo, con las lluvias.`,
+        tarjetas: tarjetasRiego(ahora),
+        enlaces: [verPlan]
+      });
+    }
     return mensaje({
       rol: 'asistente',
       texto: `Sí, ${nombre}. La tierra de su lote ${lote} está seca para un maíz en floración. Riegue esta semana unos 450 m³ por hectárea.`,
@@ -132,7 +141,8 @@ export function respuestaDemo(pregunta: string, lote_id: string, nombre = NOMBRE
 }
 
 export function conversacionDemo(escenario: EscenarioAsistente, lote_id: string, ahora: Date = new Date()): Conversacion {
-  if (escenario === 'nuevo') return { usuario: { nombre: NOMBRE_DEMO }, lote_id, mensajes: [] };
+  // La conversación de ejemplo habla del maíz de La Vega: en un lote sin cultivo se empieza de cero
+  if (escenario === 'nuevo' || !resumenLoteDemo(lote_id).cultivo) return { usuario: { nombre: NOMBRE_DEMO }, lote_id, mensajes: [] };
   const hace = (min: number) => new Date(ahora.getTime() - min * 60_000).toISOString();
   return {
     usuario: { nombre: NOMBRE_DEMO },
