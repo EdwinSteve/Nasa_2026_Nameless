@@ -1,0 +1,13 @@
+{
+  "max_depth": 8,
+  "learning_rate": 0.08287868758284396,
+  "min_child_weight": 52.14161223700918,
+  "subsample": 0.710419619332278,
+  "colsample_bytree": 0.6717057595278402,
+  "reg_lambda": 0.7488075467672605,
+  "pinball_validacion": 0.01382,
+  "arboles_en_submuestra": 1875,
+  "puntos": 100,
+  "pruebas": 11,
+  "nota": "Prueba 7 de Optuna, recuperada de data/raw/cadena_v2_log.txt: se cortó la luz en la prueba 11 de 12 y el estudio no alcanzó a guardarse."
+}

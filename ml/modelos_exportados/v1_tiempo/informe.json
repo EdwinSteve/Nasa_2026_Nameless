@@ -1,0 +1,472 @@
+{
+  "corrida": "tiempo",
+  "puntos": 397,
+  "features": [
+    "f_t_media_30",
+    "f_tmax_media_30",
+    "f_tmin_media_30",
+    "f_lluvia_30",
+    "f_hr_30",
+    "f_viento_30",
+    "f_radiacion_30",
+    "f_et0_30",
+    "f_balance_30",
+    "f_dias_lluvia_30",
+    "f_tmax_max_30",
+    "f_tmin_min_30",
+    "f_t_media_90",
+    "f_tmax_media_90",
+    "f_tmin_media_90",
+    "f_lluvia_90",
+    "f_hr_90",
+    "f_viento_90",
+    "f_radiacion_90",
+    "f_et0_90",
+    "f_balance_90",
+    "f_dias_lluvia_90",
+    "f_tmax_max_90",
+    "f_tmin_min_90",
+    "f_t_media_365",
+    "f_tmax_media_365",
+    "f_tmin_media_365",
+    "f_lluvia_365",
+    "f_hr_365",
+    "f_viento_365",
+    "f_radiacion_365",
+    "f_et0_365",
+    "f_balance_365",
+    "f_dias_lluvia_365",
+    "f_tmax_max_365",
+    "f_tmin_min_365",
+    "f_sm_raiz",
+    "f_sm_raiz_tendencia_30",
+    "f_sm_superficie",
+    "f_sm_superficie_tendencia_30",
+    "f_smap_disponible",
+    "f_imerg_30",
+    "f_imerg_90",
+    "f_imerg_disponible",
+    "f_clim_t_90_media",
+    "f_clim_t_90_p10",
+    "f_clim_t_90_p90",
+    "f_clim_tmax_90_media",
+    "f_clim_tmax_90_p10",
+    "f_clim_tmax_90_p90",
+    "f_clim_lluvia_90_media",
+    "f_clim_lluvia_90_p10",
+    "f_clim_lluvia_90_p90",
+    "f_clim_t_210_media",
+    "f_clim_t_210_p10",
+    "f_clim_t_210_p90",
+    "f_clim_tmax_210_media",
+    "f_clim_tmax_210_p10",
+    "f_clim_tmax_210_p90",
+    "f_clim_lluvia_210_media",
+    "f_clim_lluvia_210_p10",
+    "f_clim_lluvia_210_p90",
+    "f_oni",
+    "f_oni_tendencia_3m",
+    "f_suelo_sand_30cm",
+    "f_suelo_silt_30cm",
+    "f_suelo_clay_30cm",
+    "f_suelo_soc_30cm",
+    "f_suelo_phh2o_30cm",
+    "f_suelo_cec_30cm",
+    "f_suelo_nitrogen_30cm",
+    "f_suelo_bdod_30cm",
+    "f_suelo_cfvo_30cm",
+    "f_suelo_wv0033_30cm",
+    "f_suelo_wv1500_30cm",
+    "f_suelo_sand_100cm",
+    "f_suelo_silt_100cm",
+    "f_suelo_clay_100cm",
+    "f_suelo_soc_100cm",
+    "f_suelo_phh2o_100cm",
+    "f_suelo_cec_100cm",
+    "f_suelo_nitrogen_100cm",
+    "f_suelo_bdod_100cm",
+    "f_suelo_cfvo_100cm",
+    "f_suelo_wv0033_100cm",
+    "f_suelo_wv1500_100cm",
+    "f_suelo_clay_incertidumbre",
+    "f_suelo_soc_incertidumbre",
+    "f_elevacion_m",
+    "f_lat",
+    "f_lon",
+    "f_desnivel_celda_m",
+    "f_doy_sen",
+    "f_doy_cos",
+    "c_tipo_ciclo",
+    "c_con_riego",
+    "c_grupo",
+    "c_familia",
+    "c_dias_ciclo",
+    "c_n_fases",
+    "c_t_base",
+    "c_temp_critica",
+    "c_kc_ini",
+    "c_kc_mid",
+    "c_kc_end",
+    "c_zr",
+    "c_p",
+    "c_tol_sequia",
+    "c_tol_encharcamiento",
+    "c_hr_min",
+    "c_hr_max",
+    "c_viento_max",
+    "c_altitud_min",
+    "c_altitud_max",
+    "c_temp_min_abs",
+    "c_temp_opt_min",
+    "c_temp_opt_max",
+    "c_temp_max_abs",
+    "c_agua_min_abs",
+    "c_agua_opt_min",
+    "c_agua_opt_max",
+    "c_agua_max_abs",
+    "c_ph_min_abs",
+    "c_ph_opt_min",
+    "c_ph_opt_max",
+    "c_ph_max_abs",
+    "c_n_min_abs",
+    "c_n_opt_min",
+    "c_n_opt_max",
+    "c_n_max_abs",
+    "pc_taw_mm"
+  ],
+  "cultivos": [
+    "arroz_riego",
+    "arroz_secano",
+    "maiz",
+    "sorgo",
+    "frijol",
+    "soya",
+    "arveja",
+    "mani",
+    "papa",
+    "papa_criolla",
+    "yuca",
+    "name",
+    "arracacha",
+    "tomate",
+    "pimenton",
+    "ahuyama",
+    "cebolla_bulbo",
+    "cebolla_larga",
+    "zanahoria",
+    "repollo",
+    "lechuga",
+    "aguacate_hass",
+    "aguacate_tropical",
+    "mango",
+    "citricos",
+    "guayaba",
+    "pina",
+    "papaya",
+    "maracuya",
+    "granadilla",
+    "mora",
+    "lulo",
+    "tomate_arbol",
+    "uchuva",
+    "fresa",
+    "banano",
+    "platano",
+    "cafe",
+    "cacao",
+    "cana_azucar",
+    "cana_panelera",
+    "palma_aceite",
+    "algodon",
+    "crotalaria"
+  ],
+  "resultados": {
+    "test_filas": 2509040,
+    "puntaje_mae_modelo": 0.047951243817806244,
+    "puntaje_mae_climatologia": 0.07620464265346527,
+    "puntaje_pinball_p10": 0.009527076035737991,
+    "puntaje_pinball_p50": 0.023975621908903122,
+    "puntaje_pinball_p90": 0.01278622541576624,
+    "puntaje_cobertura_p10_p90": 0.6871050282179638,
+    "ndcg3_modelo": 0.9161640239858233,
+    "ndcg3_climatologia": 0.8824136879243591,
+    "exito_brier_modelo": 0.054797541350126266,
+    "exito_brier_climatologia": 0.05809081718325615,
+    "exito_ece_modelo": 0.013774373637503804,
+    "exito_ece_climatologia": 0.005354183477192078,
+    "riego_mae_modelo": 65.8968734741211,
+    "riego_mae_climatologia": 106.39959716796875,
+    "estres_mae_modelo": 18.75198745727539,
+    "estres_mae_climatologia": 22.0999755859375,
+    "le_gana_a_la_climatologia": true
+  },
+  "shap_top": {
+    "puntaje": [
+      [
+        "c_temp_opt_max",
+        0.040547240525484085
+      ],
+      [
+        "c_agua_opt_min",
+        0.015625324100255966
+      ],
+      [
+        "f_lluvia_365",
+        0.010800784453749657
+      ],
+      [
+        "c_temp_max_abs",
+        0.007448118645697832
+      ],
+      [
+        "f_clim_tmax_210_p90",
+        0.006834825035184622
+      ],
+      [
+        "f_clim_tmax_210_media",
+        0.006605679169297218
+      ],
+      [
+        "f_elevacion_m",
+        0.006605464033782482
+      ],
+      [
+        "c_agua_opt_max",
+        0.005903312470763922
+      ],
+      [
+        "c_hr_max",
+        0.00511979078873992
+      ],
+      [
+        "f_clim_t_210_p10",
+        0.0046514649875462055
+      ],
+      [
+        "f_tmin_media_365",
+        0.004595352802425623
+      ],
+      [
+        "f_desnivel_celda_m",
+        0.004437161143869162
+      ],
+      [
+        "f_oni",
+        0.00423350278288126
+      ],
+      [
+        "f_lat",
+        0.003773148637264967
+      ],
+      [
+        "f_clim_tmax_90_p90",
+        0.003482246771454811
+      ],
+      [
+        "c_con_riego",
+        0.0034159633796662092
+      ],
+      [
+        "f_dias_lluvia_365",
+        0.003155561164021492
+      ],
+      [
+        "c_temp_opt_min",
+        0.003146115457639098
+      ],
+      [
+        "f_balance_365",
+        0.003108310978859663
+      ],
+      [
+        "c_p",
+        0.003037859918549657
+      ],
+      [
+        "c_tipo_ciclo",
+        0.002972256625071168
+      ],
+      [
+        "c_altitud_max",
+        0.0026096950750797987
+      ],
+      [
+        "f_hr_365",
+        0.0025744433514773846
+      ],
+      [
+        "f_doy_sen",
+        0.0025674481876194477
+      ],
+      [
+        "f_imerg_30",
+        0.0025355895049870014
+      ]
+    ],
+    "exito": [
+      [
+        "c_agua_opt_max",
+        0.6113382577896118
+      ],
+      [
+        "f_lluvia_365",
+        0.3451334536075592
+      ],
+      [
+        "c_con_riego",
+        0.23420989513397217
+      ],
+      [
+        "f_desnivel_celda_m",
+        0.20558959245681763
+      ],
+      [
+        "c_agua_max_abs",
+        0.20034442842006683
+      ],
+      [
+        "c_temp_critica",
+        0.17685189843177795
+      ],
+      [
+        "f_oni",
+        0.16545017063617706
+      ],
+      [
+        "c_temp_max_abs",
+        0.1614309400320053
+      ],
+      [
+        "f_dias_lluvia_365",
+        0.15713202953338623
+      ],
+      [
+        "c_grupo",
+        0.14466209709644318
+      ],
+      [
+        "c_temp_min_abs",
+        0.1326860636472702
+      ],
+      [
+        "c_altitud_min",
+        0.12728789448738098
+      ],
+      [
+        "c_temp_opt_max",
+        0.1250329166650772
+      ],
+      [
+        "f_oni_tendencia_3m",
+        0.12238326668739319
+      ],
+      [
+        "f_doy_sen",
+        0.10685253888368607
+      ],
+      [
+        "f_lat",
+        0.10454761981964111
+      ],
+      [
+        "c_temp_opt_min",
+        0.08803030103445053
+      ],
+      [
+        "c_dias_ciclo",
+        0.08505547791719437
+      ],
+      [
+        "c_altitud_max",
+        0.08076466619968414
+      ],
+      [
+        "f_elevacion_m",
+        0.07697152346372604
+      ],
+      [
+        "f_clim_t_210_p10",
+        0.07576752454042435
+      ],
+      [
+        "f_doy_cos",
+        0.07489237934350967
+      ],
+      [
+        "f_balance_365",
+        0.07045325636863708
+      ],
+      [
+        "f_tmin_min_365",
+        0.06906784325838089
+      ],
+      [
+        "c_kc_mid",
+        0.06738632917404175
+      ]
+    ]
+  },
+  "parametros": {
+    "device": "cuda",
+    "tree_method": "hist",
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "min_child_weight": 20,
+    "max_bin": 256,
+    "seed": 7
+  },
+  "arboles": {
+    "puntaje": 2996,
+    "exito": 673,
+    "riego_mm": 371,
+    "dias_estres": 184
+  },
+  "catalogo_version": {
+    "arroz_riego": 1,
+    "arroz_secano": 1,
+    "maiz": 1,
+    "sorgo": 1,
+    "frijol": 1,
+    "soya": 1,
+    "arveja": 1,
+    "mani": 1,
+    "papa": 1,
+    "papa_criolla": 1,
+    "yuca": 1,
+    "name": 2,
+    "arracacha": 3,
+    "tomate": 1,
+    "pimenton": 1,
+    "ahuyama": 1,
+    "cebolla_bulbo": 1,
+    "cebolla_larga": 1,
+    "zanahoria": 1,
+    "repollo": 1,
+    "lechuga": 1,
+    "aguacate_hass": 1,
+    "aguacate_tropical": 1,
+    "mango": 2,
+    "citricos": 1,
+    "guayaba": 2,
+    "pina": 1,
+    "papaya": 2,
+    "maracuya": 2,
+    "granadilla": 2,
+    "mora": 3,
+    "lulo": 3,
+    "tomate_arbol": 2,
+    "uchuva": 3,
+    "fresa": 1,
+    "banano": 1,
+    "platano": 1,
+    "cafe": 1,
+    "cacao": 1,
+    "cana_azucar": 1,
+    "cana_panelera": 1,
+    "palma_aceite": 1,
+    "algodon": 1,
+    "crotalaria": 3
+  }
+}
