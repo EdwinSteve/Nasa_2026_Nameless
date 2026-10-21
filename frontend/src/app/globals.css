@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Paleta SURCO (los componentes usan los mismos valores en hex) */
+@theme inline {
+  --color-surco-verde: #1f4d2b;
+  --color-surco-crema: #f7f3ea;
+  --color-surco-tinta: #14202b;
+  --color-surco-error: #d94f4f;
+  --font-sans: var(--font-nunito);
+}
+
+body {
+  background: #f7f3ea;
+  color: #14202b;
+}
+
+/* Animaciones de SatelliteScan */
+@keyframes orbitar-satelite {
+  0%, 100% { transform: translate(-18px, 0); }
+  50% { transform: translate(18px, -3px); }
+}
+@keyframes barrido-haz {
+  0%, 100% { transform: rotate(-16deg); opacity: 0.65; }
+  50% { transform: rotate(16deg); opacity: 0.95; }
+}
+@keyframes onda-radar {
+  0% { transform: scale(0.4); opacity: 0.8; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+.anim-satelite { animation: orbitar-satelite 5.5s ease-in-out infinite; }
+.anim-haz { transform-origin: 180px 48px; animation: barrido-haz 4.2s ease-in-out infinite; }
+.anim-onda {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: onda-radar 3s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim-satelite, .anim-haz, .anim-onda { animation: none; }
+}
