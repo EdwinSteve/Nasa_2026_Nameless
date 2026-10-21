@@ -33,5 +33,50 @@
     "_id": "upra_eva",
     "titulo": "UPRA, Evaluaciones Agropecuarias Municipales",
     "uso": "Departamentos productores y rendimientos de referencia"
+  },
+  {
+    "_id": "santos2014_mango",
+    "titulo": "Santos, M.R.; Martinez, M.A.; Donato, S.L.R.; Coelho, E.F. (2014). Fruit yield and root system distribution of 'Tommy Atkins' mango under different irrigation regimes. Revista Brasileira de Engenharia Agrícola e Ambiental 18(4):362-369. doi:10.1590/S1415-43662014000400002",
+    "uso": "Profundidad de raíz del mango (medida en campo)"
+  },
+  {
+    "_id": "bassoi2007_guayaba",
+    "titulo": "Bassoi, L.H.; Ferreira, M.N.L.; Coelho, R.D.; Silva, J.A.M.; Silva, E.E.G.; Maia, J.L.T. (2007). Distribuição radicular da goiabeira irrigada no Vale do São Francisco. XXXVI Congresso Brasileiro de Engenharia Agrícola, Bonito-MS. Embrapa Semiárido",
+    "uso": "Profundidad de raíz de la guayaba (medida en campo)"
+  },
+  {
+    "_id": "incaper2007_papaya",
+    "titulo": "Incaper (2007). Papaya Brasil, cap. 4: manejo de irrigação do mamoeiro. https://biblioteca.incaper.es.gov.br/digital/bitstream/item/825/1/2007-cap-04.pdf",
+    "uso": "Profundidad efectiva de raíz de la papaya bajo goteo (Embrapa)"
+  },
+  {
+    "_id": "carr2014_papaya",
+    "titulo": "Carr, M.K.V. (2014). The water relations and irrigation requirements of papaya (Carica papaya L.): a review. Experimental Agriculture",
+    "uso": "Profundidad efectiva de raíz de la papaya (revisión)"
+  },
+  {
+    "_id": "freitas2009_maracuya",
+    "titulo": "Freitas, C.A.S.; Costa, C.A.G.; Bezerra, F.M.L.; Montenegro, A.A.T.; Teixeira, A.S. (2009). Sistema radicial do maracujazeiro irrigado submetido a diferentes níveis de potássio. Scientia Agraria 10(3):175-183",
+    "uso": "Profundidad de raíz del maracuyá (medida en campo)"
+  },
+  {
+    "_id": "melteras2008_name",
+    "titulo": "Melteras, M.-V.; Lebot, V.; Asher, C.J.; O'Sullivan, J.N. (2008). Crop development and root distribution in lesser yam (Dioscorea esculenta): implications for fertilization. Experimental Agriculture 44(2):209-221. doi:10.1017/S0014479708006339",
+    "uso": "Profundidad de raíz del ñame (medida en campo)"
+  },
+  {
+    "_id": "dane2017_lulo",
+    "titulo": "DANE-SIPSA (2017). Boletín Insumos y factores asociados a la producción agropecuaria: el cultivo del lulo, noviembre de 2017. https://www.dane.gov.co/files/investigaciones/agropecuario/sipsa/Bol_Insumos_nov_2017.pdf",
+    "uso": "Profundidad de raíz del lulo"
+  },
+  {
+    "_id": "fischer2020_uchuva",
+    "titulo": "Fischer, G.; Melgarejo, L.M. (2020). The ecophysiology of cape gooseberry (Physalis peruviana L.) - an Andean fruit crop. A review. Revista Colombiana de Ciencias Hortícolas",
+    "uso": "Profundidad efectiva de raíz de la uchuva"
+  },
+  {
+    "_id": "prohens2000_tomate_arbol",
+    "titulo": "Prohens, J.; Nuez, F. (2000). The tamarillo (Cyphomandra betacea): a review of a promising small fruit crop. Small Fruits Review",
+    "uso": "Descripción del sistema de raíz del tomate de árbol"
   }
 ]

@@ -4367,7 +4367,7 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
+        "profundidad_raiz_m": 0.4,
         "agotamiento_permitido_p": null,
         "tolerancia_sequia": "media",
         "tolerancia_encharcamiento": "baja"
@@ -4678,11 +4678,21 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "melteras2008_name"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.4,
+        "metodo": "medido",
+        "confianza": "media",
+        "fuentes": [
+          "melteras2008_name"
+        ],
+        "nota": "Dioscorea esculenta: las raíces primarias bajan a unos 0,30 m al final de su extensión y se abren 2-4 m en horizontal. Medición de otra especie del género; validar para D. alata y D. rotundata."
+      }
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "arracacha",
@@ -4735,7 +4745,11 @@
         "max_tolerable": 12.0,
         "sensibilidad": "baja"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.7,
+        "mid": 1.05,
+        "end": 0.95
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -4752,8 +4766,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.5,
+        "agotamiento_permitido_p": 0.35,
         "tolerancia_sequia": "media",
         "tolerancia_encharcamiento": "baja"
       }
@@ -4783,7 +4797,7 @@
           "min": 45,
           "max": 63
         },
-        "kc": null,
+        "kc": 0.7,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4810,7 +4824,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 5,
         "nitrogeno_kg_ha": {
           "min": 3,
@@ -4839,7 +4853,7 @@
           "min": 75,
           "max": 105
         },
-        "kc": null,
+        "kc": 0.88,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4866,7 +4880,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 40,
         "nitrogeno_kg_ha": {
           "min": 24,
@@ -4895,7 +4909,7 @@
           "min": 60,
           "max": 84
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4922,7 +4936,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.28,
         "nitrogeno_absorcion_pct": 30,
         "nitrogeno_kg_ha": {
           "min": 18,
@@ -4951,7 +4965,7 @@
           "min": 75,
           "max": 105
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -4978,7 +4992,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 12,
@@ -5006,7 +5020,7 @@
           "min": 45,
           "max": 63
         },
-        "kc": null,
+        "kc": 0.95,
         "temperatura_aire_C": {
           "min_absoluto": 10,
           "optimo_min": 15,
@@ -5033,7 +5047,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.35,
         "nitrogeno_absorcion_pct": 5,
         "nitrogeno_kg_ha": {
           "min": 3,
@@ -5065,9 +5079,32 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.5,
+        "metodo": "analogia",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "nota": "Tomado de zanahoria. Misma familia (Apiaceae); también se cosecha la raíz."
+      },
+      "parametros_agua": {
+        "metodo": "analogia",
+        "analogo": "zanahoria",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "campos": [
+          "kc",
+          "profundidad_raiz_m",
+          "agotamiento_permitido_p"
+        ],
+        "nota": "Misma familia (Apiaceae); también se cosecha la raíz. Por fase: regla del catálogo (fase sensible con 0,8 × p)."
+      }
     },
-    "version": 1
+    "version": 3
   },
   {
     "_id": "tomate",
@@ -8705,7 +8742,7 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
+        "profundidad_raiz_m": 0.6,
         "agotamiento_permitido_p": null,
         "tolerancia_sequia": "alta",
         "tolerancia_encharcamiento": "media"
@@ -8962,11 +8999,21 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "santos2014_mango"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.6,
+        "metodo": "medido",
+        "confianza": "alta",
+        "fuentes": [
+          "santos2014_mango"
+        ],
+        "nota": "'Tommy Atkins' bajo riego: 65 % de las raíces absorbentes entre 0 y 0,6 m; zona de manejo y sensores entre 0,1 y 0,6 m."
+      }
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "citricos",
@@ -9374,7 +9421,7 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
+        "profundidad_raiz_m": 0.6,
         "agotamiento_permitido_p": null,
         "tolerancia_sequia": "alta",
         "tolerancia_encharcamiento": "media"
@@ -9631,11 +9678,21 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "bassoi2007_guayaba"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.6,
+        "metodo": "medido",
+        "confianza": "alta",
+        "fuentes": [
+          "bassoi2007_guayaba"
+        ],
+        "nota": "cv. Paluma, microaspersión, 36 meses: raíces hasta 1,2 m y 80 % hasta 0,9 m en suelo arenoso; la capa manejada y recomendada para riego es 0,6 m. En India, sin riego, 0,60-0,75 m; en suelo arcilloso, 0,45 m."
+      }
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "pina",
@@ -10096,7 +10153,7 @@
           "optimo_max": 3.5,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
+        "profundidad_raiz_m": 0.45,
         "agotamiento_permitido_p": null,
         "tolerancia_sequia": "media",
         "tolerancia_encharcamiento": "alta"
@@ -10353,11 +10410,23 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "incaper2007_papaya",
+        "carr2014_papaya"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.45,
+        "metodo": "medido",
+        "confianza": "alta",
+        "fuentes": [
+          "incaper2007_papaya",
+          "carr2014_papaya"
+        ],
+        "nota": "Profundidad efectiva de 0,45 m bajo goteo en Latossolo (Embrapa); la revisión de Carr la da de hasta 0,55 m según el método de riego."
+      }
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "maracuya",
@@ -10428,7 +10497,7 @@
           "optimo_max": 3.5,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
+        "profundidad_raiz_m": 0.4,
         "agotamiento_permitido_p": null,
         "tolerancia_sequia": "media",
         "tolerancia_encharcamiento": "media"
@@ -10685,11 +10754,21 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "freitas2009_maracuya"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.4,
+        "metodo": "medido",
+        "confianza": "alta",
+        "fuentes": [
+          "freitas2009_maracuya"
+        ],
+        "nota": "Goteo, 420 días tras el trasplante: 80 % de las raíces hasta 0,40 m, sin cambio con la dosis de potasio."
+      }
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "granadilla",
@@ -10760,7 +10839,7 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
+        "profundidad_raiz_m": 0.4,
         "agotamiento_permitido_p": null,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
@@ -11017,11 +11096,21 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "freitas2009_maracuya"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.4,
+        "metodo": "analogia",
+        "confianza": "baja",
+        "fuentes": [
+          "freitas2009_maracuya"
+        ],
+        "nota": "Sin medición para Passiflora ligularis. Se usa el valor medido del maracuyá (mismo género); fuentes divulgativas coinciden en raíz superficial, con la mayor densidad en los primeros 0,30 m y hasta 0,50 m."
+      }
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "mora",
@@ -11075,7 +11164,11 @@
         "max_tolerable": 9.0,
         "sensibilidad": "media"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.3,
+        "mid": 1.05,
+        "end": 0.5
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -11092,8 +11185,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.9,
+        "agotamiento_permitido_p": 0.5,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
       }
@@ -11123,7 +11216,7 @@
           "min": 110,
           "max": 110
         },
-        "kc": null,
+        "kc": 0.3,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11150,7 +11243,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 35,
@@ -11179,7 +11272,7 @@
           "min": 36,
           "max": 36
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11206,7 +11299,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 20,
@@ -11236,7 +11329,7 @@
           "min": 146,
           "max": 146
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11263,7 +11356,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 35,
@@ -11292,7 +11385,7 @@
           "min": 73,
           "max": 73
         },
-        "kc": null,
+        "kc": 0.5,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 12,
@@ -11319,7 +11412,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 10,
@@ -11351,9 +11444,32 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.9,
+        "metodo": "analogia",
+        "confianza": "media",
+        "fuentes": [
+          "fao56"
+        ],
+        "nota": "Tomado de zarzas de FAO-56 (frambuesa, zarzamora). Mismo género (Rubus). FAO-56, tabla 22, Berries (bushes): Zr 0,6-1,2 m, p 0,50."
+      },
+      "parametros_agua": {
+        "metodo": "analogia",
+        "analogo": "zarzas de FAO-56 (frambuesa, zarzamora)",
+        "confianza": "media",
+        "fuentes": [
+          "fao56"
+        ],
+        "campos": [
+          "kc",
+          "profundidad_raiz_m",
+          "agotamiento_permitido_p"
+        ],
+        "nota": "Mismo género (Rubus). FAO-56, tabla 22, Berries (bushes): Zr 0,6-1,2 m, p 0,50. Por fase: regla del catálogo (fase sensible con 0,8 × p)."
+      }
     },
-    "version": 1
+    "version": 3
   },
   {
     "_id": "lulo",
@@ -11407,7 +11523,11 @@
         "max_tolerable": 9.0,
         "sensibilidad": "media"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.6,
+        "mid": 1.05,
+        "end": 0.9
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -11424,8 +11544,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.7,
+        "agotamiento_permitido_p": 0.45,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
       }
@@ -11455,7 +11575,7 @@
           "min": 110,
           "max": 110
         },
-        "kc": null,
+        "kc": 0.6,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11482,7 +11602,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.45,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -11511,7 +11631,7 @@
           "min": 36,
           "max": 36
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11538,7 +11658,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.36,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 16,
@@ -11568,7 +11688,7 @@
           "min": 146,
           "max": 146
         },
-        "kc": null,
+        "kc": 1.05,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11595,7 +11715,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.45,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -11624,7 +11744,7 @@
           "min": 73,
           "max": 73
         },
-        "kc": null,
+        "kc": 0.9,
         "temperatura_aire_C": {
           "min_absoluto": 12,
           "optimo_min": 16,
@@ -11651,7 +11771,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.45,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 8,
@@ -11681,11 +11801,35 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "dane2017_lulo"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.7,
+        "metodo": "analogia",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "nota": "Tomado de berenjena. Mismo género (Solanum). FAO-56, tabla 22, Egg Plant: Zr 0,7-1,2 m, p 0,45."
+      },
+      "parametros_agua": {
+        "metodo": "analogia",
+        "analogo": "berenjena",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "campos": [
+          "kc",
+          "profundidad_raiz_m",
+          "agotamiento_permitido_p"
+        ],
+        "nota": "Mismo género (Solanum). FAO-56, tabla 22, Egg Plant: Zr 0,7-1,2 m, p 0,45. Por fase: regla del catálogo (fase sensible con 0,8 × p)."
+      }
     },
-    "version": 1
+    "version": 3
   },
   {
     "_id": "tomate_arbol",
@@ -11756,7 +11900,7 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
+        "profundidad_raiz_m": 0.5,
         "agotamiento_permitido_p": null,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
@@ -12013,11 +12157,23 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "prohens2000_tomate_arbol",
+        "dane2017_lulo"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.5,
+        "metodo": "analogia",
+        "confianza": "baja",
+        "fuentes": [
+          "prohens2000_tomate_arbol",
+          "dane2017_lulo"
+        ],
+        "nota": "Sin medición publicada. La revisión de Prohens y Nuez describe una raíz poco extensa y poco profunda; se usa el valor del lulo (mismo género Solanum)."
+      }
     },
-    "version": 1
+    "version": 2
   },
   {
     "_id": "uchuva",
@@ -12070,7 +12226,11 @@
         "max_tolerable": 9.0,
         "sensibilidad": "media"
       },
-      "kc": null,
+      "kc": {
+        "ini": 0.6,
+        "mid": 1.15,
+        "end": 0.8
+      },
       "suelo": {
         "ph": {
           "min_absoluto": 5.0,
@@ -12087,8 +12247,8 @@
           "optimo_max": 3.0,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.8,
+        "agotamiento_permitido_p": 0.4,
         "tolerancia_sequia": "baja",
         "tolerancia_encharcamiento": "media"
       }
@@ -12118,7 +12278,7 @@
           "min": 110,
           "max": 110
         },
-        "kc": null,
+        "kc": 0.6,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12145,7 +12305,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -12174,7 +12334,7 @@
           "min": 36,
           "max": 36
         },
-        "kc": null,
+        "kc": 1.15,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12201,7 +12361,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.32,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 16,
@@ -12231,7 +12391,7 @@
           "min": 146,
           "max": 146
         },
-        "kc": null,
+        "kc": 1.15,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12258,7 +12418,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 35,
         "nitrogeno_kg_ha": {
           "min": 28,
@@ -12287,7 +12447,7 @@
           "min": 73,
           "max": 73
         },
-        "kc": null,
+        "kc": 0.8,
         "temperatura_aire_C": {
           "min_absoluto": 8,
           "optimo_min": 13,
@@ -12314,7 +12474,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 9.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 8,
@@ -12344,11 +12504,35 @@
       "validado": false,
       "fuentes": [
         "fao56",
-        "ecocrop"
+        "ecocrop",
+        "fischer2020_uchuva"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.8,
+        "metodo": "analogia",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "nota": "Tomado de tomate. Misma familia (Solanaceae); también crece con tutor."
+      },
+      "parametros_agua": {
+        "metodo": "analogia",
+        "analogo": "tomate",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "campos": [
+          "kc",
+          "profundidad_raiz_m",
+          "agotamiento_permitido_p"
+        ],
+        "nota": "Misma familia (Solanaceae); también crece con tutor. Por fase: regla del catálogo (fase sensible con 0,8 × p)."
+      }
     },
-    "version": 1
+    "version": 3
   },
   {
     "_id": "fresa",
@@ -15601,8 +15785,8 @@
           "optimo_max": 2.5,
           "max_absoluto": 10.0
         },
-        "profundidad_raiz_m": null,
-        "agotamiento_permitido_p": null,
+        "profundidad_raiz_m": 0.9,
+        "agotamiento_permitido_p": 0.5,
         "tolerancia_sequia": "alta",
         "tolerancia_encharcamiento": "baja"
       }
@@ -15662,7 +15846,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 10,
         "nitrogeno_kg_ha": {
           "min": 8,
@@ -15718,7 +15902,7 @@
           "optimo_max": 3.0,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.5,
         "nitrogeno_absorcion_pct": 70,
         "nitrogeno_kg_ha": {
           "min": 56,
@@ -15774,7 +15958,7 @@
           "optimo_max": 2.5,
           "max_tolerable": 12.0
         },
-        "agotamiento_permitido_p": null,
+        "agotamiento_permitido_p": 0.4,
         "nitrogeno_absorcion_pct": 20,
         "nitrogeno_kg_ha": {
           "min": 16,
@@ -15808,8 +15992,30 @@
         "fao56",
         "ecocrop"
       ],
-      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia."
+      "nota": "Valores de referencia generales. Validar con Agrosavia, gremios y agrónomos para las variedades y zonas de Colombia.",
+      "profundidad_raiz": {
+        "valor_m": 0.9,
+        "metodo": "analogia",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "nota": "Tomado de soya. Leguminosa anual (Fabaceae). Conserva su Kc anterior."
+      },
+      "parametros_agua": {
+        "metodo": "analogia",
+        "analogo": "soya",
+        "confianza": "baja",
+        "fuentes": [
+          "fao56"
+        ],
+        "campos": [
+          "profundidad_raiz_m",
+          "agotamiento_permitido_p"
+        ],
+        "nota": "Leguminosa anual (Fabaceae). Conserva su Kc anterior. Por fase: regla del catálogo (fase sensible con 0,8 × p)."
+      }
     },
-    "version": 1
+    "version": 3
   }
 ]

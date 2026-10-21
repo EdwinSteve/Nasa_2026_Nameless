@@ -31,6 +31,11 @@ node_modules/
 
 # ML
 mlruns/
+mlflow.db
+optuna.db
+data/processed/dataset/
+# Los modelos del corte por tiempo pesan hasta 150 MB: se versiona solo informe.json
+ml/modelos_exportados/**/*.ubj
 
 # Paquetes Python instalados en modo editable
 *.egg-info/

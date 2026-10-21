@@ -29,6 +29,9 @@ python -m datos_tierra masivo --puntos ../data/fincas_demo.json --inicio 1981-01
 
 # Elegir los puntos de entrenamiento sobre zonas de cultivo (requiere GEE)
 python -m datos_tierra puntos --n 450 --n-huila 150 --out configs/puntos.csv
+
+# Completar el suelo de los puntos que se bajaron sin SoilGrids (API de ISRIC o, si está caída, Earth Engine)
+python -m datos_tierra suelo [--via gee]
 ```
 
 | Opción | Descripción |

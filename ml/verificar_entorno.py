@@ -45,6 +45,7 @@ def gpu_pytorch():
     capacidad = torch.cuda.get_device_capability(0)
     memoria = torch.cuda.get_device_properties(0).total_memory / 1024**3
     x = torch.randn(4096, 4096, device='cuda', dtype=torch.bfloat16)
+    x @ x  # calentamiento: la primera llamada inicializa cuBLAS y no debe entrar en la medición
     torch.cuda.synchronize()
     t0 = time.perf_counter()
     for _ in range(20):

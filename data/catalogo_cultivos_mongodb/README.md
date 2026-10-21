@@ -89,7 +89,7 @@ erDiagram
 | `cultivos` | 44 | Un documento por cultivo con sus requerimientos generales y sus **fases embebidas** |
 | `variedades` | 81 | Variedades, híbridos, clones o tipos comerciales; `ajustes` permite que una variedad cambie, por ejemplo, la duración del ciclo |
 | `metricas` | 11 | Diccionario de cada métrica: unidad, altura, fuente NASA y **cómo compararla** |
-| `fuentes` | 7 | Referencias que respaldan los valores |
+| `fuentes` | 16 | Referencias que respaldan los valores |
 
 **¿Por qué las fases van embebidas y no en otra colección?** Cada cultivo tiene entre 3 y 6 fases, siempre se leen juntas y casi nunca cambian. Embeberlas permite traer todo el cultivo en **una sola lectura**, que es el patrón recomendado en MongoDB para arreglos pequeños y acotados.
 
@@ -226,6 +226,9 @@ Alternativa sin scripts: `mongoimport --db surco_agro --collection cultivos --js
 - Cada colección tiene un **validador `$jsonSchema`** (carpeta `esquemas/`): MongoDB rechaza documentos sin los campos obligatorios o con valores fuera de los tipos permitidos.
 - Todos los documentos fueron validados contra esos esquemas antes de entregarlos; también se verificó que cada trapecio esté ordenado, que las fracciones de las fases sumen 1 y que la absorción de nitrógeno sume 100 %.
 - Para agregar un cultivo: copia un documento del mismo grupo, ajusta los valores, cita la fuente en `calidad_dato.fuentes` y deja `validado: false` hasta que lo revise un agrónomo.
+- Los 44 cultivos tienen `profundidad_raiz_m` (Zr). En los 12 que FAO-56 no cubre (ñame, arracacha, mango, guayaba, papaya, maracuyá, granadilla, mora, lulo, tomate de árbol, uchuva y crotalaria), `calidad_dato.profundidad_raiz` dice de dónde sale el valor: `metodo` (`medido`, `fao56`, `revision` o `analogia`), `confianza` (`alta`, `media` o `baja`), sus fuentes y una nota. Los de confianza baja son los primeros que hay que validar con Agrosavia.
+- Arracacha, mora, lulo, uchuva y crotalaria toman Kc, Zr y p de un cultivo análogo de FAO-56 (zanahoria, zarzas, berenjena, tomate y soya). `calidad_dato.parametros_agua` dice de cuál. Por fase siguen la regla del catálogo: la fase sensible lleva 0,8 × p.
+- Siguen sin Kc ni p: ñame, mango, guayaba, papaya, maracuyá, granadilla y tomate de árbol. Para ellos el motor todavía no puede calcular ETc, RAW ni Ks.
 
 ## 9. Decisión de arquitectura (proponer como ADR-014)
 
