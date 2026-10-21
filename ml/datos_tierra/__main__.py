@@ -16,8 +16,8 @@ from pathlib import Path
 
 import httpx
 
-from . import unificar
-from .fuentes import dem, enso, puntos
+from . import suelo, unificar
+from .fuentes import dem, enso, puntos, soilgrids, soilgrids_gee
 
 RAIZ = Path(__file__).resolve().parents[2]
 TIMEOUT = httpx.Timeout(300, connect=30)
@@ -46,12 +46,16 @@ def _fuentes(texto: str) -> tuple[str, ...]:
 
 
 def _guardar(datos: dict, ruta: Path, comprimir: bool) -> None:
+    """Escribe en un temporal y lo renombra: un corte a mitad de escritura no deja un archivo
+    a medias que el modo masivo daría por descargado."""
     ruta.parent.mkdir(parents=True, exist_ok=True)
+    temporal = ruta.with_name(ruta.name + '.tmp')
     if comprimir:
-        with gzip.open(ruta, 'wt', encoding='utf-8') as fh:
+        with gzip.open(temporal, 'wt', encoding='utf-8') as fh:
             json.dump(datos, fh, ensure_ascii=False)
     else:
-        ruta.write_text(json.dumps(datos, indent=2, ensure_ascii=False), encoding='utf-8')
+        temporal.write_text(json.dumps(datos, indent=2, ensure_ascii=False), encoding='utf-8')
+    os.replace(temporal, ruta)
 
 
 def _resumen(datos: dict) -> str:
@@ -94,35 +98,93 @@ async def _lote(a) -> None:
     print('Guardado en', salida)
 
 
+def _leer(ruta: Path) -> dict:
+    with gzip.open(ruta, 'rt', encoding='utf-8') as fh:
+        return json.load(fh)
+
+
+async def _completar_suelo(cliente: httpx.AsyncClient, ruta: Path, via: str = 'rest') -> str:
+    """Si SoilGrids falló o no se pidió en una descarga anterior, pide solo el suelo y lo agrega.
+
+    El suelo no depende de las fechas, así que no hace falta repetir los 45 años de clima.
+    Permite bajar primero el clima con --fuentes sin SoilGrids y completar el suelo después.
+    via='gee' usa los mismos mapas publicados en Earth Engine cuando la API REST está caída.
+    """
+    datos = _leer(ruta)
+    fuente = datos['sources'].get('soilgrids', {})
+    if fuente.get('status') == 'ok':
+        return 'ya existe, se salta'
+    lat, lon = datos['location']['lat'], datos['location']['lon']
+    try:
+        if via == 'gee':
+            crudo = await asyncio.to_thread(soilgrids_gee.descargar, lat, lon)
+            meta = {'source': soilgrids_gee.FUENTE, 'via': 'earth_engine', 'note': 'solo la media; sin wv0033 ni wv1500'}
+        else:
+            crudo = await soilgrids.descargar(cliente, lat, lon)
+            meta = {'endpoint': soilgrids.URL}
+        procesado = suelo.procesar(crudo)
+    except Exception as exc:
+        return f'SoilGrids sigue fallando ({type(exc).__name__}); se reintenta en la próxima corrida'
+    datos['soil'] = procesado
+    datos['sources']['soilgrids'] = {'status': 'ok', **meta, 'depths': soilgrids.PROFUNDIDADES,
+                                     'patched_at': time.strftime('%Y-%m-%dT%H:%M:%S')}
+    if procesado['empty']:
+        datos['quality']['alerts'].append('SoilGrids devolvió el suelo vacío (zona urbana o cuerpo de agua).')
+    _guardar(datos, ruta, comprimir=True)
+    return 'suelo completado'
+
+
 async def _masivo(a) -> None:
-    """Un archivo por punto; si ya existe se salta, así la descarga se puede reanudar."""
+    """Un archivo por punto; si ya existe se salta, así la descarga se puede reanudar.
+
+    Al reanudar, los puntos a los que les falló SoilGrids solo vuelven a pedir el suelo.
+    Si SoilGrids está caído: primero --fuentes power,smap,imerg,modis y luego, cuando vuelva,
+    el mismo comando con --fuentes todas completa solo el suelo de cada punto.
+    """
     lista = _leer_puntos(Path(a.puntos))
     destino = Path(a.dir)
+    fuentes = _fuentes(a.fuentes)
     async with httpx.AsyncClient(timeout=TIMEOUT) as cliente:
         texto_enso = await enso.descargar(cliente)
         alturas = await dem.elevaciones(cliente, [(p['lat'], p['lon']) for p in lista])
         for i, (punto, altura) in enumerate(zip(lista, alturas), 1):
             ruta = destino / f"{punto['id']}.json.gz"
             if ruta.exists() and not a.forzar:
-                print(f'[{i}/{len(lista)}] {punto["id"]}: ya existe, se salta')
+                estado = await _completar_suelo(cliente, ruta) if 'soilgrids' in fuentes else 'ya existe, se salta'
+                print(f'[{i}/{len(lista)}] {punto["id"]}: {estado}', flush=True)
                 continue
             t0 = time.monotonic()
             try:
                 datos = await unificar.ejecutar(
                     cliente, punto['lat'], punto['lon'], a.inicio, a.fin,
                     elevacion_m=altura if altura is not None else punto['elev_m'],
-                    fuentes=tuple(f for f in _fuentes(a.fuentes) if f not in ('dem', 'enso')) + ('enso',),
+                    fuentes=tuple(f for f in fuentes if f not in ('dem', 'enso')) + ('enso',),
                     enso_texto=texto_enso,
                 )
             except Exception as exc:  # un punto malo no detiene la descarga
-                print(f'[{i}/{len(lista)}] {punto["id"]}: ERROR {type(exc).__name__}: {exc}', file=sys.stderr)
+                print(f'[{i}/{len(lista)}] {punto["id"]}: ERROR {type(exc).__name__}: {exc}', file=sys.stderr, flush=True)
+                continue
+            # Si falló una fuente de clima, no se guarda: la próxima corrida lo repite completo.
+            # SoilGrids es la excepción: se guarda y _completar_suelo lo arregla después.
+            fallidas = [k for k, v in datos['sources'].items() if v['status'] == 'error' and k != 'soilgrids']
+            if fallidas:
+                print(f'[{i}/{len(lista)}] {punto["id"]}: ERROR en {fallidas}; no se guarda, se repite en la próxima corrida',
+                      file=sys.stderr, flush=True)
                 continue
             datos['site']['point_id'] = punto['id']
             if altura is not None:
                 datos['site']['elevation_source'] = dem.FUENTE
             _guardar(datos, ruta, comprimir=True)
             estados = {k: v['status'] for k, v in datos['sources'].items()}
-            print(f'[{i}/{len(lista)}] {punto["id"]}: {estados} ({time.monotonic() - t0:.0f} s)')
+            print(f'[{i}/{len(lista)}] {punto["id"]}: {estados} ({time.monotonic() - t0:.0f} s)', flush=True)
+
+
+async def _suelo(a) -> None:
+    """Completa el suelo de los puntos ya descargados que no lo tienen."""
+    archivos = sorted(Path(a.dir).glob('*.json.gz'))
+    async with httpx.AsyncClient(timeout=TIMEOUT) as cliente:
+        for i, ruta in enumerate(archivos, 1):
+            print(f'[{i}/{len(archivos)}] {ruta.name.split(".")[0]}: {await _completar_suelo(cliente, ruta, a.via)}', flush=True)
 
 
 def _puntos(a) -> None:
@@ -160,6 +222,11 @@ def main() -> None:
     masivo.add_argument('--dir', default=str(RAIZ / 'data/raw/entrenamiento'))
     masivo.add_argument('--forzar', action='store_true', help='Volver a descargar aunque el archivo exista')
 
+    sue = sub.add_parser('suelo', help='Completa el suelo de los puntos descargados sin SoilGrids')
+    sue.add_argument('--dir', default=str(RAIZ / 'data/raw/entrenamiento'))
+    sue.add_argument('--via', choices=('rest', 'gee'), default='rest',
+                     help="rest: API de ISRIC (con cuantiles y agua retenida); gee: Earth Engine, si la API está caída")
+
     pts = sub.add_parser('puntos', help='Muestrea puntos de cultivo con MODIS Land Cover (requiere GEE)')
     pts.add_argument('--n', type=int, default=450, help='Puntos en el resto de Colombia')
     pts.add_argument('--n-huila', type=int, default=150)
@@ -172,6 +239,8 @@ def main() -> None:
         asyncio.run(_lote(a))
     elif a.comando == 'masivo':
         asyncio.run(_masivo(a))
+    elif a.comando == 'suelo':
+        asyncio.run(_suelo(a))
     else:
         _puntos(a)
 
