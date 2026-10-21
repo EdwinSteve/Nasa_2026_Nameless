@@ -14,7 +14,8 @@ Se trabaja por fases pequeñas. Cada casilla puede convertirse en un issue de Gi
 - [ ] Validar la corrección de POWER contra MODIS LST o IDEAM
 
 ## Fase 1: Investigación agronómica
-- [ ] Tabla de cultivos candidatos del Huila con sus requisitos (ver [investigacion/](investigacion/README.md))
+- [x] Tabla de cultivos candidatos con sus requisitos por fase → [catálogo surco_agro](../data/catalogo_cultivos_mongodb/README.md)
+- [ ] Kc, Zr y p medidos para los 7 cultivos sin dato ([ADR 0005](decisiones/0005-valores-por-analogo-en-catalogo.md))
 - [ ] Reglas de rotación: familias botánicas, intervalos y aporte de N de las leguminosas
 - [ ] Umbrales de estrés hídrico y térmico por cultivo
 - [ ] Datos de impacto: área y producción del Huila (Agronet/EVA), eventos de El Niño

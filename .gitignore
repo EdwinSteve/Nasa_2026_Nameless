@@ -39,3 +39,7 @@ ml/modelos_exportados/**/*.ubj
 
 # Paquetes Python instalados en modo editable
 *.egg-info/
+
+# Archivos generados por Next.js / TypeScript
+frontend/next-env.d.ts
+*.tsbuildinfo

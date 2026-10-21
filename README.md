@@ -22,11 +22,12 @@ Construimos un **sistema de soporte a la decisión** que, dada una finca del Hui
 | [data/catalogo_cultivos_mongodb/](data/catalogo_cultivos_mongodb/README.md) | Catálogo `surco_agro`: requerimientos de 44 cultivos por fase |
 | [docs/investigacion/](docs/investigacion/README.md) | Preguntas abiertas y notas de investigación |
 | [docs/decisiones/](docs/decisiones/) | Registro de decisiones técnicas (ADR) |
+| [docs/bitacora/](docs/bitacora/) | Qué se hizo en cada período, hallazgos y pendientes |
 
 ## Estructura
 
 ```
-docs/        estrategia, datos, investigación, decisiones
+docs/        estrategia, datos, investigación, decisiones, bitácora
 data/        fincas demo, catálogo de cultivos y datos procesados (raw/ no se versiona)
 scripts/     verificación y descarga de datos, motor de riego (agronomic_engine)
 ml/          servicio de datos datos_tierra y modelo predictivo
