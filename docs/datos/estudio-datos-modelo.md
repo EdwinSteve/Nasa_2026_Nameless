@@ -105,8 +105,9 @@ El JSON trae esta tabla en `catalog_map` para que el motor no tenga que adivinar
 
 ## 6. Pendientes para otros equipos
 
-- **Catálogo:** 12 cultivos no tienen `profundidad_raiz_m` (ñame, arracacha, mango, guayaba, papaya, maracuyá, granadilla, mora, lulo, tomate de árbol, uchuva y crotalaria). Sin Zr no se puede calcular TAW para ellos.
-- **Motor agronómico:** `normalizer.py` espera las unidades crudas de SoilGrids. Con el esquema 2.0 los valores ya vienen convertidos: arena y arcilla en %, que se pasan a fracción dividiendo por 100, y SOC en g/kg. Hay que ajustar el `normalizer.py` o usar `soil.summary`.
+- ~~**Catálogo:** 12 cultivos no tienen `profundidad_raiz_m`.~~ Resuelto: ya tienen Zr, y `calidad_dato.profundidad_raiz` registra la fuente y la confianza de cada valor. Arracacha, mora, lulo, uchuva y crotalaria ya tienen Kc, Zr y p por analogía con un cultivo de FAO-56. Siguen sin Kc ni p: ñame, mango, guayaba, papaya, maracuyá, granadilla y tomate de árbol. Para ellos todavía no se pueden calcular ETc, RAW ni Ks. Los valores de confianza baja son los primeros que hay que validar con Agrosavia.
+- ~~**Motor agronómico:** `normalizer.py` espera las unidades crudas de SoilGrids.~~ Resuelto: `normalizer.engine_soil_inputs(datos, zr)` lee el esquema 2.0, promedia la mediana Q0.5 por espesor hasta la Zr del cultivo y entrega `sand`, `clay`, `organic_matter` y `cfvo` para el motor. Rechaza el esquema 1.0 y los lotes sin suelo.
+- **Fincas demo:** el punto de Pitalito estaba en el casco urbano (SoilGrids devolvía vacío). Se movió a 1.82, -76.02, a 1472 m según SRTM, donde SoilGrids sí trae datos (arcilla 37 %, arena 34 % y SOC 42 g/kg en 0-5 cm).
 - **Datos:** probar SMAP, IMERG y MODIS con una cuenta de Earth Engine (`GEE_PROJECT`) y medir cuánto tarda un punto de 10 años.
 - **Validación:** contrastar `derived_t2m_max_corr` con MODIS LST y con estaciones del IDEAM, como pide la ADR 0002.
 - **Supuesto a revisar:** la presión de vapor sale del punto de rocío de la celda, sin corregir por elevación; en el valle la ET0 puede quedar ligeramente sobrestimada.
