@@ -7,6 +7,7 @@ from app.modules.identidad.api.router import router as identidad_router
 from app.modules.territorio.api.router import router as territorio_router
 from app.modules.fincas.api.router import router as fincas_router
 from app.modules.diagnostico.api.router import router as diagnostico_router
+from app.modules.recomendacion.api.router import router as recomendacion_router
 
 def create_app() -> FastAPI:
     settings = get_settings()
@@ -36,6 +37,7 @@ def create_app() -> FastAPI:
     app.include_router(territorio_router, prefix="/api/v1")
     app.include_router(fincas_router, prefix="/api/v1")
     app.include_router(diagnostico_router, prefix="/api/v1")
+    app.include_router(recomendacion_router, prefix="/api/v1")
 
     @app.get(
         "/api/v1/health",

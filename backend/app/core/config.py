@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     # (SMAP) y el verdor (MODIS) quedan como pasos fallidos; clima y suelo funcionan igual.
     gee_project: str | None = None
 
+    # Modelo predictivo: carpeta de ml/modelos_exportados con los modelo_a_*.ubj
+    modelo_corrida: str = "tiempo"
+
     @property
     def cors_origenes_lista(self) -> list[str]:
         return [o.strip() for o in self.cors_origenes.split(",") if o.strip()]
