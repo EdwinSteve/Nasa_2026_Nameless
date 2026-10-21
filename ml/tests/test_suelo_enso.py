@@ -91,3 +91,35 @@ def test_soilgrids_parte_la_consulta_en_bloques_y_une_las_capas():
 
     assert pedidas == [['a', 'b'], ['c', 'd'], ['e']]
     assert [capa['name'] for capa in unida['properties']['layers']] == ['a', 'b', 'c', 'd', 'e']
+
+
+def test_power_pide_aparte_lo_reciente_y_descarta_lluvia_imposible():
+    from datos_tierra.fuentes import power
+
+    pedidas = []
+
+    def responder(request: httpx.Request) -> httpx.Response:
+        inicio, fin = request.url.params['start'], request.url.params['end']
+        pedidas.append((inicio, fin))
+        reciente = inicio >= '20261001'
+        dias = ['20260930', '20261001', '20261002'] if fin >= '20261001' else ['20260929', '20260930']
+        dias = [d for d in dias if inicio <= d <= fin]
+        lluvia = {d: (900.0 if reciente else 3.0) for d in dias}
+        return httpx.Response(200, json={
+            'header': {'fill_value': -999.0}, 'geometry': {'coordinates': [-75.2, 3.2, 1400.0]},
+            'properties': {'parameter': {'PRECTOTCORR': lluvia, 'T2M': {d: 20.0 for d in dias}}},
+            'parameters': {'PRECTOTCORR': {'units': 'mm/day'}},
+        })
+
+    async def correr():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(responder)) as cliente:
+            return await power.descargar(cliente, 3.2, -75.2, date(2026, 9, 29), date(2026, 10, 2), hoy=date(2026, 11, 14))
+
+    crudo = asyncio.run(correr())
+    serie, meta = power.series(crudo)
+
+    assert pedidas == [('20260929', '20260930'), ('20261001', '20261002')]   # corte = hoy - 45 días
+    assert serie['PRECTOTCORR']['2026-09-30'] == 3.0
+    assert serie['PRECTOTCORR']['2026-10-01'] is None                          # 900 mm/día: descartada
+    assert serie['T2M']['2026-10-02'] == 20.0                                  # el resto del tramo se conserva
+    assert 'IMERG' in meta['warnings'][0]
