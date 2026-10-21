@@ -70,9 +70,28 @@ class Poligono:
 
     @property
     def centroide(self) -> tuple[float, float]:
-        """(lat, lon) promedio de las esquinas: suficiente para consultar datos satelitales."""
+        """(lat, lon) del punto medio del lote: el centroide ponderado por área.
+
+        Promediar las esquinas desplaza el centro hacia donde hay más puntos marcados (un borde
+        curvo con muchas esquinas lo jala); el centroide de área no depende de cuántas esquinas
+        tenga cada lado. Se calcula en una proyección local en metros, exacta para un lote.
+        En un lote muy cóncavo (en forma de C) puede caer fuera del polígono.
+        """
         lons, lats = zip(*self.vertices)
-        return round(sum(lats) / len(lats), 6), round(sum(lons) / len(lons), 6)
+        lat0 = math.radians(sum(lats) / len(lats))
+        lon_ref, lat_ref = lons[0], lats[0]
+        escala_x = math.radians(1) * RADIO_TIERRA_M * math.cos(lat0)
+        escala_y = math.radians(1) * RADIO_TIERRA_M
+        puntos = [((lon - lon_ref) * escala_x, (lat - lat_ref) * escala_y) for lon, lat in self.anillo]
+
+        area2 = cx = cy = 0.0
+        for (x1, y1), (x2, y2) in zip(puntos, puntos[1:]):
+            cruz = x1 * y2 - x2 * y1
+            area2 += cruz
+            cx += (x1 + x2) * cruz
+            cy += (y1 + y2) * cruz
+        cx, cy = cx / (3 * area2), cy / (3 * area2)
+        return round(lat_ref + cy / escala_y, 6), round(lon_ref + cx / escala_x, 6)
 
     def a_geojson(self) -> dict:
         return {"type": "Polygon", "coordinates": [[list(p) for p in self.anillo]]}

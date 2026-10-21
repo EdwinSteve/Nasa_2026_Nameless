@@ -44,10 +44,16 @@ class CrearLoteRequest(BaseModel):
     )
 
 
+class Punto(BaseModel):
+    lat: float
+    lon: float
+
+
 class LoteResponse(BaseModel):
     id: UUID
     nombre: str
     area_ha: float = Field(..., description="Calculada por el servidor sobre la esfera.")
+    centroide: Punto = Field(..., description="Punto medio del lote (centroide de área). Es el que usa el diagnóstico.")
 
 
 class LoteDetalleResponse(LoteResponse):
@@ -56,7 +62,6 @@ class LoteDetalleResponse(LoteResponse):
     municipio_nombre: str
     corregimiento_nombre: str
     poligono: PoligonoGeoJSON
-    centroide: tuple[float, float] = Field(..., description="(latitud, longitud)")
     tiene_riego: bool
     tipo_riego: TipoRiego | None
     cultivo_anterior: str | None

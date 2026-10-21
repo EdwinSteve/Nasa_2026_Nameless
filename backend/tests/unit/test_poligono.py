@@ -58,3 +58,25 @@ def test_ida_y_vuelta_a_geojson():
 def test_poligonos_invalidos(geojson, mensaje):
     with pytest.raises(PoligonoInvalido, match=mensaje):
         Poligono.desde_geojson(geojson)
+
+
+def test_el_punto_medio_de_un_cuadrado_es_su_centro():
+    d = 0.002
+    poligono = Poligono.desde_geojson(_poligono((-75.3, 2.9), (-75.3 + d, 2.9), (-75.3 + d, 2.9 + d), (-75.3, 2.9 + d)))
+
+    assert poligono.centroide == pytest.approx((2.9 + d / 2, -75.3 + d / 2), abs=1e-6)
+
+
+def test_el_punto_medio_no_se_corre_al_marcar_mas_esquinas_en_un_lado():
+    # Mismo cuadrado, pero con 5 esquinas extra sobre el lado de abajo (colineales)
+    d = 0.002
+    extra = [(-75.3 + d * k / 6, 2.9) for k in range(1, 6)]
+    poligono = Poligono.desde_geojson(
+        _poligono((-75.3, 2.9), *extra, (-75.3 + d, 2.9), (-75.3 + d, 2.9 + d), (-75.3, 2.9 + d))
+    )
+
+    lat, lon = poligono.centroide
+    assert lat == pytest.approx(2.9 + d / 2, abs=1e-6)
+    # El promedio de esquinas sí se hubiera ido hacia abajo
+    promedio_lat = sum(p[1] for p in poligono.vertices) / len(poligono.vertices)
+    assert promedio_lat < 2.9 + d / 2 - d / 10

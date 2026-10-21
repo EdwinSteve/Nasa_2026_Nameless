@@ -22,8 +22,9 @@ La documentación interactiva queda en `http://localhost:8000/docs`.
 | POST | `/auth/logout` y `/auth/logout-todo` | Bearer | Cierra una sesión o todas (204) |
 | GET | `/territorio/municipios?departamento=41` | pública | Los 37 municipios del Huila |
 | GET | `/territorio/municipios/{codigo}/corregimientos` | pública | Casco urbano y centros poblados del municipio |
+| GET | `/territorio/elevacion?lat=&lon=` | pública | Altitud NASA SRTM y municipio más cercano (chip de la bienvenida) |
 | POST | `/fincas` | Bearer | Crea una finca (valida municipio y centro poblado) |
-| POST | `/fincas/{finca_id}/lotes` | Bearer | Crea un lote: valida el polígono y calcula el área |
+| POST | `/fincas/{finca_id}/lotes` | Bearer | Crea un lote: valida el polígono, calcula el área y guarda su punto medio (`centroide`) |
 | GET | `/lotes/{lote_id}` | Bearer | Detalle del lote con nombres de municipio y corregimiento |
 | PUT | `/usuarios/me/preferencias` | Bearer | Orden de las cuatro prioridades del productor (204) |
 | POST | `/lotes/{lote_id}/diagnostico` | Bearer | Inicia el diagnóstico en segundo plano (202 + `tarea_id`) |

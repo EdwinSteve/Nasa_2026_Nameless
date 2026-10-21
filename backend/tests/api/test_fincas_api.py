@@ -49,6 +49,7 @@ async def test_flujo_finca_lote_preferencias(cliente, entorno):
     lote = await cliente.post(f"/api/v1/fincas/{finca.json()['id']}/lotes", json=LOTE)
     assert lote.status_code == 201, lote.text
     assert lote.json()["area_ha"] == pytest.approx(32.7395, rel=1e-4)
+    assert lote.json()["centroide"] == pytest.approx({"lat": 2.98886, "lon": -75.29124}, abs=1e-4)
 
     detalle = await cliente.get(f"/api/v1/lotes/{lote.json()['id']}")
     assert detalle.status_code == 200

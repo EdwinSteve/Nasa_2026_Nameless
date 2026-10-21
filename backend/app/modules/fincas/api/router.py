@@ -16,6 +16,7 @@ from app.modules.fincas.api.schemas import (
     GuardarPreferenciasRequest,
     LoteDetalleResponse,
     LoteResponse,
+    Punto,
 )
 from app.modules.fincas.application.casos import (
     CrearFinca,
@@ -76,7 +77,8 @@ async def crear_lote(
         cultivo_anterior=body.cultivo_anterior or None,
     )
     lote = await caso.ejecutar(usuario.id, finca_id, datos)
-    return LoteResponse(id=lote.id, nombre=lote.nombre, area_ha=lote.area_ha)
+    lat, lon = lote.poligono.centroide
+    return LoteResponse(id=lote.id, nombre=lote.nombre, area_ha=lote.area_ha, centroide=Punto(lat=lat, lon=lon))
 
 
 @router.get(
@@ -100,7 +102,7 @@ async def obtener_lote(
         municipio_nombre=r.municipio_nombre,
         corregimiento_nombre=r.centro_poblado_nombre,
         poligono=r.lote.poligono.a_geojson(),
-        centroide=r.lote.poligono.centroide,
+        centroide=Punto(lat=r.lote.poligono.centroide[0], lon=r.lote.poligono.centroide[1]),
         tiene_riego=r.lote.tiene_riego,
         tipo_riego=r.lote.tipo_riego,
         cultivo_anterior=r.lote.cultivo_anterior,

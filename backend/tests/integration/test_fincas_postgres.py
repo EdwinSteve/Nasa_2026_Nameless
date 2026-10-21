@@ -46,6 +46,8 @@ async def test_flujo_completo_del_wizard(cliente, sesion_maker):
         ))).mappings().one()
         guardado = (await sesion.execute(text("SELECT orden FROM fincas.preferencias_productor"))).scalars().all()
     assert float(fila["area_ha"]) == pytest.approx(32.7395, rel=1e-4)
+    # La base guarda el mismo punto medio que devolvió la API al crear el lote
+    assert float(fila["centroide_lat"]) == pytest.approx(lote.json()["centroide"]["lat"], abs=1e-6)
     assert fila["vereda"] == "El Vergel"
     assert guardado == [orden]
 
